@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #2A3647;
+  --nav-bg-color: #2A3647;
   --accent-color-dark: #091931;
   --accent-color-light: #409DF2;
   --bg-color: #F6F7F8;
@@ -29,6 +29,11 @@
   margin: 0;
   box-sizing: border-box;
   position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 
