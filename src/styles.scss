@@ -10,8 +10,18 @@
 }
 
 @font-face {
-  font-family: 'mainFont';
+  font-family: 'mainFontRegular';
   src: url(./assets/fonts/Inter/static/Inter_18pt-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'mainFontLight';
+  src: url(./assets/fonts/Inter/static/Inter_18pt-Light.ttf);
+}
+
+@font-face {
+  font-family: 'mainFontBold';
+  src: url(./assets/fonts/Inter/static/Inter_18pt-Bold.ttf);
 }
 
 * {
@@ -25,5 +35,5 @@
 
 html,
 body {
-  font-family: 'mainFont', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'mainFontRegular', Tahoma, Geneva, Verdana, sans-serif;
 }
