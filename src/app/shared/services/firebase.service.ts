@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, onSnapshot } from 'firebase/firestore';
+import { collection, doc, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { Contactlist } from '../../contactlist';
 
 @Injectable({
@@ -11,9 +11,6 @@ export class FirebaseService {
 
   contacts: Contactlist[] = [];
   unsubscribe;
-
-  docRef = doc(this.firestore, 'contactlist');
-
 
   constructor() {
     this.unsubscribe = this.subContactList();
