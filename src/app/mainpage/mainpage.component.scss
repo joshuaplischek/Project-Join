@@ -1,3 +1,10 @@
-p {
-  color: var(--accent-color);
+.layout {
+  display: flex;
+  height: 100vh;
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 }
