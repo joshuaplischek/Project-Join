@@ -2,14 +2,19 @@
   background-color: var(--nav-bg-color);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 4rem 0;
-  gap: 8rem;
+  gap: 6.5rem;
   width: 100%;
   max-width: 14.5rem;
   min-height: 100dvh;
+
+  >img {
+    width: 100px;
+  }
 }
+
 
 nav {
   display: flex;
