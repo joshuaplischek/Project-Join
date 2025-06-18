@@ -1,7 +1,16 @@
+:root {
+  --primary-color: #2A3647;
+  --accent-color-dark: #091931;
+  --accent-color-light: #409DF2;
+  --bg-color: #F6F7F8;
+  --warn-color: #FF3D00;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  position: relative;
 }
 
 html,
