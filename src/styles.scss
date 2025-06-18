@@ -3,7 +3,15 @@
   --accent-color-dark: #091931;
   --accent-color-light: #409DF2;
   --bg-color: #F6F7F8;
-  --warn-color: #FF3D00;
+  --error-color: #FF3D00;
+  --success-color: #7AE229;
+  --warning-color: #FFA801;
+
+}
+
+@font-face {
+    font-family: 'mainFont';
+    src: url(./assets/fonts/Inter/static/Inter_18pt-Regular.ttf);
 }
 
 * {
@@ -13,7 +21,9 @@
   position: relative;
 }
 
+
+
 html,
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'mainFont', Tahoma, Geneva, Verdana, sans-serif;
 }
