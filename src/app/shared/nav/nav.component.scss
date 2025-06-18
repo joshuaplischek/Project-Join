@@ -4,6 +4,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 4rem 0;
+    gap: 8rem;
+    width: 100%;
+    max-width: 14.5rem;
+    min-height: 100dvh;
 }
 
 nav {
@@ -12,12 +17,22 @@ nav {
     gap: 1rem;
     align-items: center;
     justify-content: center;
+    width: 100%;
     >div {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 1rem;
+       &:hover{
+        background-color: var(--accent-color-dark);
+       } 
     }
     >img {
         width: 25px;
     }
+}
+
+.policy-wrapper {
+    display: flex; 
+    flex-direction: column;
+    gap: 2rem;
 }
