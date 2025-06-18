@@ -11,6 +11,5 @@ import { PrivacypoliceComponent } from "./pages/privacypolice/privacypolice.comp
 })
 export class AppComponent {
   constructor() {
-
   }
 }
