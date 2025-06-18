@@ -35,8 +35,13 @@ nav {
       }
 
       &:hover {
+        background-color: var(--nav-bg-hover);
+      }
+
+      &:active {
         background-color: var(--accent-color-dark);
       }
+
     }
   }
 }
@@ -45,4 +50,10 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  >a {
+    &:hover {
+      color: var(--accent-color-light);
+    }
+  }
 }
