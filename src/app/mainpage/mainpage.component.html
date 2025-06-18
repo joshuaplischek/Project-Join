@@ -1,3 +1,14 @@
 <app-header></app-header>
 <app-nav></app-nav>
 <app-quick-menu></app-quick-menu>
+
+
+
+<ul>
+  @for (contact of contacts; track $index) {
+  <p>{{contact.name}}</p>
+  <p>{{contact.email}}</p>
+  <p>{{contact.phone}}</p>
+  <hr>
+  }
+</ul>

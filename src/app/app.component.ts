@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MainpageComponent } from "./mainpage/mainpage.component";
 import { PrivacypoliceComponent } from "./pages/privacypolice/privacypolice.component";
-import { Firestore } from 'firebase/firestore';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MainpageComponent, PrivacypoliceComponent],
+  imports: [RouterOutlet, PrivacypoliceComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
