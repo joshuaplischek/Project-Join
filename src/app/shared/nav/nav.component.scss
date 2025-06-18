@@ -1,3 +1,23 @@
 .nav-wrapper {
-    background-color: ;
+    background-color: var(--nav-bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    >div {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    >img {
+        width: 25px;
+    }
 }
