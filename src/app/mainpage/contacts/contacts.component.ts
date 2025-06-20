@@ -22,7 +22,11 @@ export class ContactsComponent {
 
   addContact() { }
 
-  openSingleContact() { 
+  openSingleContact() {
     this.isOpen = !this.isOpen;
   }
+
+  openEdit() { }
+
+  deleteContact() { }
 }
