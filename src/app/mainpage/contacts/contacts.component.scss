@@ -1,13 +1,16 @@
-.contact-list-wrapper {
+.contactlist-wrapper {
   display: flex;
   height: calc(100dvh - 96px);
+
   .contactlist-container {
     width: clamp(200px, 20vw, 400px);
   }
+
   .single-contact-container {
     display: none;
     flex: 1;
     background-color: aquamarine;
+
     &.open-contact {
       display: flex;
     }

@@ -1,11 +1,13 @@
-<div class="contact-list-wrapper">
+<div class="contactlist-wrapper">
   <div class="contactlist-container">
+    <!-- Add Contact: Anne -->
     <button id="addContactBtn" (click)="addContact()">Add new contact</button>
-  
+
+    <!-- Contactlist: Joshua -->
     <div>
       <ul>
         @for (contact of contacts; track $index) {
-        <div class="single-contact" (click)="openSingleContact()" >
+        <div class="single-contact" (click)="openSingleContact()">
           <p>{{contact.name}}</p>
           <p>{{contact.email}}</p>
           <p>{{contact.phone}}</p>
@@ -15,8 +17,14 @@
       </ul>
     </div>
   </div>
-  
-  <div class="single-contact-container"[ngClass]="{ 'open-contact': isOpen }">
+
+  <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
+
+    <!-- Detailview: Tony -->
     <p>Klaus Mustermann</p>
+
+    <!-- Buttons Delete & Edit: Mirkan -->
+    <button>Edit</button>
+    <button>Delete</button>
   </div>
 </div>
