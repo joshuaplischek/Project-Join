@@ -1,1 +1,13 @@
-<p>header works!</p>
+<header class="header">
+  <h1>Kanban Project Management Tool</h1>
+  <div>
+    <img src="/assets/images/icons/icon-help.svg" alt="help icon">
+    <div (click)="openQuickMenu()" class="user-badge"><span>SM</span></div>
+  </div>
+</header>
+
+<div class="quickMenu" [ngClass]="{ 'show': isMenuOpen }">
+  <a href="">Legal Notice</a>
+  <a href="">Privacy Policy</a>
+  <a href="">Log out</a>
+</div>
