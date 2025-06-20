@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { collection, doc, Firestore, onSnapshot, orderBy, query } from '@angular/fire/firestore';
 import { Contactlist } from '../../contactlist';
 
 @Injectable({
@@ -21,11 +21,16 @@ export class FirebaseService {
       list.forEach((element) => {
         this.contacts.push(this.setContactsObject(element.data(), element.id));
       })
+      this.sortContacts();
     })
   }
 
   getContacts() {
     return collection(this.firestore, 'contactlist');
+  }
+
+  sortContacts() {
+    this.contacts.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   getSingleContact(colId: string, docId: string){

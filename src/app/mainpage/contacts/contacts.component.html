@@ -8,8 +8,8 @@
       <ul>
         @for (contact of contacts; track $index) {
         <div class="single-contact" (click)="openSingleContact()">
-          <p>{{contact.name}}</p>
-          <p>{{contact.email}}</p>
+          <p class="contact-name">{{contact.name}}</p>
+          <p class="contact-email">{{contact.email}}</p>
         </div>
         <hr>
         }
@@ -17,9 +17,9 @@
     </div>
   </div>
 
-  <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
-
     <!-- Detailview: Tony -->
+  <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
+  
     <p>Klaus Mustermann</p>
 
     <!-- Buttons Delete & Edit: Mirkan -->
