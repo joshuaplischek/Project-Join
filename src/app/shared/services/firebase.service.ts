@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, onSnapshot, orderBy, query } from '@angular/fire/firestore';
+import { collection, doc, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { Contactlist } from '../../contactlist';
 
 @Injectable({

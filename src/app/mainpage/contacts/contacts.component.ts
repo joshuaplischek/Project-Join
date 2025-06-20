@@ -18,9 +18,7 @@ export class ContactsComponent {
 
   ngOnInit() {
     this.contacts =  this.contactlist.contacts;
-    
   }
-
 
   addContact() {}
 
