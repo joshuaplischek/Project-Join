@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FirebaseService } from '../../../shared/services/firebase.service';
 
 @Component({
   selector: 'app-contactform',
@@ -8,6 +9,12 @@ import { Component, Input } from '@angular/core';
   styleUrl: './contactform.component.scss'
 })
 export class ContactformComponent {
+
+  constructor(private contactService: FirebaseService) { }
+
+  callServiceMethode() {
+    this.contactService.sortContacts();
+  }
 
   @Input() heading: string = '';
   @Input() subheading: string = '';
