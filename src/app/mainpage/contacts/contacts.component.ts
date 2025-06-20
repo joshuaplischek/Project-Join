@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Contactlist } from '../../contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
+import { TestComponent } from "../../test/test.component";
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TestComponent],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss'
 })
