@@ -2,31 +2,33 @@ import { Component } from '@angular/core';
 import { Contactlist } from '../../contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
+import { TestComponent } from '../../test/test.component';
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TestComponent],
   templateUrl: './contacts.component.html',
-  styleUrl: './contacts.component.scss'
+  styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent {
-
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
-  constructor(private contactlist: FirebaseService) { }
+  constructor(private contactlist: FirebaseService) {}
 
   ngOnInit() {
-    this.contacts = this.contactlist.contacts;
+    this.contacts =  this.contactlist.contacts;
+    
   }
 
-  addContact() { }
+
+  addContact() {}
 
   openSingleContact() {
     this.isOpen = !this.isOpen;
   }
 
-  openEdit() { }
+  openEdit() {}
 
-  deleteContact() { }
+  deleteContact() {}
 }

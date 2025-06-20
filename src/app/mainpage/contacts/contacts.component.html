@@ -1,6 +1,6 @@
 <div class="contactlist-wrapper">
   <div class="contactlist-container">
-    <!-- Add Contact: Anne -->
+    <!-- Add Contact: Anne :D -->
     <button id="addContactBtn" (click)="addContact()">Add new contact</button>
 
     <!-- Contactlist: Joshua -->
@@ -8,9 +8,8 @@
       <ul>
         @for (contact of contacts; track $index) {
         <div class="single-contact" (click)="openSingleContact()">
-          <p>{{contact.name}}</p>
-          <p>{{contact.email}}</p>
-          <p>{{contact.phone}}</p>
+          <p class="contact-name">{{contact.name}}</p>
+          <p class="contact-email">{{contact.email}}</p>
         </div>
         <hr>
         }
@@ -41,3 +40,6 @@
     </div>
   </div>
 </div>
+
+
+<app-test></app-test>
