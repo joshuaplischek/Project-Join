@@ -1,16 +1,22 @@
-<div class="contactlist-container">
-  <button id="addContactBtn" (click)="addContact()">Add new contact</button>
-
-  <div>
-    <ul>
-      @for (contact of contacts; track $index) {
-      <div class="single-contact" (click)="openSingleContact()">
-        <p>{{contact.name}}</p>
-        <p>{{contact.email}}</p>
-        <p>{{contact.phone}}</p>
-      </div>
-      <hr>
-      }
-    </ul>
+<div class="contact-list-wrapper">
+  <div class="contactlist-container">
+    <button id="addContactBtn" (click)="addContact()">Add new contact</button>
+  
+    <div>
+      <ul>
+        @for (contact of contacts; track $index) {
+        <div class="single-contact" (click)="openSingleContact()" >
+          <p>{{contact.name}}</p>
+          <p>{{contact.email}}</p>
+          <p>{{contact.phone}}</p>
+        </div>
+        <hr>
+        }
+      </ul>
+    </div>
+  </div>
+  
+  <div class="single-contact-container"[ngClass]="{ 'open-contact': isOpen }">
+    <p>Klaus Mustermann</p>
   </div>
 </div>

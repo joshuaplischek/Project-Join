@@ -28,6 +28,10 @@ export class FirebaseService {
     return collection(this.firestore, 'contactlist');
   }
 
+  getSingleContact(colId: string, docId: string){
+    return doc(collection(this.firestore, colId), docId)
+  }
+
   setContactsObject(obj: any, id: string): Contactlist {
     return {
       id: id,
