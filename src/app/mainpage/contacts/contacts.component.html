@@ -10,7 +10,7 @@
       <ul>
         @for (contact of contacts; track $index) {
         <div class="single-contact" (click)="openSingleContact()">
-          <p class="contact-name">{{contact.name}}</p>
+          <p class="contact-name">{{contact.firstName}} {{contact.lastName}}</p>
           <p class="contact-email">{{contact.email}}</p>
         </div>
         <hr>
