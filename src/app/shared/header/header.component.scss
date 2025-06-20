@@ -46,3 +46,33 @@
     }
   }
 }
+
+
+.quickMenu {
+  display: none;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+  background-color: #2A3647;
+
+  border-radius: 20px 0px 20px 20px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  width: 150px;
+
+
+  position: absolute;
+  top: 100%;
+  right: 2%;
+  z-index: 999;
+
+  >a {
+    color: #CDCDCD;
+    ;
+  }
+
+  &.show {
+    display: flex;
+  }
+}
