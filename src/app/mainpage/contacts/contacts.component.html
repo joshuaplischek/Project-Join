@@ -1,8 +1,10 @@
-<ul>
-  @for (contact of contacts; track $index) {
-  <p>{{contact.name}}</p>
-  <p>{{contact.email}}</p>
-  <p>{{contact.phone}}</p>
-  <hr>
-  }
-</ul>
+<div class="contactlist-container">
+  <ul>
+    @for (contact of contacts; track $index) {
+    <p>{{contact.name}}</p>
+    <p>{{contact.email}}</p>
+    <p>{{contact.phone}}</p>
+    <hr>
+    }
+  </ul>
+</div>
