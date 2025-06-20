@@ -1,51 +1,47 @@
 <div class="contactlist-wrapper">
   <div class="contactlist-container">
     <!-- Add Contact: Anne :D -->
-    <button id="addContactBtn" (click)="addContact()">Add new contact</button>
+    <button id="addContactBtn" (click)="openAddContact()">Add new contact</button>
+    <app-add-contact-modul [isVisible]="isAddContactFormVisible" (closeModal)="closeAddContact()">
+    </app-add-contact-modul>
 
     <!-- Contactlist: Joshua -->
     <div>
       <ul>
-        @for (contact of contacts; track $index) {
-        <div class="single-contact" (click)="openSingleContact()">
-          <div class="contact-initials">
-            <p>{{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}</p>
-          </div>
-          <div>
-            <p class="contact-name">{{contact.firstName}} {{contact.lastName}}</p>
-            <p class="contact-email">{{contact.email}}</p>
-          </div>
+        @for (group of groupedContacts; track group.letter) {
+        <h2>{{ group.letter }}</h2>
 
+        @for (contact of group.contacts; track contact.id) {
+        <div class="single-contact" (click)="openSingleContact()">
+          <p class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</p>
+          <p class="contact-email">{{ contact.email }}</p>
         </div>
         <hr>
         }
+        }
       </ul>
     </div>
-  </div>
 
+    <!-- Detailview: Tony -->
+    <div class="contact-container">
+      <div class="contact-container-heading">
+        <h2>Contacts</h2>
+        <p>Better with teams</p>
+      </div>
+      <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
 
-  <div class="contact-container">
-    <div class="contact-container-heading">
-      <h2>Contacts</h2>
-      <p>Better with teams</p>
-    </div>
-    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
-      <!-- Detailview: Tony -->
-      <p>Klaus Mustermann</p>
-      <!-- Buttons Delete & Edit: Mirkan -->
-      <div class="options-btns-container">
-        <div (click)="openEdit()">
-          <img src="" alt="">
-          <span>Edit</span>
-        </div>
-        <div (click)="deleteContact()">
-          <img src="" alt="">
-          <span>Delete</span>
+        <p>Klaus Mustermann</p>
+        <!-- Buttons Delete & Edit: Mirkan -->
+        <div class="options-btns-container">
+          <div (click)="openEdit()">
+            <img src="" alt="">
+            <span>Edit</span>
+          </div>
+          <div (click)="deleteContact()">
+            <img src="" alt="">
+            <span>Delete</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
-<app-test></app-test>
