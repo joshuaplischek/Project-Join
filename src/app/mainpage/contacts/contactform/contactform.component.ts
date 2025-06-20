@@ -21,6 +21,7 @@ export class ContactformComponent {
   @Input() subheading: string = '';
   @Input() buttonOne: string = '';
   @Input() buttonTwo: string = '';
+
   @Input() isVisible = false;
   @Output() closeModal = new EventEmitter<void>();
 
