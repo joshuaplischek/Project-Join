@@ -18,4 +18,6 @@ export class ContactsComponent {
     this.contacts = this.contactlist.contacts;
   }
 
+  addContact() { }
+
 }
