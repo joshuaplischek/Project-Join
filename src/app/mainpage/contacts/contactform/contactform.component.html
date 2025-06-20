@@ -1,33 +1,30 @@
-<div class="modal">
-  <div class="side-banner">
-    <img src="" alt="">
-
-    <h3>{{heading}}</h3>
-    <p>{{subheading}}</p>
-  </div>
-
-  <div class="contact-form">
-    <div class="user-badge">
+<div class="overlay" [ngClass]="{'visible': isVisible, 'hidden': !isVisible}" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="side-banner">
+      <img src="" alt="">
+      <h3>{{heading}}</h3>
+      <p>{{subheading}}</p>
     </div>
-    <div class="form">
-      <div class="name-field">
-        <input type="text" placeholder="Name">
-        <img src="" alt="person icon">
-      </div>
 
-      <div class="email-field">
-        <input type="text" placeholder="Email">
-        <img src="" alt="mail icon">
-      </div>
-
-      <div class="phone-field">
-        <input type="number" placeholder="Phone">
-        <img src="" alt="phone icon">
-      </div>
-
-      <div>
-        <button>{{buttonOne}}</button>
-        <button><span>{{buttonTwo}}</span><img src="" alt="check icon"></button>
+    <div class="contact-form">
+      <div class="user-badge"></div>
+      <div class="form">
+        <div class="name-field">
+          <input type="text" placeholder="Name">
+          <img src="" alt="person icon">
+        </div>
+        <div class="email-field">
+          <input type="text" placeholder="Email">
+          <img src="" alt="mail icon">
+        </div>
+        <div class="phone-field">
+          <input type="number" placeholder="Phone">
+          <img src="" alt="phone icon">
+        </div>
+        <div>
+          <button>{{buttonOne}}</button>
+          <button><span>{{buttonTwo}}</span><img src="" alt="check icon"></button>
+        </div>
       </div>
     </div>
   </div>
