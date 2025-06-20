@@ -30,7 +30,7 @@ export class FirebaseService {
   }
 
   sortContacts() {
-    this.contacts.sort((a, b) => a.name.localeCompare(b.name));
+    this.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
   }
 
   getSingleContact(colId: string, docId: string){
@@ -40,7 +40,8 @@ export class FirebaseService {
   setContactsObject(obj: any, id: string): Contactlist {
     return {
       id: id,
-      name: obj.name || '',
+      firstName: obj.firstName || '',
+      lastName: obj.lastName || '',
       email: obj.email || '',
       phone: obj.phone,
     }
