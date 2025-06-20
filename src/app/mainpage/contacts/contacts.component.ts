@@ -23,6 +23,20 @@ export class ContactsComponent {
     this.contacts = this.contactlist.contacts;
   }
 
+  get groupedContacts() {
+    const grouped: Record<string, Contactlist[]> = {};
+
+    for (const contact of this.contacts) {
+      const letter = contact.firstName[0].toUpperCase();
+      grouped[letter] ??= [];
+      grouped[letter].push(contact);
+    }
+
+    return Object.keys(grouped)
+      .sort()
+      .map(letter => ({ letter, contacts: grouped[letter] }));
+  }
+
   openAddContact() {
     this.isAddContactFormVisible = true;
   }
