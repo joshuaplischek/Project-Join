@@ -12,21 +12,26 @@
   }
 
   .single-contact {
-    .contact-name{
+    .contact-name {
       font-size: 20px;
     }
-    .contact-email{
+
+    .contact-email {
       font-size: 16px;
       color: var(--accent-color-light);
     }
+
     &:hover {
       cursor: pointer;
     }
   }
 
-  .single-contact-container {
-    display: none;
+  .contact-container {
     flex: 1;
+
+    .contact-container-heading {
+      display: flex;
+    }
 
     .single-contact-container {
       display: none;
@@ -38,6 +43,4 @@
       }
     }
   }
-
-
 }
