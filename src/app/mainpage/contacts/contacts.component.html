@@ -8,8 +8,14 @@
       <ul>
         @for (contact of contacts; track $index) {
         <div class="single-contact" (click)="openSingleContact()">
-          <p class="contact-name">{{contact.firstName}} {{contact.lastName}}</p>
-          <p class="contact-email">{{contact.email}}</p>
+          <div class="contact-initials">
+            <p>{{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}</p>
+          </div>
+          <div>
+            <p class="contact-name">{{contact.firstName}} {{contact.lastName}}</p>
+            <p class="contact-email">{{contact.email}}</p>
+          </div>
+
         </div>
         <hr>
         }

@@ -22,6 +22,7 @@ export class FirebaseService {
         this.contacts.push(this.setContactsObject(element.data(), element.id));
       })
       this.sortContacts();
+      console.log(this.contacts);
     })
   }
 
