@@ -14,7 +14,7 @@
 
         @for (contact of group.contacts; track contact.id) {
         <div class="single-contact" (click)="openSingleContact()">
-          <div class="contact-initials">
+          <div class="contact-initials" [style.background]="getRandomHslColor()">
             <p>{{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}</p>
           </div>
           <div>
