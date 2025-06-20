@@ -6,13 +6,19 @@
     width: clamp(200px, 20vw, 400px);
   }
 
-  .single-contact-container {
-    display: none;
+  .contact-container {
     flex: 1;
-    background-color: aquamarine;
 
-    &.open-contact {
-      display: flex;
+    .single-contact-container {
+      display: none;
+
+      background-color: aquamarine;
+
+      &.open-contact {
+        display: flex;
+      }
     }
   }
+
+
 }

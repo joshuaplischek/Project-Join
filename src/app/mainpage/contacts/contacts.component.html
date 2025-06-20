@@ -18,20 +18,25 @@
     </div>
   </div>
 
-  <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
 
-    <!-- Detailview: Tony -->
-    <p>Klaus Mustermann</p>
-
-    <!-- Buttons Delete & Edit: Mirkan -->
-    <div class="options-btns-container">
-      <div (click)="openEdit()">
-        <img src="" alt="">
-        <span>Edit</span>
-      </div>
-      <div (click)="deleteContact()">
-        <img src="" alt="">
-        <span>Delete</span>
+  <div class="contact-container">
+    <div class="contact-container-heading">
+      <h2>Contacts</h2>
+      <p>Better with teams</p>
+    </div>
+    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
+      <!-- Detailview: Tony -->
+      <p>Klaus Mustermann</p>
+      <!-- Buttons Delete & Edit: Mirkan -->
+      <div class="options-btns-container">
+        <div (click)="openEdit()">
+          <img src="" alt="">
+          <span>Edit</span>
+        </div>
+        <div (click)="deleteContact()">
+          <img src="" alt="">
+          <span>Delete</span>
+        </div>
       </div>
     </div>
   </div>
