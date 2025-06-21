@@ -24,6 +24,8 @@ export class ContactformComponent {
 
   @Input() isVisible = false;
   @Output() closeModal = new EventEmitter<void>();
+  @Output() buttonOneClick = new EventEmitter<void>();
+  @Output() buttonTwoClick = new EventEmitter<void>();
 
   close() {
     this.closeModal.emit();

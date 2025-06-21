@@ -1,3 +1,4 @@
 <app-contactform [isVisible]="isVisible" [heading]="'Add contact'" [subheading]="'Tasks are better with a team!'"
-  [buttonOne]="'Cancel'" [buttonTwo]="'Create contact'" (closeModal)="close()">
+  [buttonOne]="'Cancel'" [buttonTwo]="'Create contact'" (buttonOneClick)="close()" (buttonTwoClick)="createContact()"
+  (closeModal)="close()">
 </app-contactform>

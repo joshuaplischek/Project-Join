@@ -16,4 +16,6 @@ export class AddContactModulComponent {
   close() {
     this.closeModal.emit();
   }
+
+  createContact() { }
 }

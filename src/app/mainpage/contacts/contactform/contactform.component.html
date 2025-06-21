@@ -46,10 +46,15 @@
           </div>
         </div>
         <div class="form-buttons">
-          <button class="buttonOne"><span>{{buttonOne}}</span><img src="/assets/images/contactform/cancel.svg"
-              alt="cancel icon"></button>
-          <button class="buttonTwo"><span>{{buttonTwo}}</span><img src="/assets/images/contactform/check.svg"
-              alt="check icon"></button>
+          <button class="buttonOne" (click)="buttonOneClick.emit()">
+            <span>{{buttonOne}}</span>
+            <img src="/assets/images/contactform/cancel.svg" alt="cancel icon">
+          </button>
+
+          <button class="buttonTwo" (click)="buttonTwoClick.emit()">
+            <span>{{buttonTwo}}</span>
+            <img src="/assets/images/contactform/check.svg" alt="check icon">
+          </button>
         </div>
       </div>
     </div>
