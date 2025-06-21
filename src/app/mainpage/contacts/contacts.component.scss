@@ -25,8 +25,8 @@
     .contact-container-heading {
       display: flex;
       align-items: center;
-      gap: 20px;
-      padding: 60px 30px;
+      gap: 1.25rem;
+      padding: 3.75rem 1.8rem;
       padding-bottom: 0;
       h2 {
         font-size: 3.8rem;
@@ -41,8 +41,8 @@
   .name-badge-container {
     display: flex;
     align-items: center;
-    padding: 30px;
-    gap: 40px;
+    padding: 1.8rem;
+    gap: 2.5rem;
     .name-btn-container {
       p {
         font-size: 3rem;
@@ -52,29 +52,38 @@
   }
   .options-btns-container {
     display: flex;
-    gap: 15px;
+    gap: 1rem;
     div {
       display: flex;
       align-items: center;
       gap: 5px;
       &:hover {
         cursor: pointer;
+        color: #29abe2;
+        font-weight: 500;
       }
     }
   }
   .contact-information-wrapper {
-    padding: 30px;
+    padding: 1.8rem;
     div {
       display: flex;
       flex-direction: column;
       gap: 10px;
+
       a {
         margin-bottom: 10px;
+        &:hover {
+        }
       }
       p {
         font-size: 1rem;
         font-weight: 700;
       }
+    }
+  }
+  .contact-information {
+    p {
     }
   }
 }
