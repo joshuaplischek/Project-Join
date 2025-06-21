@@ -1,36 +1,57 @@
 <div class="overlay" [ngClass]="{'visible': isVisible, 'hidden': !isVisible}" (click)="close()">
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="side-banner">
-      <img src="" alt="">
-      <h3>{{heading}}</h3>
-      <p>{{subheading}}</p>
+      <img src="/assets/images/sidebar-logo.svg" alt="Join Logo">
+      <div>
+        <h3>{{heading}}</h3>
+        <p>{{subheading}}</p>
+      </div>
+      <hr>
     </div>
 
     <div class="contact-form">
-      <div class="user-badge"></div>
+      <div class="user-badge-container">
+        <div class="user-badge">
+          <img src="/assets/images/contactform/person.svg" alt="User Badge Icon">
+        </div>
+      </div>
       <div class="form">
-        <div class="firstname-field">
-          <input type="text" placeholder="Firstname">
-          <img src="" alt="person icon">
+        <div class="close-btn-wrapper">
+          <img class="close-btn" (click)="close()" src="/assets/images/contactform/cancel.svg" alt="cancel button">
         </div>
-        <div class="lastname-field">
-          <input type="text" placeholder="Lastname">
-          <img src="" alt="person icon">
+        <div class="input-fields">
+          <div class="firstname-field ">
+            <div class="input-wrapper">
+              <input type="text" placeholder="Firstname" />
+              <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
+            </div>
+          </div>
+          <div class="lastname-field">
+            <div class="input-wrapper">
+              <input type="text" placeholder="Lastname">
+              <img src="/assets/images/contactform/person-small.svg" alt="person icon">
+            </div>
+          </div>
+          <div class="email-field">
+            <div class="input-wrapper">
+              <input type="text" placeholder="Email">
+              <img src="/assets/images/contactform/mail.svg" alt="mail icon">
+            </div>
+          </div>
+          <div class="phone-field">
+            <div class="input-wrapper">
+              <input type="text" placeholder="Phone" inputmode="numeric">
+              <img src="/assets/images/contactform/call.svg" alt="phone icon">
+            </div>
+          </div>
         </div>
-        <div class="email-field">
-          <input type="text" placeholder="Email">
-          <img src="" alt="mail icon">
-        </div>
-        <div class="phone-field">
-          <input type="number" placeholder="Phone">
-          <img src="" alt="phone icon">
-        </div>
-        <div>
-          <button>{{buttonOne}}</button>
-          <button><span>{{buttonTwo}}</span><img src="" alt="check icon"></button>
+        <div class="form-buttons">
+          <button class="buttonOne"><span>{{buttonOne}}</span><img src="/assets/images/contactform/cancel.svg"
+              alt="cancel icon"></button>
+          <button class="buttonTwo"><span>{{buttonTwo}}</span><img src="/assets/images/contactform/check.svg"
+              alt="check icon"></button>
         </div>
       </div>
     </div>
-    <span class="close-btn" (click)="close()">X</span>
   </div>
 </div>
