@@ -8,25 +8,31 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './contacts.component.html',
-  styleUrl: './contacts.component.scss'
+  styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent {
-
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
-  constructor(private contactlist: FirebaseService) { }
+  selectedContact: any = null;
+  constructor(private contactlist: FirebaseService) {}
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
   }
 
-  addContact() { }
+  addContact() {}
 
   openSingleContact() {
     this.isOpen = !this.isOpen;
   }
 
-  openEdit() { }
+  getContactField(id: any) {
+    this.contactlist.subSingleContact(id, (data) => {
+      this.selectedContact = data;
+    });
+  }
 
-  deleteContact() { }
+  openEdit() {}
+
+  deleteContact() {}
 }

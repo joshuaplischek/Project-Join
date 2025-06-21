@@ -7,7 +7,7 @@
     <div>
       <ul>
         @for (contact of contacts; track $index) {
-        <div class="single-contact" (click)="openSingleContact()">
+        <div class="single-contact" (click)="openSingleContact(); getContactField(contact.id)">
           <p>{{contact.name}}</p>
           <p>{{contact.email}}</p>
           <p>{{contact.phone}}</p>
@@ -26,7 +26,7 @@
     </div>
     <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
       <!-- Detailview: Tony -->
-      <p>Klaus Mustermann</p>
+      <p>{{ selectedContact.firstName }}</p>
       <!-- Buttons Delete & Edit: Mirkan -->
       <div class="options-btns-container">
         <div (click)="openEdit()">
