@@ -9,7 +9,7 @@
         @for (contact of contacts; track $index) {
         <div
           class="single-contact"
-          (click)="openSingleContact(); getContactField(contact.id)"
+          (click)="openSingleContact(contact); getContactField(contact.id)"
         >
           <p>{{ contact.name }}</p>
           <p>{{ contact.email }}</p>
@@ -24,7 +24,7 @@
   <div class="contact-container">
     <div class="contact-container-heading">
       <h2>Contacts</h2>
-      <div style="background-color: blue; width: 2px; height: 50px"></div>
+      <div style="background-color: #29ABE2; width: 2px; height: 50px"></div>
       <p>Better with a team</p>
     </div>
     <div
@@ -51,19 +51,16 @@
         </div>
       </div>
       <div class="contact-information-wrapper">
-        <p>Contact Information</p>
+        <p style="margin-bottom: 30px; font-size: 20px;">Contact Information</p>
         <div>
           <p>E-Mail</p>
-          <a href="">{{ selectedContact?.email }}</a>
+          <a href="mailto:{{ selectedContact?.email }}" style="color: #007CEE;">{{ selectedContact?.email }}</a>
         </div>
           <div>
           <p>Phone</p>
-          <a href="">{{ selectedContact?.phone }}</a>
+          <a href="tel:{{ selectedContact?.phone }}" style="color: black;">+49 {{ selectedContact?.phone }}</a>
         </div>
       </div>
-      <!-- <p>{{ selectedContact?.email }}</p>
-      <p>{{ selectedContact?.phone }}</p> -->
-      <!-- Buttons Delete & Edit: Mirkan -->
     </div>
   </div>
 </div>

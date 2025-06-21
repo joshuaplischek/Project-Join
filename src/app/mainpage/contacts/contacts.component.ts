@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class ContactsComponent {
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
+  openDetail: boolean = false;
   selectedContact: any = null;
   constructor(private contactlist: FirebaseService) {}
 
@@ -22,8 +23,15 @@ export class ContactsComponent {
 
   addContact() {}
 
-  openSingleContact() {
+  openSingleContact(contact: Contactlist) {
     this.isOpen = !this.isOpen;
+    if (this.selectedContact?.id === contact.id) return;
+    if (!this.isOpen) {
+      setTimeout(() => {
+        this.getContactField(contact.id);
+        this.isOpen = true;
+      }, 400);
+    }
   }
 
   getContactField(id: any) {

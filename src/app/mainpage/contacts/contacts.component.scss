@@ -12,10 +12,14 @@
     .single-contact-container {
       display: flex;
       flex-direction: column;
-      background-color: aquamarine;
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
 
       &.open-contact {
         display: flex;
+      }
+      &.single-contact-container.open-contact {
+        transform: translateX(0);
       }
     }
     .contact-container-heading {
@@ -36,9 +40,10 @@
 
   .name-badge-container {
     display: flex;
+    align-items: center;
     padding: 30px;
     gap: 40px;
-    .name-btn-container{
+    .name-btn-container {
       p {
         font-size: 3rem;
         font-weight: 500;
@@ -52,6 +57,9 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
   .contact-information-wrapper {
@@ -62,6 +70,10 @@
       gap: 10px;
       a {
         margin-bottom: 10px;
+      }
+      p {
+        font-size: 1rem;
+        font-weight: 700;
       }
     }
   }
