@@ -10,15 +10,59 @@
     flex: 1;
 
     .single-contact-container {
-      display: none;
-
+      display: flex;
+      flex-direction: column;
       background-color: aquamarine;
 
       &.open-contact {
         display: flex;
       }
     }
+    .contact-container-heading {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 60px 30px;
+      padding-bottom: 0;
+      h2 {
+        font-size: 3.8rem;
+        font-weight: 700;
+      }
+      p {
+        font-size: 1.6rem;
+      }
+    }
   }
 
-
+  .name-badge-container {
+    display: flex;
+    padding: 30px;
+    gap: 40px;
+    .name-btn-container{
+      p {
+        font-size: 3rem;
+        font-weight: 500;
+      }
+    }
+  }
+  .options-btns-container {
+    display: flex;
+    gap: 15px;
+    div {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+  .contact-information-wrapper {
+    padding: 30px;
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      a {
+        margin-bottom: 10px;
+      }
+    }
+  }
 }

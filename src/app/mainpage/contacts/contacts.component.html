@@ -7,37 +7,63 @@
     <div>
       <ul>
         @for (contact of contacts; track $index) {
-        <div class="single-contact" (click)="openSingleContact(); getContactField(contact.id)">
-          <p>{{contact.name}}</p>
-          <p>{{contact.email}}</p>
-          <p>{{contact.phone}}</p>
+        <div
+          class="single-contact"
+          (click)="openSingleContact(); getContactField(contact.id)"
+        >
+          <p>{{ contact.name }}</p>
+          <p>{{ contact.email }}</p>
+          <p>{{ contact.phone }}</p>
         </div>
-        <hr>
+        <hr />
         }
       </ul>
     </div>
   </div>
 
-
   <div class="contact-container">
     <div class="contact-container-heading">
       <h2>Contacts</h2>
-      <p>Better with teams</p>
+      <div style="background-color: blue; width: 2px; height: 50px"></div>
+      <p>Better with a team</p>
     </div>
-    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
+    <div
+      class="single-contact-container"
+      [ngClass]="{ 'open-contact': isOpen }"
+    >
       <!-- Detailview: Tony -->
-      <p>{{ selectedContact.firstName }}</p>
-      <!-- Buttons Delete & Edit: Mirkan -->
-      <div class="options-btns-container">
-        <div (click)="openEdit()">
-          <img src="" alt="">
-          <span>Edit</span>
-        </div>
-        <div (click)="deleteContact()">
-          <img src="" alt="">
-          <span>Delete</span>
+      <div class="name-badge-container">
+        <img src="/assets/images/icons/placeholder-ellipse.svg" alt="Badge" />
+        <div class="name-btn-container">
+          <p>
+            {{ selectedContact?.firstName + " " + selectedContact?.lastName }}
+          </p>
+          <div class="options-btns-container">
+            <div (click)="openEdit()">
+              <img src="/assets/images/icons/icon-edit.svg" alt="" />
+              <span>Edit</span>
+            </div>
+            <div (click)="deleteContact()">
+              <img src="/assets/images/icons/icon-delete.svg" alt="" />
+              <span>Delete</span>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="contact-information-wrapper">
+        <p>Contact Information</p>
+        <div>
+          <p>E-Mail</p>
+          <a href="">{{ selectedContact?.email }}</a>
+        </div>
+          <div>
+          <p>Phone</p>
+          <a href="">{{ selectedContact?.phone }}</a>
+        </div>
+      </div>
+      <!-- <p>{{ selectedContact?.email }}</p>
+      <p>{{ selectedContact?.phone }}</p> -->
+      <!-- Buttons Delete & Edit: Mirkan -->
     </div>
   </div>
 </div>
