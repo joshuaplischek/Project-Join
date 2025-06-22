@@ -13,7 +13,7 @@
         <h2>{{ group.letter }}</h2>
 
         @for (contact of group.contacts; track contact.id) {
-        <div class="single-contact" (click)="openSingleContact()">
+        <div class="single-contact" (click)="openSingleContact(contact)">
           <p class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</p>
           <p class="contact-email">{{ contact.email }}</p>
         </div>
@@ -31,7 +31,7 @@
       </div>
       <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
 
-        <p>Klaus Mustermann</p>
+        <p>{{ selectedContact?.firstName }} {{ selectedContact?.lastName }}</p>
         <!-- Buttons Delete & Edit: Mirkan -->
         <div class="options-btns-container">
           <div (click)="openEdit()">
@@ -47,6 +47,6 @@
     </div>
   </div>
   
-  <app-edit-contact [isVisible]="isEditContactFormVisible" (closeModal)="closeEditContact()">
+  <app-edit-contact [isVisible]="isEditContactFormVisible" [selectedContact]="selectedContact" (closeModal)="closeEditContact()">
   </app-edit-contact>
 </div>

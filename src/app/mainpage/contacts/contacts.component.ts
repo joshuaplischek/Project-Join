@@ -17,7 +17,8 @@ export class ContactsComponent {
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
   isAddContactFormVisible = false;
-  isEditContactFormVisible = false; // Neue Variable
+  isEditContactFormVisible = false;
+  selectedContact: Contactlist | null = null;
 
   constructor(private contactlist: FirebaseService) { }
 
@@ -47,20 +48,21 @@ export class ContactsComponent {
     this.isAddContactFormVisible = false;
   }
 
-  openSingleContact() {
+  openSingleContact(contact: Contactlist) {
+    this.selectedContact = contact;
     this.isOpen = !this.isOpen;
   }
 
-  openEditContact() { // Neue Methode
+  openEditContact() {
     this.isEditContactFormVisible = true;
   }
 
-  closeEditContact() { // Neue Methode
+  closeEditContact() {
     this.isEditContactFormVisible = false;
   }
 
   openEdit() {
-    this.openEditContact(); // Hier rufst du deine Edit-Methode auf
+    this.openEditContact();
   }
 
   deleteContact() { }

@@ -22,25 +22,25 @@
         <div class="input-fields">
           <div class="firstname-field ">
             <div class="input-wrapper">
-              <input type="text" placeholder="Firstname" />
+              <input type="text" placeholder="Firstname" [(ngModel)]="firstName" />
               <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
             </div>
           </div>
           <div class="lastname-field">
             <div class="input-wrapper">
-              <input type="text" placeholder="Lastname">
+              <input type="text" placeholder="Lastname" [(ngModel)]="lastName">
               <img src="/assets/images/contactform/person-small.svg" alt="person icon">
             </div>
           </div>
           <div class="email-field">
             <div class="input-wrapper">
-              <input type="text" placeholder="Email">
+              <input type="text" placeholder="Email" [(ngModel)]="email">
               <img src="/assets/images/contactform/mail.svg" alt="mail icon">
             </div>
           </div>
           <div class="phone-field">
             <div class="input-wrapper">
-              <input type="text" placeholder="Phone" inputmode="numeric">
+              <input type="number" placeholder="Phone" [(ngModel)]="phone">
               <img src="/assets/images/contactform/call.svg" alt="phone icon">
             </div>
           </div>
