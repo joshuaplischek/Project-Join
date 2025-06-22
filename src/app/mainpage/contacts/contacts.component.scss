@@ -66,24 +66,35 @@
   }
   .contact-information-wrapper {
     padding: 1.8rem;
-    div {
+    .contact-information {
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
       gap: 10px;
-
-      a {
-        margin-bottom: 10px;
-        &:hover {
-        }
-      }
       p {
         font-size: 1rem;
         font-weight: 700;
       }
+      a {
+        margin-bottom: 10px;
+        display: inline;
+      }
     }
   }
-  .contact-information {
-    p {
+
+  .ellipse-container {
+    padding: 1.8rem;
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 100%;
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      color: white;
+      font-size: 3rem;
     }
   }
 }
