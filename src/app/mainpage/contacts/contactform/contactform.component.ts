@@ -27,6 +27,13 @@ export class ContactformComponent {
   @Output() buttonOneClick = new EventEmitter<void>();
   @Output() buttonTwoClick = new EventEmitter<void>();
 
+  // create contact
+  @Output() createContact = new EventEmitter<any>();
+
+  onCreateContact(formData: any) {
+    this.createContact.emit(formData);
+  }
+
   close() {
     this.closeModal.emit();
   }

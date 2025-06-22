@@ -12,10 +12,14 @@ import { CommonModule } from '@angular/common';
 export class AddContactModulComponent {
   @Input() isVisible = false;
   @Output() closeModal = new EventEmitter<void>();
+  @Output() contactCreated = new EventEmitter<any>();
+
+  createContact(formData: any) {
+    this.contactCreated.emit(formData);
+  }
 
   close() {
     this.closeModal.emit();
   }
 
-  createContact() { }
 }
