@@ -30,17 +30,17 @@ export class FirebaseService {
     });
   }
 
-  subSingleContact(id: any, callback: (data: any) => void) {
-  return onSnapshot(this.getSingleContact('contactlist', id), (element) => {
-    if (element.exists()) {
-      const data = element.data();
-      callback({ id: element.id, ...data });
-    } else {
-      console.warn('Dokument existiert nicht.');
-      callback(null);
-    }
-  });
+async getSingleContactOnce(id: string) {
+  const docRef = doc(this.firestore, 'contactlist', id);
+  const snapshot = await getDoc(docRef);
+  if (snapshot.exists()) {
+    return { id: snapshot.id, ...snapshot.data() };
+  } else {
+    return null;
+  }
 }
+
+
 
 
   getContacts() {

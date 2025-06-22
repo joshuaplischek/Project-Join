@@ -34,11 +34,12 @@ export class ContactsComponent {
     }
   }
 
-  getContactField(id: any) {
-    this.contactlist.subSingleContact(id, (data) => {
-      this.selectedContact = data;
-    });
-  }
+async getContactField(id: any) {
+  const data = await this.contactlist.getSingleContactOnce(id);
+  this.selectedContact = data;
+}
+
+  
 
   openEdit() {}
 
