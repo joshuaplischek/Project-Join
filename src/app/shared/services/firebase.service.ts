@@ -33,7 +33,7 @@ export class FirebaseService {
     this.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
   }
 
-  getSingleContact(colId: string, docId: string){
+  getSingleContact(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId)
   }
 
@@ -47,7 +47,7 @@ export class FirebaseService {
     }
   }
 
-  addContact() { }
+  addContact(formData: any) { }
 
   deleteContact() { }
 
