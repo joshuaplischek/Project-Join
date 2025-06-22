@@ -37,11 +37,15 @@ export class ContactsComponent {
       .map(letter => ({ letter, contacts: grouped[letter] }));
   }
 
-  openAddContact() {
+  openAddContactForm() {
     this.isAddContactFormVisible = true;
   }
 
-  closeAddContact() {
+  addContactToDb(formData: any) {
+    this.contactlist.addContact(formData);
+  }
+
+  closeAddContactForm() {
     this.isAddContactFormVisible = false;
   }
 
