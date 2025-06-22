@@ -4,11 +4,12 @@ import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
 import { TestComponent } from '../../test/test.component';
 import { AddContactModulComponent } from "./add-contact-modul/add-contact-modul.component";
+import { EditContactComponent } from "./edit-contact/edit-contact.component";
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [CommonModule, AddContactModulComponent],
+  imports: [CommonModule, AddContactModulComponent, EditContactComponent],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })
@@ -16,6 +17,7 @@ export class ContactsComponent {
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
   isAddContactFormVisible = false;
+  isEditContactFormVisible = false; // Neue Variable
 
   constructor(private contactlist: FirebaseService) { }
 
@@ -49,7 +51,17 @@ export class ContactsComponent {
     this.isOpen = !this.isOpen;
   }
 
-  openEdit() { }
+  openEditContact() { // Neue Methode
+    this.isEditContactFormVisible = true;
+  }
+
+  closeEditContact() { // Neue Methode
+    this.isEditContactFormVisible = false;
+  }
+
+  openEdit() {
+    this.openEditContact(); // Hier rufst du deine Edit-Methode auf
+  }
 
   deleteContact() { }
 }
