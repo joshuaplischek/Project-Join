@@ -17,6 +17,12 @@ export class ContactformComponent {
   email: string = '';
   phone: string = '';
 
+  clicked = false;
+  firstNameTouched = false;
+  lastNameTouched = false;
+  emailTouched = false;
+  phoneTouched = false;
+
   constructor(private contactService: FirebaseService) { }
 
   callServiceMethode() {
@@ -48,7 +54,19 @@ export class ContactformComponent {
     }
   }
 
+  resetForm() {
+    this.firstName = '';
+    this.lastName = '';
+    this.email = '';
+    this.phone = '';
+    this.firstNameTouched = false;
+    this.lastNameTouched = false;
+    this.emailTouched = false;
+    this.phoneTouched = false;
+  }
+
   close() {
+    this.resetForm();
     this.closeModal.emit();
   }
 }
