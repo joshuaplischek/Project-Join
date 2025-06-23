@@ -1,0 +1,4 @@
+<app-contactform [isVisible]="isVisible" [heading]="'Edit contact'" [subheading]="'Update contact information'"
+  [buttonOne]="'Delete'" [buttonTwo]="'Save changes'" [contactData]="selectedContact"
+  (buttonOneClick)="deleteContact()" (buttonTwoClick)="saveContact()" (closeModal)="close()">
+</app-contactform>
