@@ -11,7 +11,7 @@ import { EditContactComponent } from "./edit-contact/edit-contact.component";
   standalone: true,
   imports: [CommonModule, AddContactModulComponent, EditContactComponent],
   templateUrl: './contacts.component.html',
-  styleUrl: './contacts.component.scss'
+  styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent {
 

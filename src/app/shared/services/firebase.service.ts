@@ -5,6 +5,7 @@ import {
   Firestore,
   onSnapshot,
   getDoc,
+  addDoc,
 } from '@angular/fire/firestore';
 import { Contactlist } from '../../contactlist';
 import { single } from 'rxjs';
