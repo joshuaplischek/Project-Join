@@ -42,4 +42,10 @@ body {
   font-family: 'mainFontRegular', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
   background-color: var(--main-bg-color);
+  scroll-behavior: smooth;
+}
+
+.active {
+  background-color: var(--accent-color-dark);
+  color: #fff;
 }

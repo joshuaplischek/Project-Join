@@ -10,7 +10,7 @@
     </app-add-contact-modul>
 
     <app-edit-contact [isVisible]="isEditContactFormVisible" [selectedContact]="selectedContact"
-      (closeModal)="closeEditContactForm()">
+      (closeModal)="closeEditContactForm()" (contactDeleted)="deleteContact()">
     </app-edit-contact>
 
     <!-- Contactlist: Joshua -->
@@ -20,7 +20,8 @@
         <h2>{{ group.letter }}</h2>
 
         @for (contact of group.contacts; track contact.id) {
-        <div class="single-contact" (click)="openSingleContact(contact); getContactField(contact.id)">
+        <div class="single-contact" [ngClass]="{ 'active': selectedContact?.id === contact.id }"
+          (click)="openSingleContact(contact); getContactField(contact.id)">
           <div class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
             <p>{{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}</p>
           </div>
@@ -30,8 +31,7 @@
           </div>
         </div>
         <hr />
-        }
-        }
+        }}
       </ul>
     </div>
   </div>
@@ -42,11 +42,12 @@
       <div style="background-color: #29abe2; width: 2px; height: 50px"></div>
       <p>Better with a team</p>
     </div>
-    
-    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }" [class.open-contact] = "isOpen && selectedContact">
-      <!-- Detailview: Tony -->
+
+    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }"
+      [class.open-contact]="isOpen && selectedContact">
       <div class="name-badge-container">
-        <div class="ellipse-container" [style.background]="getColorForLetter(selectedContact?.firstName?.charAt(0) ?? '')">
+        <div class="ellipse-container"
+          [style.background]="getColorForLetter(selectedContact?.firstName?.charAt(0) ?? '')">
           <span>{{ selectedContact?.firstName?.charAt(0) }}{{ selectedContact?.lastName?.charAt(0) }}</span>
         </div>
 
@@ -99,4 +100,9 @@
       </div>
     </div>
   </div>
+  @if(showSuccessMessage){
+  <div class="success-message-container">
+    {{successMessage}}
+  </div>
+  }
 </div>

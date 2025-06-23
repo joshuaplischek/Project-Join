@@ -33,7 +33,10 @@ export class ContactsComponent {
   isEditContactFormVisible = false;
   selectedContact: Contactlist | null = null;
 
-  constructor(private contactlist: FirebaseService) {}
+  successMessage = '';
+  showSuccessMessage = false;
+
+  constructor(private contactlist: FirebaseService) { }
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
@@ -69,19 +72,47 @@ export class ContactsComponent {
 
   addContactToDb(formData: Contactlist) {
     this.contactlist.addContact(formData);
+    this.showSuccessMessageBox('Kontakt wurde erfolgreich hinzugefügt!');
+
+    setTimeout(() => {
+      const newContact = this.contactlist.contacts.find(
+        contact => (contact.email === formData.email) && (contact.lastName === formData.lastName)
+      );
+      if (newContact) {
+        this.selectedContact = newContact;
+        this.isOpen = true;
+      }
+      this.isAddContactFormVisible = false;
+    }, 300);
+  }
+
+  showSuccessMessageBox(message: string) {
+    this.successMessage = message;
+    this.showSuccessMessage = true;
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 1000);
   }
 
   closeAddContactForm() {
     this.isAddContactFormVisible = false;
   }
 
+  openEdit() {
+    this.isEditContactFormVisible = true;
+  }
+
+  closeEditContactForm() {
+    this.isEditContactFormVisible = false;
+  }
+
   openSingleContact(contact: Contactlist) {
     if (this.selectedContact && contact.id !== this.selectedContact.id) {
-      this.isOpen = false; 
+      this.isOpen = false;
       setTimeout(() => {
         this.selectedContact = contact;
-        this.isOpen = true; 
-      }, 300); 
+        this.isOpen = true;
+      }, 300);
     } else {
       this.selectedContact = contact;
       this.isOpen = true;
@@ -93,13 +124,16 @@ export class ContactsComponent {
     this.selectedContact = data;
   }
 
-  openEdit() {
-    this.isEditContactFormVisible = true;
-  }
+  async deleteContact(contactId?: string) {
+    if (!contactId && this.selectedContact?.id) {
+      contactId = this.selectedContact.id;
+    }
 
-  closeEditContactForm() {
-    this.isEditContactFormVisible = false;
+    if (contactId) {
+      await this.contactlist.deleteContact(contactId);
+      this.selectedContact = null;
+      this.isOpen = false;
+      this.closeEditContactForm();
+    }
   }
-
-  deleteContact() {}
 }

@@ -43,13 +43,13 @@
     overflow-y: scroll;
     padding: 1rem;
 
-    > div {
-      > ul {
+    >div {
+      >ul {
         display: flex;
         flex-direction: column;
         gap: 15px;
 
-        > h2 {
+        >h2 {
           font-size: 20px;
           padding: 0 12px;
         }
@@ -85,13 +85,13 @@
 
     &:hover {
       cursor: pointer;
-
       background-image: linear-gradient(rgb(240, 240, 240), rgb(235, 235, 235));
     }
   }
 
   .contact-container {
     flex: 1;
+    padding: 3rem;
 
     .contact-container-heading {
       display: flex;
@@ -116,8 +116,7 @@
       display: flex;
       align-items: center;
       gap: 1.25rem;
-      padding: 3.75rem 1.8rem;
-      padding-bottom: 0;
+      padding-top: 3.75rem;
 
       h2 {
         font-size: 3.8rem;
@@ -196,5 +195,26 @@
       color: white;
       font-size: 3rem;
     }
+  }
+}
+
+
+.success-message-container {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--nav-bg-color);
+  color: #fff;
+  padding: 16px 32px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  z-index: 9999;
+  transform: translateX(120%);
+  animation: slide-in 0.3s forwards;
+}
+
+@keyframes slide-in {
+  to {
+    transform: translateX(0);
   }
 }
