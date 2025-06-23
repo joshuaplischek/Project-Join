@@ -22,26 +22,39 @@
         <div class="input-fields">
           <div class="firstname-field ">
             <div class="input-wrapper">
-              <input [(ngModel)]="firstName" type="text" placeholder="Firstname" />
+              <input [(ngModel)]="firstName" type="text" placeholder="Firstname" (blur)="firstNameTouched = true" />
               <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
+            </div>
+            <div class="input-hint">@if (!firstName && firstNameTouched) {
+              <span>Bitte Vornamen eingeben</span>}
             </div>
           </div>
           <div class="lastname-field">
             <div class="input-wrapper">
-              <input [(ngModel)]="lastName" type="text" placeholder="Lastname">
+              <input [(ngModel)]="lastName" type="text" placeholder="Lastname" (blur)="lastNameTouched = true">
               <img src="/assets/images/contactform/person-small.svg" alt="person icon">
+            </div>
+            <div class="input-hint">@if (!lastName && lastNameTouched) {
+              <span>Bitte Nachname eingeben</span>}
             </div>
           </div>
           <div class="email-field">
             <div class="input-wrapper">
-              <input [(ngModel)]="email" type="text" placeholder="Email">
+              <input [(ngModel)]="email" type="text" placeholder="Email" (blur)="emailTouched = true">
               <img src="/assets/images/contactform/mail.svg" alt="mail icon">
+            </div>
+            <div class="input-hint">@if (!email && emailTouched) {
+              <span>Bitte Email angeben</span>}
             </div>
           </div>
           <div class="phone-field">
             <div class="input-wrapper">
-              <input [(ngModel)]="phone" type="text" placeholder="Phone" inputmode="numeric">
+              <input [(ngModel)]="phone" type="number" placeholder="Phone" inputmode="numeric"
+                (blur)="phoneTouched = true">
               <img src="/assets/images/contactform/call.svg" alt="phone icon">
+            </div>
+            <div class="input-hint">@if (!phone && phoneTouched) {
+              <span>Bitte Telefonnummer eingeben</span>}
             </div>
           </div>
         </div>
@@ -51,7 +64,8 @@
             <img src="/assets/images/contactform/cancel.svg" alt="cancel icon">
           </button>
 
-          <button class="buttonTwo" (click)="buttonTwoClick.emit({firstName, lastName, email, phone})">
+          <button class="buttonTwo" (click)="buttonTwoClick.emit({firstName, lastName, email, phone})" type="submit"
+            [disabled]="!firstName || !lastName || !email || !phone">
             <span>{{buttonTwo}}</span>
             <img src="/assets/images/contactform/check.svg" alt="check icon">
           </button>

@@ -17,6 +17,12 @@ export class ContactformComponent {
   email: string = '';
   phone: string = '';
 
+  clicked = false;
+  firstNameTouched = false;
+  lastNameTouched = false;
+  emailTouched = false;
+  phoneTouched = false;
+
   constructor(private contactService: FirebaseService) { }
 
   callServiceMethode() {
