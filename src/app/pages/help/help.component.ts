@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../shared/header/header.component';
-import { LegalnoticeComponent } from '../legalnotice/legalnotice.component';
-import { NavComponent } from '../../shared/nav/nav.component';
-import { RouterLink } from '@angular/router';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-help',
   standalone: true,
-  imports: [HeaderComponent, NavComponent, RouterLink],
+  imports: [CommonModule],
   templateUrl: './help.component.html',
   styleUrl: './help.component.scss'
 })
 export class HelpComponent {
+  constructor(private location: Location) {}
 
+  goBack(): void{
+    this.location.back();
+  }
 }
