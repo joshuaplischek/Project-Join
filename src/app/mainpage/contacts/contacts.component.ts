@@ -57,10 +57,12 @@ export class ContactsComponent {
       .map((letter) => ({ letter, contacts: grouped[letter] }));
   }
 
-  getRandomHslColor(): string {
-    const index = Math.floor(Math.random() * this.standardColors.length);
-    return this.standardColors[index];
-  }
+getColorForLetter(letter: string): string {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const index = alphabet.indexOf(letter.toUpperCase());
+  if (index === -1) return this.standardColors[0];
+  return this.standardColors[index % this.standardColors.length];
+}
 
   openAddContactForm() {
     this.isAddContactFormVisible = true;
