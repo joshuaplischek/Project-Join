@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ContactformComponent } from "../contactform/contactform.component";
 import { CommonModule } from '@angular/common';
 import { Contactlist } from '../../../contactlist';
+import { FirebaseService } from '../../../shared/services/firebase.service';
 
 @Component({
   selector: 'app-edit-contact',
@@ -14,14 +15,20 @@ export class EditContactComponent {
   @Input() isVisible = false;
   @Input() selectedContact: Contactlist | null = null; 
   @Output() closeModal = new EventEmitter<void>();
+  @Output() contactDeleted = new EventEmitter<void>();
+  
+  firebaseService = inject(FirebaseService);
 
   close() {
     this.closeModal.emit();
   }
 
-  deleteContact() {
-    console.log('Delete contact:', this.selectedContact);
-    this.close();
+  async deleteContact() {
+    if (this.selectedContact?.id) {
+      await this.firebaseService.deleteContact(this.selectedContact.id);
+      this.contactDeleted.emit();
+      this.close();
+    }
   }
 
   saveContact() {

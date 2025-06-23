@@ -105,13 +105,24 @@ export class ContactsComponent {
     this.selectedContact = data;
   }
 
-  deleteContact() { }
+  openEdit() {
+    this.isEditContactFormVisible = true;
+  }
 
-  showSuccessMessageBox(message: string) {
-    this.successMessage = message;
-    this.showSuccessMessage = true;
-    setTimeout(() => {
-      this.showSuccessMessage = false;
-    }, 1000);
+  closeEditContactForm() {
+    this.isEditContactFormVisible = false;
+  }
+
+  async deleteContact(contactId?: string) {
+    if (!contactId && this.selectedContact?.id) {
+      contactId = this.selectedContact.id;
+    }
+    
+    if (contactId) {
+      await this.contactlist.deleteContact(contactId);
+      this.selectedContact = null;
+      this.isOpen = false;
+      this.closeEditContactForm();
+    }
   }
 }
