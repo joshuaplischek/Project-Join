@@ -1,11 +1,10 @@
 <div class="contactlist-wrapper">
   <div class="contactlist-container">
     <!-- Add Contact: Anne :D -->
-    <button id="addContactBtn" (click)="openAddContactForm()"><span>Add new contact</span> <img
-        src="/assets/images/icons/person_add.svg" alt="add person"></button>
-    <app-add-contact-modul [isVisible]="isAddContactFormVisible" (closeModal)="closeAddContactForm()"
-      (contactCreated)="addContactToDb($event)">
-    </app-add-contact-modul>
+    <button id="addContactBtn" (click)="openAddContact()">
+      Add new contact
+    </button>
+    <app-add-contact-modul [isVisible]="isAddContactFormVisible" (closeModal)="closeAddContact()"></app-add-contact-modul>
 
     <!-- Contactlist: Joshua -->
     <div>
@@ -15,12 +14,18 @@
 
         @for (contact of group.contacts; track contact.id) {
         <div class="single-contact" (click)="openSingleContact()">
-          <p class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</p>
-          <p class="contact-email">{{ contact.email }}</p>
+          <div class="contact-initials" [style.background]="getRandomHslColor()">
+            <p>{{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}</p>
+          </div>
+          <div>
+            <p class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</p>
+            <p class="contact-email">{{ contact.email }}</p>
+          </div>
         </div>
         <hr />
         }
         }
+        <hr />
         }
       </ul>
     </div>

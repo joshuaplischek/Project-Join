@@ -3,7 +3,7 @@ import { Contactlist } from '../../contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
 import { TestComponent } from '../../test/test.component';
-import { AddContactModulComponent } from "./add-contact-modul/add-contact-modul.component";
+import { AddContactModulComponent } from './add-contact-modul/add-contact-modul.component';
 
 @Component({
   selector: 'app-contacts',
@@ -14,6 +14,19 @@ import { AddContactModulComponent } from "./add-contact-modul/add-contact-modul.
   styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent {
+
+  readonly standardColors: string[] = [
+  '#ff7a00',  
+  '#1fd7c1',  
+  '#6e52ff',  
+  '#9327ff',  
+  '#ffbb2b',  
+  '#fc71ff',  
+  '#ff4646',  
+  '#3F51B5',  
+  '#462f8a',
+];
+
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
   openDetail: boolean = false;
@@ -35,7 +48,12 @@ export class ContactsComponent {
 
     return Object.keys(grouped)
       .sort()
-      .map(letter => ({ letter, contacts: grouped[letter] }));
+      .map((letter) => ({ letter, contacts: grouped[letter] }));
+  }
+
+  getRandomHslColor(): string {
+    const index = Math.floor(Math.random() * this.standardColors.length);
+    return this.standardColors[index];
   }
 
   openAddContactForm() {
