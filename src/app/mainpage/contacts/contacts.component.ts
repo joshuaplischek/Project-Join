@@ -32,7 +32,10 @@ export class ContactsComponent {
   isEditContactFormVisible = false;
   selectedContact: Contactlist | null = null;
 
-  constructor(private contactlist: FirebaseService) {}
+  toastMessage = '';
+  showToast = false;
+
+  constructor(private contactlist: FirebaseService) { }
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
@@ -74,13 +77,21 @@ export class ContactsComponent {
     this.isAddContactFormVisible = false;
   }
 
+  openEdit() {
+    this.isEditContactFormVisible = true;
+  }
+
+  closeEditContactForm() {
+    this.isEditContactFormVisible = false;
+  }
+
   openSingleContact(contact: Contactlist) {
     if (this.selectedContact && contact.id !== this.selectedContact.id) {
-      this.isOpen = false; 
+      this.isOpen = false;
       setTimeout(() => {
         this.selectedContact = contact;
-        this.isOpen = true; 
-      }, 300); 
+        this.isOpen = true;
+      }, 300);
     } else {
       this.selectedContact = contact;
       this.isOpen = true;
@@ -92,13 +103,15 @@ export class ContactsComponent {
     this.selectedContact = data;
   }
 
-  openEdit() {
-    this.isEditContactFormVisible = true;
-  }
 
-  closeEditContactForm() {
-    this.isEditContactFormVisible = false;
-  }
+  // TODO Delete Contact Methode aus der Editiermethode hier rein bringen
+  deleteContact() { }
 
-  deleteContact() {}
+  showSuccessToast(message: string) {
+    this.toastMessage = message;
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 1000);
+  }
 }
