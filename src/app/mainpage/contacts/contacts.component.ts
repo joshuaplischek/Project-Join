@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Contactlist } from '../../contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
-import { TestComponent } from '../../test/test.component';
 import { AddContactModulComponent } from "./add-contact-modul/add-contact-modul.component";
 import { EditContactComponent } from "./edit-contact/edit-contact.component";
 
@@ -96,7 +95,7 @@ export class ContactsComponent {
 
 
 
-  openEdit() { 
+  openEdit() {
     this.isEditContactFormVisible = true;
   }
 
