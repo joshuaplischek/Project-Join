@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { Contactlist } from '../../../contactlist';
 
 @Component({
@@ -32,7 +32,7 @@ export class ContactformComponent {
   @Input() isVisible = false;
   @Output() closeModal = new EventEmitter<void>();
   @Output() buttonOneClick = new EventEmitter<void>();
-  @Output() buttonTwoClick = new EventEmitter<void>();
+  @Output() buttonTwoClick = new EventEmitter<Contactlist>();
 
   ngOnChanges() {
     if (this.contactData) {
