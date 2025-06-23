@@ -75,6 +75,14 @@ export class ContactsComponent {
     this.showSuccessMessageBox('Kontakt wurde erfolgreich hinzugefügt!');
   }
 
+  showSuccessMessageBox(message: string) {
+    this.successMessage = message;
+    this.showSuccessMessage = true;
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 1000);
+  }
+
   closeAddContactForm() {
     this.isAddContactFormVisible = false;
   }
@@ -105,19 +113,11 @@ export class ContactsComponent {
     this.selectedContact = data;
   }
 
-  openEdit() {
-    this.isEditContactFormVisible = true;
-  }
-
-  closeEditContactForm() {
-    this.isEditContactFormVisible = false;
-  }
-
   async deleteContact(contactId?: string) {
     if (!contactId && this.selectedContact?.id) {
       contactId = this.selectedContact.id;
     }
-    
+
     if (contactId) {
       await this.contactlist.deleteContact(contactId);
       this.selectedContact = null;
