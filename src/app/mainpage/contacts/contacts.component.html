@@ -20,7 +20,8 @@
         <h2>{{ group.letter }}</h2>
 
         @for (contact of group.contacts; track contact.id) {
-        <div class="single-contact" (click)="openSingleContact(contact); getContactField(contact.id)">
+        <div class="single-contact" [ngClass]="{ 'active': selectedContact?.id === contact.id }"
+          (click)="openSingleContact(contact); getContactField(contact.id)">
           <div class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
             <p>{{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}</p>
           </div>
@@ -44,7 +45,6 @@
 
     <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }"
       [class.open-contact]="isOpen && selectedContact">
-      <!-- Detailview: Tony -->
       <div class="name-badge-container">
         <div class="ellipse-container"
           [style.background]="getColorForLetter(selectedContact?.firstName?.charAt(0) ?? '')">
