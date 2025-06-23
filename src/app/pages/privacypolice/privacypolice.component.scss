@@ -15,19 +15,19 @@ section {
         margin: 10px 0;
       }
 
-      >ul{
+      > ul {
         margin: 10px 0;
         padding: 0 50px;
       }
-
-      >a{
-        color: black;
-        &:hover{
-            cursor: pointer;
-            text-decoration: underline;
-            color: var(--accent-color-light);
-        }
-      }
     }
+  }
+}
+
+a {
+  color: black;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--accent-color-light);
   }
 }
