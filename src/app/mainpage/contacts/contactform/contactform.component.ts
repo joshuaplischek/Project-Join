@@ -34,11 +34,6 @@ export class ContactformComponent {
   @Output() buttonOneClick = new EventEmitter<void>();
   @Output() buttonTwoClick = new EventEmitter<void>();
 
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  phone: number = 0;
-
   ngOnChanges() {
     if (this.contactData) {
       this.firstName = this.contactData.firstName;

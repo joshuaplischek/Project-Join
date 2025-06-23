@@ -37,7 +37,8 @@ export class FirebaseService {
     const docRef = doc(this.firestore, 'contactlist', id);
     const snapshot = await getDoc(docRef);
     if (snapshot.exists()) {
-      return { id: snapshot.id, ...snapshot.data() };
+      const data = snapshot.data();
+      return this.setContactsObject(data, snapshot.id);
     } else {
       return null;
     }
