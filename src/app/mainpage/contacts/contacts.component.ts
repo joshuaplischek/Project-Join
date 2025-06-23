@@ -77,12 +77,15 @@ export class ContactsComponent {
   openSingleContact(contact: Contactlist) {
     this.selectedContact = contact;
     this.isOpen = !this.isOpen;
-    if (this.selectedContact?.id === contact.id) return;
+    if (this.selectedContact?.id === contact.id && this.isOpen) return;
     if (!this.isOpen) {
       setTimeout(() => {
         this.getContactField(contact.id);
         this.isOpen = true;
       }, 400);
+    } else {
+      this.getContactField(contact.id);
+      this.isOpen = true;
     }
   }
 
