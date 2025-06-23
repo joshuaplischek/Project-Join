@@ -67,17 +67,18 @@ export class FirebaseService {
     };
   }
 
-  addContact(formData: Contactlist) {
+  async addContact(formData: Contactlist) {
     const contactsCollection = this.getContacts();
-
-    addDoc(contactsCollection, {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone
-    }).catch((error) => {
-      console.error("Fehler beim Hinzufügen des Kontakts:", error)
-    })
+    try {
+      await addDoc(contactsCollection, {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone
+      });
+    } catch (error) {
+      console.error("Fehler beim Hinzufügen des Kontakts:", error);
+    }
   }
 
   deleteContact() { }
