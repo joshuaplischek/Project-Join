@@ -43,13 +43,13 @@
     overflow-y: scroll;
     padding: 1rem;
 
-    > div {
-      > ul {
+    >div {
+      >ul {
         display: flex;
         flex-direction: column;
         gap: 15px;
 
-        > h2 {
+        >h2 {
           font-size: 20px;
           padding: 0 12px;
         }
@@ -196,5 +196,26 @@
       color: white;
       font-size: 3rem;
     }
+  }
+}
+
+
+.success-message-container {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--nav-bg-color);
+  color: #fff;
+  padding: 16px 32px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  z-index: 9999;
+  transform: translateX(120%);
+  animation: slide-in 0.3s forwards;
+}
+
+@keyframes slide-in {
+  to {
+    transform: translateX(0);
   }
 }
