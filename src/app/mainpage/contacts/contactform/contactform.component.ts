@@ -25,10 +25,6 @@ export class ContactformComponent {
 
   constructor(private contactService: FirebaseService) { }
 
-  callServiceMethode() {
-    this.contactService.sortContacts();
-  }
-
   @Input() heading: string = '';
   @Input() subheading: string = '';
   @Input() buttonOne: string = '';

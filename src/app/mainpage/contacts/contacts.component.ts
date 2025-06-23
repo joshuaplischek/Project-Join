@@ -104,8 +104,6 @@ export class ContactsComponent {
     this.selectedContact = data;
   }
 
-
-  // TODO Delete Contact Methode aus der Editiermethode hier rein bringen
   deleteContact() { }
 
   showSuccessToast(message: string) {

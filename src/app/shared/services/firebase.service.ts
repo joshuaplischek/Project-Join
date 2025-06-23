@@ -44,7 +44,6 @@ export class FirebaseService {
     }
   }
 
-
   getContacts() {
     return collection(this.firestore, 'contactlist');
   }
