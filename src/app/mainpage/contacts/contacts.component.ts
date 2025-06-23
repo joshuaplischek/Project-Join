@@ -11,7 +11,6 @@ import { AddContactModulComponent } from './add-contact-modul/add-contact-modul.
   imports: [CommonModule, AddContactModulComponent],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
-  styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent {
 
@@ -31,6 +30,7 @@ export class ContactsComponent {
   isOpen: boolean = false;
   openDetail: boolean = false;
   selectedContact: any = null;
+  isAddContactFormVisible: boolean = false;
   constructor(private contactlist: FirebaseService) {}
 
   ngOnInit() {
