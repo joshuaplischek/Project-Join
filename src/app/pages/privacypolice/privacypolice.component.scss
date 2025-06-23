@@ -5,6 +5,10 @@ section {
     padding: 25px 75px;
     overflow-y: scroll;
     height: calc(100vh - 96px);
+    >h1{
+        font-size: 61px;
+        font-weight: bold;
+    }
     > div {
       margin: 25px 0;
       > h2 {
