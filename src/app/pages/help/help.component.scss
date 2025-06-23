@@ -1,5 +1,5 @@
 section {
-  padding: 6rem 6rem;
+  padding: min(5vw, 6rem);
   overflow-y: auto;
   height: calc(100dvh - 96px);
   scrollbar-width: none;
@@ -8,29 +8,29 @@ section {
     display: none;
   }
   h1 {
-    font-size: 61px;
+    font-size: 3.813rem;
   }
   h2 {
-    font-size: 27px;
+    font-size: 1.688rem;
   }
   span {
-    font-size: 16px;
+    font-size: 1rem;
   }
   p {
-    font-size: 16px;
+    font-size: 1rem;
   }
   .ordered-list {
-    padding-left: 30px;
+    padding: min(5vw, 1.875rem);
     li {
       padding-left: 3rem;
-      font-size: 16px;
+      font-size: 1rem;
       &::marker {
         font-weight: bold;
-        font-size: 27px;
+        font-size: 1.688rem;
       }
     }
     h3 {
-      font-size: 20px;
+      font-size: 1.25rem;
     }
   }
   .highlight {
@@ -38,8 +38,8 @@ section {
   }
   .image-container {
     position: fixed;
-    right: 100px;
-    top: 220px;
+    right: 6.25rem;
+    top: 13.75rem;
     z-index: 1000;
     img{
         cursor: pointer;
