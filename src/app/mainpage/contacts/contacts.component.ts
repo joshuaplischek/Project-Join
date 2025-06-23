@@ -73,6 +73,17 @@ export class ContactsComponent {
   addContactToDb(formData: Contactlist) {
     this.contactlist.addContact(formData);
     this.showSuccessMessageBox('Kontakt wurde erfolgreich hinzugefügt!');
+
+    setTimeout(() => {
+      const newContact = this.contactlist.contacts.find(
+        contact => (contact.email === formData.email) && (contact.lastName === formData.lastName)
+      );
+      if (newContact) {
+        this.selectedContact = newContact;
+        this.isOpen = true;
+      }
+      this.isAddContactFormVisible = false;
+    }, 300);
   }
 
   showSuccessMessageBox(message: string) {
