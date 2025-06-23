@@ -4,7 +4,8 @@
     <button id="addContactBtn" (click)="openAddContactForm()">
       Add new contact
     </button>
-    <app-add-contact-modul [isVisible]="isAddContactFormVisible" (closeModal)="closeAddContactForm()">
+    <app-add-contact-modul [isVisible]="isAddContactFormVisible" (closeModal)="closeAddContactForm()"
+      (contactCreated)="addContactToDb($event)">
     </app-add-contact-modul>
 
     <!-- Contactlist: Joshua -->
@@ -26,8 +27,6 @@
         <hr />
         }
         }
-        <hr />
-
       </ul>
     </div>
   </div>
