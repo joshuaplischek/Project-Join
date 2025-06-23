@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { addDoc, collection, doc, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { Contactlist } from '../../contactlist';
 
 @Injectable({
@@ -18,9 +18,12 @@ export class FirebaseService {
 
   subContactList() {
     return onSnapshot(this.getContacts(), (list) => {
+      //wichtig um Doppelung im Array zu vermeiden
+      this.contacts = [];
       list.forEach((element) => {
         this.contacts.push(this.setContactsObject(element.data(), element.id));
-      })
+      });
+      console.log('Contacts Array:', this.contacts);
       this.sortContacts();
     })
   }
@@ -47,7 +50,18 @@ export class FirebaseService {
     }
   }
 
-  addContact(formData: any) { }
+  addContact(formData: Contactlist) {
+    const contactsCollection = this.getContacts();
+
+    addDoc(contactsCollection, {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone
+    }).catch((error) => {
+      console.error("Fehler beim Hinzufügen des Kontakts:", error)
+    })
+  }
 
   deleteContact() { }
 
