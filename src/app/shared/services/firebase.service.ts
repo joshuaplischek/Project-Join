@@ -6,6 +6,7 @@ import {
   onSnapshot,
   getDoc,
   addDoc,
+  deleteDoc, // Add this import
 } from '@angular/fire/firestore';
 import { Contactlist } from '../../contactlist';
 import { single } from 'rxjs';
@@ -25,7 +26,6 @@ export class FirebaseService {
 
   subContactList() {
     return onSnapshot(this.getContacts(), (list) => {
-      //wichtig um Doppelung im Array zu vermeiden
       this.contacts = [];
       list.forEach((element) => {
         this.contacts.push(this.setContactsObject(element.data(), element.id));
@@ -81,7 +81,14 @@ export class FirebaseService {
     }
   }
 
-  deleteContact() { }
+  async deleteContact(id: string) {
+    try {
+      await deleteDoc(doc(this.firestore, 'contactlist', id));
+      console.log("Kontakt erfolgreich gelöscht");
+    } catch (error) {
+      console.error("Fehler beim Löschen des Kontakts:", error);
+    }
+  }
 
   changeContact() { }
 

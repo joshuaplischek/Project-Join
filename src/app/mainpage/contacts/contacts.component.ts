@@ -101,5 +101,16 @@ export class ContactsComponent {
     this.isEditContactFormVisible = false;
   }
 
-  deleteContact() {}
+  async deleteContact(contactId?: string) {
+    if (!contactId && this.selectedContact?.id) {
+      contactId = this.selectedContact.id;
+    }
+    
+    if (contactId) {
+      await this.contactlist.deleteContact(contactId);
+      this.selectedContact = null;
+      this.isOpen = false;
+      this.closeEditContactForm();
+    }
+  }
 }
