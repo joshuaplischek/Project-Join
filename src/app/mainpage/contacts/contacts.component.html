@@ -2,15 +2,14 @@
   <div class="contactlist-container">
     <!-- Add Contact: Anne :D -->
     <button id="addContactBtn" (click)="openAddContactForm()">
-      Add new contact
+      <span>Add new contact</span>
+      <img src="/assets/images/icons/person_add.svg" alt="add icon">
     </button>
     <app-add-contact-modul [isVisible]="isAddContactFormVisible" (closeModal)="closeAddContactForm()"
       (contactCreated)="addContactToDb($event)">
     </app-add-contact-modul>
 
-    <app-edit-contact 
-      [isVisible]="isEditContactFormVisible" 
-      [selectedContact]="selectedContact"
+    <app-edit-contact [isVisible]="isEditContactFormVisible" [selectedContact]="selectedContact"
       (closeModal)="closeEditContactForm()">
     </app-edit-contact>
 
