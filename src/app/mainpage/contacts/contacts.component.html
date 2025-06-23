@@ -46,7 +46,7 @@
     <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }" [class.open-contact] = "isOpen && selectedContact">
       <!-- Detailview: Tony -->
       <div class="name-badge-container">
-        <div class="ellipse-container">
+        <div class="ellipse-container" [style.background]="getColorForLetter(selectedContact?.firstName?.charAt(0) ?? '')">
           <span>{{ selectedContact?.firstName?.charAt(0) }}{{ selectedContact?.lastName?.charAt(0) }}</span>
         </div>
 

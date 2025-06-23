@@ -4,6 +4,7 @@ import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
 import { AddContactModulComponent } from './add-contact-modul/add-contact-modul.component';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-contacts',
