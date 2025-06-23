@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Contactlist } from '../../contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
-import { AddContactModulComponent } from "./add-contact-modul/add-contact-modul.component";
-import { EditContactComponent } from "./edit-contact/edit-contact.component";
+import { AddContactModulComponent } from './add-contact-modul/add-contact-modul.component';
+import { EditContactComponent } from './edit-contact/edit-contact.component';
 
 @Component({
   selector: 'app-contacts',
@@ -13,7 +13,6 @@ import { EditContactComponent } from "./edit-contact/edit-contact.component";
   styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent {
-
   readonly standardColors: string[] = [
     '#ff7a00',
     '#1fd7c1',
@@ -33,7 +32,7 @@ export class ContactsComponent {
   isEditContactFormVisible = false;
   selectedContact: Contactlist | null = null;
 
-  constructor(private contactlist: FirebaseService) { }
+  constructor(private contactlist: FirebaseService) {}
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
@@ -56,12 +55,12 @@ export class ContactsComponent {
       .map((letter) => ({ letter, contacts: grouped[letter] }));
   }
 
-getColorForLetter(letter: string): string {
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const index = alphabet.indexOf(letter.toUpperCase());
-  if (index === -1) return this.standardColors[0];
-  return this.standardColors[index % this.standardColors.length];
-}
+  getColorForLetter(letter: string): string {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const index = alphabet.indexOf(letter.toUpperCase());
+    if (index === -1) return this.standardColors[0];
+    return this.standardColors[index % this.standardColors.length];
+  }
 
   openAddContactForm() {
     this.isAddContactFormVisible = true;
@@ -76,16 +75,14 @@ getColorForLetter(letter: string): string {
   }
 
   openSingleContact(contact: Contactlist) {
-    this.selectedContact = contact;
-    this.isOpen = !this.isOpen;
-    if (this.selectedContact?.id === contact.id && this.isOpen) return;
-    if (!this.isOpen) {
+    if (this.selectedContact && contact.id !== this.selectedContact.id) {
+      this.isOpen = false; 
       setTimeout(() => {
-        this.getContactField(contact.id);
-        this.isOpen = true;
-      }, 400);
+        this.selectedContact = contact;
+        this.isOpen = true; 
+      }, 300); 
     } else {
-      this.getContactField(contact.id);
+      this.selectedContact = contact;
       this.isOpen = true;
     }
   }
@@ -95,8 +92,6 @@ getColorForLetter(letter: string): string {
     this.selectedContact = data;
   }
 
-
-
   openEdit() {
     this.isEditContactFormVisible = true;
   }
@@ -105,5 +100,5 @@ getColorForLetter(letter: string): string {
     this.isEditContactFormVisible = false;
   }
 
-  deleteContact() { }
+  deleteContact() {}
 }

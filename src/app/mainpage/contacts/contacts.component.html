@@ -42,7 +42,8 @@
       <div style="background-color: #29abe2; width: 2px; height: 50px"></div>
       <p>Better with a team</p>
     </div>
-    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }">
+    
+    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }" [class.open-contact] = "isOpen && selectedContact">
       <!-- Detailview: Tony -->
       <div class="name-badge-container">
         <div class="ellipse-container">
