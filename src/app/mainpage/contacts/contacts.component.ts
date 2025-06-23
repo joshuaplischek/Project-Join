@@ -96,7 +96,13 @@ export class ContactsComponent {
 
 
 
-  openEdit() { }
+  openEdit() { 
+    this.isEditContactFormVisible = true;
+  }
+
+  closeEditContactForm() {
+    this.isEditContactFormVisible = false;
+  }
 
   deleteContact() { }
 }

@@ -8,6 +8,12 @@
       (contactCreated)="addContactToDb($event)">
     </app-add-contact-modul>
 
+    <app-edit-contact 
+      [isVisible]="isEditContactFormVisible" 
+      [selectedContact]="selectedContact"
+      (closeModal)="closeEditContactForm()">
+    </app-edit-contact>
+
     <!-- Contactlist: Joshua -->
     <div>
       <ul>
