@@ -50,6 +50,10 @@ export class ContactformComponent {
     }
   }
 
+  isValidEmail(): boolean {
+    return this.email.includes('@');
+  }
+
   resetForm() {
     this.firstName = '';
     this.lastName = '';
