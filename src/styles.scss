@@ -44,3 +44,8 @@ body {
   background-color: var(--main-bg-color);
   scroll-behavior: smooth;
 }
+
+.active {
+  background-color: var(--accent-color-dark);
+  color: #fff;
+}
