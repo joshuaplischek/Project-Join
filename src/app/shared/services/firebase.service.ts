@@ -1,14 +1,20 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, onSnapshot } from '@angular/fire/firestore';
+import {
+  collection,
+  doc,
+  Firestore,
+  onSnapshot,
+  getDoc,
+} from '@angular/fire/firestore';
 import { Contactlist } from '../../contactlist';
+import { single } from 'rxjs';
+import { idToken } from '@angular/fire/auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirebaseService {
-
   firestore: Firestore = inject(Firestore);
-
   contacts: Contactlist[] = [];
   unsubscribe;
 
@@ -19,11 +25,23 @@ export class FirebaseService {
   subContactList() {
     return onSnapshot(this.getContacts(), (list) => {
       list.forEach((element) => {
-        this.contacts.push(this.setContactsObject(element.data(), element.id));
-      })
-      this.sortContacts();
-    })
+        this.contacts.push(this.setContactsObject(element.data(), element.id));  
+      });
+    });
   }
+
+async getSingleContactOnce(id: string) {
+  const docRef = doc(this.firestore, 'contactlist', id);
+  const snapshot = await getDoc(docRef);
+  if (snapshot.exists()) {
+    return { id: snapshot.id, ...snapshot.data() };
+  } else {
+    return null;
+  }
+}
+
+
+
 
   getContacts() {
     return collection(this.firestore, 'contactlist');
@@ -44,14 +62,14 @@ export class FirebaseService {
       lastName: obj.lastName || '',
       email: obj.email || '',
       phone: obj.phone,
-    }
+    };
   }
 
   addContact(formData: any) { }
 
-  deleteContact() { }
+  deleteContact() {}
 
-  changeContact() { }
+  changeContact() {}
 
   ngOnDestroy() {
     this.unsubscribe();

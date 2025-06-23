@@ -11,13 +11,14 @@ import { AddContactModulComponent } from "./add-contact-modul/add-contact-modul.
   imports: [CommonModule, AddContactModulComponent],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
+  styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent {
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
-  isAddContactFormVisible = false;
-
-  constructor(private contactlist: FirebaseService) { }
+  openDetail: boolean = false;
+  selectedContact: any = null;
+  constructor(private contactlist: FirebaseService) {}
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
@@ -49,11 +50,25 @@ export class ContactsComponent {
     this.isAddContactFormVisible = false;
   }
 
-  openSingleContact() {
+  openSingleContact(contact: Contactlist) {
     this.isOpen = !this.isOpen;
+    if (this.selectedContact?.id === contact.id) return;
+    if (!this.isOpen) {
+      setTimeout(() => {
+        this.getContactField(contact.id);
+        this.isOpen = true;
+      }, 400);
+    }
   }
 
-  openEdit() { }
+async getContactField(id: any) {
+  const data = await this.contactlist.getSingleContactOnce(id);
+  this.selectedContact = data;
+}
 
-  deleteContact() { }
+  
+
+  openEdit() {}
+
+  deleteContact() {}
 }
