@@ -3,12 +3,13 @@ import { Contactlist } from '../../contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
 import { TestComponent } from '../../test/test.component';
-import { AddContactModulComponent } from './add-contact-modul/add-contact-modul.component';
+import { AddContactModulComponent } from "./add-contact-modul/add-contact-modul.component";
+import { EditContactComponent } from "./edit-contact/edit-contact.component";
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [CommonModule, AddContactModulComponent],
+  imports: [CommonModule, AddContactModulComponent, EditContactComponent],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })
@@ -28,10 +29,11 @@ export class ContactsComponent {
 
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
-  openDetail: boolean = false;
-  selectedContact: any = null;
-  isAddContactFormVisible: boolean = false;
-  constructor(private contactlist: FirebaseService) {}
+  isAddContactFormVisible = false;
+  isEditContactFormVisible = false;
+  selectedContact: Contactlist | null = null;
+
+  constructor(private contactlist: FirebaseService) { }
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
@@ -72,6 +74,7 @@ export class ContactsComponent {
   }
 
   openSingleContact(contact: Contactlist) {
+    this.selectedContact = contact;
     this.isOpen = !this.isOpen;
     if (this.selectedContact?.id === contact.id) return;
     if (!this.isOpen) {
