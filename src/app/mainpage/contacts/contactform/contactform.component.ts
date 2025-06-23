@@ -15,7 +15,7 @@ export class ContactformComponent {
   firstName: string = '';
   lastName: string = '';
   email: string = '';
-  phone: number = 0;
+  phone: string = '';
 
   constructor(private contactService: FirebaseService) { }
 
@@ -44,7 +44,7 @@ export class ContactformComponent {
       this.firstName = '';
       this.lastName = '';
       this.email = '';
-      this.phone = 0;
+      this.phone = '';
     }
   }
 

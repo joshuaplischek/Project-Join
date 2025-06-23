@@ -63,7 +63,7 @@ export class FirebaseService {
       firstName: obj.firstName || '',
       lastName: obj.lastName || '',
       email: obj.email || '',
-      phone: obj.phone,
+      phone: obj.phone || '',
     };
   }
 
