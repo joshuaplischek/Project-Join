@@ -34,7 +34,7 @@ export class ContactsComponent {
   selectedContact: Contactlist | null = null;
 
   successMessage = '';
-  showToast = false;
+  showSuccessMessage = false;
 
   constructor(private contactlist: FirebaseService) { }
 
@@ -72,7 +72,7 @@ export class ContactsComponent {
 
   addContactToDb(formData: Contactlist) {
     this.contactlist.addContact(formData);
-    this.showSuccessToast('Kontakt wurde erfolgreich hinzugefügt!');
+    this.showSuccessMessageBox('Kontakt wurde erfolgreich hinzugefügt!');
   }
 
   closeAddContactForm() {
@@ -107,11 +107,11 @@ export class ContactsComponent {
 
   deleteContact() { }
 
-  showSuccessToast(message: string) {
+  showSuccessMessageBox(message: string) {
     this.successMessage = message;
-    this.showToast = true;
+    this.showSuccessMessage = true;
     setTimeout(() => {
-      this.showToast = false;
-    }, 5000);
+      this.showSuccessMessage = false;
+    }, 1000);
   }
 }
