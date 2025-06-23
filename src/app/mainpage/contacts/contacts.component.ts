@@ -16,19 +16,20 @@ import { EditContactComponent } from "./edit-contact/edit-contact.component";
 export class ContactsComponent {
 
   readonly standardColors: string[] = [
-  '#ff7a00',  
-  '#1fd7c1',  
-  '#6e52ff',  
-  '#9327ff',  
-  '#ffbb2b',  
-  '#fc71ff',  
-  '#ff4646',  
-  '#3F51B5',  
-  '#462f8a',
-];
+    '#ff7a00',
+    '#1fd7c1',
+    '#6e52ff',
+    '#9327ff',
+    '#ffbb2b',
+    '#fc71ff',
+    '#ff4646',
+    '#3F51B5',
+    '#462f8a',
+  ];
 
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
+  openDetail: boolean = false;
   isAddContactFormVisible = false;
   isEditContactFormVisible = false;
   selectedContact: Contactlist | null = null;
@@ -85,14 +86,14 @@ export class ContactsComponent {
     }
   }
 
-async getContactField(id: any) {
-  const data = await this.contactlist.getSingleContactOnce(id);
-  this.selectedContact = data;
-}
+  async getContactField(id: any) {
+    const data = await this.contactlist.getSingleContactOnce(id);
+    this.selectedContact = data;
+  }
 
-  
 
-  openEdit() {}
 
-  deleteContact() {}
+  openEdit() { }
+
+  deleteContact() { }
 }
