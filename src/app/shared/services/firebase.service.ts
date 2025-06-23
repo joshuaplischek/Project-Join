@@ -24,21 +24,23 @@ export class FirebaseService {
 
   subContactList() {
     return onSnapshot(this.getContacts(), (list) => {
+      //wichtig um Doppelung im Array zu vermeiden
+      this.contacts = [];
       list.forEach((element) => {
-        this.contacts.push(this.setContactsObject(element.data(), element.id));  
+        this.contacts.push(this.setContactsObject(element.data(), element.id));
       });
     });
   }
 
-async getSingleContactOnce(id: string) {
-  const docRef = doc(this.firestore, 'contactlist', id);
-  const snapshot = await getDoc(docRef);
-  if (snapshot.exists()) {
-    return { id: snapshot.id, ...snapshot.data() };
-  } else {
-    return null;
+  async getSingleContactOnce(id: string) {
+    const docRef = doc(this.firestore, 'contactlist', id);
+    const snapshot = await getDoc(docRef);
+    if (snapshot.exists()) {
+      return { id: snapshot.id, ...snapshot.data() };
+    } else {
+      return null;
+    }
   }
-}
 
 
 
@@ -65,11 +67,22 @@ async getSingleContactOnce(id: string) {
     };
   }
 
-  addContact(formData: any) { }
+  addContact(formData: Contactlist) {
+    const contactsCollection = this.getContacts();
 
-  deleteContact() {}
+    addDoc(contactsCollection, {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone
+    }).catch((error) => {
+      console.error("Fehler beim Hinzufügen des Kontakts:", error)
+    })
+  }
 
-  changeContact() {}
+  deleteContact() { }
+
+  changeContact() { }
 
   ngOnDestroy() {
     this.unsubscribe();
