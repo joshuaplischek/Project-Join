@@ -43,8 +43,8 @@
       <p>Better with a team</p>
     </div>
 
-    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen }"
-      [class.open-contact]="isOpen && selectedContact">
+    <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen && selectedContact }"
+      >
       <div class="name-badge-container">
         <div class="ellipse-container"
           [style.background]="getColorForLetter(selectedContact?.firstName?.charAt(0) ?? '')">
