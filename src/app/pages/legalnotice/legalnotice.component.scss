@@ -1,0 +1,34 @@
+@import "../../../styles.scss";
+
+section {
+  > div {
+    padding: 25px 75px;
+    overflow-y: scroll;
+    height: calc(100vh - 96px);
+    >h1{
+        font-size: 61px;
+        font-weight: bold;
+    }
+      > h2 {
+        margin: 15px 0;
+      }
+
+      > h3 {
+        margin: 10px 0;
+      }
+
+      > ul {
+        margin: 10px 0;
+        padding: 0 50px;
+      }
+  }
+}
+
+a {
+  color: black;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--accent-color-light);
+  }
+}
