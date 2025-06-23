@@ -16,6 +16,7 @@ export class EditContactComponent {
   @Input() selectedContact: Contactlist | null = null; 
   @Output() closeModal = new EventEmitter<void>();
   @Output() contactDeleted = new EventEmitter<void>();
+  @Output() contactUpdated = new EventEmitter<void>();
   
   firebaseService = inject(FirebaseService);
 
@@ -31,8 +32,11 @@ export class EditContactComponent {
     }
   }
 
-  saveContact() {
-    console.log('Save contact:', this.selectedContact);
-    this.close();
+  async saveContact(formData: Contactlist) {
+    if (this.selectedContact?.id) {
+      await this.firebaseService.updateContact(this.selectedContact.id, formData);
+      this.contactUpdated.emit();
+      this.close();
+    }
   }
 }
