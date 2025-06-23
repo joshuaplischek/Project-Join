@@ -9,6 +9,7 @@
   gap: 6.5rem;
   width: 100%;
   max-width: 14.5rem;
+  max-height: 100dvh;
   min-height: 100dvh;
 
   .link-container {
@@ -58,7 +59,7 @@ nav {
 
       &:active {
         background-color: var(--accent-color-dark);
-       } 
+      }
     }
   }
 }
