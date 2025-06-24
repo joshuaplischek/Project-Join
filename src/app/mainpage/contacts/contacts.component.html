@@ -1,6 +1,5 @@
 <div class="contactlist-wrapper">
   <div class="contactlist-container">
-    <!-- Add Contact: Anne :D -->
     <button id="addContactBtn" (click)="openAddContactForm()">
       <span>Add new contact</span>
       <img src="/assets/images/icons/person_add.svg" alt="add icon">
@@ -13,7 +12,6 @@
       (closeModal)="closeEditContactForm()" (contactDeleted)="deleteContact()" (contactUpdated)="updateContact()">
     </app-edit-contact>
 
-    <!-- Contactlist: Joshua -->
     <div>
       <ul>
         @for (group of groupedContacts; track group.letter) {
