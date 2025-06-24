@@ -35,11 +35,18 @@ export class ContactsComponent {
 
   successMessage = '';
   showSuccessMessage = false;
+  isMobile: boolean = false
 
   constructor(private contactlist: FirebaseService) { }
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
+    this.checkMobile();
+    window.addEventListener('resize', () => this.checkMobile());
+  }
+
+  checkMobile(){
+    this.isMobile = window.innerWidth < 768;
   }
 
   get groupedContacts() {
@@ -114,6 +121,9 @@ export class ContactsComponent {
       }, 300);
     } else {
       this.selectedContact = contact;
+      this.isOpen = true;
+    }
+    if (this.isMobile) {
       this.isOpen = true;
     }
   }

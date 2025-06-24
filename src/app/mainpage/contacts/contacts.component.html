@@ -1,4 +1,5 @@
 <div class="contactlist-wrapper">
+  @if (!isMobile || (isMobile && !isOpen)){
   <div class="contactlist-container">
     <button id="addContactBtn" (click)="openAddContactForm()">
       <span>Add new contact</span>
@@ -33,15 +34,15 @@
         }}
       </ul>
     </div>
-  </div>
-
+  </div>}
+  
   <div class="contact-container">
     <div class="contact-container-heading">
       <h2>Contacts</h2>
       <div></div>
       <p>Better with a team</p>
     </div>
-
+    @if (!isMobile || (isMobile && isOpen)) {
     <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen && selectedContact }">
       <div class="name-badge-container">
         <div class="ellipse-container"
@@ -97,7 +98,9 @@
         </div>
       </div>
     </div>
+    }
   </div>
+
   @if(showSuccessMessage){
   <div class="success-message-container">
     {{successMessage}}

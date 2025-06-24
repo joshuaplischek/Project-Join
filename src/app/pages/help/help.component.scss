@@ -1,5 +1,5 @@
 section {
-  padding: min(5vw, 6rem);
+  padding: min(2vw, 10.8rem);
   overflow-y: auto;
   height: calc(100dvh - 96px);
   scrollbar-width: none;
@@ -24,12 +24,17 @@ section {
   p {
     font-size: 1rem;
   }
-
-  .ordered-list {
-    padding: min(5vw, 1.875rem);
+  .ordered-list-container{
+    padding-left: min(4vw, 0rem);
+    @media (max-width:620px) {
+      padding-left: min(4vw, 0.5rem);
+    }
+    .ordered-list {
+    padding-left: min(4vw, 1.875rem);
+    list-style-position: outside;
 
     li {
-      padding-left: 3rem;
+      padding-left: min(4vw, 1.875rem);
       font-size: 1rem;
 
       &::marker {
@@ -42,6 +47,8 @@ section {
       font-size: 1.25rem;
     }
   }
+  }
+  
 
   .highlight {
     color: #29ABE2;
