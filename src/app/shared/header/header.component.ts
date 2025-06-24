@@ -13,6 +13,10 @@ export class HeaderComponent {
   isMenuOpen = false;
 
   openQuickMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen = true;
+  }
+
+  closeQuickMenu() {
+    this.isMenuOpen = false;
   }
 }
