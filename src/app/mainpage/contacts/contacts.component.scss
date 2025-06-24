@@ -99,6 +99,11 @@
     .contact-container-heading {
       display: flex;
       margin-bottom: 1rem;
+      div {
+        background-color: #29abe2; 
+        width: 2px; 
+        height: 50px
+      }
     }
 
     .single-contact-container {
