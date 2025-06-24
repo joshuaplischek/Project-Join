@@ -51,15 +51,25 @@ section {
     position: fixed;
     right: 6.25rem;
     top: 13.75rem;
-    z-index: 10;
+    z-index: 1000;
 
     img {
       cursor: pointer;
 
       &:hover {
-        background-color: rgba(128, 128, 128, 0.144);
+        background-color: var(--grey-color);
         border-radius: 100%;
+      }
+
+      z-index: 10;
+
+      img {
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(128, 128, 128, 0.144);
+          border-radius: 100%;
+        }
       }
     }
   }
-}
