@@ -182,11 +182,12 @@
 
   .contact-information-wrapper {
     padding: clamp(1rem, 4vw, 1.9rem);
-    p {
+    >p:first-child {
       margin-bottom: 30px;
+    }
+    p {
       font-size: 20px;
     }
-
     .contact-information {
       display: flex;
       flex-direction: column;

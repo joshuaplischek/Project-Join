@@ -6,8 +6,11 @@
   </div>
 </header>
 
-<div class="quickMenu" [ngClass]="{ 'show': isMenuOpen }">
-  <a routerLink="/privacypolicy">Privacy Policy</a>
-  <a routerLink="/legalnotice">Legal notice</a>
-  <a href="">Log out</a>
+@if (isMenuOpen) {
+<div class="overlay" (click)="closeQuickMenu()"></div>
+<div class="quickMenu show" (click)="$event.stopPropagation()">
+  <a routerLink="/privacypolicy" (click)="closeQuickMenu()">Privacy Policy</a>
+  <a routerLink="/legalnotice" (click)="closeQuickMenu()">Legal notice</a>
+  <a href="" (click)="closeQuickMenu()">Log out</a>
 </div>
+}
