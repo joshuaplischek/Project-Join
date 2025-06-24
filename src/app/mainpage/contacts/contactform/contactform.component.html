@@ -22,39 +22,43 @@
         <div class="input-fields">
           <div class="firstname-field ">
             <div class="input-wrapper">
+              <label for="firstNameInput">Vorname</label>
               <input [(ngModel)]="firstName" type="text" placeholder="Firstname" (blur)="firstNameTouched = true" />
               <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
             </div>
             <div class="input-hint">@if (!firstName && firstNameTouched) {
-              <span>Bitte Vornamen eingeben</span>}
+              <span role="alert">Bitte Vornamen eingeben</span>}
             </div>
           </div>
           <div class="lastname-field">
             <div class="input-wrapper">
+              <label for="lastNameInput">Nachname</label>
               <input [(ngModel)]="lastName" type="text" placeholder="Lastname" (blur)="lastNameTouched = true">
               <img src="/assets/images/contactform/person-small.svg" alt="person icon">
             </div>
             <div class="input-hint">@if (!lastName && lastNameTouched) {
-              <span>Bitte Nachname eingeben</span>}
+              <span role="alert">Bitte Nachname eingeben</span>}
             </div>
           </div>
           <div class="email-field">
             <div class="input-wrapper">
+              <label for="emailInput">E-Mail</label>
               <input [(ngModel)]="email" type="text" placeholder="Email" (blur)="emailTouched = true">
               <img src="/assets/images/contactform/mail.svg" alt="mail icon">
             </div>
             <div class="input-hint">@if ((!email || !isValidEmail()) && emailTouched) {
-              <span>Bitte gültige Email eingeben</span>}
+              <span role="alert">Bitte gültige Email eingeben</span>}
             </div>
           </div>
           <div class="phone-field">
             <div class="input-wrapper">
+              <label for="phoneInput">Telefonnummer</label>
               <input [(ngModel)]="phone" type="number" placeholder="Phone" inputmode="numeric"
                 (blur)="phoneTouched = true">
               <img src="/assets/images/contactform/call.svg" alt="phone icon">
             </div>
             <div class="input-hint">@if (!phone && phoneTouched) {
-              <span>Bitte Telefonnummer eingeben</span>}
+              <span role="alert">Bitte Telefonnummer eingeben</span>}
             </div>
           </div>
         </div>
