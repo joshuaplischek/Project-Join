@@ -45,7 +45,6 @@ export class ContactsComponent {
   get groupedContacts() {
     const grouped: Record<string, Contactlist[]> = {};
 
-    // Wichtig! this.contactlist.contacts nutzen - damit erhält man immer die aktuellsten Daten
     for (const contact of this.contactlist.contacts) {
       if (contact.firstName && contact.firstName.length > 0) {
         const letter = contact.firstName[0].toUpperCase();
