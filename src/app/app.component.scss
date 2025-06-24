@@ -3,12 +3,19 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+    @media (max-width: 1024px){
+    flex-direction: column-reverse;
+  }
 }
 
 .sidenav {
   width: 10vw;
   min-width: fit-content;
   height: 100vh;
+      @media (max-width: 1024px){
+        width: 100vw;
+        height: 10vh;
+  }
 }
 
 .main-content {

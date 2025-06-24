@@ -36,12 +36,6 @@
   display: flex;
   height: calc(100dvh - 96px);
 
-  @media (max-width: 1100px){
-    .contact-container{
-      padding: clamp(0.1rem, 1vw, 3rem);
-    }
-  }
-
   .contactlist-container {
     display: flex;
     flex-direction: column;
@@ -188,8 +182,8 @@
 
   .contact-information-wrapper {
     padding: clamp(1rem, 4vw, 1.9rem);
-    p{
-      margin-bottom: 30px; 
+    p {
+      margin-bottom: 30px;
       font-size: 20px;
     }
 
@@ -230,6 +224,26 @@
     span {
       color: white;
       font-size: clamp(1.5rem, 5vw, 3rem);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .contact-container {
+      padding: clamp(0.1rem, 1vw, 3rem);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    flex: 1;
+    .contact-container {
+      display: none;
+    }
+    .contactlist-container {
+      flex: 1;
+      height: calc(100% - 96px);
+      > div {
+        width: 100%;
+      }
     }
   }
 }

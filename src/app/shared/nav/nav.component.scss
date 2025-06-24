@@ -12,6 +12,13 @@
   max-height: 100dvh;
   min-height: 100dvh;
   white-space: nowrap;
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    max-height: 96px;
+    min-height: 96px;
+    width: 100vw;
+    padding: 0;;
+  }
 
   .link-container {
     display: flex;
@@ -20,7 +27,14 @@
     align-items: center;
     gap: 6rem;
 
-    >img {
+    @media (max-width: 1024px) {
+      flex-direction: row;
+      > img {
+        display: none;
+      }
+    }
+
+    > img {
       width: 100px;
     }
   }
@@ -28,7 +42,7 @@
 
 a {
   font-size: 1rem;
-  color: #CDCDCD;
+  color: #cdcdcd;
   transition: all 0.3s ease;
 }
 
@@ -39,7 +53,7 @@ nav {
   width: 10vw;
   min-width: fit-content;
 
-  >div {
+  > div {
     width: 100%;
 
     a {
@@ -51,7 +65,7 @@ nav {
       img {
         width: clamp(20px, 3vw, 25px);
         min-width: clamp(20px, 3vw, 25px);
-        margin-right: clamp(0.5rem, 2vw, 1rem);
+        margin-right: 1rem;
       }
 
       &:hover {
@@ -63,6 +77,21 @@ nav {
       }
     }
   }
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-evenly;
+    > div {
+      width: fit-content;
+      a {
+        flex-direction: column;
+        img {
+          margin-right: 0;
+        }
+      }
+    }
+  }
 }
 
 .policy-wrapper {
@@ -71,7 +100,7 @@ nav {
   width: 100%;
   text-align: center;
 
-  >a {
+  > a {
     padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.5rem, 3vw, 1rem);
 
     &:hover {
@@ -79,7 +108,6 @@ nav {
     }
   }
 }
-
 
 @media (max-width: 700px) {
   .sidenav {
