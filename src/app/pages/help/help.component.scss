@@ -44,7 +44,7 @@ section {
     img{
         cursor: pointer;
         &:hover {
-            background-color: rgba(128, 128, 128, 0.144);
+            background-color: var(--grey-color);
             border-radius: 100%;
         }
     }
