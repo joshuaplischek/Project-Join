@@ -1,25 +1,36 @@
 @import "../../../styles.scss";
 
 section {
-  > div {
-    padding: 25px 75px;
+  >div {
+    padding: 1.5rem 4.6rem;
     overflow-y: scroll;
     height: calc(100vh - 96px);
-    > h1 {
-      font-size: 61px;
+
+    @media(max-width:1024px) {
+      height: calc(100vh - 192px);
+    }
+
+    @media(max-width:768px) {
+      padding: 1.5rem 2.75rem;
+    }
+
+    >h1 {
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
       font-weight: bold;
     }
-    > div {
+
+    >div {
       margin: 25px 0;
-      > h2 {
+
+      >h2 {
         margin: 15px 0;
       }
 
-      > h3 {
+      >h3 {
         margin: 10px 0;
       }
 
-      > ul {
+      >ul {
         margin: 10px 0;
         padding: 0 50px;
       }
@@ -29,6 +40,7 @@ section {
 
 a {
   color: var(--accent-color-light);
+
   &:hover {
     cursor: pointer;
     text-decoration: underline;

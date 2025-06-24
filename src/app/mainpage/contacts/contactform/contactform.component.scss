@@ -254,6 +254,10 @@
   }
 }
 
+label{
+  display: none;
+}
+
 @media(max-width: 1500px) {
   .contact-form {
     gap: 2rem;
