@@ -50,4 +50,7 @@ body {
   background-color: var(--accent-color-dark);
   color: #fff;
   width: 100%;
+  @media (max-width: 1024px){
+      border-radius: 8px;
+  }
 }

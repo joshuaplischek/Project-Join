@@ -86,9 +86,17 @@ nav {
       width: fit-content;
       a {
         flex-direction: column;
+        border-radius: 8px;
         img {
           margin-right: 0;
         }
+      }
+    }
+  }
+  @media (max-width: 400px){
+    >div{
+      a{
+        padding: clamp(0.5rem, 2vw, 0.5rem);
       }
     }
   }
