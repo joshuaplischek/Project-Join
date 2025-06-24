@@ -8,9 +8,10 @@
   padding: 4rem 0;
   gap: 6.5rem;
   width: 100%;
-  max-width: 14.5rem;
+  max-width: fit-content;
   max-height: 100dvh;
   min-height: 100dvh;
+  white-space: nowrap;
 
   .link-container {
     display: flex;
