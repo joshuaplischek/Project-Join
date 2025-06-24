@@ -5,24 +5,25 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 1rem;
-  gap: 16px;
   background: #2a3647;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   margin: 1.5rem 0 3rem 0;
+  padding: clamp(0.5rem, 1rem, 1rem) clamp(1rem, 2rem, 2rem);
+  gap: clamp(0.5rem, 1.5rem, 1.5rem);
+  margin: clamp(1rem, 1.5rem, 1.5rem) 0 clamp(2rem, 3rem, 3rem) 0;
   width: 100%;
 
   span {
     font-family: "mainFontBold";
-    font-size: 1.3rem;
+    font-size: clamp(1rem, 2vw, 1.3rem);
     color: #ffffff;
   }
 
   img {
-    width: 30px;
+    width: clamp(20px, 30px, 30px);
   }
 
   &:hover {
@@ -41,7 +42,7 @@
     align-items: center;
     background-color: #ffffff;
     overflow-y: scroll;
-    padding: 1rem;
+    padding: clamp(0.5rem, 1rem, 1rem);
 
     >div {
       >ul {
@@ -60,26 +61,26 @@
   .single-contact {
     display: flex;
     align-items: center;
-    gap: 25px;
     border-radius: 10px;
-    padding: 0.5rem;
+    gap: clamp(0.8rem, 2rem, 2rem);
+    padding: clamp(0.3rem, 0.5rem, 0.5rem);
 
     .contact-initials {
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
-      height: 42px;
-      width: 42px;
+      height: clamp(32px, 42px, 45px);
+      width: clamp(32px, 42px, 45px);
       border-radius: 100%;
     }
 
     .contact-name {
-      font-size: 20px;
+      font-size: clamp(1rem, 1.25rem, 1.4rem);
     }
 
     .contact-email {
-      font-size: 16px;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
       color: var(--accent-color-light);
     }
 
@@ -91,7 +92,7 @@
 
   .contact-container {
     flex: 1;
-    padding: 3rem;
+    padding: clamp(1.5rem, 3rem, 3rem);
 
     .contact-container-heading {
       display: flex;
@@ -115,8 +116,8 @@
     .contact-container-heading {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
-      padding-top: 3.75rem;
+      gap: clamp(0.5rem, 1.25, 1.3rem);
+      padding-top: clamp(1.5rem, 3.75rem, 4rem);
 
       h2 {
         font-size: 3.8rem;
