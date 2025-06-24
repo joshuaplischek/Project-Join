@@ -30,8 +30,30 @@
     background: #29abe2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   @media (max-width: 767px) {
     display: none;
+  }
+}
+
+.mobil-addContactBtn {
+  display: none;
+
+  @media(max-width:767px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: var(--nav-bg-color);
+    border: 1px solid var(--nav-bg-color);
+    padding: 0.75rem;
+    width: fit-content;
+
+    position: fixed;
+    bottom: 15%;
+    right: 5%;
+    z-index: 999;
   }
 }
 
@@ -48,13 +70,13 @@
     padding: clamp(0.5rem, 4vw, 1.5rem);
     min-width: fit-content;
 
-    > div {
-      > ul {
+    >div {
+      >ul {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
 
-        > h2 {
+        >h2 {
           font-size: clamp(1.1rem, 4vw, 1.5rem);
           padding: 0 clamp(8px, 3vw, 20px);
         }
@@ -104,6 +126,7 @@
       display: flex;
       margin-bottom: 1rem;
       max-width: fit-content;
+
       div {
         background-color: #29abe2;
         width: 2px;
@@ -138,12 +161,14 @@
       p {
         font-size: clamp(1rem, 3vw, 1.6rem);
       }
+
       @media (max-width: 1100px) {
         flex-direction: column;
         gap: 0;
         padding-top: clamp(0.5rem, 1vw, 4rem);
         align-items: start;
-        > div {
+
+        >div {
           order: 3;
           height: 2px;
           width: 10vw;
@@ -185,12 +210,15 @@
 
   .contact-information-wrapper {
     padding: clamp(1rem, 4vw, 1.9rem);
-    > p:first-child {
+
+    >p:first-child {
       margin-bottom: 30px;
     }
+
     p {
       font-size: 20px;
     }
+
     .contact-information {
       display: flex;
       flex-direction: column;
@@ -207,9 +235,11 @@
         margin-bottom: 10px;
         display: inline;
       }
+
       .mail-to {
         color: #007cee;
       }
+
       .phone-number {
         color: black;
       }
@@ -249,13 +279,16 @@
 
   @media (max-width: 767px) {
     flex: 1;
+
     .contact-container {
       display: none;
     }
+
     .contactlist-container {
       flex: 1;
       height: calc(100% - 96px);
-      > div {
+
+      >div:not(.mobil-addContactBtn) {
         width: 100%;
       }
     }

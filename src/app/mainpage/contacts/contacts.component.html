@@ -4,6 +4,9 @@
       <span>Add new contact</span>
       <img src="/assets/images/icons/person_add.svg" alt="add icon">
     </button>
+    <div class="mobil-addContactBtn" (click)="openAddContactForm()">
+      <img src="/assets/images/icons/person_add.svg" alt="add icon">
+    </div>
     <app-add-contact-modul [isVisible]="isAddContactFormVisible" (closeModal)="closeAddContactForm()"
       (contactCreated)="addContactToDb($event)">
     </app-add-contact-modul>
