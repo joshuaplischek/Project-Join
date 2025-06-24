@@ -139,7 +139,7 @@ export class ContactsComponent {
   async updateContact() {
     this.showSuccessMessageBox('Kontakt wurde erfolgreich aktualisiert!');
     this.closeEditContactForm();
-    
+
     if (this.selectedContact?.id) {
       await this.getContactField(this.selectedContact.id);
     }
