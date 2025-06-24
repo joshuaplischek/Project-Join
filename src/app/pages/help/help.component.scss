@@ -1,0 +1,53 @@
+section {
+  padding: min(5vw, 6rem);
+  overflow-y: auto;
+  height: calc(100dvh - 96px);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  h1 {
+    font-size: 3.813rem;
+  }
+  h2 {
+    font-size: 1.688rem;
+  }
+  span {
+    font-size: 1rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .ordered-list {
+    padding: min(5vw, 1.875rem);
+    li {
+      padding-left: 3rem;
+      font-size: 1rem;
+      &::marker {
+        font-weight: bold;
+        font-size: 1.688rem;
+      }
+    }
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
+  .highlight {
+    color: #29ABE2;
+  }
+  .image-container {
+    position: fixed;
+    right: 6.25rem;
+    top: 13.75rem;
+    z-index: 1000;
+    img{
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.144);
+            border-radius: 100%;
+        }
+    }
+    }
+  }
+

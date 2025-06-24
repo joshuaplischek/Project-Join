@@ -104,12 +104,10 @@
       transform: translateX(100%);
       transition: transform 0.4s ease, opacity 0.1s;
       opacity: 0;
-      pointer-events: none;
 
       &.open-contact {
         transform: translateX(0);
         opacity: 1;
-        pointer-events: auto;
       }
     }
 

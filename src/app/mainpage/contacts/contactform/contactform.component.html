@@ -16,8 +16,8 @@
         </div>
       </div>
       <div class="form">
-        <div class="close-btn-wrapper">
-          <img class="close-btn" (click)="close()" src="/assets/images/contactform/cancel.svg" alt="cancel button">
+        <div (click)="close()" class="close-btn-wrapper">
+          <img class="close-btn"  src="/assets/images/contactform/cancel.svg" alt="cancel button">
         </div>
         <div class="input-fields">
           <div class="firstname-field ">
@@ -43,8 +43,8 @@
               <input [(ngModel)]="email" type="text" placeholder="Email" (blur)="emailTouched = true">
               <img src="/assets/images/contactform/mail.svg" alt="mail icon">
             </div>
-            <div class="input-hint">@if (!email && emailTouched) {
-              <span>Bitte Email angeben</span>}
+            <div class="input-hint">@if ((!email || !isValidEmail()) && emailTouched) {
+              <span>Bitte gültige Email eingeben</span>}
             </div>
           </div>
           <div class="phone-field">
@@ -65,7 +65,7 @@
           </button>
 
           <button class="buttonTwo" (click)="buttonTwoClick.emit({firstName, lastName, email, phone})" type="submit"
-            [disabled]="!firstName || !lastName || !email || !phone">
+            [disabled]="!firstName || !lastName || !email || !phone || !isValidEmail()">
             <span>{{buttonTwo}}</span>
             <img src="/assets/images/contactform/check.svg" alt="check icon">
           </button>

@@ -7,6 +7,7 @@ import {
   getDoc,
   addDoc,
   deleteDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { Contactlist } from '../../contactlist';
 import { single } from 'rxjs';
@@ -89,7 +90,19 @@ export class FirebaseService {
     }
   }
 
-  changeContact() { }
+  async updateContact(id: string, formData: Contactlist) {
+    try {
+      const docRef = doc(this.firestore, 'contactlist', id);
+      await updateDoc(docRef, {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone
+      });
+    } catch (error) {
+      console.error("Fehler beim Aktualisieren des Kontakts:", error);
+    }
+  }
 
   ngOnDestroy() {
     this.unsubscribe();
