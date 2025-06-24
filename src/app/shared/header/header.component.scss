@@ -44,12 +44,11 @@
       }
 
       &:hover {
-        background-color: rgb(230, 230, 230);
+        background-color: var(--grey-color);
       }
     }
   }
 }
-
 
 .quickMenu {
   display: none;
@@ -66,7 +65,6 @@
   position: absolute;
   top: 100%;
   right: 2%;
-  z-index: 999;
 
   a {
     color: #CDCDCD;
@@ -79,5 +77,6 @@
 
   &.show {
     display: flex;
+    z-index: 999;
   }
 }
