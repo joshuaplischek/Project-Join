@@ -8,7 +8,6 @@
 .sidenav {
   width: 10vw;
   min-width: fit-content;
-  max-width: 220px;
   height: 100vh;
 }
 
@@ -19,9 +18,4 @@
   min-width: 0;
   height: 100vh;
   overflow: hidden;
-}
-
-router-outlet+* {
-  overflow-y: auto;
-  height: 100%;
 }
