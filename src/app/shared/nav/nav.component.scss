@@ -7,8 +7,9 @@
   align-items: center;
   padding: 4rem 0;
   gap: 6.5rem;
+  max-width: 10vw;
   width: 100%;
-  max-width: fit-content;
+  min-width: min-content;
   max-height: 100dvh;
   min-height: 100dvh;
   white-space: nowrap;

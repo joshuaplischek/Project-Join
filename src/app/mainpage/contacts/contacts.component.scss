@@ -42,8 +42,7 @@
     align-items: center;
     background-color: #ffffff;
     overflow-y: scroll;
-    padding: clamp(0.5rem, 2vw, 1rem);
-    width: 20vw;
+    padding: clamp(0.5rem, 4vw, 1.5rem);
     min-width: fit-content;
 
     >div {
