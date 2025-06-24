@@ -9,7 +9,7 @@ import {
   deleteDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Contactlist } from '../../contactlist';
+import { Contactlist, ContactlistFirestoreData } from '../../contactlist';
 import { single } from 'rxjs';
 import { idToken } from '@angular/fire/auth';
 
@@ -57,7 +57,7 @@ export class FirebaseService {
     return doc(collection(this.firestore, colId), docId)
   }
 
-  setContactsObject(obj: any, id: string): Contactlist {
+  setContactsObject(obj: ContactlistFirestoreData, id: string): Contactlist {
     return {
       id: id,
       firstName: obj.firstName || '',

@@ -5,3 +5,10 @@ export interface Contactlist {
  email: string;
  phone: string;
 }
+
+export interface ContactlistFirestoreData {
+ firstName?: string;
+ lastName?: string;
+ email?: string;
+ phone?: string;
+}

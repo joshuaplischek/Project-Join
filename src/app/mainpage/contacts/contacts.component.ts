@@ -118,7 +118,7 @@ export class ContactsComponent {
     }
   }
 
-  async getContactField(id: any) {
+  async getContactField(id: string) {
     const data = await this.contactlist.getSingleContactOnce(id);
     this.selectedContact = data;
   }
