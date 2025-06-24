@@ -86,14 +86,14 @@
         </div>
       </div>
       <div class="contact-information-wrapper">
-        <p style="margin-bottom: 30px; font-size: 20px">Contact Information</p>
+        <p>Contact Information</p>
         <div class="contact-information">
           <p>E-Mail</p>
-          <a href="mailto:{{ selectedContact?.email }}" style="color: #007cee">{{ selectedContact?.email }}</a>
+          <a class="mail-to" href="mailto:{{ selectedContact?.email }}">{{ selectedContact?.email }}</a>
         </div>
         <div class="contact-information">
           <p>Phone</p>
-          <a href="tel:{{ selectedContact?.phone }}" style="color: black">+49 {{ selectedContact?.phone }}</a>
+          <a class="phone-number" href="tel:{{ selectedContact?.phone }}">+49 {{ selectedContact?.phone }}</a>
         </div>
       </div>
     </div>
