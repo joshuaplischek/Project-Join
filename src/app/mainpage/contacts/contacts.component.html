@@ -39,7 +39,7 @@
     </div>
   </div>}
   
-  <div class="contact-container">
+  <div class="contact-container" [ngClass]="{ 'responsive-contact-open': isOpen && selectedContact}">
     <div class="contact-container-heading">
       <h2>Contacts</h2>
       <div></div>

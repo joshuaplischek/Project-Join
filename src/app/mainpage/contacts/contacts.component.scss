@@ -122,6 +122,12 @@
     max-width: 80vw;
     width: 100%;
 
+    &.responsive-contact-open {
+      display: flex;
+      flex-direction: column;
+      padding: 50px 40px;
+    }
+
     .contact-container-heading {
       display: flex;
       margin-bottom: 1rem;
