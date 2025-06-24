@@ -83,6 +83,14 @@
     }
   }
 
+  .help-page-media {
+    display: none;
+
+    @media (max-width: 1024px) {
+      display: block;
+    }
+  }
+
   &.show {
     display: flex;
     z-index: 999;

@@ -9,8 +9,9 @@
 @if (isMenuOpen) {
 <div class="overlay" (click)="closeQuickMenu()"></div>
 <div class="quickMenu show" (click)="$event.stopPropagation()">
+  <a class="help-page-media" routerLink="/help">Help</a>
   <a routerLink="/privacypolicy" (click)="closeQuickMenu()">Privacy Policy</a>
   <a routerLink="/legalnotice" (click)="closeQuickMenu()">Legal notice</a>
-  <a href="" (click)="closeQuickMenu()">Log out</a>
+  <a routerLink="/logout" (click)="closeQuickMenu()">Log out</a>
 </div>
 }
