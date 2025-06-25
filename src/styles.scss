@@ -43,10 +43,14 @@ body {
   line-height: 1.5;
   background-color: var(--main-bg-color);
   scroll-behavior: smooth;
-  @media (max-width: 1024px) {
-    overflow: hidden;
-  }
 }
+
+  @media (max-width: 1024px) {
+    html, body {
+      overflow: hidden;
+      touch-action: none;
+    }
+  }
 
 .active {
   background-color: var(--accent-color-dark);
