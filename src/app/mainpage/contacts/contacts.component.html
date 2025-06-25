@@ -38,7 +38,7 @@
       </ul>
     </div>
   </div>}
-  
+
   <div class="contact-container" [ngClass]="{ 'responsive-contact-open': isOpen && selectedContact}">
     <div class="contact-container-heading">
       <h2>Contacts</h2>
@@ -87,6 +87,7 @@
               <span>Delete</span>
             </div>
           </div>
+
         </div>
       </div>
       <div class="contact-information-wrapper">
@@ -101,6 +102,19 @@
         </div>
       </div>
     </div>
+    <div (click)="openOptionsMenu()" class="responsive-options-btns-container">
+      <img src="/assets/images/icons/more_vert.svg" alt="options button">
+    </div>
+
+    @if (isMenuOpen){
+    <div class="overlay" (click)="closeOptionsMenu()"></div>
+
+    <div (click)="$event.stopPropagation()" class="responsive-options-btns-menu show">
+      <div (click)="openEdit()"><img src="/assets/images/icons/icon-edit.svg" alt="edit contact"><span>Edit</span></div>
+      <div (click)="deleteContact()"><img src="/assets/images/icons/icon-delete.svg"
+          alt="delete contact"><span>Delete</span></div>
+    </div>
+    }
     }
   </div>
 
