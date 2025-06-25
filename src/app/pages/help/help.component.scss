@@ -1,4 +1,6 @@
 section {
+  max-width: 1920px;
+  padding: min(2vw, 10.8rem);
   padding: clamp(1.5rem, 4vw, 3rem);
   overflow-y: auto;
   height: calc(100dvh - 192px);
@@ -53,15 +55,14 @@ section {
 
     }
 
-    h3 {
-      font-size: 1.25rem;
+      h3 {
+        font-size: 1.25rem;
+      }
     }
   }
-  }
-  
 
   .highlight {
-    color: #29ABE2;
+    color: #29abe2;
   }
 
   .image-container {
@@ -72,13 +73,18 @@ section {
     background-color: var(--main-bg-color);
     border-radius: 50%;
 
-    @media(max-width:1024px) {
+    @media (min-width: 1920px) {
+      position: absolute;
+      top: 5%;
+    }
+
+    @media (max-width: 1024px) {
       position: unset;
       text-align: right;
       top: 20%;
     }
 
-    @media(max-width:768px) {
+    @media (max-width: 768px) {
       top: 30%;
     }
 

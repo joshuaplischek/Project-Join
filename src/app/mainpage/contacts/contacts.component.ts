@@ -45,7 +45,7 @@ export class ContactsComponent {
     window.addEventListener('resize', () => this.checkMobile());
   }
 
-  checkMobile(){
+  checkMobile() {
     this.isMobile = window.innerWidth < 768;
   }
 
@@ -97,7 +97,7 @@ export class ContactsComponent {
     this.showSuccessMessage = true;
     setTimeout(() => {
       this.showSuccessMessage = false;
-    }, 1000);
+    }, 2000);
   }
 
   closeAddContactForm() {
