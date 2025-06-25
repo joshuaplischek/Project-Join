@@ -241,13 +241,15 @@
     justify-content: center;
     align-items: center;
 
+
+
     @media(max-width:767px) {
       display: flex;
     }
   }
 
   .responsive-options-btns-menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
@@ -267,8 +269,12 @@
       gap: 0.5rem;
     }
 
-  }
+    &.show {
+      display: flex;
+      z-index: 999;
+    }
 
+  }
 
   .contact-information-wrapper {
     padding: clamp(1rem, 4vw, 1.9rem);
@@ -310,8 +316,6 @@
         color: black;
         white-space: nowrap;
       }
-
-
     }
   }
 

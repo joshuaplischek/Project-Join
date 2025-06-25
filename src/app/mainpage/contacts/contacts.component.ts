@@ -28,6 +28,7 @@ export class ContactsComponent {
 
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
+  isMenuOpen: boolean = false;
   openDetail: boolean = false;
   isAddContactFormVisible = false;
   isEditContactFormVisible = false;
@@ -153,5 +154,14 @@ export class ContactsComponent {
     if (this.selectedContact?.id) {
       await this.getContactField(this.selectedContact.id);
     }
+  }
+
+
+  openOptionsMenu() {
+    this.isMenuOpen = true;
+  }
+
+  closeOptionsMenu() {
+    this.isMenuOpen = false;
   }
 }

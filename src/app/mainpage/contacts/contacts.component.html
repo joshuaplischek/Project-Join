@@ -102,14 +102,19 @@
         </div>
       </div>
     </div>
-    <div class="responsive-options-btns-container">
+    <div (click)="openOptionsMenu()" class="responsive-options-btns-container">
       <img src="/assets/images/icons/more_vert.svg" alt="options button">
     </div>
-    <div class="responsive-options-btns-menu">
+
+    @if (isMenuOpen){
+    <div class="overlay" (click)="closeOptionsMenu()"></div>
+
+    <div (click)="$event.stopPropagation()" class="responsive-options-btns-menu show">
       <div (click)="openEdit()"><img src="/assets/images/icons/icon-edit.svg" alt="edit contact"><span>Edit</span></div>
       <div (click)="deleteContact()"><img src="/assets/images/icons/icon-delete.svg"
           alt="delete contact"><span>Delete</span></div>
     </div>
+    }
     }
   </div>
 
