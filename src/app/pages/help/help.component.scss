@@ -1,9 +1,13 @@
 section {
-  padding: min(2vw, 10.8rem);
+  max-width: 1920px;
+  padding: clamp(1.5rem, 4vw, 3rem);
   overflow-y: auto;
   height: calc(100dvh - 96px);
   scrollbar-width: none;
   -ms-overflow-style: none;
+  @media(max-width:1024px){
+    height: calc(100dvh - 192px);
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -25,33 +29,42 @@ section {
     font-size: 1rem;
   }
   .ordered-list-container{
-    padding-left: min(4vw, 0rem);
-    @media (max-width:620px) {
-      padding-left: min(4vw, 0.5rem);
-    }
+    padding-left: 0;
     .ordered-list {
-    padding-left: min(4vw, 1.875rem);
-    list-style-position: outside;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    counter-reset: list-counter;
 
     li {
-      padding-left: min(4vw, 1.875rem);
-      font-size: 1rem;
-
-      &::marker {
+      counter-increment: list-counter;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      &::before {
+        content: counter(list-counter) ".";
         font-weight: bold;
         font-size: 1.688rem;
+        width: 2.5rem;
+        flex-shrink: 0;
+    
+      }
+      .li-content {
+        max-width: 100%;
+      }
+
+    }
+
+      h3 {
+        font-size: 1.25rem;
       }
     }
-
-    h3 {
-      font-size: 1.25rem;
-    }
   }
-  }
-  
 
   .highlight {
-    color: #29ABE2;
+    color: #29abe2;
   }
 
   .image-container {
@@ -62,13 +75,18 @@ section {
     background-color: var(--main-bg-color);
     border-radius: 50%;
 
-    @media(max-width:1024px) {
+    @media (min-width: 1920px) {
+      position: absolute;
+      top: 5%;
+    }
+
+    @media (max-width: 1024px) {
       position: unset;
       text-align: right;
       top: 20%;
     }
 
-    @media(max-width:768px) {
+    @media (max-width: 768px) {
       top: 30%;
     }
 
