@@ -5,7 +5,7 @@ section {
   height: calc(100dvh - 96px);
   scrollbar-width: none;
   -ms-overflow-style: none;
-  @media(max-width:1024px){
+  @media(max-width:1024px) {
     height: calc(100dvh - 192px);
   }
 
