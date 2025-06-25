@@ -1,16 +1,26 @@
 <header class="header">
-  <h1 class="header-text">Kanban Project Management Tool</h1>
-  <img class="header-icon" src="/assets/images/header_logo.svg" alt="Logo Icon">
-  <div>
-    <a class="help-icon-link" routerLink="/help"><img src="/assets/images/icons/icon-help.svg" alt="help icon"></a>
-    <div (click)="openQuickMenu()" class="user-badge"><span>SM</span></div>
+  <div class="header-max-content-wrapper">
+    <h1 class="header-text">Kanban Project Management Tool</h1>
+    <img
+      class="header-icon"
+      src="/assets/images/header_logo.svg"
+      alt="Logo Icon"
+    />
+    <div>
+      <a class="help-icon-link" routerLink="/help"
+        ><img src="/assets/images/icons/icon-help.svg" alt="help icon"
+      /></a>
+      <div (click)="openQuickMenu()" class="user-badge"><span>SM</span></div>
+    </div>
   </div>
 </header>
 
 @if (isMenuOpen) {
 <div class="overlay" (click)="closeQuickMenu()"></div>
 <div class="quickMenu show" (click)="$event.stopPropagation()">
-  <a class="help-page-media" routerLink="/help" (click)="closeQuickMenu()">Help</a>
+  <a class="help-page-media" routerLink="/help" (click)="closeQuickMenu()"
+    >Help</a
+  >
   <a routerLink="/privacypolicy" (click)="closeQuickMenu()">Privacy Policy</a>
   <a routerLink="/legalnotice" (click)="closeQuickMenu()">Legal notice</a>
   <a routerLink="/logout" (click)="closeQuickMenu()">Log out</a>

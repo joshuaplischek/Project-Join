@@ -11,52 +11,60 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   z-index: 20;
 
-  @media(max-width:1024px) {
+  @media (max-width: 1024px) {
     padding: 2rem;
   }
 
-  h1 {
-    font-size: clamp(1.1rem, 2vw, 1.25rem);
-    font-weight: 400;
-  }
-
-  .header-icon {
-    display: none;
-
-    @media(max-width:1024px) {
-      display: block;
+  .header-max-content-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      max-width: 1920px;
+      width: 100%;
+    h1 {
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      font-weight: 400;
     }
-  }
 
-  >div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
+    .header-icon {
+      display: none;
 
-    >a {
-      cursor: pointer;
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: scale(1.2);
+      @media (max-width: 1024px) {
+        display: block;
       }
     }
 
-    .user-badge {
-      background-color: #ffffff;
-      border: 3px solid var(--accent-color-dark);
-      border-radius: 50%;
-      padding: 0.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
+    > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
 
-      span {
-        color: var(--accent-color-light);
+      > a {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.2);
+        }
       }
 
-      &:hover {
-        background-color: var(--grey-color);
+      .user-badge {
+        background-color: #ffffff;
+        border: 3px solid var(--accent-color-dark);
+        border-radius: 50%;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        span {
+          color: var(--accent-color-light);
+        }
+
+        &:hover {
+          background-color: var(--grey-color);
+        }
       }
     }
   }
@@ -76,7 +84,7 @@
   justify-content: flex-start;
   gap: 1rem;
   padding: 1.5rem 1rem;
-  background-color: #2A3647;
+  background-color: #2a3647;
   border-radius: 20px 0px 20px 20px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   width: 150px;
@@ -87,7 +95,7 @@
   z-index: 101;
 
   a {
-    color: #CDCDCD;
+    color: #cdcdcd;
     transition: all 0.3s ease;
 
     &:hover {
@@ -98,7 +106,7 @@
   .help-page-media {
     display: none;
 
-    @media(max-width:1024px) {
+    @media (max-width: 1024px) {
       display: flex;
     }
   }
@@ -109,8 +117,7 @@
   }
 }
 
-@media(max-width:1024px) {
-
+@media (max-width: 1024px) {
   .help-icon-link,
   .header-text {
     display: none;
