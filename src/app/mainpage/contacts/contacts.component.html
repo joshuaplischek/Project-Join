@@ -105,9 +105,11 @@
         </div>
       </div>
     </div>
+    @if (!isMenuOpen) {
     <div (click)="openOptionsMenu()" class="responsive-options-btns-container">
       <img src="/assets/images/icons/more_vert.svg" alt="options button">
     </div>
+    }
 
     @if (isMenuOpen){
     <div class="overlay" (click)="closeOptionsMenu()"></div>

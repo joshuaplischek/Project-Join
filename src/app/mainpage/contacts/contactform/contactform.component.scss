@@ -160,7 +160,7 @@
           input {
             width: 100%;
             padding: clamp(8px, 2vw, 12px);
-            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
             border: 1px solid #D1D1D1;
             background-color: white;
             border-radius: 10px;
@@ -180,8 +180,10 @@
 
         .input-hint {
           color: var(--error-color);
-          font-size: 0.85rem;
-          margin-top: 2px;
+          font-size: 0.75rem;
+          min-height: 1.3em;
+          display: flex;
+          align-items: flex-start;
         }
       }
     }
@@ -254,7 +256,7 @@
   }
 }
 
-label{
+label {
   display: none;
 }
 
