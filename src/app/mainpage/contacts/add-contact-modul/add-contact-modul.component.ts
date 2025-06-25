@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ContactformComponent } from "../contactform/contactform.component";
 import { CommonModule } from '@angular/common';
 import { Contactlist } from '../../../contactlist';
@@ -14,6 +14,7 @@ export class AddContactModulComponent {
   @Input() isVisible = false;
   @Output() closeModal = new EventEmitter<void>();
   @Output() contactCreated = new EventEmitter<Contactlist>();
+  @ViewChild(ContactformComponent) contactFormComponent?: ContactformComponent;
 
   createContact(formData: Contactlist) {
     this.contactCreated.emit(formData);
@@ -21,7 +22,7 @@ export class AddContactModulComponent {
   }
 
   close() {
+    this.contactFormComponent?.resetForm();
     this.closeModal.emit();
   }
-
 }

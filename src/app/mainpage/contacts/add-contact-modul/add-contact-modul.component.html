@@ -1,4 +1,4 @@
-<app-contactform [isVisible]="isVisible" [heading]="'Add contact'" [subheading]="'Tasks are better with a team!'"
-  [buttonOne]="'Cancel'" [buttonTwo]="'Create contact'" (buttonOneClick)="close()"
-  (buttonTwoClick)="createContact($event)" (closeModal)="close()">
+<app-contactform #contactForm [isVisible]="isVisible" [heading]="'Add contact'"
+  [subheading]="'Tasks are better with a team!'" [buttonOne]="'Cancel'" [buttonTwo]="'Create contact'"
+  (buttonOneClick)="close()" (buttonTwoClick)="createContact($event)" (closeModal)="close()">
 </app-contactform>

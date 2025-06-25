@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Contactlist } from '../../contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { AddContactModulComponent } from './add-contact-modul/add-contact-modul.
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { first } from 'rxjs';
 import { Location } from '@angular/common';
+import { ContactformComponent } from './contactform/contactform.component';
 
 @Component({
   selector: 'app-contacts',
@@ -104,6 +105,7 @@ export class ContactsComponent {
 
   closeAddContactForm() {
     this.isAddContactFormVisible = false;
+
   }
 
   openEdit() {
