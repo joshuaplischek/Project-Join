@@ -112,6 +112,7 @@
     &:hover {
       cursor: pointer;
       background-image: linear-gradient(rgb(240, 240, 240), rgb(235, 235, 235));
+      color: black;
     }
   }
 
@@ -124,7 +125,7 @@
     &.responsive-contact-open {
       display: flex;
       flex-direction: column;
-      padding: 3.5rem 2.75rem;
+      padding: clamp(1.5rem, 4vw, 3rem);
     }
 
     .contact-container-heading {
@@ -269,6 +270,7 @@
     }
   }
 
+
   .responsive-options-btns-menu {
     display: none;
     flex-direction: column;
@@ -288,6 +290,9 @@
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     &.show {
