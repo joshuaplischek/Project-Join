@@ -1,8 +1,8 @@
 .layout {
   display: flex;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
   overflow: hidden;
     @media (max-width: 1024px){
     flex-direction: column-reverse;
@@ -12,9 +12,9 @@
 .sidenav {
   width: 10vw;
   min-width: fit-content;
-  height: 100vh;
+  height: 100dvh;
       @media (max-width: 1024px){
-        width: 100vw;
+        width: 100dvw;
         flex: 0;
   }
 }
@@ -24,6 +24,6 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
