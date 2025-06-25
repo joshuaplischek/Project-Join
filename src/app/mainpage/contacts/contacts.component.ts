@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AddContactModulComponent } from './add-contact-modul/add-contact-modul.component';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { first } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-contacts',
@@ -38,7 +39,7 @@ export class ContactsComponent {
   showSuccessMessage = false;
   isMobile: boolean = false
 
-  constructor(private contactlist: FirebaseService) { }
+  constructor(private contactlist: FirebaseService, private location: Location) { }
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
@@ -156,12 +157,15 @@ export class ContactsComponent {
     }
   }
 
-
   openOptionsMenu() {
     this.isMenuOpen = true;
   }
 
   closeOptionsMenu() {
     this.isMenuOpen = false;
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

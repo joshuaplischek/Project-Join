@@ -45,6 +45,9 @@
       <div></div>
       <p>Better with a team</p>
     </div>
+    <div class="image-container">
+      <img src="/assets/images/icons/arrow-left-line.svg" alt="" (click)="goBack()" />
+    </div>
     @if (!isMobile || (isMobile && isOpen)) {
     <div class="single-contact-container" [ngClass]="{ 'open-contact': isOpen && selectedContact }">
       <div class="name-badge-container">
