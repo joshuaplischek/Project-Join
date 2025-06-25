@@ -166,6 +166,11 @@ export class ContactsComponent {
   }
 
   goBack(): void {
-    this.location.back();
+    if (this.isMobile) {
+      this.isOpen = false;
+      this.selectedContact = null;
+    } else {
+      this.location.back();
+    }
   }
 }
