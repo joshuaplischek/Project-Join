@@ -1,4 +1,8 @@
 <div class="contactlist-wrapper">
+  <app-edit-contact [isVisible]="isEditContactFormVisible" [selectedContact]="selectedContact"
+    (closeModal)="closeEditContactForm()" (contactDeleted)="deleteContact()" (contactUpdated)="updateContact()">
+  </app-edit-contact>
+
   @if (!isMobile || (isMobile && !isOpen)){
   <div class="contactlist-container">
     <button id="addContactBtn" (click)="openAddContactForm()">
@@ -11,10 +15,6 @@
     <app-add-contact-modul [isVisible]="isAddContactFormVisible" (closeModal)="closeAddContactForm()"
       (contactCreated)="addContactToDb($event)">
     </app-add-contact-modul>
-
-    <app-edit-contact [isVisible]="isEditContactFormVisible" [selectedContact]="selectedContact"
-      (closeModal)="closeEditContactForm()" (contactDeleted)="deleteContact()" (contactUpdated)="updateContact()">
-    </app-edit-contact>
 
     <div>
       <ul>
