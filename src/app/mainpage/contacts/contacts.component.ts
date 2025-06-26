@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Contactlist } from '../../../interfaces/contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,7 @@ import { ContactformComponent } from './contactform/contactform.component';
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })
-export class ContactsComponent {
+export class ContactsComponent implements OnInit {
   readonly standardColors: string[] = [
     '#ff7a00',
     '#1fd7c1',
@@ -43,7 +43,7 @@ export class ContactsComponent {
   constructor(
     private contactlist: FirebaseService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;

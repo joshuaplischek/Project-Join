@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 5rem;
+  padding: 5rem 10rem 2rem 5rem;
 }
 
 .board-header {
@@ -131,6 +131,7 @@
     gap: 35px;
     color: #42526E;
     font-family: 'mainFontBold';
+    margin-bottom: 1.5rem;
 
 
     .addTaskToListBtn {
@@ -140,15 +141,27 @@
       align-items: center;
       padding: 3px;
       gap: 10px;
-
-      margin: 0 auto;
       width: 24px;
       height: 24px;
-
       border: 2px solid #2A3647;
       border-radius: 8px;
     }
   }
+}
+
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  color: #A8A8A8;
+  background: #E7E7E7;
+  border: 1px dashed #A8A8A8;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
 }
 
 label {
