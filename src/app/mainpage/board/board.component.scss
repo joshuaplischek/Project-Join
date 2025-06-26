@@ -14,24 +14,33 @@
 
 .kanban-board-container {
   display: flex;
-  flex-flow: row wrap;
-  align-content: center;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px 64px;
+  gap: 24px;
   width: 100%;
 
   .toDoList,
   .inProgressList,
   .awaitFeedbackList,
   .doneList {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
     width: 20%;
+
   }
 
   .list-heading {
     display: flex;
-    flex-flow: row nowrap;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    gap: 35px;
+    color: #42526E;
+    font-family: 'mainFontBold';
   }
 }
