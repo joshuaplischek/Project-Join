@@ -1,9 +1,29 @@
-@for (task of getList(); track $index) {
-    <p>{{task.id}}</p>
-    <p>{{task.category}}</p>
-    <p>{{task.assignedTo}}</p>
-}
+<div class="task-card-container">
+  <div class="inner-container">
+    @for (task of getList(); track $index) {
+    <p class="card-category">{{task.category}}</p>
+    <div>
+      <p class="card-title">{{task.title}}</p>
+      <p class="card-description">{{task.descritpion}}</p>
+    </div>
+    <div class="subtasks-container">
+      <!-- TODO Fortschritsbalken , Inline STyle entfernen-->
+      <div class="fortschrittsbalken"
+        style="width: 150px; height: 10px; border-radius: 3rem; background-color: darkgray;"></div>
+      <!-- TODO Subtasks als Zahl laden -->
+      <p>0/2 Subtasks</p>
+    </div>
+    <div class="user-badges-prio-container">
+      <!-- <p class="card-users">{{task.assignedTo}}</p> -->
+      <div class="user-badges-container">
+        <div class="user-badge1 badge">AS</div>
+        <div class="user-badge2 badge">DE</div>
+        <div class="user-badge3 badge">EF</div>
+      </div>
 
-
-
-
+      <!-- <p class="card-prio">{{task.priority}}</p> -->
+      <img class="card-prio" src="/assets/images/board/prio-urgent.svg" alt="prio icon">
+    </div>
+    }
+  </div>
+</div>
