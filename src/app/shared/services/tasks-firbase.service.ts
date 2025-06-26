@@ -22,11 +22,12 @@ export class TasksFirbaseService {
   subTasks() {
     return onSnapshot(this.getTasks(), (list) => {
       this.tasks = [];
-      list.forEach((element) => {
-        this.tasks.push(this.setTasksObject(element.data(), element.id));
-        console.log(this.tasks);
-
+     list.forEach((element) => {
+       this.tasks.push(this.setTasksObject(element.data(), element.id));
+       console.log(this.tasks);
+       
       });
+
     });
   }
 
