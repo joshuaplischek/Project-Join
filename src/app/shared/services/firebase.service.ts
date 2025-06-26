@@ -9,9 +9,13 @@ import {
   deleteDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Contactlist, ContactlistFirestoreData } from '../../contactlist';
+import {
+  Contactlist,
+  ContactlistFirestoreData,
+} from '../../../interfaces/contactlist';
 import { single } from 'rxjs';
 import { idToken } from '@angular/fire/auth';
+import { Tasks } from '../../../interfaces/tasks';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +23,7 @@ import { idToken } from '@angular/fire/auth';
 export class FirebaseService {
   firestore: Firestore = inject(Firestore);
   contacts: Contactlist[] = [];
+  tasks: Tasks[] = [];
   unsubscribe;
 
   constructor() {
@@ -54,11 +59,11 @@ export class FirebaseService {
   }
 
   getSingleContact(colId: string, docId: string) {
-    return doc(collection(this.firestore, colId), docId)
+    return doc(collection(this.firestore, colId), docId);
   }
 
   setContactsObject(obj: ContactlistFirestoreData, id: string): Contactlist {
-    return {
+    return {  
       id: id,
       firstName: obj.firstName || '',
       lastName: obj.lastName || '',
@@ -74,19 +79,19 @@ export class FirebaseService {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        phone: formData.phone
+        phone: formData.phone,
       });
     } catch (error) {
-      console.error("Fehler beim Hinzufügen des Kontakts:", error);
+      console.error('Fehler beim Hinzufügen des Kontakts:', error);
     }
   }
 
   async deleteContact(id: string) {
     try {
       await deleteDoc(doc(this.firestore, 'contactlist', id));
-      console.log("Kontakt erfolgreich gelöscht");
+      console.log('Kontakt erfolgreich gelöscht');
     } catch (error) {
-      console.error("Fehler beim Löschen des Kontakts:", error);
+      console.error('Fehler beim Löschen des Kontakts:', error);
     }
   }
 
@@ -97,10 +102,10 @@ export class FirebaseService {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        phone: formData.phone
+        phone: formData.phone,
       });
     } catch (error) {
-      console.error("Fehler beim Aktualisieren des Kontakts:", error);
+      console.error('Fehler beim Aktualisieren des Kontakts:', error);
     }
   }
 

@@ -1,14 +1,20 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ContactformComponent } from "../contactform/contactform.component";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { ContactformComponent } from '../contactform/contactform.component';
 import { CommonModule } from '@angular/common';
-import { Contactlist } from '../../../contactlist';
+import { Contactlist } from '../../../../interfaces/contactlist';
 
 @Component({
   selector: 'app-add-contact-modul',
   standalone: true,
   imports: [ContactformComponent, CommonModule],
   templateUrl: './add-contact-modul.component.html',
-  styleUrl: './add-contact-modul.component.scss'
+  styleUrl: './add-contact-modul.component.scss',
 })
 export class AddContactModulComponent {
   @Input() isVisible = false;

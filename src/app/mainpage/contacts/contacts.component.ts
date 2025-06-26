@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Contactlist } from '../../contactlist';
+import { Contactlist } from '../../../interfaces/contactlist';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
 import { AddContactModulComponent } from './add-contact-modul/add-contact-modul.component';
@@ -38,9 +38,12 @@ export class ContactsComponent {
 
   successMessage = '';
   showSuccessMessage = false;
-  isMobile: boolean = false
+  isMobile: boolean = false;
 
-  constructor(private contactlist: FirebaseService, private location: Location) { }
+  constructor(
+    private contactlist: FirebaseService,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
@@ -85,7 +88,9 @@ export class ContactsComponent {
 
     setTimeout(() => {
       const newContact = this.contactlist.contacts.find(
-        contact => (contact.email === formData.email) && (contact.lastName === formData.lastName)
+        (contact) =>
+          contact.email === formData.email &&
+          contact.lastName === formData.lastName
       );
       if (newContact) {
         this.selectedContact = newContact;
@@ -105,7 +110,6 @@ export class ContactsComponent {
 
   closeAddContactForm() {
     this.isAddContactFormVisible = false;
-
   }
 
   openEdit() {
