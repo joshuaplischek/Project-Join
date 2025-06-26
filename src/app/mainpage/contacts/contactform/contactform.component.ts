@@ -2,14 +2,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Contactlist } from '../../../contactlist';
+import { Contactlist } from '../../../../interfaces/contactlist';
 
 @Component({
   selector: 'app-contactform',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './contactform.component.html',
-  styleUrl: './contactform.component.scss'
+  styleUrl: './contactform.component.scss',
 })
 export class ContactformComponent {
   firstName: string = '';
@@ -23,7 +23,7 @@ export class ContactformComponent {
   emailTouched = false;
   phoneTouched = false;
 
-  constructor(private contactService: FirebaseService) { }
+  constructor(private contactService: FirebaseService) {}
 
   @Input() heading: string = '';
   @Input() subheading: string = '';
