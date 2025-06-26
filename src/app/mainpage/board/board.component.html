@@ -1,45 +1,48 @@
-<div class="board-header">
-  <h1>Board</h1>
-  <div>
-    <div class="search-field-wrapper">
-      <label for="">Find Task</label>
-      <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
+<section class="board-wrapper">
+  <div class="board-header">
+    <h2>Board</h2>
+    <div>
+      <div class="search-field-wrapper">
+        <label for="Find Task">Find Task</label>
+        <input type="text" placeholder="Find Task" />
+        <div class="border-right"></div>
+        <img src="/assets/images/board/search.svg" alt="search icon" />
+      </div>
+      <button id="addTaskBtn">
+        <span>Add Task</span>
+        <img src="/assets/images/icons/add.svg" alt="add task icon">
+      </button>
     </div>
-    <button id="addTaskBtn">
-      <span>Add Task</span>
-      <img src="" alt="add task icon">
-    </button>
   </div>
-</div>
 
-
-<div class="kanban-board-container">
-  <div class="toDoList">
-    <div class="list-heading">
-      <h3>To do</h3>
-      <button>+</button>
+  <div class="kanban-board-container">
+    <div class="toDoList">
+      <div class="list-heading">
+        <h3>To do</h3>
+        <button>+</button>
+      </div>
+      <div class="tasks"></div>
     </div>
-    <div class="tasks"></div>
-  </div>
-  <div class="inProgressList">
-    <div class="list-heading">
-      <h3>In progress</h3>
-      <button>+</button>
+    <div class="inProgressList">
+      <div class="list-heading">
+        <h3>In progress</h3>
+        <button>+</button>
+      </div>
+      <div class="tasks"></div>
     </div>
-    <div class="tasks"></div>
-  </div>
-  <div class="awaitFeedbackList">
-    <div class="list-heading">
-      <h3>Await feedback</h3>
-      <button>+</button>
+    <div class="awaitFeedbackList">
+      <div class="list-heading">
+        <h3>Await feedback</h3>
+        <button>+</button>
+      </div>
+      <div class="tasks"></div>
     </div>
-    <div class="tasks"></div>
-  </div>
-  <div class="doneList">
-    <div class="list-heading">
-      <h3>Done</h3>
-      <button>+</button>
+    <div class="doneList">
+      <div class="list-heading">
+        <h3>Done</h3>
+        <button>+</button>
+      </div>
+      <div class="tasks"></div>
     </div>
-    <div class="tasks"></div>
   </div>
-</div>
+</section>
