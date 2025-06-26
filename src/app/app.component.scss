@@ -4,7 +4,8 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-    @media (max-width: 1024px){
+
+  @media (max-width: 1024px) {
     flex-direction: column-reverse;
   }
 }
@@ -13,9 +14,10 @@
   width: 10vw;
   min-width: fit-content;
   height: 100vh;
-      @media (max-width: 1024px){
-        width: 100vw;
-        flex: 0;
+
+  @media (max-width: 1024px) {
+    width: 100vw;
+    flex: 0;
   }
 }
 
