@@ -36,6 +36,8 @@ export class FirebaseService {
       this.tasks = [];
       list.forEach((element) => {
         this.tasks.push(this.setTasksObject(element.data(), element.id));
+        console.log(this.tasks);
+        
       });
     });
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Task } from 'zone.js/lib/zone-impl';
+import { Tasks } from '../../../interfaces/tasks';
 import { FirebaseService } from '../services/firebase.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './compact-task.component.scss'
 })
 export class CompactTaskComponent {
-  tasks: Task[] = [];
+  tasks: Tasks[] = [];
 
-  constructor(private taskService: FirebaseService){}
+  constructor(private taskService: FirebaseService){
+    this.tasks = this.taskService.tasks
+  }
+
+  
 }
