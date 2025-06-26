@@ -45,18 +45,33 @@ body {
   scroll-behavior: smooth;
 }
 
-  @media (max-width: 1024px) {
-    html, body {
-      overflow: hidden;
-      touch-action: none;
-    }
+@media (max-width: 1024px) {
+
+  html,
+  body {
+    overflow: hidden;
+    touch-action: none;
   }
+}
 
 .active {
   background-color: var(--nav-bg-color);
   color: #fff;
   width: 100%;
+
   @media (max-width: 1024px) {
     border-radius: 8px;
   }
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+
+
+h2 {
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  font-weight: 700;
 }
