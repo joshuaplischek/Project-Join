@@ -1,28 +1,27 @@
 :root {
-  --nav-bg-color: #2A3647;
-  --nav-bg-hover: #2A3D59;
-  --main-bg-color: #F6F7F8;
-  --grey-color: #D1D1D1;
+  --nav-bg-color: #2a3647;
+  --nav-bg-hover: #2a3d59;
+  --main-bg-color: #f6f7f8;
+  --grey-color: #d1d1d1;
   --accent-color-dark: #091931;
-  --accent-color-light: #409DF2;
-  --error-color: #FF3D00;
-  --success-color: #7AE229;
-  --warning-color: #FFA801;
-
+  --accent-color-light: #409df2;
+  --error-color: #ff3d00;
+  --success-color: #7ae229;
+  --warning-color: #ffa801;
 }
 
 @font-face {
-  font-family: 'mainFontRegular';
+  font-family: "mainFontRegular";
   src: url(./assets/fonts/Inter/static/Inter_18pt-Regular.ttf);
 }
 
 @font-face {
-  font-family: 'mainFontLight';
+  font-family: "mainFontLight";
   src: url(./assets/fonts/Inter/static/Inter_18pt-Light.ttf);
 }
 
 @font-face {
-  font-family: 'mainFontBold';
+  font-family: "mainFontBold";
   src: url(./assets/fonts/Inter/static/Inter_18pt-Bold.ttf);
 }
 
@@ -40,17 +39,24 @@ a {
 
 html,
 body {
-  font-family: 'mainFontRegular', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "mainFontRegular", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
   background-color: var(--main-bg-color);
   scroll-behavior: smooth;
 }
 
+  @media (max-width: 1024px) {
+    html, body {
+      overflow: hidden;
+      touch-action: none;
+    }
+  }
+
 .active {
   background-color: var(--nav-bg-color);
   color: #fff;
   width: 100%;
-  @media (max-width: 1024px){
-      border-radius: 8px;
+  @media (max-width: 1024px) {
+    border-radius: 8px;
   }
 }
