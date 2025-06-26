@@ -1,27 +1,15 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  collection,
-  doc,
-  Firestore,
-  onSnapshot,
-  getDoc,
-  addDoc,
-  deleteDoc,
-  updateDoc,
-} from '@angular/fire/firestore';
-import { single } from 'rxjs';
-import { idToken } from '@angular/fire/auth';
+import { collection, Firestore, onSnapshot, Timestamp } from '@angular/fire/firestore';
 import { Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
-import { Task } from 'zone.js/lib/zone-impl';
-import { Timestamp } from 'firebase/firestore';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class FirebaseService {
+export class TasksFirbaseService {
   firestore: Firestore = inject(Firestore);
   tasks: Tasks[] = [];
   unsubscribe;
+
 
   constructor() {
     this.unsubscribe = this.subTasks();
@@ -37,7 +25,7 @@ export class FirebaseService {
       list.forEach((element) => {
         this.tasks.push(this.setTasksObject(element.data(), element.id));
         console.log(this.tasks);
-        
+
       });
     });
   }
@@ -53,5 +41,9 @@ export class FirebaseService {
       subtasks: obj.subtasks || [],
       title: obj.title || '',
     };
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe();
   }
 }
