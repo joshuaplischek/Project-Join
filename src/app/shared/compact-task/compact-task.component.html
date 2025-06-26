@@ -1,6 +1,9 @@
-@for (task of tasks; track $index) {
+@for (task of getList(); track $index) {
+    <p>{{task.id}}</p>
     <p>{{task.category}}</p>
-    <p>{{task.title}}</p>
+    <p>{{task.assignedTo}}</p>
 }
 
-<p>it works</p>
+
+
+

@@ -23,7 +23,6 @@ import { Tasks } from '../../../interfaces/tasks';
 export class FirebaseService {
   firestore: Firestore = inject(Firestore);
   contacts: Contactlist[] = [];
-  tasks: Tasks[] = [];
   unsubscribe;
 
   constructor() {

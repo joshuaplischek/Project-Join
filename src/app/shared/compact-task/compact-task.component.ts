@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
+
 import { CommonModule } from '@angular/common';
 import { TasksFirbaseService } from '../services/tasks-firbase.service';
+import { Tasks } from '../../../interfaces/tasks';
 
 @Component({
   selector: 'app-compact-task',
@@ -11,11 +12,14 @@ import { TasksFirbaseService } from '../services/tasks-firbase.service';
   styleUrl: './compact-task.component.scss'
 })
 export class CompactTaskComponent {
-  tasks: Tasks[] = [];
+  
 
   constructor(private taskService: TasksFirbaseService) {
-    this.tasks = this.taskService.tasks;
-    console.log(this.tasks);
+    
   }
+
+ getList(){
+  return this.taskService.tasks
+ }
 
 }
