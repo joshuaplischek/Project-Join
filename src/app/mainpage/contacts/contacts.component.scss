@@ -36,10 +36,16 @@
   }
 }
 
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+}
+
 .mobil-addContactBtn {
   display: none;
 
-  @media(max-width:767px) {
+  @media (max-width: 767px) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,14 +74,15 @@
     overflow-y: scroll;
     padding: clamp(0.5rem, 4vw, 1.5rem);
     min-width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.363);
 
-    >div {
-      >ul {
+    > div {
+      > ul {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
 
-        >h2 {
+        > h2 {
           font-size: clamp(1.1rem, 4vw, 1.5rem);
           padding: 0 clamp(8px, 3vw, 20px);
         }
@@ -174,10 +181,10 @@
         padding-top: clamp(0.5rem, 1vw, 4rem);
         align-items: start;
 
-        >div {
+        > div {
           order: 3;
           height: 2px;
-          width: 10vw;
+          width: 50%;
         }
       }
     }
@@ -212,7 +219,7 @@
     padding: clamp(1rem, 1vw, 1.8rem);
     gap: clamp(1rem, 4vw, 2.5rem);
 
-    @media(max-width:780px) {
+    @media (max-width: 780px) {
       padding: 0;
     }
 
@@ -229,7 +236,7 @@
     display: flex;
     gap: 1rem;
 
-    @media(max-width:767px) {
+    @media (max-width: 767px) {
       display: none;
     }
 
@@ -265,11 +272,10 @@
     justify-content: center;
     align-items: center;
 
-    @media(max-width:767px) {
+    @media (max-width: 767px) {
       display: flex;
     }
   }
-
 
   .responsive-options-btns-menu {
     display: none;
@@ -277,14 +283,14 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1.5rem;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px 20px 0px 20px;
     position: absolute;
     right: -20%;
     bottom: 3%;
 
-    >div {
+    > div {
       display: flex;
       color: black;
       justify-content: space-between;
@@ -299,7 +305,7 @@
       display: flex;
       z-index: 999;
 
-      @media(min-width:767px) {
+      @media (min-width: 767px) {
         display: none;
       }
     }
@@ -308,11 +314,11 @@
   .contact-information-wrapper {
     padding: clamp(1rem, 4vw, 1.9rem);
 
-    @media(max-width:767px) {
+    @media (max-width: 767px) {
       padding-left: 0;
     }
 
-    >p:first-child {
+    > p:first-child {
       margin-bottom: 30px;
     }
 
@@ -390,7 +396,7 @@
       flex: 1;
       height: calc(100% - 96px);
 
-      >div:not(.mobil-addContactBtn) {
+      > div:not(.mobil-addContactBtn) {
         width: 100%;
       }
     }
@@ -410,11 +416,11 @@
   transform: translateX(120%);
   animation: slide-in 0.3s forwards;
 
-  @media (max-width:1024px) {
+  @media (max-width: 1024px) {
     bottom: 12%;
   }
 
-  @media (max-width:480px) {
+  @media (max-width: 480px) {
     font-size: 0.9rem;
   }
 }

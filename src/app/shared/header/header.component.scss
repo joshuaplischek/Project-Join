@@ -115,6 +115,9 @@
     display: flex;
     z-index: 999;
   }
+   @media (max-width: 1024px) {
+    top: 200%;
+    }
 }
 
 @media (max-width: 1024px) {

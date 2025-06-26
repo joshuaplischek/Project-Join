@@ -16,7 +16,7 @@
     flex-direction: row;
     max-height: 96px;
     min-height: 96px;
-    width: 100vw;
+    width: 100dvw;
     padding: 0;;
   }
 
@@ -80,7 +80,7 @@ nav {
 
   @media (max-width: 1024px) {
     flex-direction: row;
-    width: 100vw;
+    width: 100dvw;
     justify-content: space-evenly;
     > div {
       width: fit-content;
