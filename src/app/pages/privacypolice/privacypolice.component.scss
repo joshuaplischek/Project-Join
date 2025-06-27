@@ -1,7 +1,8 @@
 @import "../../../styles.scss";
 
 section {
-    max-width: 1920px;
+  max-width: 1920px;
+
   >div {
     padding: 1.5rem 4.6rem;
     overflow-y: scroll;
@@ -18,12 +19,14 @@ section {
     >h1 {
       font-size: clamp(2.5rem, 4vw, 3.8rem);
       font-weight: bold;
+      font-size: 3rem;
     }
 
     >div {
       margin: 25px 0;
 
       >h2 {
+        font-size: 2rem;
         margin: 15px 0;
       }
 
