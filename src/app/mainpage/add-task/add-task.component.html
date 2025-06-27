@@ -3,44 +3,61 @@
 
   <section class="form">
     <div class="addTaskForm">
-      <div class="contact-form">
-        <div class="user-badge-container">
-
+      <div class="title-field">
+        <label for="titleInput">Title<span class="warning">*</span></label>
+        <input [(ngModel)]="title" type="text" placeholder="Enter a title" (blur)="titleTouched= true" />
+        <div class="input-hint">@if (!title && titleTouched) {
+          <span role="alert">Please enter a title</span>}
         </div>
-        <div class="form">
-          <div class="input-fields">
-            <div class="input-field">
-              <div class="input-wrapper">
-                <label for="titleInput">Title<span class="warning">*</span></label>
-                <input [(ngModel)]="title" type="text" placeholder="Enter a title" (blur)="titleTouched= true" />
-                <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
-              </div>
-              <div class="input-hint">@if (!title && titleTouched) {
-                <span role="alert">Please enter a title</span>}
-              </div>
-            </div>
-            <div class="description-field">
-              <div class="input-wrapper">
-                <label for="description">Description</label>
-                <input type="text" placeholder="Enter a Description">
-              </div>
-            </div>
-            <div class="date-field">
-              <div class="input-wrapper">
-                <label for="dateInput">Due date<span class="warning">*</span></label>
-                <input [(ngModel)]="date" type="text" placeholder="dd/mm/yyyy" (blur)="dateTouched">
-                <img src="/assets/images/contactform/mail.svg" alt="calender icons">
-              </div>
-              <div class="input-hint">@if (!date && dateTouched) {
-                <span role="alert">Please enter a valid email address</span>}
-              </div>
-            </div>
-          </div>
+      </div>
+
+      <div class="description-field">
+        <label for="description">Description</label>
+        <textarea rows="5" name="description" id="description" placeholder="Enter a Description"></textarea>
+      </div>
+      <div class="date-field">
+        <label for="dateInput">Due date<span class="warning">*</span></label>
+        <div class="input-wrapper">
+          <input [(ngModel)]="date" type="text" placeholder="dd/mm/yyyy" (blur)="dateTouched">
+          <img src="/assets/images/board/calender.svg" alt="calender icons">
+        </div>
+        <div class="input-hint">@if (!date && dateTouched) {
+          <span role="alert">Please enter a valid email address</span>}
         </div>
       </div>
     </div>
     <div class="border"></div>
-    <div class="taskOptions"></div>
+    <div class="taskOptions">
+      <div class="prio-wrapper">
+        <p>Priority</p>
+        <div class="prio-btn-container">
+          <button class="urgent">Urgent <img src="/assets/images/board/prio-urgent.svg" alt=""></button>
+          <button class="medium">Medium <img src="/assets/images/board/prio-medium.svg" alt=""></button>
+          <button class="low">Low <img src="/assets/images/board/prio-low.svg" alt=""></button>
+        </div>
+      </div>
+      <div class="assignedTo-wrapper">
+        <label for="assignedTo">Assigned to</label>
+        <select name="assignedTo" id="assignedTo">
+          <option value="">Select contacts to assign</option>
+          <option value="">Kontak1</option>
+          <option value="">Kontak1</option>
+        </select>
+      </div>
+      <div class="category-wrapper">
+        <label for="category">Category<span class="warning">*</span></label>
+        <select name="category" id="category">
+          <option value="">Select task category</option>
+          <option value="technicalTask">Technical Task</option>
+          <option value="userStory">User Story</option>
+        </select>
+      </div>
+      <div class="subtasks-wrapper">
+        <label for="subtasks">Subtasks<span class="warning">*</span></label>
+        <input type="text" placeholder="Add new subtask">
+        <img src="/assets/images/board/add.svg" alt="">
+      </div>
+    </div>
   </section>
 
   <section class="form-footer">
