@@ -15,12 +15,15 @@ export class BoardComponent {
   get todoTasks() {
     return this.taskService.tasks.filter(task => task.status === 'todo');
   }
+
   get inProgressTasks() {
     return this.taskService.tasks.filter(task => task.status === 'inprogress');
   }
+
   get awaitFeedbackTasks() {
     return this.taskService.tasks.filter(task => task.status === 'awaitfeedback');
   }
+
   get doneTasks() {
     return this.taskService.tasks.filter(task => task.status === 'done');
   }
