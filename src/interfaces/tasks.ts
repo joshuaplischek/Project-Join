@@ -7,7 +7,7 @@ export interface Tasks {
     date?: Timestamp;
     description?: string;
     priority?: string;
-    subtasks?: string[];
+    subtasks?: Subtask[];
     title?: string;
     status?: string;
 }
@@ -18,7 +18,12 @@ export interface TasksFirestoreData {
     date?: Timestamp;
     description?: string;
     priority?: string;
-    subtasks?: string[];
+    subtasks?: Subtask[];
     title?: string;
     status?: string;
+}
+
+export interface Subtask {
+    title: string;
+    done: boolean;
 }
