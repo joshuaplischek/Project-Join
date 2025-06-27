@@ -1,1 +1,60 @@
-<p>add-task works!</p>
+<section class="add-task-wrapper">
+  <h2>Add Task</h2>
+
+  <section class="form">
+    <div class="addTaskForm">
+      <div class="contact-form">
+        <div class="user-badge-container">
+
+        </div>
+        <div class="form">
+          <div class="input-fields">
+            <div class="input-field">
+              <div class="input-wrapper">
+                <label for="titleInput">Title<span class="warning">*</span></label>
+                <input [(ngModel)]="title" type="text" placeholder="Enter a title" (blur)="titleTouched= true" />
+                <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
+              </div>
+              <div class="input-hint">@if (!title && titleTouched) {
+                <span role="alert">Please enter a title</span>}
+              </div>
+            </div>
+            <div class="description-field">
+              <div class="input-wrapper">
+                <label for="description">Description</label>
+                <input type="text" placeholder="Enter a Description">
+              </div>
+            </div>
+            <div class="date-field">
+              <div class="input-wrapper">
+                <label for="dateInput">Due date<span class="warning">*</span></label>
+                <input [(ngModel)]="date" type="text" placeholder="dd/mm/yyyy" (blur)="dateTouched">
+                <img src="/assets/images/contactform/mail.svg" alt="calender icons">
+              </div>
+              <div class="input-hint">@if (!date && dateTouched) {
+                <span role="alert">Please enter a valid email address</span>}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="border"></div>
+    <div class="taskOptions"></div>
+  </section>
+
+  <section class="form-footer">
+    <p><span class="warning">*</span>This field is requierd</p>
+    <div class="button-container">
+      <button class="clearBtn">
+        <span>Clear</span>
+        <img src="/assets/images/icons/icon-cancel.svg" alt="clear task">
+      </button>
+      <button class="createTaskBtn">
+        <span>Create Task</span>
+        <img src="/assets/images/icons/icon-check.svg" alt="create task">
+      </button>
+    </div>
+  </section>
+
+</section>
