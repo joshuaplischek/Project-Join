@@ -1,10 +1,10 @@
 <div class="task-card-container">
   <div class="inner-container">
-    @for (task of getList(); track $index) {
+
     <p class="card-category">{{task.category}}</p>
     <div>
       <p class="card-title">{{task.title}}</p>
-      <p class="card-description">{{task.descritpion}}</p>
+      <p class="card-description">{{task.description}}</p>
     </div>
     <div class="subtasks-container">
       <!-- TODO Fortschritsbalken , Inline STyle entfernen-->
@@ -24,6 +24,6 @@
       <!-- <p class="card-prio">{{task.priority}}</p> -->
       <img class="card-prio" src="/assets/images/board/prio-urgent.svg" alt="prio icon">
     </div>
-    }
+
   </div>
 </div>

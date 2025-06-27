@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TasksFirbaseService } from '../services/tasks-firbase.service';
 import { Tasks } from '../../../interfaces/tasks';
@@ -12,14 +11,13 @@ import { Tasks } from '../../../interfaces/tasks';
   styleUrl: './compact-task.component.scss'
 })
 export class CompactTaskComponent {
-  
 
-  constructor(private taskService: TasksFirbaseService) {
-    
+  constructor(private taskService: TasksFirbaseService) { }
+
+  @Input() task!: Tasks;
+
+  getList() {
+    return this.taskService.tasks
   }
-
- getList(){
-  return this.taskService.tasks
- }
 
 }

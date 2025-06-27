@@ -22,10 +22,8 @@ export class TasksFirbaseService {
   subTasks() {
     return onSnapshot(this.getTasks(), (list) => {
       this.tasks = [];
-     list.forEach((element) => {
-       this.tasks.push(this.setTasksObject(element.data(), element.id));
-       console.log(this.tasks);
-       
+      list.forEach((element) => {
+        this.tasks.push(this.setTasksObject(element.data(), element.id));
       });
 
     });
@@ -35,10 +33,11 @@ export class TasksFirbaseService {
     return {
       id: id,
       assignedTo: obj.assignedTo || [],
-      category: obj.category || [],
+      category: obj.category || '',
       date: obj.date || Timestamp.now(),
-      descritpion: obj.descritpion || '',
-      priority: obj.priority || [],
+      description: obj.description || '',
+      priority: obj.priority || '',
+      status: obj.status || '',
       subtasks: obj.subtasks || [],
       title: obj.title || '',
     };
