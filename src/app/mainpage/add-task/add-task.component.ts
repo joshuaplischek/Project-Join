@@ -12,9 +12,13 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddTaskComponent {
   title: string = '';
-  date: number = 0;
+  date: Timestamp | null = null;
 
   clicked = false;
   titleTouched = false;
   dateTouched = false;
+
+
+
+  // timestamp = Timestamp.fromDate(new Date(dateString));
 }
