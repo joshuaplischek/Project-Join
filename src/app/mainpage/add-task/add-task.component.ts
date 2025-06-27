@@ -1,12 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
+  title: string = '';
+  date: number = 0;
 
+  clicked = false;
+  titleTouched = false;
+  dateTouched = false;
 }
