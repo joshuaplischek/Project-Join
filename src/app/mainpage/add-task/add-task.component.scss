@@ -157,6 +157,7 @@
       }
     }
   }
+
   .subtasks-wrapper {
     img {
       width: 15px;
@@ -212,9 +213,11 @@
     gap: 8px;
     align-items: center;
   }
+
   .placeholder {
     color: #D1D1D1;
   }
+
   .dropdown {
     position: absolute;
     top: 100%;
@@ -226,10 +229,11 @@
     border: 1px solid #D1D1D1;
     border-radius: 0 0 10px 10px;
     z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     margin-top: 2px;
     padding: 8px 0;
   }
+
   .dropdown-option {
     display: flex;
     align-items: center;
@@ -242,35 +246,14 @@
       background: #f5f5f5;
     }
 
-    .contact-initials {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 1rem;
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
-
     .contact-name {
       flex: 1;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 1rem;
-      color: #222;
       display: flex;
       align-items: center;
-      gap: 6px;
     }
 
     .checkbox-container {
-      margin-left: 12px;
       display: flex;
       align-items: center;
 
@@ -282,46 +265,29 @@
       }
     }
   }
-  .contact-initials {
-    display: inline-flex;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    color: white;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.9rem;
-    margin-right: 8px;
-  }
-  .contact-chip {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    background: #f0f0f0;
-    border-radius: 12px;
-    padding: 2px 8px;
-    font-size: 0.95em;
-  }
-  .group-letter {
-    font-weight: bold;
-    margin: 8px 0 4px 16px;
-    color: #888;
-  }
 
   .dropdown-option.selected {
-    background: #23397a;
-    color: #fff;
+    background: var(--accent-color-dark);
 
-    .contact-name,
-    .contact-initials {
+    .contact-name {
       color: #fff;
     }
   }
 }
 
+.contact-initials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  padding: 6px;
+}
+
 .selected-contacts-initials {
   display: flex;
   gap: 8px;
-  margin-top: 8px;
 }
