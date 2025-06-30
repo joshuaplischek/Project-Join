@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import {CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray, transferArrayItem,} from '@angular/cdk/drag-drop';
 import { CompactTaskComponent } from '../../shared/compact-task/compact-task.component';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { TasksFirbaseService } from '../../shared/services/tasks-firbase.service';
 import { Tasks } from '../../../interfaces/tasks';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -8,13 +9,16 @@ import { doc, updateDoc } from 'firebase/firestore';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CompactTaskComponent, DragDropModule, CdkDrag, CdkDropList],
+  imports: [CompactTaskComponent, TaskDetailComponent, DragDropModule, CdkDrag, CdkDropList],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
 export class BoardComponent {
   constructor(public taskService: TasksFirbaseService) {}
   @Input() selcetedTask: Tasks | null = null;
+
+  isTaskDetailVisible = false;
+  selectedTaskForDetail: Tasks | null = null;
 
   todo: Tasks[] = [];
 
@@ -82,4 +86,17 @@ private getStatusByArray(event: CdkDragDrop<Tasks[]>) {
   if (id.includes('done')) return 'done';
   return '';
 }
+
+  openTaskDetail(task: Tasks) {
+    this.selectedTaskForDetail = task;
+    this.isTaskDetailVisible = true;
+  }
+
+  closeTaskDetail() {
+    this.isTaskDetailVisible = false;
+    // Nach der Animation das selectedTask zurücksetzen
+    setTimeout(() => {
+      this.selectedTaskForDetail = null;
+    }, 300);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TasksFirbaseService } from '../services/tasks-firbase.service';
 import { Tasks } from '../../../interfaces/tasks';
@@ -15,6 +15,14 @@ export class CompactTaskComponent {
   constructor(private taskService: TasksFirbaseService) { }
 
   @Input() task!: Tasks;
+  @Output() taskClick = new EventEmitter<Tasks>();
+
+  onTaskClick(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.taskClick.emit(this.task);
+  }
 
   getList() {
     return this.taskService.tasks

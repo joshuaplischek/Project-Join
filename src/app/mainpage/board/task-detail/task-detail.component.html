@@ -1,0 +1,68 @@
+<div class="overlay" [ngClass]="{'visible': isVisible, 'hidden': !isVisible}" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="task-detail-container">
+      <div class="task-header">
+        <div class="category-badge" [ngClass]="task?.category?.toLowerCase()">
+          {{ task?.category }}
+        </div>
+        <div class="close-btn-wrapper" (click)="close()">
+          <img class="close-btn" src="/assets/images/contactform/cancel.svg" alt="close button">
+        </div>
+      </div>
+
+      <div class="task-content">
+        <h2 class="task-title">{{ task?.title }}</h2>
+        <p class="task-description">{{ task?.description }}</p>
+
+        <div class="task-meta">
+          <div class="meta-item">
+            <span class="meta-label">Due date:</span>
+            <span class="meta-value">{{ task?.date?.toDate() | date:'dd/MM/yyyy' }}</span>
+          </div>
+          
+          <div class="meta-item">
+            <span class="meta-label">Priority:</span>
+            <div class="priority-container">
+              <span class="meta-value priority-text">{{ task?.priority | titlecase }}</span>
+              <img [src]="getPriorityIcon()" alt="priority icon" class="priority-icon">
+            </div>
+          </div>
+        </div>
+
+        <div class="assigned-to-section" *ngIf="hasAssignedUsers">
+          <span class="section-label">Assigned To:</span>
+          <div class="assigned-users">
+            <div class="user-item" *ngFor="let user of assignedUsers">
+              <div class="user-badge">{{ user.substring(0, 2).toUpperCase() }}</div>
+              <span class="user-name">{{ user }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subtasks-section" *ngIf="hasSubtasks">
+          <span class="section-label">Subtasks</span>
+          <div class="subtasks-list">
+            <div class="subtask-item" *ngFor="let subtask of subtasks; let i = index" (click)="toggleSubtask(i)">
+              <div class="checkbox" [ngClass]="{'checked': subtask.done}">
+                <img *ngIf="subtask.done" src="/assets/images/icons/icon-check.svg" alt="checked">
+              </div>
+              <span class="subtask-text" [ngClass]="{'completed': subtask.done}">{{ subtask.title }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-actions">
+          <button class="action-btn delete-btn" (click)="deleteTask()">
+            <img src="/assets/images/icons/icon-delete.svg" alt="delete icon">
+            <span>Delete</span>
+          </button>
+          <div class="divider"></div>
+          <button class="action-btn edit-btn" (click)="editTask()">
+            <img src="/assets/images/icons/icon-edit.svg" alt="edit icon">
+            <span>Edit</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
