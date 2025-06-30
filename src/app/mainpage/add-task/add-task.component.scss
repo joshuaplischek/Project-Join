@@ -161,7 +161,6 @@
   .subtasks-wrapper {
     img {
       width: 15px;
-
     }
 
     .focus-subtasks-input {
@@ -210,8 +209,8 @@
   .selected {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
     align-items: center;
+    justify-content: space-between;
   }
 
   .placeholder {

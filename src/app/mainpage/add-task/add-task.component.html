@@ -39,18 +39,17 @@
               src="/assets/images/board/prio-low.svg" alt=""></button>
         </div>
       </div>
+
       <div class="assignedTo-wrapper">
-        <label>Assigned to</label>
-        <div class="custom-select" tabindex="0" (blur)="dropdownOpen = false">
-          <div class="selected" (click)="dropdownOpen = !dropdownOpen">
-            @if (selectedContacts.length === 0) {
-            <span class="placeholder">Select contacts to assign</span>
-            }
-            @if (selectedContacts.length > 0) {
+        <p>Assigned to</p>
+
+        <div class="custom-select" tabindex="0" (blur)="contactDropDownOpen = false">
+          <div class="selected" (click)="contactDropDownOpen = !contactDropDownOpen">
             <span>Select contacts to assign</span>
-            }
+            <img src="/assets/images/board/arrow_drop_down.svg" alt="">
+
           </div>
-          @if (dropdownOpen) {
+          @if (contactDropDownOpen) {
           <div class="dropdown" (mousedown)="$event.preventDefault()">
             @for (group of contactlist.getGroupedContacts(); track group.letter) {
             <div class="group">
@@ -74,7 +73,7 @@
           }
         </div>
         <!-- Hier die Initialen der ausgewählten Kontakte unter dem Input anzeigen -->
-                @if (selectedContacts.length > 0) {
+        @if (selectedContacts.length > 0) {
         <div class="selected-contacts-initials">
           @for (contact of selectedContacts; track contact.id) {
           <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
@@ -82,16 +81,30 @@
           </span>
           }
         </div>
-      }
+        }
       </div>
+
       <div class="category-wrapper">
-        <label for="category">Category<span class="warning">*</span></label>
-        <select name="category" id="category">
-          <option value="">Select task category</option>
-          <option value="technicalTask">Technical Task</option>
-          <option value="userStory">User Story</option>
-        </select>
+        <p>Category<span class="warning">*</span></p>
+        <div class="custom-select" tabindex="0" (blur)="categoryDropDownOpen = false">
+          <div class="selected" (click)="categoryDropDownOpen = !categoryDropDownOpen">
+            @if (!selectedCategory) {
+            <span>Select task category</span>
+            }
+            @if (selectedCategory) {
+            <span>{{ selectedCategory }}</span>
+            }
+            <img src="/assets/images/board/arrow_drop_down.svg" alt="">
+          </div>
+          @if (categoryDropDownOpen) {
+          <div class="dropdown" (mousedown)="$event.preventDefault()">
+            <div (click)="selectedCategory = 'Technical Task'; categoryDropDownOpen = false">Technical Task</div>
+            <div (click)="selectedCategory = 'User Story'; categoryDropDownOpen = false">User Story</div>
+          </div>
+          }
+        </div>
       </div>
+
       <div class="subtasks-wrapper">
         <label for="subtasks">Subtasks<span class="warning">*</span></label>
         <div class="input-wrapper">

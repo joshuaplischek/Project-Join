@@ -22,9 +22,12 @@ export class AddTaskComponent {
   date: Timestamp | null = null;
   titleTouched = false;
   dateTouched = false;
-  dropdownOpen = false;
+    selectedPrio: string = '';
+  contactDropDownOpen = false;
   selectedContacts: Contactlist[] = [];
-  selectedPrio: string = '';
+    categoryDropDownOpen = false;
+    selectedCategory: string = '';
+
 
 get allContacts() {
   return this.contactlist.contacts;
