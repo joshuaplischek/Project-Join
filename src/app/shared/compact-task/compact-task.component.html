@@ -20,8 +20,7 @@
         <div class="user-badge3 badge">EF</div>
       </div>
 
-      <!-- <p class="card-prio">{{task.priority}}</p> -->
-      <img class="card-prio" src="/assets/images/board/prio-urgent.svg" alt="prio icon">
+      <img class="card-prio" [src]="getPriorityIcon()" alt="priority icon">
     </div>
   </div>
 </div>
