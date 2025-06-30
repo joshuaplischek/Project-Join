@@ -49,6 +49,23 @@ export class FirebaseService {
     }
   }
 
+  getGroupedContacts() {
+  const grouped: Record<string, Contactlist[]> = {};
+
+  for (const contact of this.contacts) {
+    if (contact.firstName && contact.firstName.length > 0) {
+      const letter = contact.firstName[0].toUpperCase();
+      grouped[letter] ??= [];
+      grouped[letter].push(contact);
+    }
+  }
+
+  return Object.keys(grouped)
+    .sort()
+    .map((letter) => ({ letter, contacts: grouped[letter] }));
+}
+  
+
   getContacts() {
     return collection(this.firestore, 'contactlist');
   }

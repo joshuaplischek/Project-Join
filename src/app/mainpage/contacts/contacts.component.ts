@@ -55,21 +55,9 @@ export class ContactsComponent implements OnInit {
     this.isMobile = window.innerWidth < 768;
   }
 
-  get groupedContacts() {
-    const grouped: Record<string, Contactlist[]> = {};
-
-    for (const contact of this.contactlist.contacts) {
-      if (contact.firstName && contact.firstName.length > 0) {
-        const letter = contact.firstName[0].toUpperCase();
-        grouped[letter] ??= [];
-        grouped[letter].push(contact);
-      }
-    }
-
-    return Object.keys(grouped)
-      .sort()
-      .map((letter) => ({ letter, contacts: grouped[letter] }));
-  }
+get groupedContacts() {
+  return this.contactlist.getGroupedContacts();
+}
 
   getColorForLetter(letter: string): string {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
