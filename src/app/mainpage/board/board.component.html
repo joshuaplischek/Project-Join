@@ -23,7 +23,7 @@
       </div>
       <div class="tasks">
         @for (task of todoTasks; track task.id) {
-        <app-compact-task [task]="task"></app-compact-task>
+        <app-compact-task draggable="true" (dragstart)="startDragging(task.id)" [task]="task"></app-compact-task>
         }
       </div>
       <div class="empty-list" [class.disabled]="todoTasks.length > 0">
@@ -37,7 +37,7 @@
       </div>
       <div class="tasks">
         @for (task of inProgressTasks; track task.id) {
-        <app-compact-task [task]="task"></app-compact-task>
+        <app-compact-task draggable="true" (dragstart)="startDragging(task.id)" [task]="task"></app-compact-task>
         }
       </div>
       <div class="empty-list" [class.disabled]="inProgressTasks.length > 0">
@@ -51,7 +51,7 @@
       </div>
       <div class="tasks">
         @for (task of awaitFeedbackTasks; track task.id) {
-        <app-compact-task [task]="task"></app-compact-task>
+        <app-compact-task draggable="true" (dragstart)="startDragging(task.id)" [task]="task"></app-compact-task>
         }
       </div>
       <div class="empty-list" [class.disabled]="awaitFeedbackTasks.length > 0">
@@ -64,7 +64,7 @@
       </div>
       <div class="tasks">
         @for (task of doneTasks; track task.id) {
-        <app-compact-task [task]="task"></app-compact-task>
+        <app-compact-task draggable="true" (dragstart)="startDragging(task.id)" [task]="task"></app-compact-task>
         }
       </div>
       <div class="empty-list" [class.disabled]="doneTasks.length > 0">

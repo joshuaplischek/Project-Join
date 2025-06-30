@@ -12,6 +12,8 @@ import { TasksFirbaseService } from '../../shared/services/tasks-firbase.service
 export class BoardComponent {
   constructor(public taskService: TasksFirbaseService) { }
 
+  dragElement: string | undefined;
+
   get todoTasks() {
     return this.taskService.tasks.filter(task => task.status === 'todo');
   }
@@ -27,5 +29,12 @@ export class BoardComponent {
   get doneTasks() {
     return this.taskService.tasks.filter(task => task.status === 'done');
   }
+
+  startDragging(taskId: any) {
+   this.dragElement = taskId;
+
+  }
+
+
 
 }
