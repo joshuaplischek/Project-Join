@@ -30,20 +30,48 @@
     <div class="taskOptions">
       <div class="prio-wrapper">
         <p>Priority</p>
-        <!-- clicked abfrage für urgent, medium,low klasse -->
         <div class="prio-btn-container">
-          <button class="urgent">Urgent <img src="/assets/images/board/prio-urgent.svg" alt=""></button>
-          <button class="medium">Medium <img src="/assets/images/board/prio-medium.svg" alt=""></button>
-          <button class="low">Low <img src="/assets/images/board/prio-low.svg" alt=""></button>
+          <button class="urgent" [ngClass]="{'active': selectedPrio === 'urgent'}" (click)="selectPrio('urgent')">Urgent <img src="/assets/images/board/prio-urgent.svg" alt=""></button>
+          <button class="medium" [ngClass]="{'active': selectedPrio === 'medium'}" (click)="selectPrio('medium')">Medium <img src="/assets/images/board/prio-medium.svg" alt=""></button>
+          <button class="low" [ngClass]="{'active': selectedPrio == 'low'}" (click)="selectPrio('low')">Low <img src="/assets/images/board/prio-low.svg" alt=""></button>
         </div>
       </div>
       <div class="assignedTo-wrapper">
-        <label for="assignedTo">Assigned to</label>
-        <select name="assignedTo" id="assignedTo">
-          <option value="">Select contacts to assign</option>
-          <option value="">Kontak1</option>
-          <option value="">Kontak1</option>
-        </select>
+        <label>Assigned to</label>
+        <div class="custom-select" tabindex="0" (blur)="dropdownOpen = false">
+          <div class="selected" (click)="dropdownOpen = !dropdownOpen">
+            <span class="placeholder" *ngIf="selectedContacts.length === 0">Select contacts to assign</span>
+            <span *ngIf="selectedContacts.length > 0">Select contacts to assign</span>
+          </div>
+          @if (dropdownOpen) {
+            <div class="dropdown" (mousedown)="$event.preventDefault()">
+              @for (group of contactlist.getGroupedContacts(); track group.letter) {
+                <div class="group">
+                  @for (contact of group.contacts; track contact.id) {
+                    <label class="dropdown-option">
+                      <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
+                        {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
+                      </span>
+                      {{ contact.firstName }} {{ contact.lastName }}
+                      <input type="checkbox"
+                             [checked]="isSelected(contact)"
+                             (click)="$event.stopPropagation()"
+                             (change)="toggleContact(contact)">
+                    </label>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+        <!-- Hier die Initialen der ausgewählten Kontakte unter dem Input anzeigen -->
+        <div class="selected-contacts-initials" *ngIf="selectedContacts.length > 0">
+          @for (contact of selectedContacts; track contact.id) {
+            <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
+              {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
+            </span>
+          }
+        </div>
       </div>
       <div class="category-wrapper">
         <label for="category">Category<span class="warning">*</span></label>
@@ -55,8 +83,15 @@
       </div>
       <div class="subtasks-wrapper">
         <label for="subtasks">Subtasks<span class="warning">*</span></label>
-        <input type="text" placeholder="Add new subtask">
-        <img src="/assets/images/board/add.svg" alt="">
+        <div class="input-wrapper">
+          <input id="subtasks" type="text" placeholder="Add new subtask">
+          <img src="/assets/images/board/add.svg" alt="">
+          <div class="focus-subtasks-input">
+            <img class="close" src="/assets/images/board/close.svg" alt="close button">
+            <div class="border"></div>
+            <img class="check" src="/assets/images/board/check.svg" alt="check button">
+          </div>
+        </div>
       </div>
     </div>
   </section>
