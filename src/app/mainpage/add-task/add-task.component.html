@@ -48,15 +48,20 @@
               @for (group of contactlist.getGroupedContacts(); track group.letter) {
                 <div class="group">
                   @for (contact of group.contacts; track contact.id) {
-                    <label class="dropdown-option">
+                    <!-- Hier die Initialen der ausgewählten Kontakte unter dem Input anzeigen -->
+                    <label class="dropdown-option"
+                    [class.selected]="isSelected(contact)"(click)="toggleContact(contact)">
                       <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
                         {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
                       </span>
-                      {{ contact.firstName }} {{ contact.lastName }}
-                      <input type="checkbox"
-                             [checked]="isSelected(contact)"
-                             (click)="$event.stopPropagation()"
-                             (change)="toggleContact(contact)">
+                      <span class="contact-name">
+                        {{ contact.firstName }} {{ contact.lastName }}
+                      </span>
+                      <span class="checkbox-container" (click)="$event.stopPropagation()">
+                        <input type="checkbox"
+                               [checked]="isSelected(contact)"
+                               (change)="toggleContact(contact)">
+                      </span>
                     </label>
                   }
                 </div>
