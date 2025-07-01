@@ -1,9 +1,14 @@
+app-compact-task {
+  border-radius: 24px;
+}
+
 .board-wrapper {
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 5rem);
+  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem)
+    clamp(1rem, 4vw, 5rem);
 
   @media (max-width: 1200px) {
     padding: 2rem 4vw 1rem 2vw;
@@ -58,21 +63,21 @@
         transform: translateY(-50%);
         width: 1px;
         height: 25px;
-        background-color: #D1D1D1;
+        background-color: #d1d1d1;
       }
 
       input {
         width: 100%;
         padding: clamp(8px, 2vw, 12px);
         font-size: clamp(0.75rem, 1.5vw, 1rem);
-        border: 1px solid #D1D1D1;
+        border: 1px solid #d1d1d1;
         background-color: white;
         border-radius: 10px;
         cursor: pointer;
         transition: all 0.3s ease;
 
         &::placeholder {
-          color: #D1D1D1;
+          color: #d1d1d1;
         }
 
         &:focus {
@@ -109,10 +114,9 @@
     justify-content: space-between;
     align-items: center;
     gap: 35px;
-    color: #42526E;
-    font-family: 'mainFontBold';
+    color: #42526e;
+    font-family: "mainFontBold";
     margin-bottom: 1.5rem;
-
 
     .addTaskToListBtn {
       display: flex;
@@ -123,7 +127,7 @@
       gap: 10px;
       width: 24px;
       height: 24px;
-      border: 2px solid #2A3647;
+      border: 2px solid #2a3647;
       border-radius: 8px;
     }
   }
@@ -146,9 +150,9 @@
   gap: 10px;
   padding: 0.5rem 1rem;
   width: 100%;
-  color: #A8A8A8;
-  background: #E7E7E7;
-  border: 1px dashed #A8A8A8;
+  color: #a8a8a8;
+  background: #e7e7e7;
+  border: 1px dashed #a8a8a8;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
   border-radius: 10px;
 
@@ -160,4 +164,27 @@
 
 label {
   display: none;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 24px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  transform: rotate(10deg);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
