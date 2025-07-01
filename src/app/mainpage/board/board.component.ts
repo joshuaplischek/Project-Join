@@ -28,28 +28,33 @@ export class BoardComponent {
 
   done: Tasks[] = [];
 
-  get todoTasks() {
-    this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
-    return this.todo;
+ngOnInit() {
+  this.taskService.tasksChanged.subscribe(() => {
+    this.updateArrays(); 
+  });
+}
+
+updateArrays() {
+  this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
+  this.inprogress = this.taskService.tasks.filter((task) => task.status === 'inprogress');
+  this.awaitfeedback = this.taskService.tasks.filter((task) => task.status === 'awaitfeedback');
+  this.done = this.taskService.tasks.filter((task) => task.status === 'done');
+}
+
+get todoTasks(): Tasks[] {
+  return this.taskService.tasks.filter((task) => task.status === 'todo');
+}
+
+  get inProgressTasks(): Tasks[]  {
+    return this.taskService.tasks.filter((task) => task.status === 'inprogress');
   }
 
-  get inProgressTasks() {
-    this.inprogress = this.taskService.tasks.filter(
-      (task) => task.status === 'inprogress'
-    );
-    return this.inprogress;
+  get awaitFeedbackTasks(): Tasks[]  {
+    return this.taskService.tasks.filter((task) => task.status === 'awaitfeedback');
   }
 
-  get awaitFeedbackTasks() {
-    this.awaitfeedback = this.taskService.tasks.filter(
-      (task) => task.status === 'awaitfeedback'
-    );
-    return this.awaitfeedback;
-  }
-
-  get doneTasks() {
-    this.done = this.taskService.tasks.filter((task) => task.status === 'done');
-    return this.done;
+  get doneTasks(): Tasks[]  {
+    return this.taskService.tasks.filter((task) => task.status === 'done');
   }
 
   drop(event: CdkDragDrop<Tasks[]>) {
@@ -75,6 +80,7 @@ export class BoardComponent {
         this.taskService.updateTaskStatus(movedTask.id, { status: newStatus });
       }
     }
+     this.updateArrays();
     }
   }
 

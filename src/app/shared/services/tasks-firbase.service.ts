@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import {collection, doc, Firestore, onSnapshot, Timestamp, updateDoc,} from '@angular/fire/firestore';
 import { Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ export class TasksFirbaseService {
   firestore: Firestore = inject(Firestore);
   tasks: Tasks[] = [];
   unsubscribe;
+  tasksChanged = new Subject<void>();
 
   constructor() {
     this.unsubscribe = this.subTasks();
@@ -25,10 +27,12 @@ export class TasksFirbaseService {
 
   subTasks() {
     return onSnapshot(this.getTasks(), (list) => {
-      this.tasks = [];
+    const newTasks: Tasks[] = [];
       list.forEach((element) => {
-        this.tasks.push(this.setTasksObject(element.data(), element.id));
+        newTasks.push(this.setTasksObject(element.data(), element.id));
       });
+          this.tasks = newTasks;
+          this.tasksChanged.next();
     });
   }
 
