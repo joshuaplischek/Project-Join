@@ -6,11 +6,11 @@
       <div class="title-field">
         <label for="titleInput">Title<span class="warning">*</span></label>
         <input [(ngModel)]="title" type="text" placeholder="Enter a title" (blur)="titleTouched= true" />
-        <div class="input-hint">@if (!title && titleTouched) {
+        <div class="input-hint">
+          @if (!title && titleTouched) {
           <span role="alert">Please enter a title</span>}
         </div>
       </div>
-
       <div class="description-field">
         <label for="description">Description</label>
         <textarea rows="5" name="description" id="description" placeholder="Enter a Description"></textarea>
@@ -21,12 +21,15 @@
           <input [(ngModel)]="date" type="text" placeholder="dd/mm/yyyy" (blur)="dateTouched">
           <img src="/assets/images/board/calender.svg" alt="calender icons">
         </div>
-        <div class="input-hint">@if (!date && dateTouched) {
-          <span role="alert">Please enter a valid email address</span>}
+        <div class="input-hint">
+          @if (!date && dateTouched) {
+          <span role="alert">Please enter a valid date</span>}
         </div>
       </div>
     </div>
+
     <div class="border"></div>
+    
     <div class="taskOptions">
       <div class="prio-wrapper">
         <p>Priority</p>
@@ -42,19 +45,16 @@
 
       <div class="assignedTo-wrapper">
         <p>Assigned to</p>
-
         <div class="custom-select" tabindex="0" (blur)="contactDropDownOpen = false">
           <div class="selected" (click)="contactDropDownOpen = !contactDropDownOpen">
             <span>Select contacts to assign</span>
             <img src="/assets/images/board/arrow_drop_down.svg" alt="">
-
           </div>
           @if (contactDropDownOpen) {
           <div class="dropdown" (mousedown)="$event.preventDefault()">
             @for (group of contactlist.getGroupedContacts(); track group.letter) {
             <div class="group">
               @for (contact of group.contacts; track contact.id) {
-              <!-- Hier die Initialen der ausgewählten Kontakte unter dem Input anzeigen -->
               <label class="dropdown-option" [class.selected]="isSelected(contact)" (click)="toggleContact(contact)">
                 <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
                   {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}

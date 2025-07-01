@@ -63,12 +63,12 @@
           </div>
         </div>
         <div class="form-buttons">
-          <button class="buttonOne" (click)="buttonOneClick.emit()">
+          <button class="buttonOne button-white-border" (click)="buttonOneClick.emit()">
             <span>{{buttonOne}}</span>
             <img src="/assets/images/contactform/cancel.svg" alt="cancel icon">
           </button>
 
-          <button class="buttonTwo" (click)="buttonTwoClick.emit({firstName, lastName, email, phone})" type="submit"
+          <button class="buttonTwo button-blue" (click)="buttonTwoClick.emit({firstName, lastName, email, phone})" type="submit"
             [disabled]="!firstName || !lastName || !email || !phone || !isValidEmail()">
             <span>{{buttonTwo}}</span>
             <img src="/assets/images/contactform/check.svg" alt="check icon">
