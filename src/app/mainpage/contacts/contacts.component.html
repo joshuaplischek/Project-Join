@@ -3,6 +3,7 @@
     (closeModal)="closeEditContactForm()" (contactDeleted)="deleteContact()" (contactUpdated)="updateContact()">
   </app-edit-contact>
 
+  <!-- TODO Slide in/Slide out Animation -->
   @if (!isMobile || (isMobile && !isOpen)){
   <div class="contactlist-container">
     <button class="button-blue" (click)="openAddContactForm()">
