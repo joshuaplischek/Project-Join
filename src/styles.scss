@@ -1,3 +1,5 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 :root {
   --nav-bg-color: #2a3647;
   --nav-bg-hover: #2a3d59;
@@ -46,7 +48,6 @@ body {
 }
 
 @media (max-width: 1024px) {
-
   html,
   body {
     overflow: hidden;
