@@ -1,5 +1,12 @@
 import { Component, Input } from '@angular/core';
-import {CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray, transferArrayItem,} from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { CompactTaskComponent } from '../../shared/compact-task/compact-task.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { TasksFirbaseService } from '../../shared/services/tasks-firbase.service';
@@ -9,7 +16,13 @@ import { doc, updateDoc } from 'firebase/firestore';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CompactTaskComponent, TaskDetailComponent, DragDropModule, CdkDrag, CdkDropList],
+  imports: [
+    CompactTaskComponent,
+    TaskDetailComponent,
+    DragDropModule,
+    CdkDrag,
+    CdkDropList,
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -28,32 +41,40 @@ export class BoardComponent {
 
   done: Tasks[] = [];
 
-ngOnInit() {
-  this.taskService.tasksChanged.subscribe(() => {
-    this.updateArrays(); 
-  });
-}
-
-updateArrays() {
-  this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
-  this.inprogress = this.taskService.tasks.filter((task) => task.status === 'inprogress');
-  this.awaitfeedback = this.taskService.tasks.filter((task) => task.status === 'awaitfeedback');
-  this.done = this.taskService.tasks.filter((task) => task.status === 'done');
-}
-
-get todoTasks(): Tasks[] {
-  return this.taskService.tasks.filter((task) => task.status === 'todo');
-}
-
-  get inProgressTasks(): Tasks[]  {
-    return this.taskService.tasks.filter((task) => task.status === 'inprogress');
+  ngOnInit() {
+    this.taskService.tasksChanged.subscribe(() => {
+      this.updateArrays();
+    });
   }
 
-  get awaitFeedbackTasks(): Tasks[]  {
-    return this.taskService.tasks.filter((task) => task.status === 'awaitfeedback');
+  updateArrays() {
+    this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
+    this.inprogress = this.taskService.tasks.filter(
+      (task) => task.status === 'inprogress'
+    );
+    this.awaitfeedback = this.taskService.tasks.filter(
+      (task) => task.status === 'awaitfeedback'
+    );
+    this.done = this.taskService.tasks.filter((task) => task.status === 'done');
   }
 
-  get doneTasks(): Tasks[]  {
+  get todoTasks(): Tasks[] {
+    return this.taskService.tasks.filter((task) => task.status === 'todo');
+  }
+
+  get inProgressTasks(): Tasks[] {
+    return this.taskService.tasks.filter(
+      (task) => task.status === 'inprogress'
+    );
+  }
+
+  get awaitFeedbackTasks(): Tasks[] {
+    return this.taskService.tasks.filter(
+      (task) => task.status === 'awaitfeedback'
+    );
+  }
+
+  get doneTasks(): Tasks[] {
     return this.taskService.tasks.filter((task) => task.status === 'done');
   }
 
@@ -72,26 +93,28 @@ get todoTasks(): Tasks[] {
         event.currentIndex
       );
 
-    const movedTask = event.container.data[event.currentIndex];
-    const newStatus = this.getStatusByArray(event);
-    if (movedTask && newStatus) {
-      movedTask.status = newStatus;
-      if (typeof movedTask.id === 'string') {
-        this.taskService.updateTaskStatus(movedTask.id, { status: newStatus });
+      const movedTask = event.container.data[event.currentIndex];
+      const newStatus = this.getStatusByArray(event);
+      if (movedTask && newStatus) {
+        movedTask.status = newStatus;
+        if (typeof movedTask.id === 'string') {
+          this.taskService.updateTaskStatus(movedTask.id, {
+            status: newStatus,
+          });
+        }
       }
-    }
-     this.updateArrays();
+      this.updateArrays();
     }
   }
 
-private getStatusByArray(event: CdkDragDrop<Tasks[]>) {
-  const id = (event.container.id as string);
-  if (id.includes('todo')) return 'todo';
-  if (id.includes('inprogress')) return 'inprogress';
-  if (id.includes('awaitfeedback')) return 'awaitfeedback';
-  if (id.includes('done')) return 'done';
-  return '';
-}
+  private getStatusByArray(event: CdkDragDrop<Tasks[]>) {
+    const id = event.container.id as string;
+    if (id.includes('todo')) return 'todo';
+    if (id.includes('inprogress')) return 'inprogress';
+    if (id.includes('awaitfeedback')) return 'awaitfeedback';
+    if (id.includes('done')) return 'done';
+    return '';
+  }
 
   openTaskDetail(task: Tasks) {
     this.selectedTaskForDetail = task;
