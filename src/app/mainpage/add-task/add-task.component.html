@@ -21,7 +21,7 @@
       <div class="date-field">
         <label for="dateInput">Due date<span class="warning">*</span></label>
         <div class="input-wrapper" style="position: relative;">
-          <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" placeholder="dd/mm/yyyy"
+          <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minDate" placeholder="dd/mm/yyyy"
             (blur)="dateTouched = true" (focus)="picker.open()">
           <mat-datepicker-toggle matSuffix [for]="picker">
             <img matDatepickerToggleIcon src="/assets/images/board/calender.svg" alt="calender icon">
