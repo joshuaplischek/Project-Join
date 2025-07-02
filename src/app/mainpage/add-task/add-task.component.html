@@ -123,12 +123,12 @@
       <div class="subtasks-wrapper">
         <label for="subtasks">Subtasks</label>
         <div class="input-wrapper">
-          <input id="subtasks" type="text" placeholder="Add new subtask">
+          <input [(ngModel)]="newSubtask" id="subtasks" type="text" placeholder="Add new subtask">
           <img src="/assets/images/board/add.svg" alt="">
           <div class="focus-subtasks-input">
             <img class="close" src="/assets/images/board/close.svg" alt="close button">
             <div class="border"></div>
-            <img class="check" src="/assets/images/board/check.svg" alt="check button">
+            <img (click)="addSubtask()" class="check" src="/assets/images/board/check.svg" alt="check button">
           </div>
         </div>
       </div>
@@ -142,10 +142,19 @@
         <span>Clear</span>
         <img src="/assets/images/icons/icon-cancel.svg" alt="clear task">
       </button>
-      <button class="button-blue" [disabled]="!title || !date || !category">
-        <span>Create Task</span>
-        <img src="/assets/images/icons/icon-check.svg" alt="create task">
-      </button>
+<button 
+  (click)="addTaskToDBViaTemplateClick()" 
+  class="button-blue" 
+  [disabled]="!title || !date || !category">
+  <span>Create Task</span>
+  <img src="/assets/images/icons/icon-check.svg" alt="create task">
+</button>
     </div>
   </section>
+
+    @if(showSuccessMessage){
+  <div class="success-message-container">
+    {{successMessage}}
+  </div>
+  }
 </section>

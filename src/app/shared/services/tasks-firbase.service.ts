@@ -1,5 +1,14 @@
 import { inject, Injectable } from '@angular/core';
-import {collection, doc, Firestore, onSnapshot, Timestamp, updateDoc,} from '@angular/fire/firestore';
+import { 
+  Firestore, 
+  collection, 
+  addDoc, 
+  doc, 
+  updateDoc, 
+  onSnapshot,
+  Timestamp,
+  serverTimestamp 
+} from '@angular/fire/firestore';  // Alle Imports aus @angular/fire/firestore
 import { Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
 import { Subject } from 'rxjs';
 
@@ -37,11 +46,21 @@ export class TasksFirbaseService {
   }
 
   setTasksObject(obj: TasksFirestoreData, id: string): Tasks {
+    // Datum-Konvertierung vor der Objekterstellung
+    let dateValue: Timestamp;
+    if (obj.date instanceof Date) {
+      dateValue = Timestamp.fromDate(obj.date);
+    } else if (obj.date instanceof Timestamp) {
+      dateValue = obj.date;
+    } else {
+      dateValue = Timestamp.now();
+    }
+
     return {
       id: id,
       assignedTo: obj.assignedTo || [],
       category: obj.category || '',
-      date: obj.date || Timestamp.now(),
+      date: dateValue,
       description: obj.description || '',
       priority: obj.priority || '',
       status: obj.status || '',
@@ -49,6 +68,37 @@ export class TasksFirbaseService {
       title: obj.title || '',
     };
   }
+
+  
+
+async addTask(formData: TasksFirestoreData) {
+  try {
+    const tasksCollection = this.getTasks();
+    // Datum korrekt konvertieren
+    let dateTimestamp: Timestamp;
+    if (formData.date instanceof Date) {
+      dateTimestamp = Timestamp.fromDate(formData.date);
+    } else if (formData.date instanceof Timestamp) {
+      dateTimestamp = formData.date;
+    } else {
+      dateTimestamp = Timestamp.now();
+    }
+
+    const taskData = {
+      ...formData,
+      status: 'todo',
+      date: dateTimestamp
+    };
+
+    const docRef = await addDoc(tasksCollection, taskData);
+    console.log('Task erfolgreich hinzugefügt, ID:', docRef.id);
+    this.tasksChanged.next();
+    return docRef.id;
+  } catch (error) {
+    console.error('Fehler beim Hinzufügen des Tasks:', error);
+    throw error;
+  }
+}
 
   ngOnDestroy() {
     this.unsubscribe();
