@@ -88,12 +88,21 @@ export class AddTaskComponent {
     }
   }
 
-  addSubtask() {
-    if (this.newSubtask.trim()) {
-      this.subtasks.push(this.newSubtask.trim());
-      this.newSubtask = '';
-    }
+addSubtask() {
+  if (this.newSubtask.trim()) {
+    this.subtasks.push(this.newSubtask.trim());
+    this.newSubtask = ''; // Input leeren nach Hinzufügen
   }
+}
+
+clearSubtaskInput() {
+  this.newSubtask = '';
+}
+
+removeSubtask(index: number) {
+  this.subtasks.splice(index, 1);
+}
+
   async addTaskToDBViaTemplateClick() {
     const processedFormData: TasksFirestoreData = {
       title: this.title,
@@ -103,20 +112,20 @@ export class AddTaskComponent {
         (c) => `${c.firstName} ${c.lastName}`
       ),
       date: this.date instanceof Date ? this.date : new Date(this.date),
-      priority: this.selectedPrio || 'medium', // Fallback falls keine Priorität gesetzt
+      priority: this.selectedPrio || 'medium',
       subtasks: this.subtasks.map((title) => ({ title, done: false })),
       status: 'todo',
     };
 
     try {
-      await this.addTaskToDB(processedFormData); // Warte auf die async Operation
+      await this.addTaskToDB(processedFormData);
       this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
+      console.log(processedFormData)
       this.clearForm();
       setTimeout(() => {
         this.router.navigate(['/board']);
-      }, 2000);
+      }, 1500);
     } catch (error) {
-      console.error('Fehler beim Hinzufügen des Tasks:', error);
       this.showSuccessMessageBox('Fehler beim Hinzufügen des Tasks!');
     }
   }
@@ -125,7 +134,6 @@ export class AddTaskComponent {
     try {
       await this.taskService.addTask(formData);
     } catch (error) {
-      console.error('Fehler in addTaskToDB:', error);
       throw error;
     }
   }
@@ -135,7 +143,7 @@ export class AddTaskComponent {
     this.showSuccessMessage = true;
     setTimeout(() => {
       this.showSuccessMessage = false;
-    }, 2000);
+    }, 1500);
   }
 
   clearForm() {
