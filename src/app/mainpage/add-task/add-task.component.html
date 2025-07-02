@@ -14,7 +14,8 @@
       </div>
       <div class="description-field">
         <label for="description">Description</label>
-        <textarea [(ngModel)]="description" rows="5" name="description" id="description" placeholder="Enter a Description"></textarea>
+        <textarea [(ngModel)]="description" rows="5" name="description" id="description"
+          placeholder="Enter a Description"></textarea>
       </div>
 
       <div class="date-field">
@@ -119,7 +120,6 @@
         </div>
       </div>
 
-
       <div class="subtasks-wrapper">
         <label for="subtasks">Subtasks</label>
         <div class="input-wrapper">
@@ -142,17 +142,14 @@
         <span>Clear</span>
         <img src="/assets/images/icons/icon-cancel.svg" alt="clear task">
       </button>
-<button 
-  (click)="addTaskToDBViaTemplateClick()" 
-  class="button-blue" 
-  [disabled]="!title || !date || !category">
-  <span>Create Task</span>
-  <img src="/assets/images/icons/icon-check.svg" alt="create task">
-</button>
+      <button (click)="addTaskToDBViaTemplateClick()" class="button-blue" [disabled]="!title || !date || !category">
+        <span>Create Task</span>
+        <img src="/assets/images/icons/icon-check.svg" alt="create task">
+      </button>
     </div>
   </section>
 
-    @if(showSuccessMessage){
+  @if(showSuccessMessage){
   <div class="success-message-container">
     {{successMessage}}
   </div>
