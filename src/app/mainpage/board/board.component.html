@@ -22,7 +22,7 @@
       </div>
       <div id="todo" cdkDropList #toDoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[inProgressList, awaitFeedbackList, doneList]" (cdkDropListDropped)="drop($event)" class="tasks">
         @for (task of todoTasks; track task.id) {
-          <div cdkDrag>
+          <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
             <div class="custom-placeholder" *cdkDragPlaceholder></div>
             <app-compact-task  [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
           </div>
@@ -40,7 +40,7 @@
       </div>
       <div id="inprogress" cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="inprogress" [cdkDropListConnectedTo]="[toDoList, awaitFeedbackList, doneList]" (cdkDropListDropped)="drop($event)" class="tasks">
         @for (task of inprogress; track task.id) {
-          <div cdkDrag>
+          <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
             <div class="custom-placeholder" *cdkDragPlaceholder></div>
             <app-compact-task  [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
           </div>
@@ -57,7 +57,7 @@
       </div>
       <div id="awaitfeedback" cdkDropList #awaitFeedbackList="cdkDropList" [cdkDropListData]="awaitfeedback" [cdkDropListConnectedTo]="[toDoList, inProgressList, doneList]" (cdkDropListDropped)="drop($event)" class="tasks">
         @for (task of awaitfeedback; track task.id) {
-          <div cdkDrag>
+          <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
             <div class="custom-placeholder" *cdkDragPlaceholder></div>
             <app-compact-task  [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
           </div>
@@ -73,7 +73,7 @@
       </div>
       <div id="done" cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[toDoList, inProgressList, awaitFeedbackList]" (cdkDropListDropped)="drop($event)" class="tasks">
         @for (task of done; track task.id) {
-          <div cdkDrag>
+          <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
             <div class="custom-placeholder" *cdkDragPlaceholder></div>
             <app-compact-task  [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
           </div>
