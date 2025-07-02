@@ -26,7 +26,7 @@ export class AddTaskComponent {
     public contactlist: FirebaseService,
     public taskService: TasksFirbaseService,
     private router: Router
-  ) {}
+  ) {this.minDate.setHours(0, 0, 0, 0);}
 
   title: string = '';
   description: string = '';
@@ -47,6 +47,7 @@ export class AddTaskComponent {
   selectedContacts: Contactlist[] = [];
   filteredContacts: Contactlist[] = [];
   subtasks: string[] = [];
+  minDate: Date = new Date();
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
@@ -88,10 +89,16 @@ export class AddTaskComponent {
     }
   }
 
+  validateDate(date: Date): boolean {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date >= today;
+}
+
 addSubtask() {
   if (this.newSubtask.trim()) {
     this.subtasks.push(this.newSubtask.trim());
-    this.newSubtask = ''; // Input leeren nach Hinzufügen
+    this.newSubtask = '';
   }
 }
 
@@ -103,7 +110,12 @@ removeSubtask(index: number) {
   this.subtasks.splice(index, 1);
 }
 
+// TODO: FUNCTION REFACTORING
   async addTaskToDBViaTemplateClick() {
+      if (!this.validateDate(this.date)) {
+    this.showSuccessMessageBox('Bitte wählen Sie ein Datum in der Zukunft!');
+    return;
+  }
     const processedFormData: TasksFirestoreData = {
       title: this.title,
       description: this.description,
