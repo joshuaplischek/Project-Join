@@ -16,17 +16,6 @@ import { ContactformComponent } from './contactform/contactform.component';
   styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent implements OnInit {
-  readonly standardColors: string[] = [
-    '#ff7a00',
-    '#1fd7c1',
-    '#6e52ff',
-    '#9327ff',
-    '#ffbb2b',
-    '#fc71ff',
-    '#ff4646',
-    '#3F51B5',
-    '#462f8a',
-  ];
 
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
@@ -60,10 +49,7 @@ get groupedContacts() {
 }
 
   getColorForLetter(letter: string): string {
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const index = alphabet.indexOf(letter.toUpperCase());
-    if (index === -1) return this.standardColors[0];
-    return this.standardColors[index % this.standardColors.length];
+    return this.contactlist.getColorForLetter(letter);
   }
 
   openAddContactForm() {

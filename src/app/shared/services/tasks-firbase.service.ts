@@ -8,7 +8,7 @@ import {
   onSnapshot,
   Timestamp,
   serverTimestamp 
-} from '@angular/fire/firestore';  // Alle Imports aus @angular/fire/firestore
+} from '@angular/fire/firestore';
 import { Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
 import { Subject } from 'rxjs';
 
@@ -18,8 +18,9 @@ import { Subject } from 'rxjs';
 export class TasksFirbaseService {
   firestore: Firestore = inject(Firestore);
   tasks: Tasks[] = [];
-  unsubscribe;
+
   tasksChanged = new Subject<void>();
+    private unsubscribe: () => void;
 
   constructor() {
     this.unsubscribe = this.subTasks();
@@ -34,33 +35,32 @@ export class TasksFirbaseService {
     return collection(this.firestore, 'tasks');
   }
 
-  subTasks() {
+  subTasks(): () => void {
     return onSnapshot(this.getTasks(), (list) => {
-    const newTasks: Tasks[] = [];
+      const newTasks: Tasks[] = [];
       list.forEach((element) => {
         newTasks.push(this.setTasksObject(element.data(), element.id));
       });
-          this.tasks = newTasks;
-          this.tasksChanged.next();
+      this.tasks = newTasks;
+      this.tasksChanged.next();
     });
   }
 
-  setTasksObject(obj: TasksFirestoreData, id: string): Tasks {
-    // Datum-Konvertierung vor der Objekterstellung
-    let dateValue: Timestamp;
-    if (obj.date instanceof Date) {
-      dateValue = Timestamp.fromDate(obj.date);
-    } else if (obj.date instanceof Timestamp) {
-      dateValue = obj.date;
-    } else {
-      dateValue = Timestamp.now();
-    }
+  convertDate(date: Date | Timestamp | undefined): Timestamp {
+  if (date instanceof Date) {
+    return Timestamp.fromDate(date);
+  } else if (date instanceof Timestamp) {
+    return date;
+  }
+  return Timestamp.now();
+}
 
+  setTasksObject(obj: TasksFirestoreData, id: string): Tasks {
     return {
       id: id,
       assignedTo: obj.assignedTo || [],
       category: obj.category || '',
-      date: dateValue,
+      date: this.convertDate(obj.date),
       description: obj.description || '',
       priority: obj.priority || '',
       status: obj.status || '',
@@ -69,38 +69,25 @@ export class TasksFirbaseService {
     };
   }
 
-  
-
 async addTask(formData: TasksFirestoreData) {
   try {
     const tasksCollection = this.getTasks();
-    // Datum korrekt konvertieren
-    let dateTimestamp: Timestamp;
-    if (formData.date instanceof Date) {
-      dateTimestamp = Timestamp.fromDate(formData.date);
-    } else if (formData.date instanceof Timestamp) {
-      dateTimestamp = formData.date;
-    } else {
-      dateTimestamp = Timestamp.now();
-    }
-
     const taskData = {
       ...formData,
       status: 'todo',
-      date: dateTimestamp
+      date: this.convertDate(formData.date)
     };
-
     const docRef = await addDoc(tasksCollection, taskData);
-    console.log('Task erfolgreich hinzugefügt, ID:', docRef.id);
     this.tasksChanged.next();
     return docRef.id;
   } catch (error) {
-    console.error('Fehler beim Hinzufügen des Tasks:', error);
     throw error;
   }
 }
 
   ngOnDestroy() {
-    this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 }

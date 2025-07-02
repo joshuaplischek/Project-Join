@@ -14,13 +14,14 @@
       </div>
       <div class="description-field">
         <label for="description">Description</label>
-        <textarea [(ngModel)]="description" rows="5" name="description" id="description" placeholder="Enter a Description"></textarea>
+        <textarea [(ngModel)]="description" rows="5" name="description" id="description"
+          placeholder="Enter a Description"></textarea>
       </div>
 
       <div class="date-field">
         <label for="dateInput">Due date<span class="warning">*</span></label>
         <div class="input-wrapper" style="position: relative;">
-          <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" placeholder="dd/mm/yyyy"
+          <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minDate" placeholder="dd/mm/yyyy"
             (blur)="dateTouched = true" (focus)="picker.open()">
           <mat-datepicker-toggle matSuffix [for]="picker">
             <img matDatepickerToggleIcon src="/assets/images/board/calender.svg" alt="calender icon">
@@ -119,18 +120,32 @@
         </div>
       </div>
 
-
       <div class="subtasks-wrapper">
         <label for="subtasks">Subtasks</label>
         <div class="input-wrapper">
-          <input [(ngModel)]="newSubtask" id="subtasks" type="text" placeholder="Add new subtask">
-          <img src="/assets/images/board/add.svg" alt="">
+          <input [(ngModel)]="newSubtask" id="subtasks" type="text" placeholder="Add new subtask"
+            (keyup.enter)="addSubtask()">
+          <!-- <img src="/assets/images/board/add.svg" alt=""> -->
           <div class="focus-subtasks-input">
-            <img class="close" src="/assets/images/board/close.svg" alt="close button">
+                        <button class="icon-check-button" (click)="addSubtask()">
+              <img class="check" src="/assets/images/board/check.svg" alt="check button">
+            </button>
             <div class="border"></div>
-            <img (click)="addSubtask()" class="check" src="/assets/images/board/check.svg" alt="check button">
+            <button class="icon-close-button" (click)="clearSubtaskInput()">
+              <img class="close" src="/assets/images/board/close.svg" alt="close button">
+            </button>
           </div>
         </div>
+        @if (subtasks.length > 0) {
+        <ul class="subtasks-list">
+          @for (subtask of subtasks; track subtask; let i = $index) {
+          <li class="subtask-item">
+            <span>{{ subtask }}</span>
+            <img src="/assets/images/board/delete.svg" alt="delete subtask" (click)="removeSubtask(i)">
+          </li>
+          }
+        </ul>
+        }
       </div>
     </div>
   </section>
@@ -142,17 +157,14 @@
         <span>Clear</span>
         <img src="/assets/images/icons/icon-cancel.svg" alt="clear task">
       </button>
-<button 
-  (click)="addTaskToDBViaTemplateClick()" 
-  class="button-blue" 
-  [disabled]="!title || !date || !category">
-  <span>Create Task</span>
-  <img src="/assets/images/icons/icon-check.svg" alt="create task">
-</button>
+      <button (click)="addTaskToDBViaTemplateClick()" class="button-blue" [disabled]="!title || !date || !category">
+        <span>Create Task</span>
+        <img src="/assets/images/icons/icon-check.svg" alt="create task">
+      </button>
     </div>
   </section>
 
-    @if(showSuccessMessage){
+  @if(showSuccessMessage){
   <div class="success-message-container">
     {{successMessage}}
   </div>

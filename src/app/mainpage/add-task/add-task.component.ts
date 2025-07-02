@@ -22,16 +22,20 @@ import { Router } from '@angular/router';
   styleUrl: './add-task.component.scss',
 })
 export class AddTaskComponent {
-  constructor(public contactlist: FirebaseService, public taskService: TasksFirbaseService, private router: Router) {}
+  constructor(
+    public contactlist: FirebaseService,
+    public taskService: TasksFirbaseService,
+    private router: Router
+  ) {this.minDate.setHours(0, 0, 0, 0);}
 
   title: string = '';
-    description: string = '';
-  date:any;
+  description: string = '';
+  date: any;
   category: string = '';
   selectedPrio: string = '';
   contactInput: string = '';
   newSubtask: string = '';
-    successMessage = '';
+  successMessage = '';
 
   showSuccessMessage = false;
   categoryDropDownOpen = false;
@@ -43,6 +47,7 @@ export class AddTaskComponent {
   selectedContacts: Contactlist[] = [];
   filteredContacts: Contactlist[] = [];
   subtasks: string[] = [];
+  minDate: Date = new Date();
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
@@ -56,23 +61,8 @@ export class AddTaskComponent {
     this.selectedPrio = prio;
   }
 
-  standardColors: string[] = [
-    '#ff7a00',
-    '#1fd7c1',
-    '#6e52ff',
-    '#9327ff',
-    '#ffbb2b',
-    '#fc71ff',
-    '#ff4646',
-    '#3F51B5',
-    '#462f8a',
-  ];
-
   getColorForLetter(letter: string): string {
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const index = alphabet.indexOf(letter.toUpperCase());
-    if (index === -1) return this.standardColors[0];
-    return this.standardColors[index % this.standardColors.length];
+    return this.contactlist.getColorForLetter(letter);
   }
 
   isSelected(contact: Contactlist) {
@@ -99,52 +89,73 @@ export class AddTaskComponent {
     }
   }
 
-  addSubtask() {
+  validateDate(date: Date): boolean {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date >= today;
+}
+
+addSubtask() {
   if (this.newSubtask.trim()) {
     this.subtasks.push(this.newSubtask.trim());
     this.newSubtask = '';
   }
 }
-async addTaskToDBViaTemplateClick() {
-  const processedFormData: TasksFirestoreData = {
-    title: this.title,
-    description: this.description,
-    category: this.category,
-    assignedTo: this.selectedContacts.map(c => `${c.firstName} ${c.lastName}`),
-    date: this.date instanceof Date ? this.date : new Date(this.date),
-    priority: this.selectedPrio || 'medium', // Fallback falls keine Priorität gesetzt
-    subtasks: this.subtasks.map(title => ({ title, done: false })),
-    status: 'todo'
-  };
 
-  try {
-    await this.addTaskToDB(processedFormData); // Warte auf die async Operation
-    this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
-    this.clearForm();
-    setTimeout(() => {
-      this.router.navigate(['/board']);
-    }, 2000);
-  } catch (error) {
-    console.error('Fehler beim Hinzufügen des Tasks:', error);
-    this.showSuccessMessageBox('Fehler beim Hinzufügen des Tasks!');
-  }
+clearSubtaskInput() {
+  this.newSubtask = '';
 }
+
+removeSubtask(index: number) {
+  this.subtasks.splice(index, 1);
+}
+
+// TODO: FUNCTION REFACTORING
+  async addTaskToDBViaTemplateClick() {
+      if (!this.validateDate(this.date)) {
+    this.showSuccessMessageBox('Bitte wählen Sie ein Datum in der Zukunft!');
+    return;
+  }
+    const processedFormData: TasksFirestoreData = {
+      title: this.title,
+      description: this.description,
+      category: this.category,
+      assignedTo: this.selectedContacts.map(
+        (c) => `${c.firstName} ${c.lastName}`
+      ),
+      date: this.date instanceof Date ? this.date : new Date(this.date),
+      priority: this.selectedPrio || 'medium',
+      subtasks: this.subtasks.map((title) => ({ title, done: false })),
+      status: 'todo',
+    };
+
+    try {
+      await this.addTaskToDB(processedFormData);
+      this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
+      console.log(processedFormData)
+      this.clearForm();
+      setTimeout(() => {
+        this.router.navigate(['/board']);
+      }, 1500);
+    } catch (error) {
+      this.showSuccessMessageBox('Fehler beim Hinzufügen des Tasks!');
+    }
+  }
 
   async addTaskToDB(formData: TasksFirestoreData) {
-  try {
-    await this.taskService.addTask(formData); // Warte auf die Promise
-  } catch (error) {
-    console.error('Fehler in addTaskToDB:', error);
-    throw error; // Fehler weiterreichen
+    try {
+      await this.taskService.addTask(formData);
+    } catch (error) {
+      throw error;
+    }
   }
-}
 
-    showSuccessMessageBox(message: string) {
+  showSuccessMessageBox(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
     setTimeout(() => {
       this.showSuccessMessage = false;
-    }, 2000);
+    }, 1500);
   }
 
   clearForm() {

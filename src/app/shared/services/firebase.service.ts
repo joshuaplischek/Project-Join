@@ -29,6 +29,25 @@ export class FirebaseService {
     this.unsubscribe = this.subContactList();
   }
 
+    private readonly standardColors: string[] = [
+    '#ff7a00',
+    '#1fd7c1',
+    '#6e52ff',
+    '#9327ff',
+    '#ffbb2b',
+    '#fc71ff',
+    '#ff4646',
+    '#3F51B5',
+    '#462f8a',
+  ];
+
+  getColorForLetter(letter: string): string {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const index = alphabet.indexOf(letter.toUpperCase());
+    if (index === -1) return this.standardColors[0];
+    return this.standardColors[index % this.standardColors.length];
+  }
+
   subContactList() {
     return onSnapshot(this.getContacts(), (list) => {
       this.contacts = [];
