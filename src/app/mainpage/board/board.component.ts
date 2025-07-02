@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
+  CdkDragPlaceholder,
   CdkDropList,
   DragDropModule,
   moveItemInArray,
@@ -21,7 +22,7 @@ import { doc, updateDoc } from 'firebase/firestore';
     TaskDetailComponent,
     DragDropModule,
     CdkDrag,
-    CdkDropList,
+    CdkDropList, CdkDragPlaceholder
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
