@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
+  CdkDragPlaceholder,
   CdkDropList,
   DragDropModule,
   moveItemInArray,
@@ -22,6 +23,7 @@ import { doc, updateDoc } from 'firebase/firestore';
     DragDropModule,
     CdkDrag,
     CdkDropList,
+    CdkDragPlaceholder,
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -29,7 +31,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 export class BoardComponent {
   constructor(public taskService: TasksFirbaseService) {}
   @Input() selcetedTask: Tasks | null = null;
-
+  dragStartDelay = 0;
   isTaskDetailVisible = false;
   selectedTaskForDetail: Tasks | null = null;
 
@@ -45,6 +47,8 @@ export class BoardComponent {
     this.taskService.tasksChanged.subscribe(() => {
       this.updateArrays();
     });
+    this.setDragStartDelay();
+    window.addEventListener('resize', () => this.setDragStartDelay());
   }
 
   updateArrays() {
@@ -127,5 +131,9 @@ export class BoardComponent {
     setTimeout(() => {
       this.selectedTaskForDetail = null;
     }, 300);
+  }
+
+  setDragStartDelay() {
+    this.dragStartDelay = window.innerWidth <= 1024 ? 150 : 0;
   }
 }
