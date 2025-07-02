@@ -8,7 +8,7 @@ import {
   onSnapshot,
   Timestamp,
   serverTimestamp 
-} from '@angular/fire/firestore';  // Alle Imports aus @angular/fire/firestore
+} from '@angular/fire/firestore';
 import { Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
 import { Subject } from 'rxjs';
 
@@ -18,8 +18,9 @@ import { Subject } from 'rxjs';
 export class TasksFirbaseService {
   firestore: Firestore = inject(Firestore);
   tasks: Tasks[] = [];
-  unsubscribe;
+
   tasksChanged = new Subject<void>();
+    private unsubscribe: () => void;
 
   constructor() {
     this.unsubscribe = this.subTasks();
@@ -34,14 +35,14 @@ export class TasksFirbaseService {
     return collection(this.firestore, 'tasks');
   }
 
-  subTasks() {
+  subTasks(): () => void {
     return onSnapshot(this.getTasks(), (list) => {
-    const newTasks: Tasks[] = [];
+      const newTasks: Tasks[] = [];
       list.forEach((element) => {
         newTasks.push(this.setTasksObject(element.data(), element.id));
       });
-          this.tasks = newTasks;
-          this.tasksChanged.next();
+      this.tasks = newTasks;
+      this.tasksChanged.next();
     });
   }
 
@@ -85,6 +86,8 @@ async addTask(formData: TasksFirestoreData) {
 }
 
   ngOnDestroy() {
-    this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 }

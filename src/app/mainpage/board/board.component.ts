@@ -13,6 +13,7 @@ import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { TasksFirbaseService } from '../../shared/services/tasks-firbase.service';
 import { Tasks } from '../../../interfaces/tasks';
 import { doc, updateDoc } from 'firebase/firestore';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -30,6 +31,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 })
 export class BoardComponent {
   constructor(public taskService: TasksFirbaseService) {}
+  private subscription: Subscription = new Subscription();
   @Input() selcetedTask: Tasks | null = null;
   dragStartDelay = 0;
   isTaskDetailVisible = false;
@@ -44,9 +46,12 @@ export class BoardComponent {
   done: Tasks[] = [];
 
   ngOnInit() {
-    this.taskService.tasksChanged.subscribe(() => {
-      this.updateArrays();
-    });
+    this.taskService.subTasks();
+    this.subscription.add(
+      this.taskService.tasksChanged.subscribe(() => {
+        this.updateArrays();
+      })
+    );
     this.setDragStartDelay();
     window.addEventListener('resize', () => this.setDragStartDelay());
   }
@@ -60,6 +65,11 @@ export class BoardComponent {
       (task) => task.status === 'awaitfeedback'
     );
     this.done = this.taskService.tasks.filter((task) => task.status === 'done');
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+    window.removeEventListener('resize', () => this.setDragStartDelay());
   }
 
   get todoTasks(): Tasks[] {
