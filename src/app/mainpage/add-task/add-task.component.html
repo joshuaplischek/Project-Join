@@ -14,7 +14,7 @@
       </div>
       <div class="description-field">
         <label for="description">Description</label>
-        <textarea rows="5" name="description" id="description" placeholder="Enter a Description"></textarea>
+        <textarea [(ngModel)]="description" rows="5" name="description" id="description" placeholder="Enter a Description"></textarea>
       </div>
 
       <div class="date-field">
@@ -50,54 +50,75 @@
         </div>
       </div>
 
-      <div class="assigendTo-wrapper">
-        <label for="">Assigned to</label>
-        <input  class="custom-select" type="text" placeholder="Select contacts to assign" matInput [(ngModel)]="contactInput"
-          (focus)="onContactInputFocus()" (ngModelChange)="filteredContacts = filterContacts($event)"
-          [matAutocomplete]="auto" />
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayContact"
-          (optionSelected)="selectContact($event.option.value)">
-          @for (contact of filteredContacts; track contact.id) {
-          <mat-option [value]="contact">
-            <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
-              {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
-            </span>
-            <span class="contact-name">
-              {{ contact.firstName }} {{ contact.lastName }}
-            </span>
-            <mat-checkbox class="contact-checkbox" [checked]="isSelected(contact)" (click)="$event.stopPropagation()"
-              (change)="toggleContact(contact)">
-            </mat-checkbox>
-          </mat-option>
+      <div class="assignedTo-wrapper">
+        <p>Assigned to</p>
+        <div class="custom-select" tabindex="0" (blur)="contactDropDownOpen = false">
+          <div class="selected" (click)="contactDropDownOpen = !contactDropDownOpen">
+            <span>Select contacts to assign</span>
+            <img src="/assets/images/board/arrow_drop_down.svg" alt="">
+          </div>
+          @if (contactDropDownOpen) {
+          <div class="dropdown" (mousedown)="$event.preventDefault()">
+            @for (group of contactlist.getGroupedContacts(); track group.letter) {
+            <div class="group">
+              @for (contact of group.contacts; track contact.id) {
+              <label class="dropdown-option" [class.selected]="isSelected(contact)" (click)="toggleContact(contact)">
+                <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
+                  {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
+                </span>
+                <span class="contact-name">
+                  {{ contact.firstName }} {{ contact.lastName }}
+                </span>
+                <span class="checkbox-container" (click)="$event.stopPropagation()">
+                  <input type="checkbox" [checked]="isSelected(contact)" (change)="toggleContact(contact)">
+                </span>
+              </label>
+              }
+            </div>
+            }
+          </div>
           }
-        </mat-autocomplete>
-      </div>
-
-      @if (selectedContacts.length > 0) {
-      <div class="selected-contacts-initials">
-        @for (contact of selectedContacts; track contact.id) {
-        <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
-          {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
-        </span>
+        </div>
+        <!-- Hier die Initialen der ausgewählten Kontakte unter dem Input anzeigen -->
+        @if (selectedContacts.length > 0) {
+        <div class="selected-contacts-initials">
+          @for (contact of selectedContacts; track contact.id) {
+          <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
+            {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
+          </span>
+          }
+        </div>
         }
       </div>
-      }
 
       <div class="category-wrapper">
         <p>Category<span class="warning">*</span></p>
-        <div class="custom-select" tabindex="0" (blur)="categoryTouched = true">
-          <mat-select [(ngModel)]="category" placeholder="Select task category"
-            (selectionChange)="categoryTouched = true" [ngClass]="{'invalid': !category && categoryTouched}">
-            <mat-option [value]="''" disabled>Select task category</mat-option>
-            <mat-option value="Technical Task">Technical Task</mat-option>
-            <mat-option value="User Story">User Story</mat-option>
-          </mat-select>
+        <div class="custom-select" tabindex="0" (blur)="onCategoryBlur()">
+          <div class="selected" (click)="categoryDropDownOpen = !categoryDropDownOpen">
+            @if (!category) {
+            <span>Select task category</span>
+            }
+            @if (category) {
+            <span>{{ category }}</span>
+            }
+            <img src="/assets/images/board/arrow_drop_down.svg" alt="">
+          </div>
+          @if (categoryDropDownOpen) {
+          <div class="dropdown" (mousedown)="$event.preventDefault()">
+            <div (click)="category = 'Technical Task'; categoryDropDownOpen = false" class="dropdown-option">Technical
+              Task
+            </div>
+            <div (click)="category = 'User Story'; categoryDropDownOpen = false" class="dropdown-option">User Story
+            </div>
+          </div>
+          }
         </div>
         <div class="input-hint">
           @if (!category && categoryTouched) {
           <span role="alert">Please enter a valid category</span>}
         </div>
       </div>
+
 
       <div class="subtasks-wrapper">
         <label for="subtasks">Subtasks</label>
@@ -117,7 +138,7 @@
   <section class="form-footer">
     <p><span class="warning">*</span>This field is requierd</p>
     <div class="button-container">
-      <button class="button-white-border">
+      <button (click)="clearForm()" class="button-white-border">
         <span>Clear</span>
         <img src="/assets/images/icons/icon-cancel.svg" alt="clear task">
       </button>

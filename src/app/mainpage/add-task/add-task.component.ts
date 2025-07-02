@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { Contactlist } from '../../../interfaces/contactlist';
@@ -17,13 +12,8 @@ import { Contactlist } from '../../../interfaces/contactlist';
   imports: [
     CommonModule,
     FormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatCheckboxModule,
     MatDatepickerModule,
-    MatInputModule,
     MatNativeDateModule,
-    MatAutocompleteModule,
   ],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
@@ -35,9 +25,11 @@ export class AddTaskComponent {
   date: Date | null = null;
   category: string = '';
   selectedPrio: string = '';
-  selectedCategory: string = '';
   contactInput: string = '';
+  description: string = '';
 
+  categoryDropDownOpen = false;
+  contactDropDownOpen = false;
   titleTouched = false;
   dateTouched = false;
   categoryTouched = false;
@@ -45,36 +37,12 @@ export class AddTaskComponent {
   selectedContacts: Contactlist[] = [];
   filteredContacts: Contactlist[] = [];
 
-
   ngOnInit() {
-    this.filteredContacts = this.allContacts;
-  }
-
-  onContactInputFocus() {
     this.filteredContacts = this.allContacts;
   }
 
   get allContacts() {
     return this.contactlist.getSortedContacts();
-  }
-
-  filterContacts(value: string): Contactlist[] {
-    const filterValue = value.toLowerCase();
-    return this.allContacts.filter(
-      (contact) =>
-        contact.firstName.toLowerCase().includes(filterValue) ||
-        contact.lastName.toLowerCase().includes(filterValue)
-    );
-  }
-
-  displayContact(contact: Contactlist): string {
-    return contact ? `${contact.firstName} ${contact.lastName}` : '';
-  }
-
-  selectContact(contact: Contactlist) {
-    this.toggleContact(contact);
-    this.contactInput = '';
-    this.filteredContacts = this.allContacts;
   }
 
   selectPrio(prio: string) {
@@ -115,5 +83,26 @@ export class AddTaskComponent {
     } else {
       this.selectedContacts.push(contact);
     }
+  }
+
+  onCategoryBlur() {
+    this.categoryDropDownOpen = false;
+    if (!this.category) {
+      this.categoryTouched = true;
+    }
+  }
+
+  clearForm() {
+    this.title = '';
+    this.description = '';
+    this.date = null;
+    this.selectedPrio = '';
+    this.category = '';
+    this.selectedContacts = [];
+    this.categoryDropDownOpen = false;
+    this.contactDropDownOpen = false;
+    this.titleTouched = false;
+    this.dateTouched = false;
+    this.categoryTouched = false;
   }
 }
