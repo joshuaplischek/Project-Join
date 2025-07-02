@@ -22,11 +22,15 @@
       </div>
       <div id="todo" cdkDropList #toDoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[inProgressList, awaitFeedbackList, doneList]" (cdkDropListDropped)="drop($event)" class="tasks">
         @for (task of todoTasks; track task.id) {
-        <app-compact-task cdkDrag [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
+            <div class="custom-placeholder" *cdkDragPlaceholder></div>
+            <app-compact-task  [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          </div>
         }
           <div class="empty-list" [class.disabled]="todoTasks.length > 0">
           No tasks to do
         </div>
+        
       </div>
     </div>
     <div class="inProgressList">
@@ -35,8 +39,11 @@
         <button class="addTaskToListBtn"><img src="/assets/images/board/add.svg" alt="add button"></button>
       </div>
       <div id="inprogress" cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="inprogress" [cdkDropListConnectedTo]="[toDoList, awaitFeedbackList, doneList]" (cdkDropListDropped)="drop($event)" class="tasks">
-        @for (task of inProgressTasks; track task.id) {
-        <app-compact-task cdkDrag [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+        @for (task of inprogress; track task.id) {
+          <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
+            <div class="custom-placeholder" *cdkDragPlaceholder></div>
+            <app-compact-task  [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          </div>
         }
           <div class="empty-list" [class.disabled]="inProgressTasks.length > 0">
           No tasks in progress
@@ -49,8 +56,11 @@
         <button class="addTaskToListBtn"><img src="/assets/images/board/add.svg" alt="add button"></button>
       </div>
       <div id="awaitfeedback" cdkDropList #awaitFeedbackList="cdkDropList" [cdkDropListData]="awaitfeedback" [cdkDropListConnectedTo]="[toDoList, inProgressList, doneList]" (cdkDropListDropped)="drop($event)" class="tasks">
-        @for (task of awaitFeedbackTasks; track task.id) {
-        <app-compact-task cdkDrag [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+        @for (task of awaitfeedback; track task.id) {
+          <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
+            <div class="custom-placeholder" *cdkDragPlaceholder></div>
+            <app-compact-task  [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          </div>
         }
           <div class="empty-list" [class.disabled]="awaitFeedbackTasks.length > 0">
           No tasks awaits feedback
@@ -62,8 +72,11 @@
         <h3>Done</h3>
       </div>
       <div id="done" cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[toDoList, inProgressList, awaitFeedbackList]" (cdkDropListDropped)="drop($event)" class="tasks">
-        @for (task of doneTasks; track task.id) {
-        <app-compact-task cdkDrag [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+        @for (task of done; track task.id) {
+          <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
+            <div class="custom-placeholder" *cdkDragPlaceholder></div>
+            <app-compact-task  [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          </div>
         }
         <div class="empty-list" [class.disabled]="doneTasks.length > 0">
           No tasks done
