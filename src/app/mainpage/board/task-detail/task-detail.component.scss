@@ -323,6 +323,35 @@
       }
     }
 
+    .date-input-container {
+      display: flex;
+      align-items: center;
+      position: relative;
+      
+      .form-input {
+        flex: 1;
+        padding-right: 50px;
+        margin: 0;
+      }
+      
+      mat-datepicker-toggle {
+        position: absolute;
+        right: 15px;
+        
+        button {
+          border: none;
+          background: transparent;
+          padding: 4px;
+          
+          .mat-datepicker-toggle-default-icon {
+            color: #2A3647;
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+
     .form-textarea {
       resize: vertical;
       min-height: 120px;
@@ -684,7 +713,6 @@
     }
   }
 
-  // Custom select styling - exact copy from Add-Task component
   .custom-select {
     position: relative;
     width: 100%;
