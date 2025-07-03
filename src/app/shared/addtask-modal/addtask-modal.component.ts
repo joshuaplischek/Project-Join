@@ -131,34 +131,61 @@ export class AddtaskModalComponent {
     this.subtasks.splice(index, 1);
   }
 
-  // TODO: FUNCTION REFACTORING
-  async addTaskToDBViaTemplateClick() {
-    if (!this.validateDate(this.date)) {
-      this.showSuccessMessageBox('Bitte wählen Sie ein Datum in der Zukunft!');
-      return;
-    }
-    const processedFormData: TasksFirestoreData = {
+  private createTaskData(): TasksFirestoreData {
+    return {
       title: this.title,
       description: this.description,
       category: this.category,
-      assignedTo: this.selectedContacts.map(
-        (c) => `${c.firstName} ${c.lastName}`
-      ),
-      date: this.date instanceof Date ? this.date : new Date(this.date),
+      assignedTo: this.getFormattedContacts(),
+      date: this.getFormattedDate(),
       priority: this.selectedPrio || 'medium',
-      subtasks: this.subtasks.map((title) => ({ title, done: false })),
+      subtasks: this.getFormattedSubtasks(),
       status: 'todo',
     };
+  }
 
+  getFormattedContacts(): string[] {
+    return this.selectedContacts.map(
+      (contact) => `${contact.firstName} ${contact.lastName}`
+    );
+  }
+
+  getFormattedDate(): Date {
+    return this.date instanceof Date ? this.date : new Date(this.date);
+  }
+
+  getFormattedSubtasks(): { title: string; done: boolean }[] {
+    return this.subtasks.map((title) => ({
+      title,
+      done: false,
+    }));
+  }
+
+  async navigateToBoard(): Promise<void> {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await this.router.navigate(['/board']);
+  }
+
+  async saveTaskAndRedirect(taskData: TasksFirestoreData): Promise<void> {
+    await this.addTaskToDB(taskData);
+    this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
+    this.clearForm();
+    await this.navigateToBoard();
+  }
+
+  async addTaskToDBViaTemplateClick(): Promise<void> {
     try {
-      await this.addTaskToDB(processedFormData);
-      this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
-      console.log(processedFormData);
-      this.clearForm();
-      setTimeout(() => {
-        this.router.navigate(['/board']);
-      }, 1500);
+      if (!this.validateDate(this.date)) {
+        this.showSuccessMessageBox(
+          'Bitte wählen Sie ein Datum in der Zukunft!'
+        );
+        return;
+      }
+
+      const taskData = this.createTaskData();
+      await this.saveTaskAndRedirect(taskData);
     } catch (error) {
+      console.error('Fehler beim Hinzufügen des Tasks:', error);
       this.showSuccessMessageBox('Fehler beim Hinzufügen des Tasks!');
     }
   }

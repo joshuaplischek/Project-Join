@@ -258,11 +258,18 @@ mat-datepicker-toggle {
         @include flex;
         justify-content: space-between;
         align-items: center;
-        padding: 8px;
-        margin-bottom: 8px;
-        background: white;
+        font-size: 0.9rem;
+        padding: 0.5rem 0.5rem 0.5rem 1.2rem;
         border-radius: 4px;
         height: 40px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &::before {
+          content: "•";
+          position: absolute;
+          left: 8px;
+        }
 
         &:last-child {
           margin-bottom: 0;
@@ -272,6 +279,8 @@ mat-datepicker-toggle {
           display: flex;
           flex-direction: row;
           gap: 0.75rem;
+          opacity: 0;
+          transition: opacity 0.3s ease;
 
           .border {
             height: 20px;
@@ -280,11 +289,15 @@ mat-datepicker-toggle {
 
           img {
             cursor: pointer;
-            width: 16px;
+          }
+        }
 
-            &:hover {
-              background-color: rgba(0, 0, 0, 0.1);
-            }
+        &:hover {
+          border-bottom: 1px solid var(--accent-color-light);
+          background: white;
+
+          .subtask-single-item-icons {
+            opacity: 1;
           }
         }
       }
