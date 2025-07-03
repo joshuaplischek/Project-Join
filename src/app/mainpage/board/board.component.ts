@@ -15,6 +15,7 @@ import { Tasks } from '../../../interfaces/tasks';
 import { doc, updateDoc } from 'firebase/firestore';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { TaskAddComponent } from './task-add/task-add.component';
 
 @Component({
   selector: 'app-board',
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     CdkDropList,
     CdkDragPlaceholder,
     FormsModule,
+    TaskAddComponent,
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -37,6 +39,7 @@ export class BoardComponent {
   @Input() selcetedTask: Tasks | null = null;
   dragStartDelay = 0;
   isTaskDetailVisible = false;
+  isTaskAddVisible = false;
   selectedTaskForDetail: Tasks | null = null;
 
   searchText: string = '';
@@ -123,6 +126,14 @@ export class BoardComponent {
     if (id.includes('awaitfeedback')) return 'awaitfeedback';
     if (id.includes('done')) return 'done';
     return '';
+  }
+
+  openAddTask() {
+    this.isTaskAddVisible = true;
+  }
+
+  closeAddTask() {
+    this.isTaskAddVisible = false;
   }
 
   openTaskDetail(task: Tasks) {
