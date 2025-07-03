@@ -1,54 +1,49 @@
-<section class="add-task-wrapper" role="main" aria-labelledby="addTaskTitle">
-  <h2 id="addTaskTitle">Add Task</h2>
+<section class="add-task-wrapper">
+  <h2>Add Task</h2>
 
-  <section class="form" role="form" aria-label="Task creation form">
-    <div class="addTaskForm" role="group" aria-labelledby="taskBasics">
-      <h3 id="taskBasics" class="visually-hidden">Basic Task Information</h3>
-
+  <section class="form">
+    <div class="addTaskForm">
       <div class="title-field">
-        <label for="titleInput">Title<span class="warning" aria-hidden="true">*</span></label>
-        <input id="titleInput" [(ngModel)]="title" type="text" placeholder="Enter a title" (blur)="titleTouched= true"
-          aria-required="true" aria-invalid="!title && titleTouched" />
-        <div class="input-hint" role="alert" aria-live="polite">
+        <label for="titleInput">Title<span class="warning">*</span></label>
+        <input id="titleInput" [(ngModel)]="title" type="text" placeholder="Enter a title"
+          (blur)="titleTouched= true" />
+        <div class="input-hint">
           @if (!title && titleTouched) {
-          <span>Please enter a title</span>
-          }
+          <span role="alert">Please enter a title</span>}
         </div>
       </div>
-
       <div class="description-field">
         <label for="description">Description</label>
         <textarea [(ngModel)]="description" rows="5" name="description" id="description"
-          placeholder="Enter a Description" aria-label="Task description"></textarea>
+          placeholder="Enter a Description"></textarea>
       </div>
 
       <div class="date-field">
-        <label for="dateInput">Due date<span class="warning" aria-hidden="true">*</span></label>
-        <div class="input-wrapper">
+        <label for="dateInput">Due date<span class="warning">*</span></label>
+        <div class="input-wrapper" style="position: relative;">
           <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minDate"
-            placeholder="dd/mm/yyyy" (blur)="dateTouched = true" (focus)="picker.open()" aria-required="true"
-            aria-invalid="!date && dateTouched">
-          <mat-datepicker-toggle matSuffix [for]="picker" aria-label="Open date picker">
-            <img matDatepickerToggleIcon src="/assets/images/board/calender.svg" alt="" aria-hidden="true">
+            placeholder="dd/mm/yyyy" (blur)="dateTouched = true" (focus)="picker.open()">
+          <mat-datepicker-toggle matSuffix [for]="picker">
+            <img matDatepickerToggleIcon src="/assets/images/board/calender.svg" alt="calender icon">
           </mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <div class="input-hint">
+          @if (!date && dateTouched) {
+          <span role="alert">Please enter a valid date</span>
+          }
         </div>
       </div>
     </div>
 
-    <div class="border" role="separator"></div>
+    <div class="border"></div>
 
-    <div class="taskOptions" role="group" aria-labelledby="taskDetails">
-      <h3 id="taskDetails" class="visually-hidden">Task Details</h3>
-
-      <div class="prio-wrapper" role="group" aria-labelledby="priorityLabel">
-        <p id="priorityLabel">Priority</p>
-        <div class="prio-btn-container" role="radiogroup" aria-label="Task priority">
-          <button class="urgent" [ngClass]="{'active': selectedPrio === 'urgent'}" (click)="selectPrio('urgent')"
-            role="radio" [attr.aria-checked]="selectedPrio === 'urgent'">
-            Urgent
-            <img src="/assets/images/board/prio-urgent.svg" alt="" aria-hidden="true">
-          </button>
+    <div class="taskOptions">
+      <div class="prio-wrapper">
+        <p>Priority</p>
+        <div class="prio-btn-container">
+          <button class="urgent" [ngClass]="{'active': selectedPrio === 'urgent'}" (click)="selectPrio('urgent')">Urgent
+            <img src="/assets/images/board/prio-urgent.svg" alt=""></button>
           <button class="medium" [ngClass]="{'active': selectedPrio === 'medium'}" (click)="selectPrio('medium')">Medium
             <img src="/assets/images/board/prio-medium.svg" alt=""></button>
           <button class="low" [ngClass]="{'active': selectedPrio == 'low'}" (click)="selectPrio('low')">Low <img
@@ -56,10 +51,9 @@
         </div>
       </div>
 
-      <div class="assignedTo-wrapper" role="group" aria-labelledby="assignLabel">
-        <p id="assignLabel">Assigned to</p>
-        <div class="custom-select" role="combobox" [attr.aria-expanded]="contactDropDownOpen" aria-haspopup="listbox"
-          aria-controls="contactsList">
+      <div class="assignedTo-wrapper">
+        <p>Assigned to</p>
+        <div class="custom-select" tabindex="0" (blur)="contactDropDownOpen = false">
           <div class="selected" (click)="contactDropDownOpen = !contactDropDownOpen">
             <span>Select contacts to assign</span>
             <img src="/assets/images/board/arrow_drop_down.svg" alt="">
@@ -125,31 +119,31 @@
         </div>
       </div>
 
-      <div class="subtasks-wrapper" role="group" aria-labelledby="subtasksLabel">
-        <label id="subtasksLabel" for="subtasks">Subtasks</label>
+      <div class="subtasks-wrapper">
+        <label for="subtasks">Subtasks</label>
         <div class="input-wrapper">
           <input [(ngModel)]="newSubtask" id="subtasks" type="text" placeholder="Add new subtask"
-            (keyup.enter)="addSubtask()" (focus)="showSubtaskControls()" (blur)="onSubtaskBlur()" #subtaskInput
-            aria-label="New subtask input">
-
-          <button class="add-subtask-btn" (click)="showSubtaskControls()" aria-label="Add subtask">
-            <img src="/assets/images/board/add.svg" [class.hide]="isSubtaskActive" alt="" aria-hidden="true">
-          </button>
+            (keyup.enter)="addSubtask()" (focus)="showSubtaskControls()" (blur)="onSubtaskBlur()" #subtaskInput>
+          <img src="/assets/images/board/add.svg" [class.hide]="isSubtaskActive" alt="" (click)="showSubtaskControls()">
+          <div class="focus-subtasks-input" [class.show]="isSubtaskActive">
+            <button class="icon-check-button" (click)="addSubtask()">
+              <img class="check" src="/assets/images/board/check.svg" alt="check button">
+            </button>
+            <div class="border"></div>
+            <button class="icon-close-button" (click)="clearSubtaskInput()">
+              <img class="close" src="/assets/images/board/close.svg" alt="close button">
+            </button>
+          </div>
         </div>
-
         @if (subtasks.length > 0) {
-        <ul class="subtasks-list" role="list" aria-label="Subtasks list">
+        <ul class="subtasks-list">
           @for (subtask of subtasks; track subtask; let i = $index) {
-          <li class="subtask-item" role="listitem">
+          <li class="subtask-item">
             <span>{{ subtask }}</span>
             <div class="subtask-single-item-icons">
-              <button aria-label="Edit subtask">
-                <img src="/assets/images/board/edit.svg" alt="" aria-hidden="true">
-              </button>
-              <div class="border" role="separator"></div>
-              <button (click)="removeSubtask(i)" aria-label="Delete subtask">
-                <img src="/assets/images/board/delete.svg" alt="" aria-hidden="true">
-              </button>
+              <img src="/assets/images/board/edit.svg" alt="edit subtask">
+              <div class="border"></div>
+              <img src="/assets/images/board/delete.svg" alt="delete subtask" (click)="removeSubtask(i)">
             </div>
           </li>
           }
@@ -160,22 +154,21 @@
   </section>
 
   <section class="form-footer">
-    <p role="note"><span class="warning" aria-hidden="true">*</span>This field is required</p>
+    <p><span class="warning">*</span>This field is requierd</p>
     <div class="button-container">
-      <button (click)="clearForm()" class="button-white-border" aria-label="Clear form">
+      <button (click)="clearForm()" class="button-white-border">
         <span>Clear</span>
-        <img src="/assets/images/icons/icon-cancel.svg" alt="" aria-hidden="true">
+        <img src="/assets/images/icons/icon-cancel.svg" alt="clear task">
       </button>
-      <button (click)="addTaskToDBViaTemplateClick()" class="button-blue" [disabled]="!title || !date || !category"
-        aria-label="Create task">
+      <button (click)="addTaskToDBViaTemplateClick()" class="button-blue" [disabled]="!title || !date || !category">
         <span>Create Task</span>
-        <img src="/assets/images/icons/icon-check.svg" alt="" aria-hidden="true">
+        <img src="/assets/images/icons/icon-check.svg" alt="create task">
       </button>
     </div>
   </section>
 
   @if(showSuccessMessage){
-  <div class="success-message-container" role="alert" aria-live="polite">
+  <div class="success-message-container">
     {{successMessage}}
   </div>
   }

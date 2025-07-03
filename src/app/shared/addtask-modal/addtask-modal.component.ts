@@ -34,7 +34,7 @@ export class AddtaskModalComponent {
   description: string = '';
   date: any;
   category: string = '';
-  selectedPrio: string = '';
+  selectedPrio: string = 'medium';
   contactInput: string = '';
   newSubtask: string = '';
   successMessage = '';
@@ -55,6 +55,7 @@ export class AddtaskModalComponent {
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
+    this.selectPrio('medium');
   }
 
   get allContacts() {
@@ -203,7 +204,7 @@ export class AddtaskModalComponent {
     this.title = '';
     this.description = '';
     this.date = null;
-    this.selectedPrio = '';
+    this.selectedPrio = 'medium';
     this.category = '';
     this.selectedContacts = [];
     this.categoryDropDownOpen = false;
