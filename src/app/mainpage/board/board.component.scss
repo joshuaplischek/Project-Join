@@ -10,7 +10,6 @@
   }
 
   @media (max-width: 1024px) {
-
   }
 
   @media (max-width: 700px) {
@@ -215,8 +214,11 @@ label {
 .custom-placeholder {
   background: #cccccc25;
   border: dotted 2px #919191;
-  min-height: 260px;
+  min-height: 300px;
+  max-height: 400px;
   width: 100%;
+  max-width: 300px;
+  min-width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
