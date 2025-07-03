@@ -1,4 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { TasksFirbaseService } from '../services/tasks-firbase.service';
 import { Router } from '@angular/router';
@@ -22,6 +28,8 @@ import { MatNativeDateModule } from '@angular/material/core';
   styleUrl: './addtask-modal.component.scss',
 })
 export class AddtaskModalComponent {
+  @Output() taskCreated = new EventEmitter<void>();
+
   constructor(
     public contactlist: FirebaseService,
     public taskService: TasksFirbaseService,
@@ -184,6 +192,7 @@ export class AddtaskModalComponent {
     await this.addTaskToDB(taskData);
     this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
     this.clearForm();
+    this.taskCreated.emit(); // Hier emittieren wir das Event
     await this.navigateToBoard();
   }
 
