@@ -601,13 +601,21 @@
     border-top: 1px solid #D1D1D1;
 
     .btn {
-      padding: 16px 32px;
+      width: 120px;
+      height: 45px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 1rem;
       border-radius: 10px;
       font-size: 20px;
       font-weight: 400;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       border: none;
+      gap: 8px;
+      white-space: nowrap;
 
       &.btn-secondary {
         background: white;
@@ -624,7 +632,8 @@
         color: white;
 
         &:hover:not(:disabled) {
-          background: #1a252f;
+          background: #29abe2;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
         &:disabled {
