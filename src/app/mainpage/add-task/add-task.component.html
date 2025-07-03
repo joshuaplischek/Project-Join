@@ -21,8 +21,8 @@
       <div class="date-field">
         <label for="dateInput">Due date<span class="warning">*</span></label>
         <div class="input-wrapper" style="position: relative;">
-          <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minDate" placeholder="dd/mm/yyyy"
-            (blur)="dateTouched = true" (focus)="picker.open()">
+          <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minDate"
+            placeholder="dd/mm/yyyy" (blur)="dateTouched = true" (focus)="picker.open()">
           <mat-datepicker-toggle matSuffix [for]="picker">
             <img matDatepickerToggleIcon src="/assets/images/board/calender.svg" alt="calender icon">
           </mat-datepicker-toggle>
@@ -124,10 +124,10 @@
         <label for="subtasks">Subtasks</label>
         <div class="input-wrapper">
           <input [(ngModel)]="newSubtask" id="subtasks" type="text" placeholder="Add new subtask"
-            (keyup.enter)="addSubtask()">
-          <!-- <img src="/assets/images/board/add.svg" alt=""> -->
-          <div class="focus-subtasks-input">
-                        <button class="icon-check-button" (click)="addSubtask()">
+            (keyup.enter)="addSubtask()" (focus)="showSubtaskControls()" (blur)="onSubtaskBlur()" #subtaskInput>
+          <img src="/assets/images/board/add.svg" [class.hide]="isSubtaskActive" alt="" (click)="showSubtaskControls()">
+          <div class="focus-subtasks-input" [class.show]="isSubtaskActive">
+            <button class="icon-check-button" (click)="addSubtask()">
               <img class="check" src="/assets/images/board/check.svg" alt="check button">
             </button>
             <div class="border"></div>
