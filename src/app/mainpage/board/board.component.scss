@@ -130,6 +130,19 @@
     }
   }
 
+  @media (max-width: 1323px) {
+    .toDoList,
+    .inProgressList,
+    .awaitFeedbackList,
+    .doneList {
+      > .list-heading {
+        > h3 {
+          height: 60px;
+        }
+      }
+    }
+  }
+
   @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
@@ -144,6 +157,11 @@
       justify-content: space-between;
       width: 100%;
       overflow: scroll;
+      > .list-heading {
+        > h3 {
+          height: auto;
+        }
+      }
     }
     .list-heading {
       margin: 1.5rem 0;

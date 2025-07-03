@@ -601,13 +601,21 @@
     border-top: 1px solid #D1D1D1;
 
     .btn {
-      padding: 16px 32px;
+      width: 120px;
+      height: 45px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 1rem;
       border-radius: 10px;
       font-size: 20px;
       font-weight: 400;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       border: none;
+      gap: 8px;
+      white-space: nowrap;
 
       &.btn-secondary {
         background: white;
@@ -624,12 +632,54 @@
         color: white;
 
         &:hover:not(:disabled) {
-          background: #1a252f;
+          background: #29abe2;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
         &:disabled {
           background: #D1D1D1;
           cursor: not-allowed;
+        }
+      }
+    }
+
+    .button-blue {
+      width: fit-content;
+      max-height: 45px;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: #2a3647;
+      border: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      gap: clamp(0.5rem, 1.5rem, 1.5rem);
+      white-space: nowrap;
+
+      span {
+        font-family: "mainFontBold";
+        font-size: clamp(1rem, 2vw, 1.1rem);
+        color: #ffffff;
+      }
+
+      img {
+        width: 30px;
+      }
+
+      &:hover:not(:disabled) {
+        background: #29abe2;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+
+      &:disabled {
+        background: #D1D1D1;
+        cursor: not-allowed;
+        
+        span {
+          color: #888;
         }
       }
     }
