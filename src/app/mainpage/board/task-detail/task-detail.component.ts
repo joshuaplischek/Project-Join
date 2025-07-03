@@ -13,7 +13,7 @@ import { Timestamp } from '@angular/fire/firestore';
   selector: 'app-task-detail',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule
