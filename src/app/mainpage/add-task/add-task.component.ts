@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -26,7 +26,9 @@ export class AddTaskComponent {
     public contactlist: FirebaseService,
     public taskService: TasksFirbaseService,
     private router: Router
-  ) {this.minDate.setHours(0, 0, 0, 0);}
+  ) {
+    this.minDate.setHours(0, 0, 0, 0);
+  }
 
   title: string = '';
   description: string = '';
@@ -48,6 +50,8 @@ export class AddTaskComponent {
   filteredContacts: Contactlist[] = [];
   subtasks: string[] = [];
   minDate: Date = new Date();
+  @ViewChild('subtaskInput') subtaskInput!: ElementRef;
+  isSubtaskActive: boolean = false;
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
@@ -90,32 +94,49 @@ export class AddTaskComponent {
   }
 
   validateDate(date: Date): boolean {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return date >= today;
-}
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date >= today;
+  }
 
-addSubtask() {
-  if (this.newSubtask.trim()) {
-    this.subtasks.push(this.newSubtask.trim());
+  showSubtaskControls() {
+    this.isSubtaskActive = true;
+    setTimeout(() => {
+      this.subtaskInput.nativeElement.focus();
+    });
+  }
+
+  onSubtaskBlur() {
+    setTimeout(() => {
+      if (!this.newSubtask.trim()) {
+        this.isSubtaskActive = false;
+      }
+    }, 100);
+  }
+
+  clearSubtaskInput() {
     this.newSubtask = '';
+    this.isSubtaskActive = false;
   }
-}
 
-clearSubtaskInput() {
-  this.newSubtask = '';
-}
+  addSubtask() {
+    if (this.newSubtask.trim()) {
+      this.subtasks.push(this.newSubtask.trim());
+      this.newSubtask = '';
+    }
+    this.isSubtaskActive = false;
+  }
 
-removeSubtask(index: number) {
-  this.subtasks.splice(index, 1);
-}
+  removeSubtask(index: number) {
+    this.subtasks.splice(index, 1);
+  }
 
-// TODO: FUNCTION REFACTORING
+  // TODO: FUNCTION REFACTORING
   async addTaskToDBViaTemplateClick() {
-      if (!this.validateDate(this.date)) {
-    this.showSuccessMessageBox('Bitte wählen Sie ein Datum in der Zukunft!');
-    return;
-  }
+    if (!this.validateDate(this.date)) {
+      this.showSuccessMessageBox('Bitte wählen Sie ein Datum in der Zukunft!');
+      return;
+    }
     const processedFormData: TasksFirestoreData = {
       title: this.title,
       description: this.description,
@@ -132,7 +153,7 @@ removeSubtask(index: number) {
     try {
       await this.addTaskToDB(processedFormData);
       this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
-      console.log(processedFormData)
+      console.log(processedFormData);
       this.clearForm();
       setTimeout(() => {
         this.router.navigate(['/board']);
