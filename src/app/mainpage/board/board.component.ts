@@ -14,6 +14,7 @@ import { TasksFirbaseService } from '../../shared/services/tasks-firbase.service
 import { Tasks } from '../../../interfaces/tasks';
 import { doc, updateDoc } from 'firebase/firestore';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
@@ -25,6 +26,7 @@ import { Subscription } from 'rxjs';
     CdkDrag,
     CdkDropList,
     CdkDragPlaceholder,
+    FormsModule,
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -140,20 +142,21 @@ export class BoardComponent {
     this.dragStartDelay = window.innerWidth <= 1024 ? 300 : 0;
   }
 
-  searchKey(data: string){
+  searchKey(data: string) {
     this.searchText = data;
     this.searchTask();
   }
 
-  searchTask(){ 
+  searchTask() {
     const search = this.searchText.toLowerCase();
-    if(!search) {
+    if (!search) {
       this.filteredTasks = this.taskService.tasks;
       return;
     }
-    this.filteredTasks = this.taskService.tasks.filter((element) => {
-      element.title?.toLowerCase().includes(search) ||
-      element.description?.toLowerCase().includes(search)
-    });
+    this.filteredTasks = this.taskService.tasks.filter(
+      (element) =>
+        element.title?.toLowerCase().includes(search) ||
+        element.description?.toLowerCase().includes(search)
+    );
   }
 }
