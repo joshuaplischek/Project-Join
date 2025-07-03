@@ -230,6 +230,16 @@ export class TaskDetailComponent implements OnInit, OnChanges {
     this.editSubtasks.splice(index, 1);
   }
 
+  editSubtask(index: number) {
+    const currentTitle = this.editSubtasks[index]?.title;
+    if (currentTitle) {
+      const newTitle = prompt('Edit subtask:', currentTitle);
+      if (newTitle && newTitle.trim() && newTitle.trim() !== currentTitle) {
+        this.editSubtasks[index].title = newTitle.trim();
+      }
+    }
+  }
+
   toggleEditSubtask(index: number) {
     if (this.editSubtasks[index]) {
       this.editSubtasks[index].done = !this.editSubtasks[index].done;
