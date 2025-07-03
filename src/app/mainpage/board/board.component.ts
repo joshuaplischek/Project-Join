@@ -37,35 +37,33 @@ export class BoardComponent {
   isTaskDetailVisible = false;
   selectedTaskForDetail: Tasks | null = null;
 
-  todo: Tasks[] = [];
+  searchText: string = '';
 
-  inprogress: Tasks[] = [];
-
-  awaitfeedback: Tasks[] = [];
-
-  done: Tasks[] = [];
+  filteredTasks: Tasks[] = [];
 
   ngOnInit() {
+    this.filteredTasks = this.taskService.tasks;
     this.taskService.subTasks();
     this.subscription.add(
       this.taskService.tasksChanged.subscribe(() => {
-        this.updateArrays();
+        this.filteredTasks = this.taskService.tasks;
+        this.searchTask();
       })
     );
     this.setDragStartDelay();
     window.addEventListener('resize', () => this.setDragStartDelay());
   }
 
-  updateArrays() {
-    this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
-    this.inprogress = this.taskService.tasks.filter(
-      (task) => task.status === 'inprogress'
-    );
-    this.awaitfeedback = this.taskService.tasks.filter(
-      (task) => task.status === 'awaitfeedback'
-    );
-    this.done = this.taskService.tasks.filter((task) => task.status === 'done');
-  }
+  // updateArrays() {
+  //   this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
+  //   this.inprogress = this.taskService.tasks.filter(
+  //     (task) => task.status === 'inprogress'
+  //   );
+  //   this.awaitfeedback = this.taskService.tasks.filter(
+  //     (task) => task.status === 'awaitfeedback'
+  //   );
+  //   this.done = this.taskService.tasks.filter((task) => task.status === 'done');
+  // }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -73,23 +71,19 @@ export class BoardComponent {
   }
 
   get todoTasks(): Tasks[] {
-    return this.taskService.tasks.filter((task) => task.status === 'todo');
+    return this.filteredTasks.filter((task) => task.status === 'todo');
   }
 
   get inProgressTasks(): Tasks[] {
-    return this.taskService.tasks.filter(
-      (task) => task.status === 'inprogress'
-    );
+    return this.filteredTasks.filter((task) => task.status === 'inprogress');
   }
 
   get awaitFeedbackTasks(): Tasks[] {
-    return this.taskService.tasks.filter(
-      (task) => task.status === 'awaitfeedback'
-    );
+    return this.filteredTasks.filter((task) => task.status === 'awaitfeedback');
   }
 
   get doneTasks(): Tasks[] {
-    return this.taskService.tasks.filter((task) => task.status === 'done');
+    return this.filteredTasks.filter((task) => task.status === 'done');
   }
 
   drop(event: CdkDragDrop<Tasks[]>) {
@@ -117,7 +111,6 @@ export class BoardComponent {
           });
         }
       }
-      this.updateArrays();
     }
   }
 
@@ -145,5 +138,22 @@ export class BoardComponent {
 
   setDragStartDelay() {
     this.dragStartDelay = window.innerWidth <= 1024 ? 300 : 0;
+  }
+
+  searchKey(data: string){
+    this.searchText = data;
+    this.searchTask();
+  }
+
+  searchTask(){ 
+    const search = this.searchText.toLowerCase();
+    if(!search) {
+      this.filteredTasks = this.taskService.tasks;
+      return;
+    }
+    this.filteredTasks = this.taskService.tasks.filter((element) => {
+      element.title?.toLowerCase().includes(search) ||
+      element.description?.toLowerCase().includes(search)
+    });
   }
 }
