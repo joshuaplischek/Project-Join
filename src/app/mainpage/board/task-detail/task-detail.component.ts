@@ -44,11 +44,14 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   categoryTouched = false;
 
   contactInput: string = '';
+  minDate: Date = new Date();
 
   constructor(
     public contactService: FirebaseService,
     private taskService: TasksFirbaseService
-  ) {}
+  ) {
+    this.minDate.setHours(0, 0, 0, 0);
+  }
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
@@ -161,7 +164,14 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   }
 
   validateForm(): boolean {
-    return !!(this.editTitle && this.editDate && this.editCategory);
+    return !!(this.editTitle && this.editDate && this.editCategory && this.validateDate(this.editDate));
+  }
+
+  validateDate(date: Date | null): boolean {
+    if (!date) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date >= today;
   }
 
   deleteTask() {
