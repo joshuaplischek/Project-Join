@@ -48,6 +48,7 @@ body {
 }
 
 @media (max-width: 1024px) {
+
   html,
   body {
     overflow: hidden;
@@ -63,6 +64,18 @@ body {
   @media (max-width: 1024px) {
     border-radius: 8px;
   }
+}
+
+.warning {
+  color: var(--error-color);
+}
+
+.input-hint {
+  color: var(--error-color);
+  font-size: 0.75rem;
+  min-height: 1.3em;
+  display: flex;
+  align-items: flex-start;
 }
 
 button,
@@ -126,7 +139,7 @@ h2 {
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
-    max-height: 45px;
+  max-height: 45px;
   height: 100%;
 
   span {
@@ -140,5 +153,33 @@ h2 {
   &:hover {
     border: 1px solid #29ABE2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.success-message-container {
+  position: fixed;
+  right: 2%;
+  bottom: 4%;
+  padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+  border-radius: clamp(10px, 2vw, 20px);
+  background: var(--nav-bg-color);
+  color: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  transform: translateX(120%);
+  animation: slide-in 0.3s forwards;
+
+  @media (max-width: 1024px) {
+    bottom: 12%;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes slide-in {
+  to {
+    transform: translateX(0);
   }
 }
