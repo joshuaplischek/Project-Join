@@ -9,7 +9,7 @@ import {
   Timestamp,
   serverTimestamp 
 } from '@angular/fire/firestore';
-import { Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
+import { Subtask, Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -18,6 +18,7 @@ import { Subject } from 'rxjs';
 export class TasksFirbaseService {
   firestore: Firestore = inject(Firestore);
   tasks: Tasks[] = [];
+  subtasks: Subtask[] = [];
 
   tasksChanged = new Subject<void>();
     private unsubscribe: () => void;
@@ -56,6 +57,11 @@ export class TasksFirbaseService {
 }
 
   setTasksObject(obj: TasksFirestoreData, id: string): Tasks {
+        const subtask = Array.isArray(obj.subtasks)
+      ? obj.subtasks.map((title) =>
+          typeof title === 'string' ? { title, done: false } : title
+        )
+      : [];
     return {
       id: id,
       assignedTo: obj.assignedTo || [],
@@ -64,7 +70,7 @@ export class TasksFirbaseService {
       description: obj.description || '',
       priority: obj.priority || '',
       status: obj.status || '',
-      subtasks: obj.subtasks || [],
+      subtasks: subtask || [],
       title: obj.title || '',
     };
   }
