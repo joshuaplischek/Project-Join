@@ -97,14 +97,16 @@
                 matInput 
                 [matDatepicker]="picker"
                 [(ngModel)]="editDate"
+                [min]="minDate"
                 (blur)="dateTouched = true"
                 class="form-input"
-                [class.error]="dateTouched && !editDate"
+                [class.error]="dateTouched && (!editDate || !validateDate(editDate))"
                 placeholder="dd/mm/yyyy">
               <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
             </div>
             <mat-datepicker #picker></mat-datepicker>
             <div *ngIf="dateTouched && !editDate" class="error-message">This field is required</div>
+            <div *ngIf="dateTouched && editDate && !validateDate(editDate)" class="error-message">Date cannot be in the past</div>
           </div>
 
           <div class="form-group">

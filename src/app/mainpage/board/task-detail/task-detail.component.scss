@@ -659,6 +659,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 32px;
+    gap: 10px;
     padding-top: 24px;
     border-top: 1px solid #D1D1D1;
 
@@ -847,6 +848,7 @@
   .selected-contacts-initials {
     display: flex;
     gap: 8px;
+    margin-top: 10px;
   }
 }
 
