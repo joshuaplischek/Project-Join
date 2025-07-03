@@ -144,6 +144,6 @@ export class BoardComponent {
   }
 
   setDragStartDelay() {
-    this.dragStartDelay = window.innerWidth <= 1024 ? 150 : 0;
+    this.dragStartDelay = window.innerWidth <= 1024 ? 300 : 0;
   }
 }

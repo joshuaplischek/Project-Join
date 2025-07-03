@@ -1,5 +1,4 @@
 .board-wrapper {
-  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -8,6 +7,10 @@
 
   @media (max-width: 1200px) {
     padding: 2rem 4vw 1rem 2vw;
+  }
+
+  @media (max-width: 1024px) {
+
   }
 
   @media (max-width: 700px) {
@@ -112,7 +115,7 @@
     gap: 35px;
     color: #42526e;
     font-family: "mainFontBold";
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 0;
 
     .addTaskToListBtn {
       display: flex;
@@ -127,6 +130,23 @@
       border-radius: 8px;
     }
   }
+
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+
+    .toDoList,
+    .inProgressList,
+    .awaitFeedbackList,
+    .doneList {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 100%;
+      overflow: scroll;
+    }
+  }
 }
 
 .tasks {
@@ -136,6 +156,12 @@
   gap: 15px;
   width: 100%;
   height: 100vh;
+
+  @media (max-width: 1024px) {
+    height: 100%;
+    align-items: flex-start;
+    flex-direction: row;
+  }
 }
 
 .empty-list {
