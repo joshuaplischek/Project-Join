@@ -131,7 +131,7 @@ export class AddtaskModalComponent {
     this.subtasks.splice(index, 1);
   }
 
-  private createTaskData(): TasksFirestoreData {
+  createTaskData(): TasksFirestoreData {
     return {
       title: this.title,
       description: this.description,
@@ -161,27 +161,8 @@ export class AddtaskModalComponent {
     }));
   }
 
-  async navigateToBoard(): Promise<void> {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    await this.router.navigate(['/board']);
-  }
-
-  async saveTaskAndRedirect(taskData: TasksFirestoreData): Promise<void> {
-    await this.addTaskToDB(taskData);
-    this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
-    this.clearForm();
-    await this.navigateToBoard();
-  }
-
   async addTaskToDBViaTemplateClick(): Promise<void> {
     try {
-      if (!this.validateDate(this.date)) {
-        this.showSuccessMessageBox(
-          'Bitte wählen Sie ein Datum in der Zukunft!'
-        );
-        return;
-      }
-
       const taskData = this.createTaskData();
       await this.saveTaskAndRedirect(taskData);
     } catch (error) {
@@ -196,6 +177,18 @@ export class AddtaskModalComponent {
     } catch (error) {
       throw error;
     }
+  }
+
+  async saveTaskAndRedirect(taskData: TasksFirestoreData): Promise<void> {
+    await this.addTaskToDB(taskData);
+    this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
+    this.clearForm();
+    await this.navigateToBoard();
+  }
+
+  async navigateToBoard(): Promise<void> {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await this.router.navigate(['/board']);
   }
 
   showSuccessMessageBox(message: string) {
