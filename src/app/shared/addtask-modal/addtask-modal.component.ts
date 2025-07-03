@@ -192,7 +192,7 @@ export class AddtaskModalComponent {
     await this.addTaskToDB(taskData);
     this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
     this.clearForm();
-    this.taskCreated.emit(); // Hier emittieren wir das Event
+    this.taskCreated.emit();
     await this.navigateToBoard();
   }
 
