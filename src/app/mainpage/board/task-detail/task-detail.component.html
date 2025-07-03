@@ -225,9 +225,15 @@
                   <img *ngIf="subtask.done" src="/assets/images/icons/icon-check.svg" alt="checked">
                 </div>
                 <span class="subtask-text" [class.completed]="subtask.done">{{ subtask.title }}</span>
-                <button type="button" class="delete-subtask-btn" (click)="removeSubtask(i)">
-                  <img src="/assets/images/icons/icon-delete.svg" alt="delete">
-                </button>
+                <div class="subtask-actions">
+                  <button type="button" class="edit-subtask-btn" (click)="editSubtask(i)">
+                    <img src="/assets/images/icons/icon-edit.svg" alt="edit">
+                  </button>
+                  <div class="divider"></div>
+                  <button type="button" class="delete-subtask-btn" (click)="removeSubtask(i)">
+                    <img src="/assets/images/icons/icon-delete.svg" alt="delete">
+                  </button>
+                </div>
               </div>
             </div>
           </div>

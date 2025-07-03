@@ -193,16 +193,14 @@
       .subtask-item {
         display: flex;
         align-items: center;
-        gap: 16px;
-        padding: 8px 0;
-        cursor: pointer;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 8px;
         transition: background-color 0.2s ease;
 
         &:hover {
-          background-color: rgba(42, 54, 71, 0.08);
-          border-radius: 4px;
-          padding: 8px 12px;
-          margin: 0 -12px;
+          background: rgba(42, 54, 71, 0.04);
         }
 
         .checkbox {
@@ -556,7 +554,6 @@
       align-items: center;
       gap: 12px;
       padding: 12px;
-      border: 1px solid #D1D1D1;
       border-radius: 8px;
       margin-bottom: 8px;
       transition: background-color 0.2s ease;
@@ -600,6 +597,28 @@
         }
       }
 
+      .subtask-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+
+        .divider {
+          width: 1px;
+          height: 16px;
+          background: #D1D1D1;
+          margin: 0 4px;
+        }
+      }
+
+      &:hover .subtask-actions {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .edit-subtask-btn,
       .delete-subtask-btn {
         background: none;
         border: none;
@@ -608,13 +627,28 @@
         border-radius: 4px;
         transition: background-color 0.2s ease;
 
+        img {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .edit-subtask-btn {
+        &:hover {
+          background: rgba(42, 54, 71, 0.1);
+        }
+
+        img {
+          filter: brightness(0) saturate(100%) invert(21%) sepia(7%) saturate(1166%) hue-rotate(174deg) brightness(98%) contrast(89%);
+        }
+      }
+
+      .delete-subtask-btn {
         &:hover {
           background: rgba(255, 61, 0, 0.1);
         }
 
         img {
-          width: 16px;
-          height: 16px;
           filter: brightness(0) saturate(100%) invert(15%) sepia(95%) saturate(7482%) hue-rotate(4deg) brightness(102%) contrast(105%);
         }
       }
