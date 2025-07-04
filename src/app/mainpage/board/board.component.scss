@@ -219,6 +219,10 @@ label {
   display: none;
 }
 
+.cdk-drag {
+  width: 100%;
+}
+
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 24px;
