@@ -188,3 +188,9 @@ h2 {
 app-board {
   overflow-y: auto;
 }
+
+.mat-datepicker-toggle-default-icon:hover {
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+}

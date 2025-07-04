@@ -61,17 +61,6 @@ export class BoardComponent {
     window.addEventListener('resize', () => this.setDragStartDelay());
   }
 
-  // updateArrays() {
-  //   this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
-  //   this.inprogress = this.taskService.tasks.filter(
-  //     (task) => task.status === 'inprogress'
-  //   );
-  //   this.awaitfeedback = this.taskService.tasks.filter(
-  //     (task) => task.status === 'awaitfeedback'
-  //   );
-  //   this.done = this.taskService.tasks.filter((task) => task.status === 'done');
-  // }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
     window.removeEventListener('resize', () => this.setDragStartDelay());
@@ -147,7 +136,6 @@ export class BoardComponent {
 
   closeTaskDetail() {
     this.isTaskDetailVisible = false;
-    // Nach der Animation das selectedTask zurücksetzen
     setTimeout(() => {
       this.selectedTaskForDetail = null;
     }, 300);

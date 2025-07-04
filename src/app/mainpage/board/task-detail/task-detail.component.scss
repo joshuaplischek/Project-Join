@@ -86,26 +86,6 @@
     font-size: 1rem;
     font-weight: 400;
     text-transform: capitalize;
-
-    &.design {
-      background: #FF7A00;
-    }
-
-    &.sales {
-      background: #FC71FF;
-    }
-
-    &.backoffice {
-      background: #1FD7C1;
-    }
-
-    &.marketing {
-      background: #0038FF;
-    }
-
-    &.media {
-      background: #FFC701;
-    }
   }
 
   .close-btn-wrapper {
@@ -123,13 +103,9 @@
   .task-form {
     display: flex;
     flex-flow: column wrap;
-    align-items: flex-start;
     gap: 1.5rem;
     align-content: flex-start;
-
-    > :last-child {
-      align-self: flex-end;
-    }
+    width: 100%;
   }
 
   .task-title {
@@ -144,7 +120,6 @@
     font-size: clamp(1rem, 2vw, 1.1rem);
     color: var(--text-color-dark-blue);
     word-break: break-word;
-
   }
 
   .task-meta {
@@ -157,7 +132,6 @@
     .meta-item {
       display: flex;
       align-items: center;
-
 
       .meta-label {
         font-size: clamp(1rem, 2vw, 1.1rem);
@@ -177,10 +151,6 @@
         align-items: center;
         gap: 16px;
 
-        .priority-text {
-          text-transform: capitalize;
-        }
-
         .priority-icon {
           width: 20px;
           height: 15px;
@@ -188,7 +158,6 @@
       }
     }
   }
-
 
   .assigned-to-section,
   .subtasks-section {
@@ -259,12 +228,6 @@
           &.checked {
             background: var(--text-color-dark-blue);
             border-color: var(--text-color-dark-blue);
-
-            img {
-              width: 10px;
-              height: 8px;
-              filter: brightness(0) invert(1);
-            }
           }
         }
 
@@ -286,6 +249,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    width: 100%;
+    justify-content: flex-end;
 
     .action-btn {
       display: flex;
