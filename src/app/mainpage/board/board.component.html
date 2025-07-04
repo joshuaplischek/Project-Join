@@ -1,4 +1,12 @@
 <section class="board-wrapper">
+  @if (showSuccessMessage) {
+  <div class="success-message-container">
+    <div class="success-message">
+      {{ successMessage }}
+    </div>
+  </div>
+  }
+
   <div class="board-header">
     <h2>Board</h2>
     <div>
@@ -99,11 +107,12 @@
       </div>
     </div>
   </div>
+
+  <!-- Task Add Modal mit Success Event -->
+  <app-task-add [isVisible]="isTaskAddVisible" [initialStatus]="selectedStatus" (closeModal)="closeAddTask()"
+    (taskSuccess)="onTaskSuccess($event)">
+  </app-task-add>
 </section>
 
-<!-- Task Detail Modal -->
 <app-task-detail [isVisible]="isTaskDetailVisible" [task]="selectedTaskForDetail" (closeModal)="closeTaskDetail()">
 </app-task-detail>
-
-<app-task-add [isVisible]="isTaskAddVisible" [initialStatus]="selectedStatus" (closeModal)="closeAddTask()">
-</app-task-add>

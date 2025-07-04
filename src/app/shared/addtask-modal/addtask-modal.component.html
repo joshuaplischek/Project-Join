@@ -82,14 +82,9 @@
         </div>
         @if (selectedContacts.length > 0) {
         <div class="selected-contacts-initials">
-          @for (contact of selectedContacts.slice(0, 3); track contact.id) {
+          @for (contact of selectedContacts; track contact.id) {
           <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
             {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
-          </span>
-          }
-          @if (selectedContacts.length > 3) {
-          <span class="contact-initials extra-count">
-            +{{ selectedContacts.length - 3 }}
           </span>
           }
         </div>
@@ -171,10 +166,4 @@
       </button>
     </div>
   </section>
-
-  @if(showSuccessMessage){
-  <div class="success-message-container">
-    {{successMessage}}
-  </div>
-  }
 </section>

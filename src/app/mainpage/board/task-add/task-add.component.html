@@ -3,7 +3,8 @@
     <div class="close-btn-wrapper" (click)="close()">
       <img class="close-btn" src="/assets/images/contactform/cancel.svg" alt="close button">
     </div>
-    <app-addtask-modal [initialStatus]="initialStatus" (taskCreated)="close()">
+    <app-addtask-modal [initialStatus]="initialStatus" (taskCreated)="close()"
+      (successMessage)="taskSuccess.emit($event)">
     </app-addtask-modal>
   </div>
 </div>

@@ -34,6 +34,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 export class AddtaskModalComponent implements OnInit {
   @Input() initialStatus: string = 'todo';
   @Output() taskCreated = new EventEmitter<void>();
+  @Output() successMessage = new EventEmitter<string>(); // Neuer Event Emitter
 
   constructor(
     public contactlist: FirebaseService,
@@ -50,7 +51,7 @@ export class AddtaskModalComponent implements OnInit {
   selectedPrio: string = 'medium';
   contactInput: string = '';
   newSubtask: string = '';
-  successMessage = '';
+  successMessageContent = '';
 
   showSuccessMessage = false;
   categoryDropDownOpen = false;
@@ -196,7 +197,12 @@ export class AddtaskModalComponent implements OnInit {
 
   async saveTaskAndRedirect(taskData: TasksFirestoreData): Promise<void> {
     await this.addTaskToDB(taskData);
-    this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
+    // Entfernen Sie die showSuccessMessageBox hier
+    // this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
+
+    // Emit success message to parent
+    this.successMessage.emit('Task added to board');
+
     this.clearForm();
     this.taskCreated.emit();
     await this.navigateToBoard();
@@ -208,7 +214,7 @@ export class AddtaskModalComponent implements OnInit {
   }
 
   showSuccessMessageBox(message: string) {
-    this.successMessage = message;
+    this.successMessageContent = message;
     this.showSuccessMessage = true;
     setTimeout(() => {
       this.showSuccessMessage = false;

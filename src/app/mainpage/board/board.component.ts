@@ -46,6 +46,9 @@ export class BoardComponent {
   selectedStatus: string = 'todo';
   searchText: string = '';
 
+  showSuccessMessage = false;
+  successMessage = '';
+
   ngOnInit() {
     this.filteredTasks = this.taskService.tasks;
     this.taskService.subTasks();
@@ -58,17 +61,6 @@ export class BoardComponent {
     this.setDragStartDelay();
     window.addEventListener('resize', () => this.setDragStartDelay());
   }
-
-  // updateArrays() {
-  //   this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
-  //   this.inprogress = this.taskService.tasks.filter(
-  //     (task) => task.status === 'inprogress'
-  //   );
-  //   this.awaitfeedback = this.taskService.tasks.filter(
-  //     (task) => task.status === 'awaitfeedback'
-  //   );
-  //   this.done = this.taskService.tasks.filter((task) => task.status === 'done');
-  // }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -145,7 +137,6 @@ export class BoardComponent {
 
   closeTaskDetail() {
     this.isTaskDetailVisible = false;
-    // Nach der Animation das selectedTask zurücksetzen
     setTimeout(() => {
       this.selectedTaskForDetail = null;
     }, 300);
@@ -171,5 +162,13 @@ export class BoardComponent {
         element.title?.toLowerCase().includes(search) ||
         element.description?.toLowerCase().includes(search)
     );
+  }
+
+  onTaskSuccess(message: string) {
+    this.successMessage = message;
+    this.showSuccessMessage = true;
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 1500);
   }
 }
