@@ -2,7 +2,11 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
@@ -27,7 +31,8 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './addtask-modal.component.html',
   styleUrl: './addtask-modal.component.scss',
 })
-export class AddtaskModalComponent {
+export class AddtaskModalComponent implements OnInit {
+  @Input() initialStatus: string = 'todo';
   @Output() taskCreated = new EventEmitter<void>();
 
   constructor(
@@ -141,7 +146,7 @@ export class AddtaskModalComponent {
   }
 
   createTaskData(): TasksFirestoreData {
-    return {
+    const taskData = {
       title: this.title,
       description: this.description,
       category: this.category,
@@ -149,8 +154,9 @@ export class AddtaskModalComponent {
       date: this.getFormattedDate(),
       priority: this.selectedPrio || 'medium',
       subtasks: this.getFormattedSubtasks(),
-      status: 'todo',
+      status: this.initialStatus,
     };
+    return taskData;
   }
 
   getFormattedContacts(): string[] {

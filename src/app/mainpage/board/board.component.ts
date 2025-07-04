@@ -37,14 +37,14 @@ export class BoardComponent {
   constructor(public taskService: TasksFirbaseService) {}
   private subscription: Subscription = new Subscription();
   @Input() selcetedTask: Tasks | null = null;
+
+  filteredTasks: Tasks[] = [];
   dragStartDelay = 0;
   isTaskDetailVisible = false;
   isTaskAddVisible = false;
   selectedTaskForDetail: Tasks | null = null;
-
+  selectedStatus: string = 'todo';
   searchText: string = '';
-
-  filteredTasks: Tasks[] = [];
 
   ngOnInit() {
     this.filteredTasks = this.taskService.tasks;
@@ -128,7 +128,9 @@ export class BoardComponent {
     return '';
   }
 
-  openAddTask() {
+  openAddTask(status: string) {
+    console.log('Opening add task with status:', status);
+    this.selectedStatus = status;
     this.isTaskAddVisible = true;
   }
 

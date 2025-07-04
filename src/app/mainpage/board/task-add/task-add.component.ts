@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   ViewChild,
+  input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddtaskModalComponent } from '../../../shared/addtask-modal/addtask-modal.component';
@@ -17,6 +18,7 @@ import { AddtaskModalComponent } from '../../../shared/addtask-modal/addtask-mod
 })
 export class TaskAddComponent {
   @Input() isVisible = false;
+  @Input() initialStatus: string = 'todo';
   @Output() closeModal = new EventEmitter<void>();
   @ViewChild(AddtaskModalComponent) addTaskModal!: AddtaskModalComponent;
 
