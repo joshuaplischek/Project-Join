@@ -135,14 +135,14 @@
   .task-title {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #2A3647;
+    color: var(--text-color-dark-blue);
     margin: 0 0 24px 0;
     line-height: 1.2;
   }
 
   .task-description {
     font-size: clamp(1rem, 2vw, 1.1rem);
-    color: #2A3647;
+    color: var(--text-color-dark-blue);
     word-break: break-word;
 
   }
@@ -161,14 +161,14 @@
 
       .meta-label {
         font-size: clamp(1rem, 2vw, 1.1rem);
-        color: #2A3647;
+        color: var(--text-color-dark-blue);
         font-weight: 400;
         min-width: 120px;
       }
 
       .meta-value {
         font-size: clamp(1rem, 2vw, 1.1rem);
-        color: #2A3647;
+        color: var(--text-color-dark-blue);
         font-weight: 400;
       }
 
@@ -199,7 +199,7 @@
 
     .section-label {
       font-size: clamp(1rem, 2vw, 1.1rem);
-      color: #2A3647;
+      color: var(--text-color-dark-blue);
     }
 
     .assigned-users {
@@ -227,7 +227,7 @@
 
         .user-name {
           font-size: clamp(1rem, 2vw, 1.1rem);
-          color: #2A3647;
+          color: var(--text-color-dark-blue);
         }
       }
     }
@@ -249,7 +249,7 @@
         .checkbox {
           width: 16px;
           height: 16px;
-          border: 2px solid #2A3647;
+          border: 2px solid var(--text-color-dark-blue);
           border-radius: 3px;
           display: flex;
           align-items: center;
@@ -257,8 +257,8 @@
           transition: all 0.2s ease;
 
           &.checked {
-            background: #2A3647;
-            border-color: #2A3647;
+            background: var(--text-color-dark-blue);
+            border-color: var(--text-color-dark-blue);
 
             img {
               width: 10px;
@@ -270,7 +270,7 @@
 
         .subtask-text {
           font-size: 1rem;
-          color: #2A3647;
+          color: var(--text-color-dark-blue);
           transition: all 0.2s ease;
 
           &.completed {
@@ -315,7 +315,7 @@
     .divider {
       width: 1px;
       height: 24px;
-      background: #D1D1D1;
+      background: var(--grey-color);
       margin: 0 8px;
     }
   }
@@ -328,7 +328,7 @@
     label {
       display: block;
       font-size: clamp(1rem, 2vw, 1.1rem);
-      color: #2A3647;
+      color: var(--text-color-dark-blue);
       font-weight: 400;
       margin-bottom: 8px;
     }
@@ -337,23 +337,23 @@
     .form-textarea {
       width: 100%;
       padding: 16px 20px;
-      border: 1px solid #D1D1D1;
+      border: 1px solid var(--grey-color);
       border-radius: 10px;
       font-size: clamp(1rem, 2vw, 1.1rem);
-      color: #2A3647;
+      color: var(--text-color-dark-blue);
       outline: none;
       transition: border-color 0.2s ease;
 
       &:focus {
-        border-color: #29ABE2;
+        border-color: var(--accent-color-light);
       }
 
       &.error {
-        border-color: #FF3D00;
+        border-color: var(--error-color);
       }
 
       &::placeholder {
-        color: #D1D1D1;
+        color: var(--grey-color);
       }
     }
 
@@ -378,7 +378,7 @@
           padding: 4px;
 
           .mat-datepicker-toggle-default-icon {
-            color: #2A3647;
+            color: var(--text-color-dark-blue);
             width: 20px;
             height: 20px;
           }
@@ -414,7 +414,7 @@
       border-radius: 10px;
       background: #FFFFFF;
       box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-      color: #2A3647;
+      color: var(--text-color-dark-blue);
       font-size: 1rem;
       font-weight: 400;
       cursor: pointer;
@@ -471,7 +471,7 @@
       left: 0;
       right: 0;
       background: white;
-      border: 1px solid #D1D1D1;
+      border: 1px solid var(--grey-color);
       border-radius: 10px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
@@ -513,7 +513,7 @@
         .checkbox {
           width: 16px;
           height: 16px;
-          border: 2px solid #2A3647;
+          border: 2px solid var(--text-color-dark-blue);
           border-radius: 3px;
           display: flex;
           align-items: center;
@@ -521,8 +521,8 @@
           transition: all 0.2s ease;
 
           &.checked {
-            background: #2A3647;
-            border-color: #2A3647;
+            background: var(--text-color-dark-blue);
+            border-color: var(--text-color-dark-blue);
 
             img {
               width: 10px;
@@ -569,7 +569,7 @@
       height: 48px;
       border: none;
       border-radius: 10px;
-      background: #2A3647;
+      background: var(--text-color-dark-blue);
       color: white;
       font-size: 1.25rem;
       cursor: pointer;
@@ -601,7 +601,7 @@
       .checkbox {
         width: 16px;
         height: 16px;
-        border: 2px solid #2A3647;
+        border: 2px solid var(--text-color-dark-blue);
         border-radius: 3px;
         display: flex;
         align-items: center;
@@ -610,8 +610,8 @@
         transition: all 0.2s ease;
 
         &.checked {
-          background: #2A3647;
-          border-color: #2A3647;
+          background: var(--text-color-dark-blue);
+          border-color: var(--text-color-dark-blue);
 
           img {
             width: 10px;
@@ -624,7 +624,7 @@
       .subtask-text {
         flex: 1;
         font-size: 1rem;
-        color: #2A3647;
+        color: var(--text-color-dark-blue);
         transition: all 0.2s ease;
 
         &.completed {
@@ -644,7 +644,7 @@
         .divider {
           width: 1px;
           height: 16px;
-          background: #D1D1D1;
+          background: var(--grey-color);
           margin: 0 4px;
         }
       }
@@ -697,7 +697,7 @@
     margin-top: 32px;
     gap: 10px;
     padding-top: 24px;
-    border-top: 1px solid #D1D1D1;
+    border-top: 1px solid var(--grey-color);
 
     .btn {
       width: 120px;
@@ -718,8 +718,8 @@
 
       &.btn-secondary {
         background: white;
-        color: #2A3647;
-        border: 1px solid #D1D1D1;
+        color: var(--text-color-dark-blue);
+        border: 1px solid var(--grey-color);
 
         &:hover {
           background: rgba(42, 54, 71, 0.08);
@@ -727,16 +727,16 @@
       }
 
       &.btn-primary {
-        background: #2A3647;
+        background: var(--text-color-dark-blue);
         color: white;
 
         &:hover:not(:disabled) {
-          background: #29abe2;
+          background: var(--accent-color-light);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
         &:disabled {
-          background: #D1D1D1;
+          background: var(--grey-color);
           cursor: not-allowed;
         }
       }
@@ -751,7 +751,7 @@
       justify-content: center;
       align-items: center;
       padding: 0.5rem 1rem;
-      background: #2a3647;
+      background: var(--text-color-dark-blue);
       border: none;
       border-radius: 10px;
       transition: all 0.3s ease;
@@ -769,12 +769,12 @@
       }
 
       &:hover:not(:disabled) {
-        background: #29abe2;
+        background: var(--accent-color-light);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       }
 
       &:disabled {
-        background: #D1D1D1;
+        background: var(--grey-color);
         cursor: not-allowed;
 
         span {
@@ -788,7 +788,7 @@
     position: relative;
     width: 100%;
     background: white;
-    border: 1px solid #D1D1D1;
+    border: 1px solid var(--grey-color);
     border-radius: 10px;
     cursor: pointer;
     padding: 8px 12px;
@@ -801,7 +801,7 @@
     }
 
     .placeholder {
-      color: #D1D1D1;
+      color: var(--grey-color);
     }
 
     .dropdown {
@@ -812,7 +812,7 @@
       max-height: 220px;
       overflow-y: auto;
       background: white;
-      border: 1px solid #D1D1D1;
+      border: 1px solid var(--grey-color);
       border-radius: 0 0 10px 10px;
       z-index: 10;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);

@@ -35,7 +35,7 @@
     .border {
       width: 1px;
       height: 400px;
-      background-color: #D1D1D1;
+      background-color: var(--grey-color);
     }
   }
 }
@@ -62,16 +62,16 @@
   textarea,
   select {
     width: 100%;
-    padding: clamp(8px, 2vw, 12px);
+    padding: clamp(0.5rem, 2vw, 0.75rem);
     font-size: clamp(0.75rem, 1.5vw, 1rem);
-    border: 1px solid #D1D1D1;
+    border: 1px solid var(--grey-color);
     background-color: white;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &::placeholder {
-      color: #D1D1D1;
+      color: var(--grey-color);
       font-family: "mainFontRegular";
     }
 
@@ -167,7 +167,7 @@ mat-datepicker-toggle {
 
       img {
         transition: opacity 0.3s ease;
-        width: 16px;
+        width: 1rem;
 
         &.hide {
           opacity: 0;
@@ -199,7 +199,7 @@ mat-datepicker-toggle {
         .icon-check-button {
           background: none;
           border: none;
-          padding: 4px;
+          padding: 0.25rem;
           cursor: pointer;
           @include center;
           width: 24px;
@@ -207,14 +207,14 @@ mat-datepicker-toggle {
           position: static;
 
           img {
-            width: 16px;
+            width: 1rem;
             position: static;
             transform: none;
             pointer-events: none;
           }
 
           .close {
-            width: 14px;
+            width: 0.9rem;
           }
 
           &:hover {
@@ -237,20 +237,20 @@ mat-datepicker-toggle {
     .subtasks-list {
       max-height: 80px;
       overflow-y: auto;
-      margin-top: 8px;
+      margin-top: 0.5rem;
 
       &::-webkit-scrollbar {
-        width: 4px;
+        width: 0.25rem;
       }
 
       &::-webkit-scrollbar-track {
         background: #f1f1f1;
-        border-radius: 4px;
+        border-radius: 0.25rem;
       }
 
       &::-webkit-scrollbar-thumb {
         background: #A8A8A8;
-        border-radius: 4px;
+        border-radius: 0.25rem;
       }
 
       .subtask-item {
@@ -259,7 +259,7 @@ mat-datepicker-toggle {
         align-items: center;
         font-size: 0.9rem;
         padding: 0.5rem 0.5rem 0.5rem 1.2rem;
-        border-radius: 4px;
+        border-radius: 0.25rem;
         height: 40px;
         transition: all 0.3s ease;
         cursor: pointer;
@@ -267,7 +267,7 @@ mat-datepicker-toggle {
         &::before {
           content: "•";
           position: absolute;
-          left: 8px;
+          left: 0.5rem;
         }
 
         &:last-child {
@@ -308,10 +308,10 @@ mat-datepicker-toggle {
   position: relative;
   width: 100%;
   background: white;
-  border: 1px solid #D1D1D1;
+  border: 1px solid var(--grey-color);
   border-radius: 10px;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
 
   .selected {
     @include flex;
@@ -321,7 +321,7 @@ mat-datepicker-toggle {
   }
 
   .placeholder {
-    color: #D1D1D1;
+    color: var(--grey-color);
   }
 
   .dropdown {
@@ -332,7 +332,7 @@ mat-datepicker-toggle {
     max-height: 220px;
     overflow-y: auto;
     background: white;
-    border: 1px solid #D1D1D1;
+    border: 1px solid var(--grey-color);
     border-radius: 0 0 10px 10px;
     z-index: 10;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -344,8 +344,8 @@ mat-datepicker-toggle {
     @include flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 6px 16px;
+    gap: 0.75rem;
+    padding: 0.3rem 1rem;
     cursor: pointer;
 
     &:hover {
@@ -388,12 +388,12 @@ mat-datepicker-toggle {
   color: white;
   @include center;
   font-weight: bold;
-  padding: 6px;
+  padding: 0.3rem;
 }
 
 .selected-contacts-initials {
   @include flex;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .form-footer {
