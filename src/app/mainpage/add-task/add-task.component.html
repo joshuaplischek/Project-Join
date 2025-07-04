@@ -1,3 +1,12 @@
 <section class="add-task-wrapper ">
-  <app-addtask-modal></app-addtask-modal>
+
+  <app-addtask-modal (successMessage)="onTaskSuccess($event)"></app-addtask-modal>
+  @if (showSuccessMessage) {
+  <div class="success-message-container">
+    <div class="success-message">
+      {{ successMessage }}
+    </div>
+  </div>
+  }
+
 </section>

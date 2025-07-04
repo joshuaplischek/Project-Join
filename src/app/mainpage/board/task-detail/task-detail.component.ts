@@ -75,11 +75,11 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   }
 
   get hasAssignedUsers(): boolean {
-    return !!(this.task?.assignedTo && this.task.assignedTo.length > 0);
+    return this.task?.assignedTo ? this.task.assignedTo.length > 0 : false;
   }
 
   get hasSubtasks(): boolean {
-    return !!(this.task?.subtasks && this.task.subtasks.length > 0);
+    return this.task?.subtasks ? this.task.subtasks.length > 0 : false;
   }
 
   get assignedUsers(): string[] {
@@ -199,11 +199,16 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   }
 
   private canSaveTask(): boolean {
-    return !!(this.task?.id && this.validateForm());
+    return this.task?.id ? this.validateForm() : false;
   }
 
   validateForm(): boolean {
-    return !!(this.editTitle && this.editDate && this.editCategory && this.validateDate(this.editDate));
+    return this.editTitle &&
+      this.editDate &&
+      this.editCategory &&
+      this.validateDate(this.editDate)
+      ? true
+      : false;
   }
 
   validateDate(date: Date | null): boolean {

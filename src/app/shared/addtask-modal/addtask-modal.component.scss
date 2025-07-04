@@ -9,6 +9,8 @@
   justify-content: center;
 }
 
+
+
 .add-task-wrapper {
   @include flex(column);
   justify-content: space-between;
@@ -92,13 +94,40 @@
   }
 }
 
-mat-datepicker-toggle {
-  position: absolute;
-  right: 2%;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: auto;
+.date-field {
+  .date-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+
+
+    .form-input {
+      flex: 1;
+      padding-right: 50px;
+      margin: 0;
+    }
+
+    mat-datepicker-toggle {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: auto;
+      padding: 0.5rem;
+
+
+      .mat-datepicker-toggle-default-icon {
+        color: var(--text-color-dark-blue);
+        width: 20px;
+        height: 20px;
+
+      }
+    }
+  }
 }
+
+
 
 .taskOptions {
   .prio-wrapper {
@@ -135,6 +164,8 @@ mat-datepicker-toggle {
           height: auto;
         }
       }
+
+
 
       .urgent.active {
         background-color: var(--error-color);
@@ -392,8 +423,26 @@ mat-datepicker-toggle {
 }
 
 .selected-contacts-initials {
-  @include flex;
+  display: flex;
   gap: 0.5rem;
+
+  .contact-initials {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+
+    &.extra-count {
+      background: rgb(187, 187, 187);
+      color: white;
+      font-size: 0.9rem;
+    }
+  }
 }
 
 .form-footer {

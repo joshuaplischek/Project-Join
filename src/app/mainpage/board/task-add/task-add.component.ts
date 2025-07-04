@@ -4,7 +4,6 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddtaskModalComponent } from '../../../shared/addtask-modal/addtask-modal.component';
@@ -20,15 +19,23 @@ export class TaskAddComponent {
   @Input() isVisible = false;
   @Input() initialStatus: string = 'todo';
   @Output() closeModal = new EventEmitter<void>();
+  @Output() taskSuccess = new EventEmitter<string>(); // Neuer Event Emitter
   @ViewChild(AddtaskModalComponent) addTaskModal!: AddtaskModalComponent;
 
   ngAfterViewInit() {
     this.addTaskModal.taskCreated.subscribe(() => {
       this.close();
     });
+
+    // Success Message weiterleiten
+    this.addTaskModal.successMessage.subscribe((message: string) => {
+      this.taskSuccess.emit(message);
+    });
   }
+
   ngOnDestroy() {
     this.addTaskModal?.taskCreated.unsubscribe();
+    this.addTaskModal?.successMessage.unsubscribe();
   }
 
   close() {

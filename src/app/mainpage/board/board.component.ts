@@ -48,6 +48,9 @@ export class BoardComponent {
   showSearchContainer: boolean = false;
 
 
+  showSuccessMessage = false;
+  successMessage = '';
+
   ngOnInit() {
     this.filteredTasks = this.taskService.tasks;
     this.taskService.subTasks();
@@ -161,5 +164,13 @@ export class BoardComponent {
         element.title?.toLowerCase().includes(search) ||
         element.description?.toLowerCase().includes(search)
     );
+  }
+
+  onTaskSuccess(message: string) {
+    this.successMessage = message;
+    this.showSuccessMessage = true;
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 1500);
   }
 }

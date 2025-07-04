@@ -20,13 +20,13 @@
 
       <div class="date-field">
         <label for="dateInput">Due date<span class="warning">*</span></label>
-        <div class="input-wrapper" style="position: relative;">
+        <div class="date-input-container">
           <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minDate"
             placeholder="dd/mm/yyyy" (blur)="dateTouched = true" (focus)="picker.open()">
           <mat-datepicker-toggle matSuffix [for]="picker" >
             <img matDatepickerToggleIcon src="/assets/images/board/calender.svg" alt="calender icon">
           </mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker id="test-datepicker" #picker></mat-datepicker>
         </div>
         <div class="input-hint">
           @if (!date && dateTouched) {
@@ -166,10 +166,4 @@
       </button>
     </div>
   </section>
-
-  @if(showSuccessMessage){
-  <div class="success-message-container">
-    {{successMessage}}
-  </div>
-  }
 </section>
