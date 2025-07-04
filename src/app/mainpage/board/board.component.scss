@@ -261,3 +261,17 @@ label {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   border-radius: 24px;
 }
+
+.no-tasks {
+  background-color: rgba(255, 0, 0, 0.089);
+  border: 1px solid red;
+  border-radius: 10px;
+  color: red;
+  text-align: center;
+  align-content: center;
+  position: fixed;
+  top: 60%;
+  right: 45%;
+  width: 10vw;
+  height: 5vh;
+}

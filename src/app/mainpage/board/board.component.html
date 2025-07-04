@@ -157,6 +157,11 @@
           No tasks done
         </div>
       </div>
+      @if (filteredTasks.length === 0) {
+        <div class="no-tasks">
+          No Tasks found
+        </div>
+      }
     </div>
   </div>
 
