@@ -9,10 +9,8 @@
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
   border-radius: 24px;
   width: 100%;
-  max-width: 300px;
-  min-width: 150px;
-  min-height: 300px;
-  max-height: 400px;
+  max-width: 100%;
+  height: 300px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
@@ -26,7 +24,8 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
-    align-self: stretch;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -40,9 +39,11 @@
   border-radius: 8px;
   color: white;
   font-size: 1rem;
+
   &.blue {
     background: #0038ff;
   }
+
   &.green {
     background: #1fd7c1;
   }
@@ -55,6 +56,7 @@
 .card-description {
   color: #a8a8a8;
 }
+
 .progress-bar-container {
   display: flex;
   flex-direction: row;
@@ -62,6 +64,7 @@
   justify-content: center;
   align-self: stretch;
   gap: 10px;
+
   .custom-progress-bar {
     width: 128px;
     max-width: 128px;
@@ -72,12 +75,14 @@
     display: flex;
     align-items: center;
   }
+
   .progress-fill {
     height: 100%;
     background-color: #4589ff;
     width: 0%;
     transition: width 0.5s ease-in-out;
   }
+
   p {
     font-size: 12px;
   }
@@ -115,6 +120,7 @@
       border-radius: 45px;
       border: 2px solid white;
     }
+
     .m-l {
       margin-left: -7px;
     }

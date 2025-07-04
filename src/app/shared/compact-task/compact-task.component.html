@@ -1,12 +1,9 @@
 <div class="task-card-container" (click)="onTaskClick($event)">
   <div class="inner-container">
-    <p
-      [ngClass]="{
+    <p [ngClass]="{
       blue: task.category === 'User Story',
       green: task.category === 'Technical Task',
-    }"
-      class="card-category"
-    >
+    }" class="card-category">
       {{ task.category }}
     </p>
     <div>
@@ -16,21 +13,16 @@
       </p>
     </div>
     <div class="subtasks-container">
-      <!-- TODO Fortschritsbalken , Inline STyle entfernen-->
       @if (task.subtasks && task.subtasks.length > 0) {
       <div class="progress-bar-container">
         <div class="custom-progress-bar">
-          <div
-            class="progress-fill"
-            [style.width.%]="(getSubtasksDone() / getSubtaskLength()) * 100"
-          ></div>
+          <div class="progress-fill" [style.width.%]="(getSubtasksDone() / getSubtaskLength()) * 100"></div>
         </div>
         <div>
           <p>{{ getSubtasksDone() }}/{{ task.subtasks.length }} Subtask</p>
         </div>
       </div>
       }
-      <!-- TODO Subtasks als Zahl laden -->
     </div>
     <div class="user-badges-prio-container">
       <!-- <p class="card-users">{{task.assignedTo}}</p> -->
