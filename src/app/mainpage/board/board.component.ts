@@ -45,6 +45,8 @@ export class BoardComponent {
   selectedTaskForDetail: Tasks | null = null;
   selectedStatus: string = 'todo';
   searchText: string = '';
+  showSearchContainer: boolean = false;
+
 
   ngOnInit() {
     this.filteredTasks = this.taskService.tasks;
