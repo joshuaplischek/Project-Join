@@ -27,8 +27,12 @@
     <div class="toDoList">
       <div class="list-heading">
         <h3>To do</h3>
-        <button class="addTaskToListBtn" (click)="openAddTask('todo')"><img src="/assets/images/board/add.svg"
-            alt="add button"></button>
+        <button class="addTaskToListBtn" (click)="openAddTask('todo')"><svg class="add-icon-svg" width="10" height="11"
+            viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+            <path d="M9 5.57544L1 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
       </div>
       <div id="todo" cdkDropList #toDoList="cdkDropList" [cdkDropListData]="todoTasks"
         [cdkDropListConnectedTo]="[inProgressList, awaitFeedbackList, doneList]" (cdkDropListDropped)="drop($event)"
@@ -48,8 +52,12 @@
     <div class="inProgressList">
       <div class="list-heading">
         <h3>In progress</h3>
-        <button class="addTaskToListBtn" (click)="openAddTask('inprogress')"><img src="/assets/images/board/add.svg"
-            alt="add button"></button>
+        <button class="addTaskToListBtn" (click)="openAddTask('inprogress')"><svg class="add-icon-svg" width="10"
+            height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+            <path d="M9 5.57544L1 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
       </div>
       <div id="inprogress" cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="inProgressTasks"
         [cdkDropListConnectedTo]="[toDoList, awaitFeedbackList, doneList]" (cdkDropListDropped)="drop($event)"
@@ -68,8 +76,12 @@
     <div class="awaitFeedbackList">
       <div class="list-heading">
         <h3>Await feedback</h3>
-        <button class="addTaskToListBtn" (click)="openAddTask('awaitfeedback')"><img src="/assets/images/board/add.svg"
-            alt="add button"></button>
+        <button class="addTaskToListBtn" (click)="openAddTask('awaitfeedback')"><svg class="add-icon-svg" width="10"
+            height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+            <path d="M9 5.57544L1 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
       </div>
       <div id="awaitfeedback" cdkDropList #awaitFeedbackList="cdkDropList" [cdkDropListData]="awaitFeedbackTasks"
         [cdkDropListConnectedTo]="[toDoList, inProgressList, doneList]" (cdkDropListDropped)="drop($event)"
