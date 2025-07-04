@@ -39,13 +39,13 @@
   transform: translateX(100%);
   transition: transform 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding-right: 0.1rem;
 }
 
 .task-detail-container {
-  padding: 2rem;
-  position: relative;
   overflow-y: auto;
   max-height: 90vh;
+  padding: 1.5rem 2rem;
 
   &::-webkit-scrollbar-button {
     display: none;
@@ -53,19 +53,21 @@
 
   &::-webkit-scrollbar {
     width: 8px;
+    height: 100%;
   }
 
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #ffffff;
     border-radius: 10px;
+    margin: 1.5rem;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: #dfdfdf;
     border-radius: 10px;
 
     &:hover {
-      background: #a8a8a8;
+      background: #dfdfdf;
     }
   }
 }
@@ -81,7 +83,7 @@
     color: white;
     padding: 4px 25px;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     text-transform: capitalize;
 
@@ -118,8 +120,20 @@
 }
 
 .task-content {
+  .task-form {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    gap: 1.5rem;
+    align-content: flex-start;
+
+    > :last-child {
+      align-self: flex-end;
+    }
+  }
+
   .task-title {
-    font-size: 61px;
+    font-size: 3.5rem;
     font-weight: 700;
     color: #2A3647;
     margin: 0 0 24px 0;
@@ -127,29 +141,33 @@
   }
 
   .task-description {
-    font-size: 20px;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     color: #2A3647;
-    margin-bottom: 16px;
-    line-height: 1.5;
+    word-break: break-word;
+
   }
 
   .task-meta {
-    margin-bottom: 32px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    gap: 1rem;
+
 
     .meta-item {
       display: flex;
       align-items: center;
-      margin-bottom: 16px;
+
 
       .meta-label {
-        font-size: 20px;
+        font-size: clamp(1rem, 2vw, 1.1rem);
         color: #2A3647;
         font-weight: 400;
         min-width: 120px;
       }
 
       .meta-value {
-        font-size: 20px;
+        font-size: clamp(1rem, 2vw, 1.1rem);
         color: #2A3647;
         font-weight: 400;
       }
@@ -171,27 +189,29 @@
     }
   }
 
+
   .assigned-to-section,
   .subtasks-section {
-    margin-bottom: 32px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    gap: 1rem;
 
     .section-label {
-      font-size: 20px;
+      font-size: clamp(1rem, 2vw, 1.1rem);
       color: #2A3647;
-      font-weight: 400;
-      display: block;
-      margin-bottom: 16px;
     }
 
     .assigned-users {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0.5rem;
 
       .user-item {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 1rem;
+        padding: 0.25rem 0 0.25rem 0.75rem;
 
         .user-badge {
           width: 42px;
@@ -202,12 +222,11 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 12px;
-          font-weight: 400;
+          font-size: 1rem;
         }
 
         .user-name {
-          font-size: 19px;
+          font-size: clamp(1rem, 2vw, 1.1rem);
           color: #2A3647;
         }
       }
@@ -218,7 +237,7 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 12px;
+        padding: 0.25rem 0 0.25rem 0.75rem;
         border-radius: 8px;
         margin-bottom: 8px;
         transition: background-color 0.2s ease;
@@ -250,7 +269,7 @@
         }
 
         .subtask-text {
-          font-size: 16px;
+          font-size: 1rem;
           color: #2A3647;
           transition: all 0.2s ease;
 
@@ -266,7 +285,6 @@
   .task-actions {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     gap: 8px;
 
     .action-btn {
@@ -279,24 +297,18 @@
       padding: 8px 12px;
       border-radius: 8px;
       transition: background-color 0.2s ease;
-      font-size: 16px;
-      color: #2A3647;
+      font-size: 1rem;
+      color: var(--nav-bg-color);
+      transition: all 0.3s ease;
 
       &:hover {
-        background-color: rgba(42, 54, 71, 0.08);
+        color: var(--accent-color-light);
+        transform: scale(1.05);
       }
 
       img {
-        width: 16px;
-        height: 16px;
-      }
-
-      &.delete-btn {
-        color: #FF3D00;
-
-        img {
-          filter: brightness(0) saturate(100%) invert(15%) sepia(95%) saturate(7482%) hue-rotate(4deg) brightness(102%) contrast(105%);
-        }
+        width: 20px;
+        height: 20px;
       }
     }
 
@@ -315,7 +327,7 @@
 
     label {
       display: block;
-      font-size: 20px;
+      font-size: clamp(1rem, 2vw, 1.1rem);
       color: #2A3647;
       font-weight: 400;
       margin-bottom: 8px;
@@ -327,7 +339,7 @@
       padding: 16px 20px;
       border: 1px solid #D1D1D1;
       border-radius: 10px;
-      font-size: 20px;
+      font-size: clamp(1rem, 2vw, 1.1rem);
       color: #2A3647;
       outline: none;
       transition: border-color 0.2s ease;
@@ -381,8 +393,8 @@
     }
 
     .error-message {
-      color: #FF3D00;
-      font-size: 14px;
+      color: var(--error-color);
+      font-size: 0.75rem;
       margin-top: 4px;
     }
   }
@@ -403,7 +415,7 @@
       background: #FFFFFF;
       box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
       color: #2A3647;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: 400;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -493,7 +505,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 12px;
+            font-size: 0.75rem;
             font-weight: 400;
           }
         }
@@ -537,7 +549,7 @@
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 400;
     }
   }
@@ -559,7 +571,7 @@
       border-radius: 10px;
       background: #2A3647;
       color: white;
-      font-size: 24px;
+      font-size: 1.25rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -611,7 +623,7 @@
 
       .subtask-text {
         flex: 1;
-        font-size: 16px;
+        font-size: 1rem;
         color: #2A3647;
         transition: all 0.2s ease;
 
@@ -696,7 +708,7 @@
       align-items: center;
       padding: 0.5rem 1rem;
       border-radius: 10px;
-      font-size: 20px;
+      font-size: clamp(1rem, 2vw, 1.1rem);
       font-weight: 400;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -886,15 +898,4 @@
     padding: 24px;
   }
 
-  .task-content {
-    .task-title {
-      font-size: 32px;
-    }
-
-    .task-description,
-    .meta-label,
-    .meta-value {
-      font-size: 16px;
-    }
-  }
 }
