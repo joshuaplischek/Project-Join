@@ -23,7 +23,7 @@
         <div class="date-input-container">
           <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minDate"
             placeholder="dd/mm/yyyy" (blur)="dateTouched = true" (focus)="picker.open()">
-          <mat-datepicker-toggle matSuffix [for]="picker" >
+          <mat-datepicker-toggle matSuffix [for]="picker">
             <img matDatepickerToggleIcon src="/assets/images/board/calender.svg" alt="calender icon">
           </mat-datepicker-toggle>
           <mat-datepicker id="test-datepicker" #picker></mat-datepicker>
