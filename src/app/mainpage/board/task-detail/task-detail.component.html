@@ -19,7 +19,8 @@
       </div>
 
       <div class="task-content">
-        <div *ngIf="!isEditMode">
+        @if (!isEditMode) {
+        <div class="task-form">
           <h2 class="task-title">{{ task?.title }}</h2>
           <p class="task-description">{{ task?.description }}</p>
 
@@ -46,7 +47,8 @@
             </div>
           </div>
 
-          <div class="assigned-to-section" *ngIf="hasAssignedUsers">
+          @if (hasAssignedUsers) {
+          <div class="assigned-to-section">
             <span class="section-label">Assigned To:</span>
             <div class="assigned-users">
               <div class="user-item" *ngFor="let user of assignedUsers">
@@ -57,8 +59,10 @@
               </div>
             </div>
           </div>
+          }
 
-          <div class="subtasks-section" *ngIf="hasSubtasks">
+          @if (hasSubtasks) {
+          <div class="subtasks-section">
             <span class="section-label">Subtasks</span>
             <div class="subtasks-list">
               <div
@@ -81,6 +85,7 @@
               </div>
             </div>
           </div>
+          }
 
           <div class="task-actions">
             <button class="action-btn delete-btn" (click)="deleteTask()">
@@ -116,22 +121,17 @@
             </button>
           </div>
         </div>
+        }
 
-        <div *ngIf="isEditMode" class="edit-form">
+        @if (isEditMode) {
+        <div class="edit-form">
           <div class="form-group">
             <label for="title">Title*</label>
-            <input
-              type="text"
-              id="title"
-              [(ngModel)]="editTitle"
-              (blur)="titleTouched = true"
-              class="form-input"
-              [class.error]="titleTouched && !editTitle"
-              placeholder="Enter a title"
-            />
-            <div *ngIf="titleTouched && !editTitle" class="error-message">
-              This field is required
-            </div>
+            <input type="text" id="title" [(ngModel)]="editTitle" (blur)="titleTouched = true" class="form-input"
+              [class.error]="titleTouched && !editTitle" placeholder="Enter a title">
+            @if (titleTouched && !editTitle) {
+            <div class="error-message">This field is required</div>
+            }
           </div>
 
           <div class="form-group">
@@ -164,15 +164,13 @@
               <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
             </div>
             <mat-datepicker #picker></mat-datepicker>
-            <div *ngIf="dateTouched && !editDate" class="error-message">
-              This field is required
-            </div>
-            <div
-              *ngIf="dateTouched && editDate && !validateDate(editDate)"
-              class="error-message"
-            >
-              Date cannot be in the past
-            </div>
+            @if (dateTouched && !editDate) {
+            <div class="error-message">This field is required</div>
+            }
+            @if (dateTouched && editDate && !validateDate(editDate)) {
+            <div class="error-message">Date cannot be in the
+              past</div>
+            }
           </div>
 
           <div class="form-group">
@@ -293,14 +291,9 @@
                 readonly
               />
 
-              <div class="dropdown-content" *ngIf="categoryDropDownOpen">
-                <div
-                  class="dropdown-item"
-                  (click)="
-                    editCategory = 'Technical Task';
-                    categoryDropDownOpen = false
-                  "
-                >
+              @if (categoryDropDownOpen) {
+              <div class="dropdown-content">
+                <div class="dropdown-item" (click)="editCategory = 'Technical Task'; categoryDropDownOpen = false">
                   <span>Technical Task</span>
                 </div>
                 <div
@@ -312,10 +305,11 @@
                   <span>User Story</span>
                 </div>
               </div>
+              }
             </div>
-            <div *ngIf="categoryTouched && !editCategory" class="error-message">
-              This field is required
-            </div>
+            @if (categoryTouched && !editCategory) {
+            <div class="error-message">This field is required</div>
+            }
           </div>
 
           <div class="form-group">
@@ -341,21 +335,11 @@
               </button>
             </div>
 
-            <div class="subtasks-list" *ngIf="editSubtasks.length > 0">
-              <div
-                class="subtask-item"
-                *ngFor="let subtask of editSubtasks; let i = index"
-              >
-                <div
-                  class="checkbox"
-                  [class.checked]="subtask.done"
-                  (click)="toggleEditSubtask(i)"
-                >
-                  <img
-                    *ngIf="subtask.done"
-                    src="/assets/images/icons/icon-check.svg"
-                    alt="checked"
-                  />
+            @if (editSubtasks.length > 0) {
+            <div class="subtasks-list">
+              <div class="subtask-item" *ngFor="let subtask of editSubtasks; let i = index">
+                <div class="checkbox" [class.checked]="subtask.done" (click)="toggleEditSubtask(i)">
+                  <img *ngIf="subtask.done" src="/assets/images/icons/icon-check.svg" alt="checked">
                 </div>
                 <span class="subtask-text" [class.completed]="subtask.done">{{
                   subtask.title
@@ -382,6 +366,7 @@
                 </div>
               </div>
             </div>
+            }
           </div>
 
           <div class="edit-actions">
@@ -403,6 +388,7 @@
             </button>
           </div>
         </div>
+        }
       </div>
     </div>
   </div>

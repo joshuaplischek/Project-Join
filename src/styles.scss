@@ -2,6 +2,7 @@
 
 :root {
   --nav-bg-color: #2a3647;
+  --text-color-dark-blue: #2a3647;
   --nav-bg-hover: #2a3d59;
   --main-bg-color: #f6f7f8;
   --grey-color: #d1d1d1;
@@ -184,6 +185,6 @@ h2 {
   }
 }
 
-app-board{
-  overflow-y : auto;
+app-board {
+  overflow-y: auto;
 }
