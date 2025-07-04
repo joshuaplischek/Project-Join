@@ -126,10 +126,6 @@
     align-items: flex-start;
     gap: 1.5rem;
     align-content: flex-start;
-
-    > :last-child {
-      align-self: flex-end;
-    }
   }
 
   .task-title {
@@ -137,7 +133,6 @@
     font-weight: 700;
     color: var(--text-color-dark-blue);
     margin: 0 0 24px 0;
-    line-height: 1.2;
   }
 
   .task-description {
@@ -240,7 +235,7 @@
         padding: 0.25rem 0 0.25rem 0.75rem;
         border-radius: 8px;
         margin-bottom: 8px;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.3s ease;
 
         &:hover {
           background: rgba(42, 54, 71, 0.04);
@@ -254,7 +249,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s ease;
+          transition: all 0.3s ease;
 
           &.checked {
             background: var(--text-color-dark-blue);
@@ -271,7 +266,7 @@
         .subtask-text {
           font-size: 1rem;
           color: var(--text-color-dark-blue);
-          transition: all 0.2s ease;
+          transition: all 0.3s ease;
 
           &.completed {
             text-decoration: line-through;
@@ -286,6 +281,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    align-self: flex-end;
 
     .action-btn {
       display: flex;
@@ -296,7 +292,7 @@
       cursor: pointer;
       padding: 8px 12px;
       border-radius: 8px;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.3s ease;
       font-size: 1rem;
       color: var(--nav-bg-color);
       transition: all 0.3s ease;
@@ -342,7 +338,7 @@
       font-size: clamp(1rem, 2vw, 1.1rem);
       color: var(--text-color-dark-blue);
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.3s ease;
 
       &:focus {
         border-color: var(--accent-color-light);
@@ -486,7 +482,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.3s ease;
 
         &:hover {
           background: rgba(42, 54, 71, 0.08);
@@ -518,7 +514,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s ease;
+          transition: all 0.3s ease;
 
           &.checked {
             background: var(--text-color-dark-blue);
@@ -576,7 +572,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.3s ease;
 
       &:hover {
         background: #1a252f;
@@ -592,7 +588,7 @@
       padding: 12px;
       border-radius: 8px;
       margin-bottom: 8px;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.3s ease;
 
       &:hover {
         background: rgba(42, 54, 71, 0.04);
@@ -607,7 +603,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
 
         &.checked {
           background: var(--text-color-dark-blue);
@@ -625,7 +621,7 @@
         flex: 1;
         font-size: 1rem;
         color: var(--text-color-dark-blue);
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
 
         &.completed {
           text-decoration: line-through;
@@ -639,7 +635,7 @@
         gap: 8px;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
 
         .divider {
           width: 1px;
@@ -661,7 +657,7 @@
         cursor: pointer;
         padding: 4px;
         border-radius: 4px;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.3s ease;
 
         img {
           width: 16px;

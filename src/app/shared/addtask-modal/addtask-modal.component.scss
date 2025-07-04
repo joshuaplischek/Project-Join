@@ -392,8 +392,26 @@ mat-datepicker-toggle {
 }
 
 .selected-contacts-initials {
-  @include flex;
+  display: flex;
   gap: 0.5rem;
+
+  .contact-initials {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+
+    &.extra-count {
+      background: rgb(187, 187, 187);
+      color: white;
+      font-size: 0.9rem;
+    }
+  }
 }
 
 .form-footer {
