@@ -20,7 +20,7 @@
               <span class="meta-label">Due date:</span>
               <span class="meta-value">{{ task?.date?.toDate() | date:'dd/MM/yyyy' }}</span>
             </div>
-            
+
             <div class="meta-item">
               <span class="meta-label">Priority:</span>
               <div class="priority-container">
@@ -68,70 +68,46 @@
         <div *ngIf="isEditMode" class="edit-form">
           <div class="form-group">
             <label for="title">Title*</label>
-            <input 
-              type="text" 
-              id="title"
-              [(ngModel)]="editTitle"
-              (blur)="titleTouched = true"
-              class="form-input"
-              [class.error]="titleTouched && !editTitle"
-              placeholder="Enter a title">
+            <input type="text" id="title" [(ngModel)]="editTitle" (blur)="titleTouched = true" class="form-input"
+              [class.error]="titleTouched && !editTitle" placeholder="Enter a title">
             <div *ngIf="titleTouched && !editTitle" class="error-message">This field is required</div>
           </div>
 
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea 
-              id="description"
-              [(ngModel)]="editDescription"
-              class="form-textarea"
-              placeholder="Enter a Description"
-              rows="4">
+            <textarea id="description" [(ngModel)]="editDescription" class="form-textarea"
+              placeholder="Enter a Description" rows="4">
             </textarea>
           </div>
 
           <div class="form-group">
             <label for="date">Due date*</label>
             <div class="date-input-container">
-              <input 
-                matInput 
-                [matDatepicker]="picker"
-                [(ngModel)]="editDate"
-                [min]="minDate"
-                (blur)="dateTouched = true"
-                class="form-input"
-                [class.error]="dateTouched && (!editDate || !validateDate(editDate))"
-                placeholder="dd/mm/yyyy">
+              <input matInput [matDatepicker]="picker" [(ngModel)]="editDate" [min]="minDate"
+                (blur)="dateTouched = true" class="form-input"
+                [class.error]="dateTouched && (!editDate || !validateDate(editDate))" placeholder="dd/mm/yyyy">
               <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
             </div>
             <mat-datepicker #picker></mat-datepicker>
             <div *ngIf="dateTouched && !editDate" class="error-message">This field is required</div>
-            <div *ngIf="dateTouched && editDate && !validateDate(editDate)" class="error-message">Date cannot be in the past</div>
+            <div *ngIf="dateTouched && editDate && !validateDate(editDate)" class="error-message">Date cannot be in the
+              past</div>
           </div>
 
           <div class="form-group">
             <label>Priority</label>
             <div class="priority-buttons">
-              <button 
-                type="button"
-                class="priority-btn urgent"
-                [class.active]="editPriority === 'urgent'"
+              <button type="button" class="priority-btn urgent" [class.active]="editPriority === 'urgent'"
                 (click)="selectPrio('urgent')">
                 Urgent
                 <img src="/assets/images/board/prio-urgent.svg" alt="urgent">
               </button>
-              <button 
-                type="button"
-                class="priority-btn medium"
-                [class.active]="editPriority === 'medium'"
+              <button type="button" class="priority-btn medium" [class.active]="editPriority === 'medium'"
                 (click)="selectPrio('medium')">
                 Medium
                 <img src="/assets/images/board/prio-medium.svg" alt="medium">
               </button>
-              <button 
-                type="button"
-                class="priority-btn low"
-                [class.active]="editPriority === 'low'"
+              <button type="button" class="priority-btn low" [class.active]="editPriority === 'low'"
                 (click)="selectPrio('low')">
                 Low
                 <img src="/assets/images/board/prio-low.svg" alt="low">
@@ -151,7 +127,8 @@
                 @for (group of contactService.getGroupedContacts(); track group.letter) {
                 <div class="group">
                   @for (contact of group.contacts; track contact.id) {
-                  <label class="dropdown-option" [class.selected]="isSelected(contact)" (click)="toggleContact(contact)">
+                  <label class="dropdown-option" [class.selected]="isSelected(contact)"
+                    (click)="toggleContact(contact)">
                     <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
                       {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
                     </span>
@@ -182,16 +159,10 @@
           <div class="form-group">
             <label for="category">Category*</label>
             <div class="dropdown-container">
-              <input 
-                type="text"
-                class="form-input dropdown-input"
-                [(ngModel)]="editCategory"
-                (focus)="categoryDropDownOpen = true"
-                (blur)="onCategoryBlur()"
-                [class.error]="categoryTouched && !editCategory"
-                placeholder="Select task category"
-                readonly>
-              
+              <input type="text" class="form-input dropdown-input" [(ngModel)]="editCategory"
+                (focus)="categoryDropDownOpen = true" (blur)="onCategoryBlur()"
+                [class.error]="categoryTouched && !editCategory" placeholder="Select task category" readonly>
+
               <div class="dropdown-content" *ngIf="categoryDropDownOpen">
                 <div class="dropdown-item" (click)="editCategory = 'Technical Task'; categoryDropDownOpen = false">
                   <span>Technical Task</span>
@@ -207,20 +178,14 @@
           <div class="form-group">
             <label>Subtasks</label>
             <div class="subtasks-input">
-              <input 
-                type="text"
-                class="form-input"
-                placeholder="Add new subtask"
-                #subtaskInput
+              <input type="text" class="form-input" placeholder="Add new subtask" #subtaskInput
                 (keyup.enter)="addSubtask(subtaskInput.value); subtaskInput.value = ''">
-              <button 
-                type="button"
-                class="add-subtask-btn"
+              <button type="button" class="add-subtask-btn"
                 (click)="addSubtask(subtaskInput.value); subtaskInput.value = ''">
                 +
               </button>
             </div>
-            
+
             <div class="subtasks-list" *ngIf="editSubtasks.length > 0">
               <div class="subtask-item" *ngFor="let subtask of editSubtasks; let i = index">
                 <div class="checkbox" [class.checked]="subtask.done" (click)="toggleEditSubtask(i)">
@@ -244,11 +209,7 @@
             <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
               Cancel
             </button>
-            <button 
-              type="button" 
-              class="button-blue"
-              [disabled]="!validateForm()"
-              (click)="saveTask()">
+            <button type="button" class="button-blue" [disabled]="!validateForm()" (click)="saveTask()">
               <span>Ok</span>
               <img src="/assets/images/icons/icon-check.svg" alt="check icon">
             </button>

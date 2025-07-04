@@ -35,15 +35,39 @@
   width: 525px;
   max-width: 525px;
   max-height: 90vh;
-  overflow-y: auto;
+  overflow: hidden;
   transform: translateX(100%);
   transition: transform 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .task-detail-container {
-  padding: 48px;
+  padding: 2rem;
   position: relative;
+  overflow-y: auto;
+  max-height: 90vh;
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+
+    &:hover {
+      background: #a8a8a8;
+    }
+  }
 }
 
 .task-header {
@@ -325,22 +349,22 @@
       display: flex;
       align-items: center;
       position: relative;
-      
+
       .form-input {
         flex: 1;
         padding-right: 50px;
         margin: 0;
       }
-      
+
       mat-datepicker-toggle {
         position: absolute;
         right: 15px;
-        
+
         button {
           border: none;
           background: transparent;
           padding: 4px;
-          
+
           .mat-datepicker-toggle-default-icon {
             color: #2A3647;
             width: 20px;
@@ -396,7 +420,7 @@
       &.urgent.active {
         background-color: var(--error-color);
         color: white;
-        
+
         img {
           filter: brightness(0) invert(1);
         }
@@ -405,7 +429,7 @@
       &.medium.active {
         background-color: var(--warning-color);
         color: white;
-        
+
         img {
           filter: brightness(0) invert(1);
         }
@@ -414,7 +438,7 @@
       &.low.active {
         background-color: var(--success-color);
         color: white;
-        
+
         img {
           filter: brightness(0) invert(1);
         }
@@ -740,7 +764,7 @@
       &:disabled {
         background: #D1D1D1;
         cursor: not-allowed;
-        
+
         span {
           color: #888;
         }
@@ -826,8 +850,8 @@
       .contact-name {
         color: #fff;
       }
-      
-      & + .dropdown-option.selected {
+
+      &+.dropdown-option.selected {
         margin-top: -1px;
       }
     }

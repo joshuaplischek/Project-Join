@@ -222,6 +222,7 @@ export class AddtaskModalComponent implements OnInit {
     this.selectedPrio = 'medium';
     this.category = '';
     this.selectedContacts = [];
+    this.subtasks = [];
     this.categoryDropDownOpen = false;
     this.contactDropDownOpen = false;
     this.titleTouched = false;
