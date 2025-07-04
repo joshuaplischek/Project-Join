@@ -164,8 +164,6 @@
       align-items: flex-start;
       justify-content: space-between;
       width: 100%;
-      overflow: scroll;
-
       >.list-heading {
         >h3 {
           height: auto;
@@ -191,7 +189,7 @@
     height: 100%;
     align-items: flex-start;
     flex-direction: row;
-    overflow: scroll;
+    overflow-x: scroll;
   }
 }
 
@@ -274,3 +272,5 @@ label {
   left: 50%;
   padding: 1rem
 }
+
+

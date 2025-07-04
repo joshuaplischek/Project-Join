@@ -35,6 +35,11 @@
   position: relative;
 }
 
+app-board {
+  overflow-y: scroll;
+  margin-bottom: 2rem;
+}
+
 a {
   text-decoration: none;
   color: white;
