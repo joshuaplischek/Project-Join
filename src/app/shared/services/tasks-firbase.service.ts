@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
-import { 
-  Firestore, 
-  collection, 
-  addDoc, 
-  doc, 
-  updateDoc, 
+import {
+  Firestore,
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
   onSnapshot,
   Timestamp,
-  serverTimestamp 
+  serverTimestamp,
 } from '@angular/fire/firestore';
-import { Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
+import { Subtask, Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -18,9 +18,10 @@ import { Subject } from 'rxjs';
 export class TasksFirbaseService {
   firestore: Firestore = inject(Firestore);
   tasks: Tasks[] = [];
+  subtasks: Subtask[] = [];
 
   tasksChanged = new Subject<void>();
-    private unsubscribe: () => void;
+  private unsubscribe: () => void;
 
   constructor() {
     this.unsubscribe = this.subTasks();
@@ -47,15 +48,20 @@ export class TasksFirbaseService {
   }
 
   convertDate(date: Date | Timestamp | undefined): Timestamp {
-  if (date instanceof Date) {
-    return Timestamp.fromDate(date);
-  } else if (date instanceof Timestamp) {
-    return date;
+    if (date instanceof Date) {
+      return Timestamp.fromDate(date);
+    } else if (date instanceof Timestamp) {
+      return date;
+    }
+    return Timestamp.now();
   }
-  return Timestamp.now();
-}
 
   setTasksObject(obj: TasksFirestoreData, id: string): Tasks {
+    const subtask = Array.isArray(obj.subtasks)
+      ? obj.subtasks.map((title) =>
+          typeof title === 'string' ? { title, done: false } : title
+        )
+      : [];
     return {
       id: id,
       assignedTo: obj.assignedTo || [],
@@ -64,26 +70,25 @@ export class TasksFirbaseService {
       description: obj.description || '',
       priority: obj.priority || '',
       status: obj.status || '',
-      subtasks: obj.subtasks || [],
+      subtasks: subtask || [],
       title: obj.title || '',
     };
   }
 
-async addTask(formData: TasksFirestoreData) {
-  try {
-    const tasksCollection = this.getTasks();
-    const taskData = {
-      ...formData,
-      status: 'todo',
-      date: this.convertDate(formData.date)
-    };
-    const docRef = await addDoc(tasksCollection, taskData);
-    this.tasksChanged.next();
-    return docRef.id;
-  } catch (error) {
-    throw error;
+  async addTask(formData: TasksFirestoreData) {
+    try {
+      const tasksCollection = this.getTasks();
+      const taskData = {
+        ...formData,
+        date: this.convertDate(formData.date),
+      };
+      const docRef = await addDoc(tasksCollection, taskData);
+      this.tasksChanged.next();
+      return docRef.id;
+    } catch (error) {
+      throw error;
+    }
   }
-}
 
   ngOnDestroy() {
     if (this.unsubscribe) {

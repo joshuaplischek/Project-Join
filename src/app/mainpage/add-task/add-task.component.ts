@@ -10,4 +10,15 @@ import { AddtaskModalComponent } from '../../shared/addtask-modal/addtask-modal.
 })
 export class AddTaskComponent {
   constructor() {}
+
+  showSuccessMessage = false;
+  successMessage = '';
+
+  onTaskSuccess(message: string) {
+    this.successMessage = message;
+    this.showSuccessMessage = true;
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 1500);
+  }
 }

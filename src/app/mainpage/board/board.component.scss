@@ -2,15 +2,13 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem)
-    clamp(1rem, 4vw, 5rem);
+  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 5rem);
 
   @media (max-width: 1200px) {
     padding: 2rem 4vw 1rem 2vw;
   }
 
-  @media (max-width: 1024px) {
-  }
+  @media (max-width: 1024px) {}
 
   @media (max-width: 700px) {
     padding: 1rem 2vw 0.5rem 2vw;
@@ -34,6 +32,7 @@
 
     .button-blue {
       height: 46px;
+
       @media (max-width: 767px) {
         display: none;
       }
@@ -125,18 +124,27 @@
       gap: 10px;
       width: 24px;
       height: 24px;
-      border: 2px solid #2a3647;
+      border: 2px solid var(--text-color-dark-blue);
       border-radius: 8px;
+
+      &:hover {
+        border: 2px solid var(--accent-color-light);
+
+        .add-icon-svg path {
+          stroke: var(--accent-color-light);
+        }
+      }
     }
   }
 
   @media (max-width: 1323px) {
+
     .toDoList,
     .inProgressList,
     .awaitFeedbackList,
     .doneList {
-      > .list-heading {
-        > h3 {
+      >.list-heading {
+        >h3 {
           height: 60px;
         }
       }
@@ -156,13 +164,13 @@
       align-items: flex-start;
       justify-content: space-between;
       width: 100%;
-      overflow: scroll;
-      > .list-heading {
-        > h3 {
+      >.list-heading {
+        >h3 {
           height: auto;
         }
       }
     }
+
     .list-heading {
       margin: 1.5rem 0;
     }
@@ -181,7 +189,7 @@
     height: 100%;
     align-items: flex-start;
     flex-direction: row;
-    overflow: scroll;
+    overflow-x: scroll;
   }
 }
 
@@ -207,6 +215,10 @@
 
 label {
   display: none;
+}
+
+.cdk-drag {
+  width: 100%;
 }
 
 .cdk-drag-preview {
@@ -247,3 +259,18 @@ label {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   border-radius: 24px;
 }
+
+.no-tasks {
+  background-color: rgba(255, 0, 0, 0.089);
+  border: 1px dashed red;
+  border-radius: 10px;
+  color: red;
+  text-align: center;
+  align-content: center;
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  padding: 1rem
+}
+
+

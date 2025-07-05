@@ -1,7 +1,8 @@
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 :root {
   --nav-bg-color: #2a3647;
+  --text-color-dark-blue: #2a3647;
   --nav-bg-hover: #2a3d59;
   --main-bg-color: #f6f7f8;
   --grey-color: #d1d1d1;
@@ -34,6 +35,11 @@
   position: relative;
 }
 
+app-board {
+  overflow-y: scroll;
+  margin-bottom: 2rem;
+}
+
 a {
   text-decoration: none;
   color: white;
@@ -48,7 +54,6 @@ body {
 }
 
 @media (max-width: 1024px) {
-
   html,
   body {
     overflow: hidden;
@@ -128,7 +133,7 @@ h2 {
 }
 
 .button-white-border {
-  border: 1px solid #2A3647;
+  border: 1px solid #2a3647;
   background-color: white;
   display: flex;
   flex-direction: row;
@@ -151,7 +156,7 @@ h2 {
   }
 
   &:hover {
-    border: 1px solid #29ABE2;
+    border: 1px solid #29abe2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 }
@@ -184,6 +189,16 @@ h2 {
   }
 }
 
-app-board{
-  overflow-y : auto;
+// Datepicker Toggle Icon Hover
+mat-datepicker-toggle {
+  button {
+    &:hover {
+      background-color: rgba(64, 156, 242, 0);
+    }
+  }
+}
+// Remove ripple effect from buttons
+.mat-mdc-button-ripple,
+.mdc-icon-button__ripple {
+  display: none !important;
 }

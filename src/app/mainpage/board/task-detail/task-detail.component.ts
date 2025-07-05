@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -16,10 +23,10 @@ import { Timestamp } from '@angular/fire/firestore';
     CommonModule,
     FormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   templateUrl: './task-detail.component.html',
-  styleUrl: './task-detail.component.scss'
+  styleUrl: './task-detail.component.scss',
 })
 export class TaskDetailComponent implements OnInit, OnChanges {
   @Input() isVisible = false;
@@ -35,10 +42,10 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   editSubtasks: { title: string; done: boolean }[] = [];
   selectedContacts: Contactlist[] = [];
   filteredContacts: Contactlist[] = [];
-  
+
   categoryDropDownOpen = false;
   contactDropDownOpen = false;
-  
+
   titleTouched = false;
   dateTouched = false;
   categoryTouched = false;
@@ -68,11 +75,11 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   }
 
   get hasAssignedUsers(): boolean {
-    return !!(this.task?.assignedTo && this.task.assignedTo.length > 0);
+    return this.task?.assignedTo ? this.task.assignedTo.length > 0 : false;
   }
 
   get hasSubtasks(): boolean {
-    return !!(this.task?.subtasks && this.task.subtasks.length > 0);
+    return this.task?.subtasks ? this.task.subtasks.length > 0 : false;
   }
 
   get assignedUsers(): string[] {
@@ -83,10 +90,10 @@ export class TaskDetailComponent implements OnInit, OnChanges {
     if (this.isEditMode) {
       return this.editSubtasks;
     }
-    
+
     const rawSubtasks = this.task?.subtasks || [];
-    
-    return rawSubtasks.map(subtask => {
+
+    return rawSubtasks.map((subtask) => {
       if (typeof subtask === 'string') {
         return { title: subtask, done: false };
       }
@@ -103,25 +110,28 @@ export class TaskDetailComponent implements OnInit, OnChanges {
 
   editTask() {
     if (!this.task) return;
-    
+
     this.isEditMode = true;
     this.editTitle = this.task.title || '';
     this.editDescription = this.task.description || '';
     this.editDate = this.task.date?.toDate() || null;
     this.editCategory = this.task.category || '';
     this.editPriority = this.task.priority || '';
-    
-    this.editSubtasks = this.task.subtasks?.map(subtask => {
-      if (typeof subtask === 'string') {
-        return { title: subtask, done: false };
-      }
-      return subtask;
-    }) || [];
-    
-    this.selectedContacts = this.allContacts.filter(contact => 
-      this.task?.assignedTo?.includes(contact.firstName + ' ' + contact.lastName)
+
+    this.editSubtasks =
+      this.task.subtasks?.map((subtask) => {
+        if (typeof subtask === 'string') {
+          return { title: subtask, done: false };
+        }
+        return subtask;
+      }) || [];
+
+    this.selectedContacts = this.allContacts.filter((contact) =>
+      this.task?.assignedTo?.includes(
+        contact.firstName + ' ' + contact.lastName
+      )
     );
-    
+
     this.titleTouched = false;
     this.dateTouched = false;
     this.categoryTouched = false;
@@ -133,38 +143,72 @@ export class TaskDetailComponent implements OnInit, OnChanges {
     this.contactDropDownOpen = false;
   }
 
-  async saveTask() {
-    if (!this.task?.id || !this.validateForm()) return;
-    
+  createUpdateData(): Partial<Tasks> {
+    return {
+      title: this.editTitle,
+      description: this.editDescription,
+      date: this.formatDate(),
+      category: this.editCategory,
+      priority: this.editPriority,
+      assignedTo: this.formatAssignedContacts(),
+      subtasks: this.editSubtasks,
+    };
+  }
+
+  formatDate(): Timestamp {
+    return this.editDate ? Timestamp.fromDate(this.editDate) : this.task!.date;
+  }
+
+  formatAssignedContacts(): string[] {
+    return this.selectedContacts.map(
+      (contact) => `${contact.firstName} ${contact.lastName}`
+    );
+  }
+
+  async updateTaskInDB(
+    taskId: string,
+    updateData: Partial<Tasks>
+  ): Promise<void> {
     try {
-      const updateData = {
-        title: this.editTitle,
-        description: this.editDescription,
-        date: this.editDate ? Timestamp.fromDate(this.editDate) : this.task.date,
-        category: this.editCategory,
-        priority: this.editPriority,
-        assignedTo: this.selectedContacts.map(contact => contact.firstName + ' ' + contact.lastName),
-        subtasks: this.editSubtasks
-      };
-      
-      await this.taskService.updateTaskStatus(this.task.id, updateData);
-      
-      // Update local task object
-      this.task = {
-        ...this.task,
-        ...updateData
-      };
-      
-      this.isEditMode = false;
-      
-      console.log('Task updated successfully');
+      await this.taskService.updateTaskStatus(taskId, updateData);
+      this.updateLocalTask(updateData);
     } catch (error) {
-      console.error('Error updating task:', error);
+      throw error;
     }
   }
 
+  updateLocalTask(updateData: Partial<Tasks>): void {
+    if (this.task) {
+      this.task = {
+        ...this.task,
+        ...updateData,
+      };
+    }
+  }
+
+  async saveTask(): Promise<void> {
+    if (!this.canSaveTask()) return;
+
+    try {
+      const updateData = this.createUpdateData();
+      await this.updateTaskInDB(this.task!.id, updateData);
+      this.isEditMode = false;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  private canSaveTask(): boolean {
+    return this.task?.id ? this.validateForm() : false;
+  }
+
   validateForm(): boolean {
-    return !!(this.editTitle && this.editDate && this.editCategory && this.validateDate(this.editDate));
+    return this.editTitle &&
+      this.editDate &&
+      this.editCategory &&
+      this.validateDate(this.editDate)
+      ? true
+      : false;
   }
 
   validateDate(date: Date | null): boolean {
@@ -187,24 +231,8 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   selectPrio(prio: string) {
     this.editPriority = prio;
   }
-
-  standardColors: string[] = [
-    '#ff7a00',
-    '#1fd7c1',
-    '#6e52ff',
-    '#9327ff',
-    '#ffbb2b',
-    '#fc71ff',
-    '#ff4646',
-    '#3F51B5',
-    '#462f8a',
-  ];
-
   getColorForLetter(letter: string): string {
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const index = alphabet.indexOf(letter.toUpperCase());
-    if (index === -1) return this.standardColors[0];
-    return this.standardColors[index % this.standardColors.length];
+    return this.contactService.getColorForLetter(letter);
   }
 
   isSelected(contact: Contactlist) {

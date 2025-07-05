@@ -1,4 +1,14 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { TasksFirbaseService } from '../services/tasks-firbase.service';
 import { Router } from '@angular/router';
@@ -21,7 +31,11 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './addtask-modal.component.html',
   styleUrl: './addtask-modal.component.scss',
 })
-export class AddtaskModalComponent {
+export class AddtaskModalComponent implements OnInit {
+  @Input() initialStatus: string = 'todo';
+  @Output() taskCreated = new EventEmitter<void>();
+  @Output() successMessage = new EventEmitter<string>(); // Neuer Event Emitter
+
   constructor(
     public contactlist: FirebaseService,
     public taskService: TasksFirbaseService,
@@ -34,10 +48,10 @@ export class AddtaskModalComponent {
   description: string = '';
   date: any;
   category: string = '';
-  selectedPrio: string = '';
+  selectedPrio: string = 'medium';
   contactInput: string = '';
   newSubtask: string = '';
-  successMessage = '';
+  successMessageContent = '';
 
   showSuccessMessage = false;
   categoryDropDownOpen = false;
@@ -55,6 +69,7 @@ export class AddtaskModalComponent {
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
+    this.selectPrio('medium');
   }
 
   get allContacts() {
@@ -132,7 +147,7 @@ export class AddtaskModalComponent {
   }
 
   createTaskData(): TasksFirestoreData {
-    return {
+    const taskData = {
       title: this.title,
       description: this.description,
       category: this.category,
@@ -140,8 +155,9 @@ export class AddtaskModalComponent {
       date: this.getFormattedDate(),
       priority: this.selectedPrio || 'medium',
       subtasks: this.getFormattedSubtasks(),
-      status: 'todo',
+      status: this.initialStatus,
     };
+    return taskData;
   }
 
   getFormattedContacts(): string[] {
@@ -181,8 +197,14 @@ export class AddtaskModalComponent {
 
   async saveTaskAndRedirect(taskData: TasksFirestoreData): Promise<void> {
     await this.addTaskToDB(taskData);
-    this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
+    // Entfernen Sie die showSuccessMessageBox hier
+    // this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
+
+    // Emit success message to parent
+    this.successMessage.emit('Task added to board');
+
     this.clearForm();
+    this.taskCreated.emit();
     await this.navigateToBoard();
   }
 
@@ -192,7 +214,7 @@ export class AddtaskModalComponent {
   }
 
   showSuccessMessageBox(message: string) {
-    this.successMessage = message;
+    this.successMessageContent = message;
     this.showSuccessMessage = true;
     setTimeout(() => {
       this.showSuccessMessage = false;
@@ -203,9 +225,10 @@ export class AddtaskModalComponent {
     this.title = '';
     this.description = '';
     this.date = null;
-    this.selectedPrio = '';
+    this.selectedPrio = 'medium';
     this.category = '';
     this.selectedContacts = [];
+    this.subtasks = [];
     this.categoryDropDownOpen = false;
     this.contactDropDownOpen = false;
     this.titleTouched = false;

@@ -14,6 +14,8 @@ import { TasksFirbaseService } from '../../shared/services/tasks-firbase.service
 import { Tasks } from '../../../interfaces/tasks';
 import { doc, updateDoc } from 'firebase/firestore';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { TaskAddComponent } from './task-add/task-add.component';
 
 @Component({
   selector: 'app-board',
@@ -25,6 +27,8 @@ import { Subscription } from 'rxjs';
     CdkDrag,
     CdkDropList,
     CdkDragPlaceholder,
+    FormsModule,
+    TaskAddComponent,
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -33,38 +37,31 @@ export class BoardComponent {
   constructor(public taskService: TasksFirbaseService) {}
   private subscription: Subscription = new Subscription();
   @Input() selcetedTask: Tasks | null = null;
+
+  filteredTasks: Tasks[] = [];
   dragStartDelay = 0;
   isTaskDetailVisible = false;
+  isTaskAddVisible = false;
   selectedTaskForDetail: Tasks | null = null;
+  selectedStatus: string = 'todo';
+  searchText: string = '';
+  showSearchContainer: boolean = false;
 
-  todo: Tasks[] = [];
 
-  inprogress: Tasks[] = [];
-
-  awaitfeedback: Tasks[] = [];
-
-  done: Tasks[] = [];
+  showSuccessMessage = false;
+  successMessage = '';
 
   ngOnInit() {
+    this.filteredTasks = this.taskService.tasks;
     this.taskService.subTasks();
     this.subscription.add(
       this.taskService.tasksChanged.subscribe(() => {
-        this.updateArrays();
+        this.filteredTasks = this.taskService.tasks;
+        this.searchTask();
       })
     );
     this.setDragStartDelay();
     window.addEventListener('resize', () => this.setDragStartDelay());
-  }
-
-  updateArrays() {
-    this.todo = this.taskService.tasks.filter((task) => task.status === 'todo');
-    this.inprogress = this.taskService.tasks.filter(
-      (task) => task.status === 'inprogress'
-    );
-    this.awaitfeedback = this.taskService.tasks.filter(
-      (task) => task.status === 'awaitfeedback'
-    );
-    this.done = this.taskService.tasks.filter((task) => task.status === 'done');
   }
 
   ngOnDestroy() {
@@ -73,23 +70,19 @@ export class BoardComponent {
   }
 
   get todoTasks(): Tasks[] {
-    return this.taskService.tasks.filter((task) => task.status === 'todo');
+    return this.filteredTasks.filter((task) => task.status === 'todo');
   }
 
   get inProgressTasks(): Tasks[] {
-    return this.taskService.tasks.filter(
-      (task) => task.status === 'inprogress'
-    );
+    return this.filteredTasks.filter((task) => task.status === 'inprogress');
   }
 
   get awaitFeedbackTasks(): Tasks[] {
-    return this.taskService.tasks.filter(
-      (task) => task.status === 'awaitfeedback'
-    );
+    return this.filteredTasks.filter((task) => task.status === 'awaitfeedback');
   }
 
   get doneTasks(): Tasks[] {
-    return this.taskService.tasks.filter((task) => task.status === 'done');
+    return this.filteredTasks.filter((task) => task.status === 'done');
   }
 
   drop(event: CdkDragDrop<Tasks[]>) {
@@ -117,7 +110,6 @@ export class BoardComponent {
           });
         }
       }
-      this.updateArrays();
     }
   }
 
@@ -130,6 +122,16 @@ export class BoardComponent {
     return '';
   }
 
+  openAddTask(status: string) {
+    console.log('Opening add task with status:', status);
+    this.selectedStatus = status;
+    this.isTaskAddVisible = true;
+  }
+
+  closeAddTask() {
+    this.isTaskAddVisible = false;
+  }
+
   openTaskDetail(task: Tasks) {
     this.selectedTaskForDetail = task;
     this.isTaskDetailVisible = true;
@@ -137,7 +139,6 @@ export class BoardComponent {
 
   closeTaskDetail() {
     this.isTaskDetailVisible = false;
-    // Nach der Animation das selectedTask zurücksetzen
     setTimeout(() => {
       this.selectedTaskForDetail = null;
     }, 300);
@@ -145,5 +146,31 @@ export class BoardComponent {
 
   setDragStartDelay() {
     this.dragStartDelay = window.innerWidth <= 1024 ? 300 : 0;
+  }
+
+  searchKey(data: string) {
+    this.searchText = data;
+    this.searchTask();
+  }
+
+  searchTask() {
+    const search = this.searchText.toLowerCase();
+    if (!search) {
+      this.filteredTasks = this.taskService.tasks;
+      return;
+    }
+    this.filteredTasks = this.taskService.tasks.filter(
+      (element) =>
+        element.title?.toLowerCase().includes(search) ||
+        element.description?.toLowerCase().includes(search)
+    );
+  }
+
+  onTaskSuccess(message: string) {
+    this.successMessage = message;
+    this.showSuccessMessage = true;
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 1500);
   }
 }
