@@ -120,10 +120,18 @@
       color: white;
       border-radius: 45px;
       border: 2px solid white;
-    }
-
-    .m-l {
+      font-size: 0.75rem;
+      font-weight: 500;
       margin-left: -7px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &.extra-count {
+        background: #A8A8A8;
+        font-size: 0.7rem;
+      }
     }
   }
 

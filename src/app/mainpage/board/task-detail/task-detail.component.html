@@ -43,7 +43,7 @@
             <span class="section-label">Assigned To:</span>
             <div class="assigned-users">
               <div class="user-item" *ngFor="let user of assignedUsers">
-                <div class="user-badge">
+                <div class="user-badge" [style.background]="getColorForLetter(user.charAt(0))">
                   {{ user.substring(0, 2).toUpperCase() }}
                 </div>
                 <span class="user-name">{{ user }}</span>

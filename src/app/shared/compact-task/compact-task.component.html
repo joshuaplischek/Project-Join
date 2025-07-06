@@ -25,11 +25,19 @@
       }
     </div>
     <div class="user-badges-prio-container">
-      <!-- <p class="card-users">{{task.assignedTo}}</p> -->
       <div class="user-badges-container">
-        <div class="user-badge1 badge">AS</div>
-        <div class="user-badge2 badge m-l">DE</div>
-        <div class="user-badge3 badge m-l">EF</div>
+        @if (hasAssignedUsers) {
+          @for (user of getDisplayedUsers(); track user) {
+            <div class="badge" [style.background]="getColorForLetter(user.charAt(0))">
+              {{ user.substring(0, 2).toUpperCase() }}
+            </div>
+          }
+          @if (getRemainingUsersCount() > 0) {
+            <div class="badge extra-count">
+              +{{ getRemainingUsersCount() }}
+            </div>
+          }
+        }
       </div>
 
       <img class="card-prio" [src]="getPriorityIcon()" alt="priority icon" />
