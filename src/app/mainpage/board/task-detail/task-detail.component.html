@@ -2,7 +2,10 @@
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="task-detail-container">
       <div class="task-header">
-        <div class="category-badge" [ngClass]="task?.category?.toLowerCase()">
+        <div class="category-badge" [ngClass]="{ 
+          'blue': (isEditMode ? editCategory : task?.category) === 'User Story',
+          'green': (isEditMode ? editCategory : task?.category) === 'Technical Task'
+        }">
           {{ isEditMode ? editCategory : task?.category }}
         </div>
         <div class="close-btn-wrapper" (click)="close()">

@@ -86,6 +86,14 @@
     font-size: 1rem;
     font-weight: 400;
     text-transform: capitalize;
+
+    &.blue {
+      background: #0038ff;
+    }
+
+    &.green {
+      background: #1fd7c1;
+    }
   }
 
   .close-btn-wrapper {
