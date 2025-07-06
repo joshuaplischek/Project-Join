@@ -5,6 +5,7 @@ import {
   Output,
   OnInit,
   OnChanges,
+  OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +29,7 @@ import { Timestamp } from '@angular/fire/firestore';
   templateUrl: './task-detail.component.html',
   styleUrl: './task-detail.component.scss',
 })
-export class TaskDetailComponent implements OnInit, OnChanges {
+export class TaskDetailComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isVisible = false;
   @Input() task: Tasks | null = null;
   @Output() closeModal = new EventEmitter<void>();
@@ -62,6 +63,13 @@ export class TaskDetailComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
+    // Event Listener für das Schließen des Category-Dropdowns
+    document.addEventListener('click', this.handleDocumentClick.bind(this));
+  }
+
+  ngOnDestroy() {
+    // Event Listener entfernen um Memory Leaks zu vermeiden
+    document.removeEventListener('click', this.handleDocumentClick.bind(this));
   }
 
   ngOnChanges() {
@@ -294,6 +302,18 @@ export class TaskDetailComponent implements OnInit, OnChanges {
         return '/assets/images/board/prio-low.svg';
       default:
         return '/assets/images/board/prio-medium.svg';
+    }
+  }
+
+  handleDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    const dropdownContainer = target.closest('.dropdown-container');
+    
+    if (!dropdownContainer && this.categoryDropDownOpen) {
+      this.categoryDropDownOpen = false;
+      if (!this.editCategory) {
+        this.categoryTouched = true;
+      }
     }
   }
 }

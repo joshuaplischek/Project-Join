@@ -210,7 +210,7 @@
             <label for="category">Category*</label>
             <div class="dropdown-container">
               <input id="category" type="text" class="form-input dropdown-input" [(ngModel)]="editCategory"
-                (focus)="categoryDropDownOpen = true" (blur)="onCategoryBlur()"
+                (focus)="categoryDropDownOpen = true" 
                 [class.error]="categoryTouched && !editCategory" placeholder="Select task category" readonly />
 
               @if (categoryDropDownOpen) {
