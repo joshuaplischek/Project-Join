@@ -6,7 +6,7 @@
   overflow-y: auto;
 
   @media (max-width: 1200px) {
-    padding: 2rem 4vw 1rem 2vw;
+    padding: 2rem 4vw 1rem 4vw;
   }
 
   @media (max-width: 1024px) {
@@ -15,5 +15,6 @@
 
   @media (max-width: 700px) {
     padding: 1rem 2vw 0.5rem 2vw;
+    height: calc(100dvh - 192px - 8rem);
   }
 }
