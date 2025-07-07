@@ -3,10 +3,9 @@
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  height: calc(100dvh - 96px - 2rem);
+  height: calc(100dvh - 96px);
   max-width: 1700px;
-  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem)
-    clamp(1rem, 4vw, 5rem);
+  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 5rem);
   overflow-y: auto;
 
   @media (max-width: 1200px) {
@@ -14,7 +13,7 @@
   }
 
   @media (max-width: 1024px) {
-    height: calc(100dvh - 192px - 2rem);
+    height: calc(100dvh - 192px);
     gap: 0;
   }
 
@@ -66,6 +65,7 @@
       justify-content: space-between;
       width: 100%;
     }
+
     .d-none {
       height: 46px;
 
@@ -178,12 +178,13 @@
   }
 
   @media (max-width: 1323px) {
+
     .toDoList,
     .inProgressList,
     .awaitFeedbackList,
     .doneList {
-      > .list-heading {
-        > h3 {
+      >.list-heading {
+        >h3 {
           height: 60px;
         }
       }
@@ -204,8 +205,8 @@
       justify-content: space-between;
       width: 100%;
 
-      > .list-heading {
-        > h3 {
+      >.list-heading {
+        >h3 {
           height: auto;
         }
       }
