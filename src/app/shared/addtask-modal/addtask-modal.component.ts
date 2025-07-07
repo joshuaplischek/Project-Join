@@ -34,7 +34,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 export class AddtaskModalComponent implements OnInit {
   @Input() initialStatus: string = 'todo';
   @Output() taskCreated = new EventEmitter<void>();
-  @Output() successMessage = new EventEmitter<string>(); // Neuer Event Emitter
+  @Output() successMessage = new EventEmitter<string>();
 
   constructor(
     public contactlist: FirebaseService,
@@ -60,16 +60,28 @@ export class AddtaskModalComponent implements OnInit {
   dateTouched = false;
   categoryTouched = false;
 
+  editingSubtaskIndex: number | null = null;
+  editingSubtaskValue: string = '';
+
   selectedContacts: Contactlist[] = [];
   filteredContacts: Contactlist[] = [];
   subtasks: string[] = [];
   minDate: Date = new Date();
   @ViewChild('subtaskInput') subtaskInput!: ElementRef;
+  @ViewChild('editInput') editInput!: ElementRef;
   isSubtaskActive: boolean = false;
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
     this.selectPrio('medium');
+  }
+
+  ngAfterViewInit() {
+    // Falls bereits im Edit-Modus, fokussiere das Input-Feld
+    if (this.editingSubtaskIndex !== null && this.editInput) {
+      this.editInput.nativeElement.focus();
+      this.editInput.nativeElement.select();
+    }
   }
 
   get allContacts() {
@@ -140,6 +152,39 @@ export class AddtaskModalComponent implements OnInit {
       this.newSubtask = '';
     }
     this.isSubtaskActive = false;
+  }
+
+  editSubtask(index: number) {
+    this.editingSubtaskIndex = index;
+    this.editingSubtaskValue = this.subtasks[index];
+
+    // Focus das Input-Feld nach dem nächsten Rendering-Zyklus
+    setTimeout(() => {
+      if (this.editInput) {
+        this.editInput.nativeElement.focus();
+        this.editInput.nativeElement.select();
+      }
+    }, 10);
+  }
+
+  saveEditedSubtask() {
+    if (this.editingSubtaskIndex !== null && this.editingSubtaskValue.trim()) {
+      this.subtasks[this.editingSubtaskIndex] = this.editingSubtaskValue.trim();
+      this.cancelEditSubtask();
+    }
+  }
+
+  cancelEditSubtask() {
+    this.editingSubtaskIndex = null;
+    this.editingSubtaskValue = '';
+  }
+
+  onSubtaskKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.saveEditedSubtask();
+    } else if (event.key === 'Escape') {
+      this.cancelEditSubtask();
+    }
   }
 
   removeSubtask(index: number) {
@@ -234,5 +279,17 @@ export class AddtaskModalComponent implements OnInit {
     this.titleTouched = false;
     this.dateTouched = false;
     this.categoryTouched = false;
+  }
+
+  get displayedContacts() {
+    return this.selectedContacts.slice(0, 3);
+  }
+
+  get remainingCount() {
+    return this.selectedContacts.length - 3;
+  }
+
+  get hasExtraContacts() {
+    return this.selectedContacts.length > 3;
   }
 }

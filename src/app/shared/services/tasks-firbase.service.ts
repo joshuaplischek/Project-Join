@@ -91,6 +91,11 @@ export class TasksFirbaseService {
     }
   }
 
+  async deleteTask(taskId: string): Promise<void> {
+    const taskDoc = doc(this.firestore, 'tasks', taskId);
+    await deleteDoc(taskDoc);
+  }
+
   ngOnDestroy() {
     if (this.unsubscribe) {
       this.unsubscribe();

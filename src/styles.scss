@@ -217,6 +217,16 @@ mat-datepicker-toggle {
   display: none !important;
 }
 
+.mat-calendar-body-cell:hover,
+.mat-calendar-body-cell.mat-calendar-body-active,
+.mat-calendar-body-cell.mat-calendar-body-selected,
+.mat-calendar-body-cell-content:hover,
+.mat-calendar-body-selected,
+.mat-calendar-body-active {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
 .checkbox-container {
   display: flex;
   align-items: center;

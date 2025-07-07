@@ -36,7 +36,7 @@ import { TaskAddComponent } from './task-add/task-add.component';
 export class BoardComponent {
   constructor(public taskService: TasksFirbaseService) {}
   private subscription: Subscription = new Subscription();
-  @Input() selcetedTask: Tasks | null = null;
+  @Input() selectedTask: Tasks | null = null;
 
   filteredTasks: Tasks[] = [];
   dragStartDelay = 0;
@@ -46,7 +46,6 @@ export class BoardComponent {
   selectedStatus: string = 'todo';
   searchText: string = '';
   showSearchContainer: boolean = false;
-
 
   showSuccessMessage = false;
   successMessage = '';
@@ -172,5 +171,13 @@ export class BoardComponent {
     setTimeout(() => {
       this.showSuccessMessage = false;
     }, 1500);
+  }
+
+  onTaskDeleted(taskId: string): void {
+    this.filteredTasks = this.filteredTasks.filter(
+      (task) => task.id !== taskId
+    );
+    this.closeTaskDetail();
+    // this.taskService.subTasks();
   }
 }

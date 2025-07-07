@@ -241,5 +241,5 @@
   [isVisible]="isTaskDetailVisible"
   [task]="selectedTaskForDetail"
   (closeModal)="closeTaskDetail()"
->
+  (taskDeleted)="onTaskDeleted($event)">
 </app-task-detail>
