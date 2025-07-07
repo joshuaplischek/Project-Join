@@ -8,6 +8,7 @@ import {
   onSnapshot,
   Timestamp,
   serverTimestamp,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { Subtask, Tasks, TasksFirestoreData } from '../../../interfaces/tasks';
 import { Subject } from 'rxjs';
@@ -88,6 +89,11 @@ export class TasksFirbaseService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async deleteTask(taskId: string): Promise<void> {
+    const taskDoc = doc(this.firestore, 'tasks', taskId);
+    await deleteDoc(taskDoc);
   }
 
   ngOnDestroy() {
