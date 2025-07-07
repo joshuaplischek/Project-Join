@@ -19,7 +19,7 @@ export class TaskAddComponent {
   @Input() isVisible = false;
   @Input() initialStatus: string = 'todo';
   @Output() closeModal = new EventEmitter<void>();
-  @Output() taskSuccess = new EventEmitter<string>(); // Neuer Event Emitter
+  @Output() taskSuccess = new EventEmitter<string>();
   @ViewChild(AddtaskModalComponent) addTaskModal!: AddtaskModalComponent;
 
   ngAfterViewInit() {

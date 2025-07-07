@@ -84,9 +84,14 @@
         </div>
         @if (selectedContacts.length > 0) {
         <div class="selected-contacts-initials">
-          @for (contact of selectedContacts; track contact.id) {
+          @for (contact of displayedContacts; track contact.id) {
           <span class="contact-initials" [style.background]="getColorForLetter(contact.firstName.charAt(0))">
             {{ contact.firstName.charAt(0).toUpperCase() }}{{ contact.lastName.charAt(0).toUpperCase() }}
+          </span>
+          }
+          @if (hasExtraContacts) {
+          <span class="contact-initials extra-count">
+            +{{ remainingCount }}
           </span>
           }
         </div>
@@ -140,12 +145,23 @@
         @if (subtasks.length > 0) {
         <ul class="subtasks-list">
           @for (subtask of subtasks; track subtask; let i = $index) {
-          <li class="subtask-item">
+          <li class="subtask-item" (dblclick)="editSubtask(i)">
+            @if (editingSubtaskIndex === i) {
+            <input type="text" [(ngModel)]="editingSubtaskValue" (keydown)="onSubtaskKeydown($event)"
+              (blur)="saveEditedSubtask()" class="subtask-edit-input" #editInput>
+            } @else {
             <span>{{ subtask }}</span>
+            }
             <div class="subtask-single-item-icons">
-              <img src="/assets/images/board/edit.svg" alt="edit subtask">
+              @if (editingSubtaskIndex === i) {
+              <img src="/assets/images/board/check.svg" alt="save subtask" (click)="saveEditedSubtask()">
+              <div class="border"></div>
+              <img src="/assets/images/board/close.svg" alt="cancel edit" (click)="cancelEditSubtask()">
+              } @else {
+              <img src="/assets/images/board/edit.svg" alt="edit subtask" (click)="editSubtask(i)">
               <div class="border"></div>
               <img src="/assets/images/board/delete.svg" alt="delete subtask" (click)="removeSubtask(i)">
+              }
             </div>
           </li>
           }
