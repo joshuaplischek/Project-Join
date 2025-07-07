@@ -33,6 +33,7 @@ export class TaskDetailComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isVisible = false;
   @Input() task: Tasks | null = null;
   @Output() closeModal = new EventEmitter<void>();
+  @Output() taskDeleted = new EventEmitter<string>(); // Neu hinzufügen
 
   isEditMode = false;
   editTitle: string = '';
@@ -63,12 +64,10 @@ export class TaskDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.filteredContacts = this.allContacts;
-    // Event Listener für das Schließen des Category-Dropdowns
     document.addEventListener('click', this.handleDocumentClick.bind(this));
   }
 
   ngOnDestroy() {
-    // Event Listener entfernen um Memory Leaks zu vermeiden
     document.removeEventListener('click', this.handleDocumentClick.bind(this));
   }
 
@@ -98,9 +97,7 @@ export class TaskDetailComponent implements OnInit, OnChanges, OnDestroy {
     if (this.isEditMode) {
       return this.editSubtasks;
     }
-
     const rawSubtasks = this.task?.subtasks || [];
-
     return rawSubtasks.map((subtask) => {
       if (typeof subtask === 'string') {
         return { title: subtask, done: false };
@@ -226,8 +223,15 @@ export class TaskDetailComponent implements OnInit, OnChanges, OnDestroy {
     return date >= today;
   }
 
-  deleteTask() {
-    console.log('Delete task clicked');
+  async deleteTask(): Promise<void> {
+    if (!this.task?.id) return;
+    try {
+      await this.taskService.deleteTask(this.task.id);
+      this.taskDeleted.emit(this.task.id);
+      this.close();
+    } catch (error) {
+      throw error;
+    }
   }
 
   toggleSubtask(index: number) {
@@ -308,7 +312,7 @@ export class TaskDetailComponent implements OnInit, OnChanges, OnDestroy {
   handleDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
     const dropdownContainer = target.closest('.dropdown-container');
-    
+
     if (!dropdownContainer && this.categoryDropDownOpen) {
       this.categoryDropDownOpen = false;
       if (!this.editCategory) {
