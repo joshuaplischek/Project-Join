@@ -9,8 +9,6 @@
   justify-content: center;
 }
 
-
-
 .add-task-wrapper {
   @include flex(column);
   justify-content: space-between;
@@ -70,6 +68,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-family: "mainFontRegular";
 
     &::placeholder {
       color: var(--grey-color);
@@ -388,22 +387,10 @@
       @include flex;
       align-items: center;
     }
-
-    .checkbox-container {
-      @include flex;
-      align-items: center;
-
-      input[type="checkbox"] {
-        accent-color: #3f51b5;
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
-      }
-    }
   }
 
   .dropdown-option.selected {
-    background: var(--accent-color-dark);
+    background: var(--text-color-dark-blue);
 
     .contact-name {
       color: #fff;

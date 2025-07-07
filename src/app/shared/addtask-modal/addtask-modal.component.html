@@ -71,7 +71,9 @@
                   {{ contact.firstName }} {{ contact.lastName }}
                 </span>
                 <span class="checkbox-container" (click)="$event.stopPropagation()">
-                  <input type="checkbox" [checked]="isSelected(contact)" (change)="toggleContact(contact)">
+                  <input type="checkbox" [checked]="isSelected(contact)" (change)="toggleContact(contact)"
+                    id="contact-{{contact.id}}">
+                  <label for="contact-{{contact.id}}" class="custom-checkbox"></label>
                 </span>
               </label>
               }
