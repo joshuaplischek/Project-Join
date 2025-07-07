@@ -16,12 +16,13 @@
   }
 
   .header-max-content-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 100%;
-      max-width: 1920px;
-      width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: 1920px;
+    width: 100%;
+
     h1 {
       font-size: clamp(1.1rem, 2vw, 1.25rem);
       font-weight: 400;
@@ -35,19 +36,21 @@
       }
     }
 
-    > div {
+    >div {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 16px;
 
-      > a {
-        cursor: pointer;
-        transition: transform 0.3s ease;
-
+      .help-icon-link {
         &:hover {
           transform: scale(1.2);
         }
+      }
+
+      >a {
+        cursor: pointer;
+        transition: transform 0.3s ease;
       }
 
       .user-badge {
@@ -115,12 +118,14 @@
     display: flex;
     z-index: 999;
   }
-   @media (max-width: 1024px) {
+
+  @media (max-width: 1024px) {
     top: 200%;
-    }
+  }
 }
 
 @media (max-width: 1024px) {
+
   .help-icon-link,
   .header-text {
     display: none;
