@@ -129,5 +129,9 @@
   }
 </section>
 
-<app-task-detail [isVisible]="isTaskDetailVisible" [task]="selectedTaskForDetail" (closeModal)="closeTaskDetail()">
+<app-task-detail
+  [isVisible]="isTaskDetailVisible"
+  [task]="selectedTaskForDetail"
+  (closeModal)="closeTaskDetail()"
+  (taskDeleted)="onTaskDeleted($event)">
 </app-task-detail>
