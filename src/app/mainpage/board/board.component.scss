@@ -14,6 +14,7 @@
 
   @media (max-width: 1024px) {
     height: calc(100dvh - 192px);
+    gap: 0;
   }
 
   @media (max-width: 700px) {
@@ -27,6 +28,30 @@
   align-content: center;
   justify-content: space-between;
   align-items: center;
+
+  .board-title {
+    width: 100%;
+
+    @media (min-width: 768px) {
+      width: auto;
+    }
+  }
+
+  @media (max-width: 767px) {
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    flex-flow: column nowrap;
+  }
+
+  .button-blue-responsive {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: flex;
+      width: 45px;
+    }
+  }
 
   div {
     display: flex;
@@ -49,6 +74,10 @@
       width: 312px;
       height: 100%;
       max-height: 100%;
+
+      @media (max-width: 767px) {
+        width: 100%;
+      }
 
       img {
         position: absolute;
@@ -197,7 +226,22 @@
     align-items: flex-start;
     flex-direction: row;
     overflow-x: scroll;
+    min-height: 320px;
+
+    &::-webkit-scrollbar-button:horizontal:start {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
   }
+}
+
+.tasks::-webkit-scrollbar-button {
+  display: none;
 }
 
 .empty-list {
@@ -277,5 +321,29 @@ label {
   position: fixed;
   top: 60%;
   left: 50%;
-  padding: 1rem
+  padding: 1rem;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.responsive-no-tasks {
+  display: none;
+  color: red;
+  height: 0px;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 767px) {
+    justify-content: flex-start;
+  }
+}
+
+.search-field-container-wrapper {
+  display: flex;
+  flex-direction: column;
 }

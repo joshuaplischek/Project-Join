@@ -8,39 +8,81 @@
   }
 
   <div class="board-header">
-    <h2>Board</h2>
+    <div class="board-title">
+      <h2>Board</h2>
+      <button
+        class="button-blue-responsive button-blue"
+        (click)="openAddTask('todo')"
+      >
+        <img src="/assets/images/icons/add.svg" alt="add task icon" />
+      </button>
+    </div>
     <div>
       <div class="search-field-wrapper">
         <label for="Find Task">Find Task</label>
-        <input type="text" id="search" [ngModel]="searchText" (ngModelChange)="searchKey($event)"
-          placeholder="Find Task" />
+        <input
+          type="text"
+          id="search"
+          [ngModel]="searchText"
+          (ngModelChange)="searchKey($event)"
+          placeholder="Find Task"
+        />
         <div class="border-right"></div>
         <img src="/assets/images/board/search.svg" alt="search icon" />
       </div>
-      <button class="button-blue" (click)="openAddTask('todo')">
+      <button class="button-blue d-none" (click)="openAddTask('todo')">
         <span>Add Task</span>
         <img src="/assets/images/icons/add.svg" alt="add task icon" />
       </button>
     </div>
   </div>
+  @if (filteredTasks.length === 0) {
+  <p class="responsive-no-tasks">No tasks found</p>
+  }
   <div class="kanban-board-container">
     <div class="toDoList">
       <div class="list-heading">
         <h3>To do</h3>
-        <button class="addTaskToListBtn" (click)="openAddTask('todo')"><svg class="add-icon-svg" width="10" height="11"
-            viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-            <path d="M9 5.57544L1 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+        <button class="addTaskToListBtn" (click)="openAddTask('todo')">
+          <svg
+            class="add-icon-svg"
+            width="10"
+            height="11"
+            viewBox="0 0 10 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 1.5V9.5"
+              stroke="#2A3647"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M9 5.57544L1 5.57544"
+              stroke="#2A3647"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
           </svg>
         </button>
       </div>
-      <div id="todo" cdkDropList #toDoList="cdkDropList" [cdkDropListData]="todoTasks"
-        [cdkDropListConnectedTo]="[inProgressList, awaitFeedbackList, doneList]" (cdkDropListDropped)="drop($event)"
-        class="tasks">
+      <div
+        id="todo"
+        cdkDropList
+        #toDoList="cdkDropList"
+        [cdkDropListData]="todoTasks"
+        [cdkDropListConnectedTo]="[inProgressList, awaitFeedbackList, doneList]"
+        (cdkDropListDropped)="drop($event)"
+        class="tasks"
+      >
         @for (task of todoTasks; track task.id) {
         <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
           <div class="custom-placeholder" *cdkDragPlaceholder></div>
-          <app-compact-task [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          <app-compact-task
+            [task]="task"
+            (taskClick)="openTaskDetail($event)"
+          ></app-compact-task>
         </div>
         }
         <div class="empty-list" [class.disabled]="todoTasks.length > 0">
@@ -51,20 +93,46 @@
     <div class="inProgressList">
       <div class="list-heading">
         <h3>In progress</h3>
-        <button class="addTaskToListBtn" (click)="openAddTask('inprogress')"><svg class="add-icon-svg" width="10"
-            height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-            <path d="M9 5.57544L1 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+        <button class="addTaskToListBtn" (click)="openAddTask('inprogress')">
+          <svg
+            class="add-icon-svg"
+            width="10"
+            height="11"
+            viewBox="0 0 10 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 1.5V9.5"
+              stroke="#2A3647"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M9 5.57544L1 5.57544"
+              stroke="#2A3647"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
           </svg>
         </button>
       </div>
-      <div id="inprogress" cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="inProgressTasks"
-        [cdkDropListConnectedTo]="[toDoList, awaitFeedbackList, doneList]" (cdkDropListDropped)="drop($event)"
-        class="tasks">
+      <div
+        id="inprogress"
+        cdkDropList
+        #inProgressList="cdkDropList"
+        [cdkDropListData]="inProgressTasks"
+        [cdkDropListConnectedTo]="[toDoList, awaitFeedbackList, doneList]"
+        (cdkDropListDropped)="drop($event)"
+        class="tasks"
+      >
         @for (task of inProgressTasks; track task.id) {
         <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
           <div class="custom-placeholder" *cdkDragPlaceholder></div>
-          <app-compact-task [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          <app-compact-task
+            [task]="task"
+            (taskClick)="openTaskDetail($event)"
+          ></app-compact-task>
         </div>
         }
         <div class="empty-list" [class.disabled]="inProgressTasks.length > 0">
@@ -75,23 +143,52 @@
     <div class="awaitFeedbackList">
       <div class="list-heading">
         <h3>Await feedback</h3>
-        <button class="addTaskToListBtn" (click)="openAddTask('awaitfeedback')"><svg class="add-icon-svg" width="10"
-            height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 1.5V9.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-            <path d="M9 5.57544L1 5.57544" stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+        <button class="addTaskToListBtn" (click)="openAddTask('awaitfeedback')">
+          <svg
+            class="add-icon-svg"
+            width="10"
+            height="11"
+            viewBox="0 0 10 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 1.5V9.5"
+              stroke="#2A3647"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M9 5.57544L1 5.57544"
+              stroke="#2A3647"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
           </svg>
         </button>
       </div>
-      <div id="awaitfeedback" cdkDropList #awaitFeedbackList="cdkDropList" [cdkDropListData]="awaitFeedbackTasks"
-        [cdkDropListConnectedTo]="[toDoList, inProgressList, doneList]" (cdkDropListDropped)="drop($event)"
-        class="tasks">
+      <div
+        id="awaitfeedback"
+        cdkDropList
+        #awaitFeedbackList="cdkDropList"
+        [cdkDropListData]="awaitFeedbackTasks"
+        [cdkDropListConnectedTo]="[toDoList, inProgressList, doneList]"
+        (cdkDropListDropped)="drop($event)"
+        class="tasks"
+      >
         @for (task of awaitFeedbackTasks; track task.id) {
         <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
           <div class="custom-placeholder" *cdkDragPlaceholder></div>
-          <app-compact-task [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          <app-compact-task
+            [task]="task"
+            (taskClick)="openTaskDetail($event)"
+          ></app-compact-task>
         </div>
         }
-        <div class="empty-list" [class.disabled]="awaitFeedbackTasks.length > 0">
+        <div
+          class="empty-list"
+          [class.disabled]="awaitFeedbackTasks.length > 0"
+        >
           No tasks awaits feedback
         </div>
       </div>
@@ -100,13 +197,22 @@
       <div class="list-heading">
         <h3>Done</h3>
       </div>
-      <div id="done" cdkDropList #doneList="cdkDropList" [cdkDropListData]="doneTasks"
-        [cdkDropListConnectedTo]="[toDoList, inProgressList, awaitFeedbackList]" (cdkDropListDropped)="drop($event)"
-        class="tasks">
+      <div
+        id="done"
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="doneTasks"
+        [cdkDropListConnectedTo]="[toDoList, inProgressList, awaitFeedbackList]"
+        (cdkDropListDropped)="drop($event)"
+        class="tasks"
+      >
         @for (task of doneTasks; track task.id) {
         <div cdkDrag [cdkDragStartDelay]="dragStartDelay">
           <div class="custom-placeholder" *cdkDragPlaceholder></div>
-          <app-compact-task [task]="task" (taskClick)="openTaskDetail($event)"></app-compact-task>
+          <app-compact-task
+            [task]="task"
+            (taskClick)="openTaskDetail($event)"
+          ></app-compact-task>
         </div>
         }
         <div class="empty-list" [class.disabled]="doneTasks.length > 0">
@@ -114,15 +220,17 @@
         </div>
       </div>
       @if (filteredTasks.length === 0) {
-        <div class="no-tasks">
-          No Tasks found
-        </div>
+      <div class="no-tasks">No Tasks found</div>
       }
     </div>
   </div>
 
-  <app-task-add [isVisible]="isTaskAddVisible" [initialStatus]="selectedStatus" (closeModal)="closeAddTask()"
-    (taskSuccess)="onTaskSuccess($event)">
+  <app-task-add
+    [isVisible]="isTaskAddVisible"
+    [initialStatus]="selectedStatus"
+    (closeModal)="closeAddTask()"
+    (taskSuccess)="onTaskSuccess($event)"
+  >
   </app-task-add>
   @if (filteredTasks.length === 0){
   <div class="no-tasks">No Tasks found</div>

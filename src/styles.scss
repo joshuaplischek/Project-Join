@@ -46,10 +46,27 @@ body {
   line-height: 1.5;
   background-color: var(--main-bg-color);
   scroll-behavior: smooth;
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 100%;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+    margin: 1.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #dfdfdf;
+    border-radius: 10px;
+  }
 }
 
 @media (max-width: 1024px) {
-
   html,
   body {
     overflow: hidden;
@@ -229,7 +246,7 @@ mat-datepicker-toggle {
     transition: all 0.3s ease;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: -5px;
       left: 6px;
@@ -244,7 +261,7 @@ mat-datepicker-toggle {
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: -3px;
       left: 6px;
@@ -259,7 +276,7 @@ mat-datepicker-toggle {
     }
   }
 
-  input[type="checkbox"]:checked+.custom-checkbox {
+  input[type="checkbox"]:checked + .custom-checkbox {
     background: transparent;
     border-color: white;
 
@@ -269,7 +286,7 @@ mat-datepicker-toggle {
     }
   }
 
-  input[type="checkbox"]:hover+.custom-checkbox {
+  input[type="checkbox"]:hover + .custom-checkbox {
     border-color: var(--accent-color-light);
   }
 }

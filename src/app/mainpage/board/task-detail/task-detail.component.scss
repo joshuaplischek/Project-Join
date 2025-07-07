@@ -47,9 +47,9 @@
   max-height: 90vh;
   padding: 1.5rem 2rem;
 
-  &::-webkit-scrollbar-button {
-    display: none;
-  }
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -869,5 +869,4 @@
   .task-detail-container {
     padding: 24px;
   }
-
 }
