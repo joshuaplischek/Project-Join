@@ -33,6 +33,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 })
 export class AddtaskModalComponent implements OnInit {
   @Input() initialStatus: string = 'todo';
+  @Input() buttonPosition: { right?: string; bottom?: string } = {};
   @Output() taskCreated = new EventEmitter<void>();
   @Output() successMessage = new EventEmitter<string>();
 
@@ -242,12 +243,7 @@ export class AddtaskModalComponent implements OnInit {
 
   async saveTaskAndRedirect(taskData: TasksFirestoreData): Promise<void> {
     await this.addTaskToDB(taskData);
-    // Entfernen Sie die showSuccessMessageBox hier
-    // this.showSuccessMessageBox('Task wurde erfolgreich hinzugefügt!');
-
-    // Emit success message to parent
     this.successMessage.emit('Task added to board');
-
     this.clearForm();
     this.taskCreated.emit();
     await this.navigateToBoard();
@@ -291,5 +287,12 @@ export class AddtaskModalComponent implements OnInit {
 
   get hasExtraContacts() {
     return this.selectedContacts.length > 3;
+  }
+
+  get buttonStyles() {
+    return {
+      '--button-right': this.buttonPosition.right || '7%',
+      '--button-bottom': this.buttonPosition.bottom || '13%',
+    };
   }
 }

@@ -74,6 +74,7 @@
       align-items: stretch;
       justify-content: flex-start;
       gap: 1rem;
+
       @media (max-width: 700px) {
         width: 100%;
       }
@@ -463,16 +464,16 @@
 .button-container {
   @include flex(row);
   position: fixed;
-  right: 7%;
-  bottom: 10%;
+  right: var(--button-right);
+  bottom: var(--button-bottom);
   gap: 1rem;
 
   @media (max-width: 1024px) {
-    bottom: 15%;
+    bottom: var(--button-bottom); //15%
   }
 
   @media (max-width: 700px) {
-    bottom: 12%;
+    bottom: var(--button-bottom); //12%
   }
 
   .button-white-border img {
@@ -484,5 +485,5 @@
       gap: 0;
     }
   }
-  
+
 }
