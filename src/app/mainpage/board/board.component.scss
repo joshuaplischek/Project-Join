@@ -61,7 +61,12 @@
     align-items: center;
     height: 100%;
 
-    .button-blue {
+    @media (max-width: 767px) {
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .d-none {
       height: 46px;
 
       @media (max-width: 767px) {
