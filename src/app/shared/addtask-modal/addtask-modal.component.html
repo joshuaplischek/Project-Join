@@ -182,11 +182,14 @@
         </div>
       </div>
     </section>
-    <p><span class="warning">*</span>This field is requierd</p>
+    <p class="requierd-text"><span class="warning">*</span>This field is requierd</p>
   </div>
 </section>
 
-<div class="button-container" [style]="buttonStyles">
+<div class="button-container" 
+     [class.fixed-position]="useFixedPosition"
+     [class.flex-position]="!useFixedPosition"
+     [style]="useFixedPosition ? buttonStyles : null">
   <button (click)="clearForm()" class="button-white-border">
     <span>Clear</span>
     <img src="/assets/images/icons/icon-cancel.svg" alt="clear task" />

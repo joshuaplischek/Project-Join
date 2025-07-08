@@ -33,7 +33,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 })
 export class AddtaskModalComponent implements OnInit {
   @Input() initialStatus: string = 'todo';
-  @Input() buttonPosition: { right?: string; bottom?: string } = {};
+  @Input() buttonPosition: {
+    right?: string;
+    bottom?: string;
+    rightWideScreen?: string;
+    bottomTablet?: string;
+    bottomMobile?: string;
+  } = {};
+  @Input() useFixedPosition: boolean = true;
   @Output() taskCreated = new EventEmitter<void>();
   @Output() successMessage = new EventEmitter<string>();
 
@@ -158,8 +165,6 @@ export class AddtaskModalComponent implements OnInit {
   editSubtask(index: number) {
     this.editingSubtaskIndex = index;
     this.editingSubtaskValue = this.subtasks[index];
-
-    // Focus das Input-Feld nach dem nächsten Rendering-Zyklus
     setTimeout(() => {
       if (this.editInput) {
         this.editInput.nativeElement.focus();
@@ -293,6 +298,10 @@ export class AddtaskModalComponent implements OnInit {
     return {
       '--button-right': this.buttonPosition.right || '7%',
       '--button-bottom': this.buttonPosition.bottom || '13%',
+      '--button-bottom-tablet': this.buttonPosition.bottomTablet || '15%',
+      '--button-bottom-mobile': this.buttonPosition.bottomMobile || '12%',
+      '--button-right-widescreen':
+        this.buttonPosition.rightWideScreen || '700px',
     };
   }
 }
