@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Tasks } from '../../../../../interfaces/tasks';
 import { FirebaseService } from '../../../../shared/services/firebase.service';
+import { TasksFirbaseService } from '../../../../shared/services/tasks-firbase.service'; // Hinzufügen
 
 @Component({
   selector: 'app-task-detail-view',
@@ -15,7 +16,10 @@ export class TaskDetailViewComponent {
   @Output() editTask = new EventEmitter<void>();
   @Output() deleteTask = new EventEmitter<void>();
 
-  constructor(public contactService: FirebaseService) {}
+  constructor(
+    public contactService: FirebaseService,
+    private taskService: TasksFirbaseService // TaskService hinzufügen
+  ) {}
 
   get hasAssignedUsers(): boolean {
     return this.task?.assignedTo ? this.task.assignedTo.length > 0 : false;
@@ -39,9 +43,21 @@ export class TaskDetailViewComponent {
     });
   }
 
-  toggleSubtask(index: number) {
-    if (this.task?.subtasks && this.task.subtasks[index]) {
+  async toggleSubtask(index: number) {
+    if (this.task?.subtasks && this.task.subtasks[index] && this.task.id) {
+      // Lokale Änderung
       this.task.subtasks[index].done = !this.task.subtasks[index].done;
+
+      try {
+        // Speichere die Änderung in der Datenbank
+        await this.taskService.updateTaskStatus(this.task.id, {
+          subtasks: this.task.subtasks,
+        });
+      } catch (error) {
+        console.error('Error updating subtask:', error);
+        // Bei Fehler: Änderung rückgängig machen
+        this.task.subtasks[index].done = !this.task.subtasks[index].done;
+      }
     }
   }
 

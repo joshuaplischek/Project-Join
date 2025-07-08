@@ -42,7 +42,10 @@
       <div>
         @for (subtask of subtasks; track $index) {
         <span class="checkbox-container">
-          <input type="checkbox" [ngClass]="{ checked: subtask.done }" (change)="toggleSubtask($index)"
+          <input 
+            type="checkbox" 
+            [checked]="subtask.done"
+            (change)="toggleSubtask($index)"
             id="subtask-{{ $index }}" />
           <label for="subtask-{{ $index }}" class="custom-checkbox"></label>
           <div class="subtask-item">

@@ -103,6 +103,23 @@
     gap: 1rem;
     margin-bottom: 0.5rem;
     padding: 0 1rem;
+    max-height: 100px;
+    overflow-y: auto;
+
+    // Scrollbar-Styling hinzufügen
+    &::-webkit-scrollbar {
+      width: 0.25rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 0.25rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #a8a8a8;
+      border-radius: 0.25rem;
+    }
 
     .checkbox-container {
 
