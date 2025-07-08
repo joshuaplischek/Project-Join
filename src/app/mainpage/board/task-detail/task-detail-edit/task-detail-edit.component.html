@@ -1,0 +1,159 @@
+<div class="edit-form">
+  <div class="form-group">
+    <label for="title">Title*</label>
+    <input type="text" id="title" [(ngModel)]="editTitle" (blur)="titleTouched = true" class="form-input"
+      [class.error]="titleTouched && !editTitle" placeholder="Enter a title">
+    @if (titleTouched && !editTitle) {
+    <div class="error-message">This field is required</div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea id="description" [(ngModel)]="editDescription" class="form-textarea" placeholder="Enter a Description"
+      rows="4">
+    </textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="date">Due date*</label>
+    <div class="date-input-container">
+      <input id="date" matInput [matDatepicker]="picker" [(ngModel)]="editDate" [min]="minDate"
+        (blur)="dateTouched = true" class="form-input" [class.error]="
+          dateTouched && (!editDate || !validateDate(editDate))
+        " placeholder="dd/mm/yyyy" />
+      <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+    </div>
+    <mat-datepicker #picker></mat-datepicker>
+    @if (dateTouched && !editDate) {
+    <div class="error-message">This field is required</div>
+    }
+    @if (dateTouched && editDate && !validateDate(editDate)) {
+    <div class="error-message">Date cannot be in the past</div>
+    }
+  </div>
+
+  <div class="form-group">
+    <p>Priority</p>
+    <div id="priority" class="priority-buttons">
+      <button type="button" class="priority-btn urgent" [class.active]="editPriority === 'urgent'"
+        (click)="selectPrio('urgent')">
+        Urgent
+        <img src="/assets/images/board/prio-urgent.svg" alt="urgent" />
+      </button>
+      <button type="button" class="priority-btn medium" [class.active]="editPriority === 'medium'"
+        (click)="selectPrio('medium')">
+        Medium
+        <img src="/assets/images/board/prio-medium.svg" alt="medium" />
+      </button>
+      <button type="button" class="priority-btn low" [class.active]="editPriority === 'low'"
+        (click)="selectPrio('low')">
+        Low
+        <img src="/assets/images/board/prio-low.svg" alt="low" />
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <p>Assigned to</p>
+    <div class="custom-select" tabindex="0" (blur)="contactDropDownOpen = false">
+      <div class="selected" (click)="contactDropDownOpen = !contactDropDownOpen">
+        <span>Select contacts to assign</span>
+        <img src="/assets/images/board/arrow_drop_down.svg" alt="" />
+      </div>
+      @if (contactDropDownOpen) {
+      <div class="dropdown" (mousedown)="$event.preventDefault()">
+        @for (group of contactService.getGroupedContacts(); track group.letter) {
+        <div class="group">
+          @for (contact of group.contacts; track contact.id) {
+          <label class="dropdown-option" [class.selected]="isSelected(contact)" (click)="toggleContact(contact)">
+            <span class="contact-initials" [style.background]="
+                getColorForLetter(contact.firstName.charAt(0))
+              ">
+              {{ contact.firstName.charAt(0).toUpperCase()
+              }}{{ contact.lastName.charAt(0).toUpperCase() }}
+            </span>
+            <span class="contact-name">
+              {{ contact.firstName }} {{ contact.lastName }}
+            </span>
+            <span class="checkbox-container" (click)="$event.stopPropagation()">
+              <input type="checkbox" [checked]="isSelected(contact)" (change)="toggleContact(contact)" />
+            </span>
+          </label>
+          }
+        </div>
+        }
+      </div>
+      }
+    </div>
+    @if (selectedContacts.length > 0) {
+    <div class="selected-contacts-initials">
+      @for (contact of selectedContacts; track contact.id) {
+      <span class="contact-initials" [style.background]="
+          getColorForLetter(contact.firstName.charAt(0))
+        ">
+        {{ contact.firstName.charAt(0).toUpperCase()
+        }}{{ contact.lastName.charAt(0).toUpperCase() }}
+      </span>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="category">Category*</label>
+    <div class="category-display">
+      <span>{{ editCategory }}</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Subtasks</label>
+    <div class="subtasks-input">
+      <input type="text" class="form-input" placeholder="Add new subtask" #subtaskInput (keyup.enter)="
+          addSubtask(subtaskInput.value); subtaskInput.value = ''
+        " />
+      <button type="button" class="add-subtask-btn" (click)="
+          addSubtask(subtaskInput.value); subtaskInput.value = ''
+        ">
+        +
+      </button>
+    </div>
+
+    @if (editSubtasks.length > 0) {
+    <div class="subtasks-list">
+      <div class="subtask-item" *ngFor="let subtask of editSubtasks; let i = index">
+        <div class="checkbox" [class.checked]="subtask.done" (click)="toggleEditSubtask(i)">
+          @if (subtask.done) {
+          <img src="/assets/images/icons/icon-check.svg" alt="checked">
+          }
+        </div>
+        <span class="subtask-text" [class.completed]="subtask.done">{{
+          subtask.title
+        }}</span>
+        <div class="subtask-actions">
+          <button type="button" class="edit-subtask-btn" (click)="editSubtask(i)">
+            <img src="/assets/images/icons/icon-edit.svg" alt="edit" />
+          </button>
+          <div class="divider"></div>
+          <button type="button" class="delete-subtask-btn" (click)="removeSubtask(i)">
+            <img src="/assets/images/icons/icon-delete.svg" alt="delete" />
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="edit-actions">
+    <button type="button" class="btn btn-secondary" (click)="onCancelEdit()">
+      Cancel
+    </button>
+    <button type="button" class="button-blue" [disabled]="!validateForm()" (click)="saveTask()">
+      <span>Ok</span>
+      <img src="/assets/images/icons/icon-check.svg" alt="check icon" />
+    </button>
+  </div>
+
+  <p class="requierd-text"><span class="warning">*</span>This field is required</p>
+</div>
