@@ -296,10 +296,10 @@ export class AddtaskModalComponent implements OnInit {
 
   get buttonStyles() {
     return {
-      '--button-right': this.buttonPosition.right || '7%',
-      '--button-bottom': this.buttonPosition.bottom || '13%',
+      '--button-right': this.buttonPosition.right || '5%',
+      '--button-bottom': this.buttonPosition.bottom || '10%',
       '--button-bottom-tablet': this.buttonPosition.bottomTablet || '15%',
-      '--button-bottom-mobile': this.buttonPosition.bottomMobile || '12%',
+      '--button-bottom-mobile': this.buttonPosition.bottomMobile || '13%',
       '--button-right-widescreen':
         this.buttonPosition.rightWideScreen || '700px',
     };

@@ -469,8 +469,8 @@
 
   &.fixed-position {
     position: fixed;
-    right: var(--button-right, 7%);
-    bottom: var(--button-bottom, 13%);
+    right: var(--button-right, 5%);
+    bottom: var(--button-bottom, 10%);
 
     @media(min-width: 1920px) {
       right: max(5%, calc(100vw - 1800px));
@@ -481,7 +481,7 @@
     }
 
     @media (max-width: 700px) {
-      bottom: var(--button-bottom-mobile, 12%);
+      bottom: var(--button-bottom-mobile, 13%);
     }
   }
 
