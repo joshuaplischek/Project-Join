@@ -114,7 +114,7 @@
     }
   }
 
-  // Priority Buttons (matching addtask-modal exactly)
+  // Priority Buttons
   .priority-buttons {
     display: flex;
     gap: clamp(0.5rem, 2vw, 2rem);
@@ -175,7 +175,6 @@
       }
     }
   }
-
 
   // Custom Select
   .custom-select {
@@ -530,10 +529,7 @@
 .edit-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 16px;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid var(--grey-color);
+  gap: 1rem;
 
   .btn {
     padding: 0.5rem 1rem;
