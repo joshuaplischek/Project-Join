@@ -82,7 +82,7 @@
         width: 42px;
         height: 42px;
         border-radius: 50%;
-        background: #FF7A00;
+        background: #ff7a00;
         color: white;
         display: flex;
         align-items: center;
@@ -111,6 +111,9 @@
       &:hover {
         background: rgba(42, 54, 71, 0.04);
       }
+      &:hover .checkbox svg, .checkbox.checked svg {
+        opacity: 1;
+      }
 
       .checkbox {
         width: 16px;
@@ -121,9 +124,12 @@
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
+        svg {
+          opacity: 0;
+        }
 
         &.checked {
-          background: var(--text-color-dark-blue);
+          // background: var(--text-color-dark-blue);
           border-color: var(--text-color-dark-blue);
         }
       }
@@ -132,11 +138,6 @@
         font-size: 1rem;
         color: var(--text-color-dark-blue);
         transition: all 0.3s ease;
-
-        &.completed {
-          text-decoration: line-through;
-          color: #888;
-        }
       }
     }
   }
