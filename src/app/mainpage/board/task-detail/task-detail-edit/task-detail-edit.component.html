@@ -128,11 +128,6 @@
       <div class="subtasks-list">
         @for (subtask of editSubtasks; track $index) {
         <div class="subtask-item">
-          <div class="checkbox" [class.checked]="subtask.done" (click)="toggleEditSubtask($index)">
-            @if (subtask.done) {
-            <img src="/assets/images/icons/icon-check.svg" alt="checked">
-            }
-          </div>
           @if (editingSubtaskIndex === $index) {
           <input type="text" class="subtask-edit-input" [(ngModel)]="editingSubtaskValue" #editInput
             (keydown)="onSubtaskKeydown($event)" (blur)="saveEditedSubtask()" />
