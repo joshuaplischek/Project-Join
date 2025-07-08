@@ -5,6 +5,9 @@ import {
   Output,
   OnInit,
   OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -28,10 +31,15 @@ import { Timestamp } from '@angular/fire/firestore';
   templateUrl: './task-detail-edit.component.html',
   styleUrl: './task-detail-edit.component.scss',
 })
-export class TaskDetailEditComponent implements OnInit, OnDestroy {
+export class TaskDetailEditComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   @Input() task: Tasks | null = null;
   @Output() taskUpdated = new EventEmitter<Tasks>();
   @Output() cancelEdit = new EventEmitter<void>();
+
+  @ViewChild('subtaskInput') subtaskInput!: ElementRef;
+  @ViewChild('editInput') editInput!: ElementRef;
 
   editTitle: string = '';
   editDescription: string = '';
@@ -50,6 +58,11 @@ export class TaskDetailEditComponent implements OnInit, OnDestroy {
 
   minDate: Date = new Date();
 
+  // Neue Properties für Subtask-Bearbeitung
+  editingSubtaskIndex: number | null = null;
+  editingSubtaskValue: string = '';
+  isSubtaskActive: boolean = false;
+
   constructor(
     public contactService: FirebaseService,
     private taskService: TasksFirbaseService
@@ -62,6 +75,10 @@ export class TaskDetailEditComponent implements OnInit, OnDestroy {
       this.loadTaskData();
     }
     document.addEventListener('click', this.handleDocumentClick.bind(this));
+  }
+
+  ngAfterViewInit() {
+    // Optional: Focus handling wenn nötig
   }
 
   ngOnDestroy() {
@@ -182,24 +199,75 @@ export class TaskDetailEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  addSubtask(title: string) {
-    if (title.trim()) {
-      this.editSubtasks.push({ title: title.trim(), done: false });
+  get displayedContacts() {
+    return this.selectedContacts.slice(0, 3);
+  }
+
+  get remainingCount() {
+    return this.selectedContacts.length - 3;
+  }
+
+  get hasExtraContacts() {
+    return this.selectedContacts.length > 3;
+  }
+
+  // Neue Subtask-Methoden
+  showSubtaskControls() {
+    this.isSubtaskActive = true;
+  }
+
+  onSubtaskBlur() {
+    setTimeout(() => {
+      this.isSubtaskActive = false;
+    }, 100);
+  }
+
+  addSubtask(title?: string) {
+    const subtaskTitle = title || this.subtaskInput?.nativeElement.value;
+    if (subtaskTitle && subtaskTitle.trim()) {
+      this.editSubtasks.push({ title: subtaskTitle.trim(), done: false });
+      if (this.subtaskInput) {
+        this.subtaskInput.nativeElement.value = '';
+      }
+    }
+  }
+
+  editSubtask(index: number) {
+    this.editingSubtaskIndex = index;
+    this.editingSubtaskValue = this.editSubtasks[index]?.title || '';
+    setTimeout(() => {
+      if (this.editInput) {
+        this.editInput.nativeElement.focus();
+      }
+    }, 0);
+  }
+
+  saveEditedSubtask() {
+    if (this.editingSubtaskIndex !== null && this.editingSubtaskValue.trim()) {
+      this.editSubtasks[this.editingSubtaskIndex].title =
+        this.editingSubtaskValue.trim();
+    }
+    this.editingSubtaskIndex = null;
+    this.editingSubtaskValue = '';
+  }
+
+  cancelEditSubtask() {
+    this.editingSubtaskIndex = null;
+    this.editingSubtaskValue = '';
+  }
+
+  onSubtaskKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.saveEditedSubtask();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      this.cancelEditSubtask();
     }
   }
 
   removeSubtask(index: number) {
     this.editSubtasks.splice(index, 1);
-  }
-
-  editSubtask(index: number) {
-    const currentTitle = this.editSubtasks[index]?.title;
-    if (currentTitle) {
-      const newTitle = prompt('Edit subtask:', currentTitle);
-      if (newTitle && newTitle.trim() && newTitle.trim() !== currentTitle) {
-        this.editSubtasks[index].title = newTitle.trim();
-      }
-    }
   }
 
   toggleEditSubtask(index: number) {
