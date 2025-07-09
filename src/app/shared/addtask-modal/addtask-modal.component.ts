@@ -36,7 +36,6 @@ export class AddtaskModalComponent implements OnInit {
   @Input() buttonPosition: {
     right?: string;
     bottom?: string;
-    rightWideScreen?: string;
     bottomTablet?: string;
     bottomMobile?: string;
   } = {};
@@ -300,8 +299,6 @@ export class AddtaskModalComponent implements OnInit {
       '--button-bottom': this.buttonPosition.bottom || '10%',
       '--button-bottom-tablet': this.buttonPosition.bottomTablet || '15%',
       '--button-bottom-mobile': this.buttonPosition.bottomMobile || '13%',
-      '--button-right-widescreen':
-        this.buttonPosition.rightWideScreen || '700px',
     };
   }
 }
