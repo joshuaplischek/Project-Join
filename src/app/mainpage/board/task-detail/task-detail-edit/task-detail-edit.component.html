@@ -116,7 +116,7 @@
         <img src="/assets/images/board/add.svg" alt="add" [class.hide]="isSubtaskActive"
           (click)="showSubtaskControls(); subtaskInput.focus()" />
         <div class="focus-subtasks-input" [class.show]="isSubtaskActive">
-          <img src="/assets/images/icons/icon-cancel.svg" alt="cancel"
+          <img class="cancel-btn" src="/assets/images/icons/icon-cancel.svg" alt="cancel"
             (click)="onSubtaskBlur(); subtaskInput.value = ''" />
           <div class="border"></div>
           <img src="/assets/images/board/check.svg" alt="add"
@@ -148,8 +148,9 @@
 </div>
 
 <div class="edit-actions">
-  <button type="button" class="btn btn-secondary button-white-border" (click)="onCancelEdit()">
-    Cancel
+  <button type="button" class="button-white-border" (click)="onCancelEdit()">
+    <span>Cancel</span>
+    <img src="/assets/images/icons/icon-cancel.svg" alt="cancel">
   </button>
   <button type="button" class="button-blue" [disabled]="!validateForm()" (click)="saveTask()">
     <span>Ok</span>

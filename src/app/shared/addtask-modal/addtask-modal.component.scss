@@ -368,6 +368,7 @@
         opacity: 1;
         visibility: visible;
         display: flex;
+
       }
 
       .icon-close-button,
@@ -533,7 +534,7 @@
   &.flex-position {
     justify-content: flex-end;
 
-    @media(min-width: 400px) {
+    @media(max-width: 400px) {
       justify-content: center;
     }
   }
