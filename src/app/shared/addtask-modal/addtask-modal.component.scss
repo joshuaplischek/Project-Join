@@ -305,6 +305,10 @@
     gap: clamp(0.5rem, 2vw, 2rem);
     width: 100%;
 
+    @media(max-width: 400px) {
+      flex-direction: column;
+    }
+
     button {
       @extend %button-base;
 
@@ -528,6 +532,10 @@
 
   &.flex-position {
     justify-content: flex-end;
+
+    @media(min-width: 400px) {
+      justify-content: center;
+    }
   }
 
   .button-white-border img {
