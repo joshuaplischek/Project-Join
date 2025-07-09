@@ -1,0 +1,80 @@
+<div class="overlay" [ngClass]="{'visible': isVisible, 'hidden': !isVisible}" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="side-banner">
+      <img src="/assets/images/sidebar-logo.svg" alt="Join Logo">
+      <div>
+        <h3>{{heading}}</h3>
+        <p>{{subheading}}</p>
+      </div>
+      <hr>
+    </div>
+
+    <div class="contact-form">
+      <div class="user-badge-container">
+        <div class="user-badge">
+          <img src="/assets/images/contactform/person.svg" alt="User Badge Icon">
+        </div>
+      </div>
+      <div class="form">
+        <div (click)="close()" class="close-btn-wrapper">
+          <img class="close-btn" src="/assets/images/contactform/cancel.svg" alt="cancel button">
+        </div>
+        <div class="input-fields">
+          <div class="firstname-field ">
+            <div class="input-wrapper">
+              <label for="firstNameInput">Vorname</label>
+              <input [(ngModel)]="firstName" type="text" placeholder="Firstname" (blur)="firstNameTouched = true" />
+              <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
+            </div>
+            <div class="input-hint">@if (!firstName && firstNameTouched) {
+              <span role="alert">Please enter your first name</span>}
+            </div>
+          </div>
+          <div class="lastname-field">
+            <div class="input-wrapper">
+              <label for="lastNameInput">Nachname</label>
+              <input [(ngModel)]="lastName" type="text" placeholder="Lastname" (blur)="lastNameTouched = true">
+              <img src="/assets/images/contactform/person-small.svg" alt="person icon">
+            </div>
+            <div class="input-hint">@if (!lastName && lastNameTouched) {
+              <span role="alert">Please enter your last name</span>}
+            </div>
+          </div>
+          <div class="email-field">
+            <div class="input-wrapper">
+              <label for="emailInput">E-Mail</label>
+              <input [(ngModel)]="email" type="text" placeholder="Email" (blur)="emailTouched = true">
+              <img src="/assets/images/contactform/mail.svg" alt="mail icon">
+            </div>
+            <div class="input-hint">@if ((!email || !isValidEmail()) && emailTouched) {
+              <span role="alert">Please enter a valid email address</span>}
+            </div>
+          </div>
+          <div class="phone-field">
+            <div class="input-wrapper">
+              <label for="phoneInput">Telefonnummer</label>
+              <input [(ngModel)]="phone" type="number" placeholder="Phone" inputmode="numeric"
+                (blur)="phoneTouched = true">
+              <img src="/assets/images/contactform/call.svg" alt="phone icon">
+            </div>
+            <div class="input-hint">@if (!phone && phoneTouched) {
+              <span role="alert">Please enter your phone number</span>}
+            </div>
+          </div>
+        </div>
+        <div class="form-buttons">
+          <button class="buttonOne button-white-border" (click)="buttonOneClick.emit()">
+            <span>{{buttonOne}}</span>
+            <img src="/assets/images/contactform/cancel.svg" alt="cancel icon">
+          </button>
+
+          <button class="buttonTwo button-blue" (click)="buttonTwoClick.emit({firstName, lastName, email, phone})"
+            type="submit" [disabled]="!firstName || !lastName || !email || !phone || !isValidEmail()">
+            <span>{{buttonTwo}}</span>
+            <img src="/assets/images/contactform/check.svg" alt="check icon">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
