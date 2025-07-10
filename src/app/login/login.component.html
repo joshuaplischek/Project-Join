@@ -3,27 +3,29 @@
 
     @if (isLoginMode) {
     <!-- Login Form -->
-    <app-log-form [heading]="'Log in'" [buttonTwo]="'Log in'" [showNameFields]="false" [showPasswordConfirm]="false"
-      [isLoginMode]="true" (buttonTwoClick)="onLogin($event)">
+    <img src="/assets/images/login/join_logo.svg" alt="join logo">
+    <div class="login-header">
+      <p>Not a Join user? </p>
+      <button type="button" class="button-blue" (click)="toggleMode()"><span>Sign up</span></button>
+    </div>
+    <app-log-form [heading]="'Log in'" [buttonOne]="'Guest Log in'" [buttonTwo]="'Log in'" [showNameFields]="false"
+      [showPasswordConfirm]="false" [isLoginMode]="true" (buttonOneClick)="guestLogin()"
+      (buttonTwoClick)="onLogin($event)">
     </app-log-form>
 
-    <div class="form-actions">
-      <button class="guest-login-btn" (click)="guestLogin()">Guest Log in</button>
-      <p>Don't have an account?
-        <button type="button" class="link-button" (click)="toggleMode()">Sign up</button>
-      </p>
-    </div>
     } @else {
     <!-- Register Form -->
+    <img (click)="toggleMode()" src="/assets/images/login/goback_arrow.svg" alt="go back link">
     <app-log-form [heading]="'Sign up'" [buttonTwo]="'Sign up'" [showNameFields]="true" [showPasswordConfirm]="true"
       [isLoginMode]="false" (buttonTwoClick)="onRegister($event)">
     </app-log-form>
-
-    <div class="form-actions">
-      <p>Already have an account?
-        <button type="button" class="link-button" (click)="toggleMode()">Log in</button>
-      </p>
-    </div>
     }
+  </div>
+
+  <div class="login-footer">
+    <a routerLink="/privacypolicy">
+      Privacy Policy</a>
+    <a routerLink="/legalnotice">
+      Legal notice</a>
   </div>
 </div>
