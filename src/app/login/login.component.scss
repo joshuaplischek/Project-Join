@@ -1,11 +1,49 @@
 .login-container {
-  width: 100dvw;
+  width: 100%;
+  max-width: 1920px;
   height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 2rem;
+
+  .login-header {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+
+  }
+
+  .login-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
+.join-logo {
+  position: absolute;
+  z-index: 1000;
+  // top: 50%;
+  // left: 50%;
+  // translate: 50%;
 
+  top: 5%;
+  left: 5%;
+}
 
 .login-footer {
+  display: flex;
+  gap: 2rem;
+  align-self: center;
+
   a {
     color: #A8A8A8;
   }

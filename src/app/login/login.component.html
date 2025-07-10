@@ -1,13 +1,14 @@
 <div class="login-container">
+  <img class="join-logo" src="/assets/images/login/join_logo.svg" alt="join logo">
+  <div class="login-header">
+    <p>Not a Join user? </p>
+    <button type="button" class="button-blue" (click)="toggleMode()"><span>Sign up</span></button>
+  </div>
   <div class="login-wrapper">
 
     @if (isLoginMode) {
     <!-- Login Form -->
-    <img src="/assets/images/login/join_logo.svg" alt="join logo">
-    <div class="login-header">
-      <p>Not a Join user? </p>
-      <button type="button" class="button-blue" (click)="toggleMode()"><span>Sign up</span></button>
-    </div>
+
     <app-log-form [heading]="'Log in'" [buttonOne]="'Guest Log in'" [buttonTwo]="'Log in'" [showNameFields]="false"
       [showPasswordConfirm]="false" [isLoginMode]="true" (buttonOneClick)="guestLogin()"
       (buttonTwoClick)="onLogin($event)">
@@ -15,9 +16,9 @@
 
     } @else {
     <!-- Register Form -->
-    <img (click)="toggleMode()" src="/assets/images/login/goback_arrow.svg" alt="go back link">
     <app-log-form [heading]="'Sign up'" [buttonTwo]="'Sign up'" [showNameFields]="true" [showPasswordConfirm]="true"
-      [isLoginMode]="false" (buttonTwoClick)="onRegister($event)">
+      [isLoginMode]="false" [showBackButton]="true" [showCheckBoxPrivacyPolicy]="true"
+      (buttonTwoClick)="onRegister($event)" (backButtonClick)="toggleMode()">
     </app-log-form>
     }
   </div>
