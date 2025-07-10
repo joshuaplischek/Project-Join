@@ -1,377 +1,180 @@
-@import "./../../../styles.scss";
-
-.button-blue {
-  padding: clamp(0.5rem, 3vw, 1rem) clamp(1rem, 3vw, 2rem);
-  margin: clamp(1rem, 2vw, 1.5rem) 0 clamp(2rem, 4vw, 3rem) 0;
-  width: 100%;
-
-  img {
-    width: clamp(20px, 30px, 30px);
-  }
-
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
-
-hr {
-  border: none;
-  height: 1px;
-  background-color: #ccc;
-}
-
-.mobil-addContactBtn {
-  display: none;
-
-  @media (max-width: 767px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: var(--nav-bg-color);
-    border: 1px solid var(--nav-bg-color);
-    padding: 0.75rem;
-    width: fit-content;
-    position: fixed;
-    bottom: 15%;
-    right: 5%;
-    z-index: 999;
-  }
-}
-
-.contactlist-wrapper {
+.contact-form {
+  flex: 2 1 320px;
+  min-width: 220px;
+  background: white;
+  border-radius: 0 30px 30px 0;
   display: flex;
-  height: calc(100dvh - 96px);
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) clamp(0.5rem, 2vw, 1rem);
+  gap: clamp(1rem, 3vw, 2rem);
 
-  .contactlist-container {
+
+  .form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #ffffff;
-    overflow-y: scroll;
-    padding: clamp(0.5rem, 4vw, 1.5rem);
-    min-width: fit-content;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.363);
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    flex: 1;
+    max-height: 26rem;
+    min-width: 0;
 
-    >div {
-      >ul {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
+    .input-fields {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: clamp(0.5rem, 2vw, 1rem);
+      width: 100%;
+      max-height: 18.385rem;
 
-        >h2 {
-          font-size: clamp(1.1rem, 4vw, 1.5rem);
-          padding: 0 clamp(8px, 3vw, 20px);
+      .firstname-field,
+      .lastname-field,
+      .email-field,
+      .password-field {
+        width: 100%;
+        border: none;
+
+        .input-wrapper {
+          position: relative;
+          width: 100%;
+
+          img {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            width: clamp(12px, 2vw, 16px);
+            pointer-events: none;
+          }
+
+          input {
+            width: 100%;
+            padding: clamp(8px, 2vw, 12px);
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
+            border: 1px solid #D1D1D1;
+            background-color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &::placeholder {
+              color: #D1D1D1;
+            }
+
+            &:focus {
+              outline: none;
+              border: 1px solid var(--accent-color-light);
+            }
+          }
         }
       }
     }
-  }
 
-  .single-contact {
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    gap: clamp(0.8rem, 4vw, 2rem);
-    padding: clamp(0.3rem, 2vw, 0.5rem);
-
-    .contact-initials {
+    .form-buttons {
       display: flex;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
-      color: white;
-      height: clamp(32px, 6vw, 42px);
-      width: clamp(32px, 6vw, 42px);
-      border-radius: 100%;
-    }
+      gap: clamp(0.5rem, 2vw, 1.5rem);
 
-    .contact-name {
-      font-size: clamp(1rem, 3vw, 1.4rem);
-    }
+      .button-blue {
+        border: 1px solid #2A3647;
+        padding: clamp(0.5rem, 2vw, 0.8rem) clamp(1rem, 4vw, 1.5rem);
+        gap: clamp(0.5rem, 2vw, 0.75rem);
 
-    .contact-email {
-      font-size: clamp(0.9rem, 2vw, 1rem);
-      color: var(--accent-color-light);
-    }
+        span {
+          font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
 
-    &:hover {
-      cursor: pointer;
-      background-image: linear-gradient(rgb(240, 240, 240), rgb(235, 235, 235));
-      color: black;
-    }
-  }
+        img {
+          width: 15px;
+        }
 
-  .contact-container {
-    flex: 1;
-    padding: clamp(1.5rem, 4vw, 3rem);
-    max-width: 80vw;
-    width: 100%;
-
-    &.responsive-contact-open {
-      display: flex;
-      flex-direction: column;
-      padding: clamp(1.5rem, 4vw, 3rem);
-    }
-
-    .contact-container-heading {
-      display: flex;
-      margin-bottom: 1.5rem;
-      max-width: fit-content;
-
-      div {
-        background-color: #29abe2;
-        width: 2px;
-        height: 50px;
-      }
-    }
-
-    .single-contact-container {
-      display: flex;
-      flex-direction: column;
-      transform: translateX(100%);
-      transition: transform 0.4s ease, opacity 0.1s;
-      opacity: 0;
-
-      &.open-contact {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    .contact-container-heading {
-      display: flex;
-      align-items: center;
-      gap: clamp(0.5rem, 2vw, 1.3rem);
-      padding-top: clamp(1.5rem, 6vw, 4rem);
-
-      p {
-        font-size: clamp(1rem, 3vw, 1.6rem);
-      }
-
-      @media (max-width: 1100px) {
-        flex-direction: column;
-        gap: 0;
-        padding-top: clamp(0.5rem, 1vw, 4rem);
-        align-items: start;
-
-        >div {
-          order: 3;
-          height: 2px;
-          width: 50%;
+        &:hover {
+          border: 1px solid #29ABE2;
         }
       }
     }
   }
+}
 
-  .image-container {
-    display: none;
-    position: absolute;
-    right: -5%;
-    top: 12%;
-    z-index: 10;
-    background-color: var(--main-bg-color);
-    border-radius: 50%;
+label {
+  display: none;
+}
 
-    @media (max-width: 767px) {
-      display: flex;
-    }
-
-    img {
-      cursor: pointer;
-
-      &:hover {
-        background-color: rgba(128, 128, 128, 0.144);
-        border-radius: 100%;
-      }
-    }
+@media(max-width: 1500px) {
+  .contact-form {
+    gap: 2rem;
   }
+}
 
-  .name-badge-container {
-    display: flex;
-    align-items: center;
-    padding: clamp(1rem, 1vw, 1.8rem);
-    gap: clamp(1rem, 4vw, 2.5rem);
-
-    @media (max-width: 780px) {
-      padding: 0;
-    }
-
-    .name-btn-container {
-      p {
-        font-size: clamp(1.5rem, 3vw, 3rem);
-        font-weight: 500;
-        white-space: nowrap;
-      }
-    }
+@media (max-width: 900px) {
+  .modal {
+    width: 95vw;
+    max-width: 100dvw;
+    min-width: 0;
   }
+}
 
-  .options-btns-container {
-    display: flex;
-    gap: 1rem;
-
-    @media (max-width: 767px) {
-      display: none;
-    }
-
-    div {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-
-      &:hover {
-        cursor: pointer;
-        color: #29abe2;
-        font-weight: bold;
-      }
-    }
-  }
-
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.01);
-    z-index: 100;
-  }
-
-  .responsive-options-btns-container {
-    position: fixed;
-    bottom: 15%;
-    right: 5%;
-    background-color: var(--nav-bg-color);
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: none;
-    justify-content: center;
-    align-items: center;
-
-    @media (max-width: 767px) {
-      display: flex;
-    }
-  }
-
-  .responsive-options-btns-menu {
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: #ffffff;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px 20px 0px 20px;
-    position: absolute;
-    right: -20%;
-    bottom: 3%;
-
-    >div {
-      display: flex;
-      color: black;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.5rem;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    &.show {
-      display: flex;
-      z-index: 999;
-
-      @media (min-width: 767px) {
-        display: none;
-      }
-    }
-  }
-
-  .contact-information-wrapper {
-    padding: clamp(1rem, 4vw, 1.9rem);
-
-    @media (max-width: 767px) {
-      padding-left: 0;
-    }
-
-    >p:first-child {
-      margin-bottom: 30px;
-    }
-
-    p {
-      font-size: 20px;
-    }
-
-    .contact-information {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-
-      p {
-        font-size: 1rem;
-        font-weight: 700;
-      }
-
-      a {
-        margin-bottom: 10px;
-        display: inline;
-      }
-
-      .mail-to {
-        color: #007cee;
-      }
-
-      .phone-number {
-        color: black;
-        white-space: nowrap;
-      }
-    }
-  }
-
-  .ellipse-container {
-    padding: 1.5rem;
-    width: clamp(4rem, 8vw, 7.5rem);
-    height: clamp(4rem, 8vw, 7.5rem);
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    span {
-      color: white;
-      font-size: clamp(1.5rem, 3vw, 3rem);
-    }
-  }
-
-  @media (max-width: 1100px) {
-    .contact-container {
-      padding-top: 1rem;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .contactlist-container {
-      height: calc(100% - 96px);
-    }
-
-    .contact-container {
-      height: calc(100% - 96px);
-    }
-  }
-
-  @media (max-width: 767px) {
-    flex: 1;
-
-    .contact-container {
-      display: none;
-    }
-
-    .contactlist-container {
-      flex: 1;
-      height: calc(100% - 96px);
-
-      >div:not(.mobil-addContactBtn) {
+@media(max-width: 770px) {
+  .contact-form {
+    .form {
+      .form-buttons {
+        flex-direction: column;
         width: 100%;
+        gap: 0.75rem;
+
+        .buttonOne {
+          display: none;
+        }
+
+        .buttonTwo {
+          width: 100%;
+          padding: 0.75rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .modal {
+    flex-direction: column;
+    width: 95vw;
+    max-height: 95vh;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+
+    .contact-form {
+      flex-direction: column;
+      padding: 1.5rem;
+      gap: 1.5rem;
+      border-radius: 0 0 20px 20px;
+      height: 50%;
+      flex: 0;
+    }
+
+    .form {
+      width: 100%;
+      gap: 1rem;
+      overflow-y: auto;
+
+      .input-fields {
+        width: 100%;
+        gap: 0.75rem;
+
+        .input-wrapper {
+          input {
+            padding: 10px;
+          }
+
+          img {
+            width: 18px;
+          }
+        }
       }
     }
   }
