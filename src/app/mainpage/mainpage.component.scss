@@ -1,4 +1,25 @@
-// app-contacts{
-//   max-width: 1920px;
-//   display: flex;
-// }
+@import '../../styles.scss';
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 100px;
+    >div{
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        .vertical-blue-line{
+            width: 2px;
+            height: 50px;
+            background-color: var(--accent-color-light);
+        }
+    }
+}
