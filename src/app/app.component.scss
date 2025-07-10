@@ -1,33 +1,6 @@
 .app-layout {
   display: flex;
-  height: 100vh;
-
-  .sidenav {
-    width: 250px;
-    // Weitere Styles...
-  }
-
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-
-    .content-area {
-      flex: 1;
-      overflow: auto;
-    }
-  }
-}
-
-.login-only {
   width: 100%;
-  height: 100vh;
-}
-
-.layout {
-  display: flex;
-  justify-content: center;
-  width: 100dvw;
   max-width: 1920px;
   height: 100dvh;
   overflow: hidden;
@@ -35,17 +8,17 @@
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
     overflow: hidden;
-  }
-}
 
-.sidenav {
-  width: 10vw;
-  min-width: fit-content;
-  height: 100dvh;
+    .sidenav {
+      width: 10vw;
+      min-width: fit-content;
+      height: 100dvh;
 
-  @media (max-width: 1024px) {
-    width: 100dvw;
-    flex: 0;
+      @media (max-width: 1024px) {
+        width: 100dvw;
+        flex: 0;
+      }
+    }
   }
 }
 
@@ -53,7 +26,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  width: 100%;
   height: 100dvh;
   overflow: hidden;
+
 }
