@@ -27,6 +27,9 @@ export class LogFormComponent {
   passwordTouched = false;
   confirmedPasswordTouched = false;
 
+  acceptPrivacyPolicy = false;
+  acceptPrivacyPolicyTouched = false;
+
   constructor(private contactService: FirebaseService) {}
 
   @Input() heading: string = '';
@@ -38,10 +41,13 @@ export class LogFormComponent {
   @Output() closeModal = new EventEmitter<void>();
   @Output() buttonOneClick = new EventEmitter<void>();
   @Output() buttonTwoClick = new EventEmitter<AuthData>();
+  @Output() backButtonClick = new EventEmitter<void>();
 
   @Input() isLoginMode = false;
   @Input() showPasswordConfirm = true;
   @Input() showNameFields = true;
+  @Input() showBackButton = false;
+  @Input() showCheckBoxPrivacyPolicy = false;
 
   isValidEmail(): boolean {
     return this.email.includes('@');
@@ -72,13 +78,36 @@ export class LogFormComponent {
     if (this.isLoginMode) {
       return emailValid && passwordValid;
     } else {
-      const nameValid = this.showNameFields
-        ? this.firstName.trim().length > 0 && this.lastName.trim().length > 0
-        : true;
-      const confirmPasswordValid = this.showPasswordConfirm
-        ? this.confirmedPassword.trim().length > 0
-        : true;
-      return emailValid && passwordValid && nameValid && confirmPasswordValid;
+      let nameValid: boolean;
+      if (this.showNameFields) {
+        nameValid =
+          this.firstName.trim().length > 0 && this.lastName.trim().length > 0;
+      } else {
+        nameValid = true;
+      }
+
+      let confirmPasswordValid: boolean;
+      if (this.showPasswordConfirm) {
+        confirmPasswordValid = this.confirmedPassword.trim().length > 0;
+      } else {
+        confirmPasswordValid = true;
+      }
+
+      // Privacy Policy Validierung hinzufügen
+      let privacyPolicyValid: boolean;
+      if (this.showCheckBoxPrivacyPolicy) {
+        privacyPolicyValid = this.acceptPrivacyPolicy;
+      } else {
+        privacyPolicyValid = true;
+      }
+
+      return (
+        emailValid &&
+        passwordValid &&
+        nameValid &&
+        confirmPasswordValid &&
+        privacyPolicyValid
+      );
     }
   }
 

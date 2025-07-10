@@ -1,7 +1,14 @@
-<div class="contact-form" [ngClass]="{'visible': isVisible, 'hidden': !isVisible}">
+<div class="log-form" [ngClass]="{'visible': isVisible, 'hidden': !isVisible}">
+  @if (showBackButton) {
+  <img class="back-button" (click)="backButtonClick.emit()" src="/assets/images/login/goback_arrow.svg"
+    alt="go back link">
+  }
   <div class="form">
-    <h2>{{heading}}</h2>
-    <div class="border"></div>
+
+    <div>
+      <h2>{{heading}}</h2>
+      <hr>
+    </div>
 
     <div class="input-fields">
       @if (showNameFields) {
@@ -59,6 +66,18 @@
         </div>
         <div class="input-hint">@if (!confirmedPassword && confirmedPasswordTouched) {
           <span role="alert">Please confirm your password</span>}
+        </div>
+      </div>
+      }
+
+
+      @if (showCheckBoxPrivacyPolicy){
+      <div class="checkbox-container">
+        <!-- <input type="checkbox" (change)="toggleSubtask()"/> -->
+        <input type="checkbox">
+        <label class="custom-checkbox"></label>
+        <div class="subtask-item">
+          <span class="subtask-text"></span>
         </div>
       </div>
       }
