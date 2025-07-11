@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Contactlist } from '../../../interfaces/contactlist';
-
 import { FirebaseService } from '../services/firebase.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AuthData } from '../../../interfaces/authData';
 
 @Component({
   selector: 'app-log-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './log-form.component.html',
   styleUrl: './log-form.component.scss',
 })
