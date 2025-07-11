@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TasksFirbaseService } from '../shared/services/tasks-firbase.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
   templateUrl: './mainpage.component.html',
   styleUrl: './mainpage.component.scss',
 })
-export class MainpageComponent {}
+export class MainpageComponent {
+  constructor(public taskService: TasksFirbaseService) {}
+  
+ngOnInit() {
+  this.taskService.tasksChanged.subscribe(() => {
+    console.log('Tasks geladen:', this.taskService.tasks);
+  });
+  
+}
+}

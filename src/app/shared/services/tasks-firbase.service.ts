@@ -25,7 +25,12 @@ export class TasksFirbaseService {
   private unsubscribe: () => void;
 
   constructor() {
+    this.loadTasksFromFirebase();
     this.unsubscribe = this.subTasks();
+  }
+
+  loadTasksFromFirebase() {
+    this.tasksChanged.next();
   }
 
   async updateTaskStatus(id: string, data: object) {
