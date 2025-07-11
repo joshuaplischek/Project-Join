@@ -1,10 +1,9 @@
-<div class="log-form" [ngClass]="{'visible': isVisible, 'hidden': !isVisible}">
+<section class="log-form" [ngClass]="{'visible': isVisible, 'hidden': !isVisible}">
   @if (showBackButton) {
   <img class="back-button" (click)="backButtonClick.emit()" src="/assets/images/login/goback_arrow.svg"
     alt="go back link">
   }
-  <div class="form">
-
+  <section class="form">
     <div>
       <h2>{{heading}}</h2>
       <hr>
@@ -71,14 +70,20 @@
       }
 
 
-      @if (showCheckBoxPrivacyPolicy){
+      @if (showCheckBoxPrivacyPolicy) {
       <div class="checkbox-container">
-        <!-- <input type="checkbox" (change)="toggleSubtask()"/> -->
-        <input type="checkbox">
-        <label class="custom-checkbox"></label>
-        <div class="subtask-item">
-          <span class="subtask-text"></span>
+        <input type="checkbox" id="privacyPolicy" [(ngModel)]="acceptPrivacyPolicy"
+          (blur)="acceptPrivacyPolicyTouched = true">
+        <label for="privacyPolicy" class="custom-checkbox"></label>
+        <div class="checkbox-text">
+          <span>I accept the </span>
+          <a routerLink="/privacypolicy" target="_blank">Privacy Policy</a>
         </div>
+      </div>
+      <div class="input-hint">
+        @if (!acceptPrivacyPolicy && acceptPrivacyPolicyTouched) {
+        <span role="alert">Please accept the privacy policy</span>
+        }
       </div>
       }
     </div>
@@ -94,5 +99,5 @@
         <span>{{buttonTwo}}</span>
       </button>
     </div>
-  </div>
-</div>
+  </section>
+</section>
