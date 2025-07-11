@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/header/header.component';
 import { NavComponent } from './shared/nav/nav.component';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,11 @@ import { NavComponent } from './shared/nav/nav.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  showLayout = false;
+  showFullLayout = false;
+  showLimitedLayout = false;
+  showNoLayout = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.checkCurrentRoute();
@@ -25,6 +28,10 @@ export class AppComponent implements OnInit {
         this.checkCurrentRoute();
       }
     });
+
+    this.authService.isLoggedIn$.subscribe(() => {
+      this.checkCurrentRoute();
+    });
   }
 
   // Beispiel aller Events während einer Navigation:
@@ -32,10 +39,37 @@ export class AppComponent implements OnInit {
   // 2. RoutesRecognized { url: '/login' }
   // 3. NavigationEnd { url: '/login' }     ← Nur hier reagieren!
 
-  checkCurrentRoute() {
+  private checkCurrentRoute() {
     // Holt die aktuelle URL vom Router
     const currentUrl = this.router.url;
-    // Setzt showLayout auf true, außer wenn URL 'login' enthält
-    this.showLayout = !currentUrl.includes('/login');
+    const isLoggedIn = this.authService.isLoggedIn;
+
+    // Kein Layout für Login (immer)
+    if (currentUrl.includes('/login')) {
+      this.showNoLayout = true;
+      this.showLimitedLayout = false;
+      this.showFullLayout = false;
+    }
+    // Wenn eingeloggt: immer volles Layout (außer Login)
+    else if (isLoggedIn) {
+      this.showNoLayout = false;
+      this.showLimitedLayout = false;
+      this.showFullLayout = true;
+    }
+    // Nicht eingeloggt + Privacy/Legal → limitiertes Layout
+    else if (
+      currentUrl.includes('/privacypolicy') ||
+      currentUrl.includes('/legalnotice')
+    ) {
+      this.showNoLayout = false;
+      this.showLimitedLayout = true;
+      this.showFullLayout = false;
+    }
+    // Fallback: volles Layout
+    else {
+      this.showNoLayout = false;
+      this.showLimitedLayout = false;
+      this.showFullLayout = true;
+    }
   }
 }
