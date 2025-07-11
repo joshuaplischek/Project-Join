@@ -1,4 +1,4 @@
-<div class="task-form">
+<section class="task-form">
   <h2 class="task-title">{{ task?.title }}</h2>
   <p class="task-description">{{ task?.description }}</p>
 
@@ -42,11 +42,7 @@
       <div>
         @for (subtask of subtasks; track $index) {
         <span class="checkbox-container">
-          <input 
-            type="checkbox" 
-            [checked]="subtask.done"
-            (change)="toggleSubtask($index)"
-            id="subtask-{{ $index }}" />
+          <input type="checkbox" [checked]="subtask.done" (change)="toggleSubtask($index)" id="subtask-{{ $index }}" />
           <label for="subtask-{{ $index }}" class="custom-checkbox"></label>
           <div class="subtask-item">
             <span class="subtask-text" [ngClass]="{ completed: subtask.done }">{{
@@ -79,4 +75,4 @@
       <span>Edit</span>
     </button>
   </div>
-</div>
+</section>

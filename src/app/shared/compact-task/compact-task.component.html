@@ -1,4 +1,4 @@
-<div class="task-card-container" (click)="onTaskClick($event)">
+<section class="task-card-container" (click)="onTaskClick($event)">
   <div class="inner-container">
     <p [ngClass]="{
       blue: task.category === 'User Story',
@@ -27,20 +27,20 @@
     <div class="user-badges-prio-container">
       <div class="user-badges-container">
         @if (hasAssignedUsers) {
-          @for (user of getDisplayedUsers(); track user) {
-            <div class="badge" [style.background]="getColorForLetter(user.charAt(0))">
-              {{ user.substring(0, 2).toUpperCase() }}
-            </div>
-          }
-          @if (getRemainingUsersCount() > 0) {
-            <div class="badge extra-count">
-              +{{ getRemainingUsersCount() }}
-            </div>
-          }
+        @for (user of getDisplayedUsers(); track user) {
+        <div class="badge" [style.background]="getColorForLetter(user.charAt(0))">
+          {{ user.substring(0, 2).toUpperCase() }}
+        </div>
+        }
+        @if (getRemainingUsersCount() > 0) {
+        <div class="badge extra-count">
+          +{{ getRemainingUsersCount() }}
+        </div>
+        }
         }
       </div>
 
       <img class="card-prio" [src]="getPriorityIcon()" alt="priority icon" />
     </div>
   </div>
-</div>
+</section>

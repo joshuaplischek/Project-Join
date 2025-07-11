@@ -9,7 +9,7 @@
       <hr>
     </div>
 
-    <div class="contact-form">
+    <section class="contact-form">
       <div class="user-badge-container">
         <div class="user-badge">
           <img src="/assets/images/contactform/person.svg" alt="User Badge Icon">
@@ -17,7 +17,7 @@
       </div>
       <div class="form">
         <div (click)="close()" class="close-btn-wrapper">
-          <img class="close-btn"  src="/assets/images/contactform/cancel.svg" alt="cancel button">
+          <img class="close-btn" src="/assets/images/contactform/cancel.svg" alt="cancel button">
         </div>
         <div class="input-fields">
           <div class="firstname-field ">
@@ -68,13 +68,13 @@
             <img src="/assets/images/contactform/cancel.svg" alt="cancel icon">
           </button>
 
-          <button class="buttonTwo button-blue" (click)="buttonTwoClick.emit({firstName, lastName, email, phone})" type="submit"
-            [disabled]="!firstName || !lastName || !email || !phone || !isValidEmail()">
+          <button class="buttonTwo button-blue" (click)="buttonTwoClick.emit({firstName, lastName, email, phone})"
+            type="submit" [disabled]="!firstName || !lastName || !email || !phone || !isValidEmail()">
             <span>{{buttonTwo}}</span>
             <img src="/assets/images/contactform/check.svg" alt="check icon">
           </button>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <section class="add-task-wrapper">
   <h2>Add Task</h2>
-  <div class="form-container">
-    <section class="form">
+  <section class="form-container">
+    <div class="form">
       <div class="addTaskForm">
         <div class="title-field">
           <label for="titleInput">Title<span class="warning">*</span></label>
@@ -181,15 +181,13 @@
           }
         </div>
       </div>
-    </section>
+    </div>
     <p class="requierd-text"><span class="warning">*</span>This field is requierd</p>
-  </div>
+  </section>
 </section>
 
-<div class="button-container" 
-     [class.fixed-position]="useFixedPosition"
-     [class.flex-position]="!useFixedPosition"
-     [style]="useFixedPosition ? buttonStyles : null">
+<div class="button-container" [class.fixed-position]="useFixedPosition" [class.flex-position]="!useFixedPosition"
+  [style]="useFixedPosition ? buttonStyles : null">
   <button (click)="clearForm()" class="button-white-border">
     <span>Clear</span>
     <img src="/assets/images/icons/icon-cancel.svg" alt="clear task" />
