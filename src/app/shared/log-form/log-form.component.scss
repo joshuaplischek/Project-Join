@@ -8,7 +8,14 @@
   padding: 2rem;
   gap: clamp(1rem, 3vw, 2rem);
   width: 30vw;
+  min-width: 500px;
+  min-height: 30vh;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+
+  @media(max-width: 600px) {
+    min-width: 300px;
+    width: 80vw;
+  }
 
   .back-button {
     position: absolute;
@@ -25,7 +32,9 @@
     align-items: center;
     gap: 2rem;
 
-
+    @media(max-width:400px) {
+      width: 100%;
+    }
 
     div {
       display: flex;
@@ -36,7 +45,6 @@
       hr {
         width: 50%;
         border: 1px solid #29ABE2;
-
       }
     }
 
@@ -98,10 +106,28 @@
       align-items: center;
       gap: clamp(0.5rem, 2vw, 1.5rem);
 
+      @media(max-width: 400px) {
+        flex-direction: column;
+        width: 50%;
+      }
+
+      .button-white-border {
+        @media(max-width:400px) {
+          width: 100%;
+          order: 2;
+        }
+      }
+
       .button-blue {
         border: 1px solid #2A3647;
         padding: clamp(0.5rem, 2vw, 0.8rem) clamp(1rem, 4vw, 1.5rem);
         gap: clamp(0.5rem, 2vw, 0.75rem);
+
+        @media(max-width:400px) {
+          width: 100%;
+          order: 1;
+        }
+
 
         span {
           font-size: clamp(0.9rem, 1.5vw, 1rem);
@@ -121,80 +147,4 @@
 
 label {
   display: none;
-}
-
-@media(max-width: 1500px) {
-  .contact-form {
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 900px) {
-  .modal {
-    width: 95vw;
-    max-width: 100dvw;
-    min-width: 0;
-  }
-}
-
-@media(max-width: 770px) {
-  .contact-form {
-    .form {
-      .form-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.75rem;
-
-        .buttonOne {
-          display: none;
-        }
-
-        .buttonTwo {
-          width: 100%;
-          padding: 0.75rem;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  .modal {
-    flex-direction: column;
-    width: 95vw;
-    max-height: 95vh;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-
-    .contact-form {
-      flex-direction: column;
-      padding: 1.5rem;
-      gap: 1.5rem;
-      border-radius: 0 0 20px 20px;
-      height: 50%;
-      flex: 0;
-    }
-
-    .form {
-      width: 100%;
-      gap: 1rem;
-      overflow-y: auto;
-
-      .input-fields {
-        width: 100%;
-        gap: 0.75rem;
-
-        .input-wrapper {
-          input {
-            padding: 10px;
-          }
-
-          img {
-            width: 18px;
-          }
-        }
-      }
-    }
-  }
 }

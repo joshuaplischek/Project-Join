@@ -7,15 +7,26 @@
   justify-content: space-between;
   align-items: flex-end;
   padding: 2rem;
+  margin: 0 auto;
+
+  @media(max-width:768px) {
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+  }
 
   .login-header {
-
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 2rem;
     padding: 1rem;
 
+    @media(max-width:768px) {
+      order: 2;
+      gap: 1rem;
+    }
   }
 
   .login-wrapper {
@@ -25,6 +36,11 @@
     gap: 2rem;
     align-items: center;
     justify-content: center;
+    margin: auto 0;
+
+    @media(max-width:768px) {
+      order: 1;
+    }
   }
 }
 
@@ -34,6 +50,7 @@
   // top: 50%;
   // left: 50%;
   // translate: 50%;
+  width: clamp(60px, 5vw, 100px);
 
   top: 5%;
   left: 5%;
@@ -44,7 +61,18 @@
   gap: 2rem;
   align-self: center;
 
+  @media(max-width:768px) {
+    order: 3;
+    position: absolute;
+    bottom: 40px;
+  }
+
   a {
     color: #A8A8A8;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: var(--accent-color-light);
+    }
   }
 }
