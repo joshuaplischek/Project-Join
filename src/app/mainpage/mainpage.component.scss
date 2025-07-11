@@ -1,1 +1,92 @@
+@import '../../styles.scss';
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+    width: 100%;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 0 100px;
+    >div{
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        .vertical-blue-line{
+            width: 2px;
+            height: 50px;
+            background-color: var(--accent-color-light);
+        }
+    }
+}
+
+.summary-terminal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    .done-todo-infos{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .circle-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            background-color: var(--nav-bg-color);
+            height: 69px;
+            width: 69px;
+        }
+        >div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: clamp(1rem, 15vw, 10rem);
+            gap: 25px;
+        }
+    }
+}
+
+.show-todo, .show-done, .show-upcoming-deadline,
+.show-sum-of-tasks, .show-tasks-in-progress, .show-awaiting-feedback{
+    display: flex;
+    border-radius: 25px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    &:hover{
+        cursor: pointer;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.show-todo, .show-done{
+    width: clamp(1rem, 20vw, 15rem);
+}
+.show-upcoming-deadline{
+    width: clamp(1rem, 20vw, 15rem);
+}
+
+.show-task-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .show-sum-of-tasks, .show-tasks-in-progress, .show-awaiting-feedback{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: clamp(1rem, 10vw, 10rem);
+    height: clamp(1rem, 10vw, 10rem);
+    >p{
+        text-align: center;
+    }
+}
+}
 
