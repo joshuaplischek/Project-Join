@@ -1,11 +1,26 @@
-@if (showLayout) {
+@if (showFullLayout) {
+<!-- Volles Layout mit Header und Sidenav -->
 <div class="app-layout">
   <app-nav class="sidenav"></app-nav>
   <div class="main-content">
     <app-header></app-header>
-    <router-outlet></router-outlet>
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+} @else if (showLimitedLayout) {
+<!-- Limitiertes Layout mit limitierter Nav -->
+<div class="app-layout">
+  <app-nav class="sidenav" [isLimitedMode]="true"></app-nav>
+  <div class="main-content">
+    <app-header [isLimitedMode]="true"></app-header>
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
   </div>
 </div>
 } @else {
+<!-- Kein Layout für Login -->
 <router-outlet></router-outlet>
 }

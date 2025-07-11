@@ -1,29 +1,27 @@
 <header class="header">
   <div class="header-max-content-wrapper">
+    @if (isLimitedMode) {
+    <h1>Kanban Project Management Tool</h1>
+    } @else {
     <h1 class="header-text">Kanban Project Management Tool</h1>
-    <img
-      class="header-icon"
-      src="/assets/images/header_logo.svg"
-      alt="Logo Icon"
-    />
+    <img class="header-icon" src="/assets/images/header_logo.svg" alt="Logo Icon" />
     <div>
-      <a class="help-icon-link" routerLink="/help"
-        ><img src="/assets/images/icons/icon-help.svg" alt="help icon"
-      /></a>
+      <a class="help-icon-link" routerLink="/help"><img src="/assets/images/icons/icon-help.svg" alt="help icon" /></a>
       <div (click)="openQuickMenu()" class="user-badge"><span>SM</span></div>
     </div>
     @if (isMenuOpen) {
     <div class="overlay" (click)="closeQuickMenu()"></div>
     <div class="quickMenu show" (click)="$event.stopPropagation()">
-      <a class="help-page-media" routerLink="/help" (click)="closeQuickMenu()"
-        >Help</a
-      >
-      <a routerLink="/privacypolicy" (click)="closeQuickMenu()"
-        >Privacy Policy</a
-      >
+      <a class="help-page-media" routerLink="/help" (click)="closeQuickMenu()">Help</a>
+      <a routerLink="/privacypolicy" (click)="closeQuickMenu()">Privacy Policy</a>
       <a routerLink="/legalnotice" (click)="closeQuickMenu()">Legal notice</a>
-      <a routerLink="/logout" (click)="closeQuickMenu()">Log out</a>
+      <div class="nav-logout">
+        <button (click)="logout()" class="logout-btn">
+          <span>Log out</span>
+        </button>
+      </div>
     </div>
+    }
     }
   </div>
 </header>
