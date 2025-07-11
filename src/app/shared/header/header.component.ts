@@ -1,16 +1,20 @@
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  isMenuOpen: boolean = false;
+  @Input() isLimitedMode = false;
+  isMenuOpen = false;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   openQuickMenu() {
     this.isMenuOpen = true;
@@ -18,5 +22,11 @@ export class HeaderComponent {
 
   closeQuickMenu() {
     this.isMenuOpen = false;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.closeQuickMenu();
+    this.router.navigate(['/login']);
   }
 }
