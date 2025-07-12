@@ -87,7 +87,6 @@ section{
         flex-direction: row;
         align-items: center;
         .priority-circle{
-            background-color: blue;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -95,7 +94,7 @@ section{
             height: 69px;
             width: 69px;
             >img{
-                height: clamp(1rem, 2vw, 2rem);
+                height: clamp(1rem, 1.3vw, 2rem);
                 filter: brightness(0) invert(1);
             }
         }
