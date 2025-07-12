@@ -14,7 +14,7 @@
             <img src="/assets/images/main/edit.png" alt="to-do-pencil image" />
           </div>
           <div>
-            <p>num</p>
+            <p class="num-of">{{ getNumberOftasks('todo') }}</p>
             <p>To-do</p>
           </div>
         </div>
@@ -23,7 +23,7 @@
             <img src="/assets/images/main/Vector.png" alt="done check symbol" />
           </div>
           <div>
-            <p>num</p>
+            <p class="num-of">{{ getNumberOftasks('done') }}</p>
             <p>Done</p>
           </div>
         </div>
@@ -32,27 +32,27 @@
         <div class="priority-part">
           <img src="" alt="priority image" />
           <div>
-            <p>num</p>
+            <p class="num-of">num</p>
             <p>priority</p>
           </div>
         </div>
         <div class="boderline"></div>
         <div>
-          <p>...date...</p>
+          <p>date</p>
           <p>Upcoming Deadline</p>
         </div>
       </div>
       <div class="show-task-info">
         <div [routerLink]="'/board'" class="show-sum-of-tasks">
-          <p>{{taskService.tasks.length}}</p>
+          <p class="num-of">{{taskService.tasks.length}}</p>
           <p>Tasks in Board</p>
         </div>
         <div [routerLink]="'/board'" class="show-tasks-in-progress">
-          <p>num</p>
+          <p class="num-of">{{ getNumberOftasks('inprogress') }}</p>
           <p>Tasks in Progress</p>
         </div>
         <div [routerLink]="'/board'" class="show-awaiting-feedback">
-          <p>num</p>
+          <p class="num-of">{{ getNumberOftasks('awaitfeedback') }}</p>
           <p>Awaiting Feedback</p>
         </div>
       </div>

@@ -111,6 +111,11 @@ section{
     }
 }
 
+.num-of{
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: bold;
+}
+
 .greeting{
     h3{
         font-size: 43px;
