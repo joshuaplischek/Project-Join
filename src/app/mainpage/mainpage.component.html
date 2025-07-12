@@ -9,7 +9,7 @@
   <section class="summary-terminal">
     <div>
       <div class="done-todo-infos">
-        <div class="show-todo">
+        <div [routerLink]="'/board'" class="show-todo">
           <div class="circle-container">
             <img src="/assets/images/main/edit.png" alt="to-do-pencil image" />
           </div>
@@ -18,7 +18,7 @@
             <p>To-do</p>
           </div>
         </div>
-        <div class="show-done">
+        <div [routerLink]="'/board'" class="show-done">
           <div class="circle-container">
             <img src="/assets/images/main/Vector.png" alt="done check symbol" />
           </div>
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="show-upcoming-deadline">
+      <div [routerLink]="'/board'" class="show-upcoming-deadline">
         <div class="priority-part">
           <img src="" alt="priority image" />
           <div>
@@ -43,23 +43,23 @@
         </div>
       </div>
       <div class="show-task-info">
-        <div class="show-sum-of-tasks">
-          <p>num</p>
+        <div [routerLink]="'/board'" class="show-sum-of-tasks">
+          <p>{{taskService.tasks.length}}</p>
           <p>Tasks in Board</p>
         </div>
-        <div class="show-tasks-in-progress">
+        <div [routerLink]="'/board'" class="show-tasks-in-progress">
           <p>num</p>
           <p>Tasks in Progress</p>
         </div>
-        <div class="show-awaiting-feedback">
+        <div [routerLink]="'/board'" class="show-awaiting-feedback">
           <p>num</p>
           <p>Awaiting Feedback</p>
         </div>
       </div>
     </div>
     <div>
-      <div>
-        <h3>good (time)</h3>
+      <div class="greeting">
+        <h3>{{getGreeting()}}</h3>
         <h2>logged name...</h2>
       </div>
     </div>
