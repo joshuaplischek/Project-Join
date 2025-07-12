@@ -30,15 +30,17 @@
       </div>
       <div [routerLink]="'/board'" class="show-upcoming-deadline">
         <div class="priority-part">
-          <img src="" alt="priority image" />
+          <div [style]="" class="priority-circle"> <!-- add dynamic backroundcolor -->
+            <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority + '.svg'" alt="priority image"  />
+          </div>
           <div>
-            <p class="num-of">num</p>
-            <p>priority</p>
+            <p class="num-of">{{nextDeadlineInfo.count}}</p>
+            <p>{{ nextDeadlineInfo.priority }}</p>
           </div>
         </div>
         <div class="boderline"></div>
         <div>
-          <p>date</p>
+          <p>{{ nextDeadlineInfo.date }}</p>
           <p>Upcoming Deadline</p>
         </div>
       </div>
@@ -65,3 +67,5 @@
     </div>
   </section>
 </section>
+
+
