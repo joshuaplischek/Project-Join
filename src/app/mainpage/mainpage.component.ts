@@ -28,28 +28,55 @@ export class MainpageComponent {
     return 'Good evening';
   }
 
-  getNumberOftasks(task: string){
-    return this.taskService.tasks.filter(t => t.status === task).length;
+  getNumberOftasks(task: string) {
+    return this.taskService.tasks.filter((t) => t.status === task).length;
+  }
+
+  // Hilfsfunktion für Datumskonvertierung
+  private getTaskDate(task: Tasks): Date {
+    return task.date instanceof Date ? task.date : task.date.toDate();
+  }
+
+  // Hilfsfunktion für Zeitstempel (nutzt getTaskDate)
+  private getTaskTime(task: Tasks): number {
+    return this.getTaskDate(task).getTime();
+  }
+
+  // Hilfsfunktion für Prioritäts-Formatierung
+  private formatPriority(priority: string): string {
+    return priority ? priority.charAt(0).toUpperCase() + priority.slice(1) : '';
   }
 
   get nextDeadlineInfo() {
     const nextTask = this.filterDeadlineTasks();
-    if (!nextTask) return { count: 0, priority: '', date: '' };
-      const dateToCompare = nextTask.date instanceof Date ? nextTask.date.getTime() : nextTask.date.toDate().getTime();
-      const sameTasks = this.taskService.tasks.filter(t =>
-      t.date && t.status !== 'done' && ((t.date instanceof Date ? t.date.getTime() : t.date.toDate().getTime()) === dateToCompare) &&
-      t.priority === nextTask.priority
+    // Early return wenn keine Task gefunden
+    if (!nextTask) {
+      return { count: 0, priority: '', date: '' };
+    }
+    const dateToCompare = this.getTaskTime(nextTask);
+    // Filtert Tasks mit gleicher Deadline und Priorität
+    const sameTasks = this.taskService.tasks.filter(
+      (task) =>
+        task.date &&
+        task.status !== 'done' &&
+        this.getTaskTime(task) === dateToCompare &&
+        task.priority === nextTask.priority
     );
+
     return {
       count: sameTasks.length,
-      priority: nextTask.priority ? nextTask.priority.charAt(0).toUpperCase() + nextTask.priority.slice(1) : '',
-      date: this.convertDate(nextTask)
+      priority: this.formatPriority(nextTask.priority),
+      date: this.convertDate(nextTask),
     };
   }
 
   convertDate(task: Tasks | null): string {
     if (!task || !task.date) return '';
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: '2-digit' };
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: '2-digit',
+    };
     if (task.date instanceof Date) {
       return task.date.toLocaleDateString('en-EN', options);
     }
@@ -61,21 +88,24 @@ export class MainpageComponent {
 
   filterDeadlineTasks() {
     const prioOrder: Record<string, number> = { urgent: 1, medium: 2, low: 3 };
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const tasksWithDate = this.taskService.tasks.filter(t => {
-      if (!t.date || t.status === 'done') return false;
-      const taskDate = t.date instanceof Date ? t.date : t.date.toDate();
-      taskDate.setHours(0, 0, 0, 0);
-      return taskDate.getTime() >= today.getTime();
-    });
-    if (tasksWithDate.length === 0) return null;
-    const sorted = tasksWithDate.sort((a, b) => {
-      const dateA = a.date instanceof Date ? a.date.getTime() : a.date.toDate().getTime();
-      const dateB = b.date instanceof Date ? b.date.getTime() : b.date.toDate().getTime();
-      if (dateA !== dateB) return dateA - dateB;
-      return (prioOrder[a.priority] ?? 99) - (prioOrder[b.priority] ?? 99);
-    });
-    return sorted[0];
+    const today = new Date().setHours(0, 0, 0, 0);
+    const upcomingTasks = this.taskService.tasks
+      .filter((task) => {
+        if (!task.date || task.status === 'done') return false;
+        // Nutzt die private Hilfsmethode
+        const taskDate = this.getTaskDate(task);
+        return taskDate.setHours(0, 0, 0, 0) >= today;
+      })
+      .sort((a, b) => {
+        // Nutzt die private Hilfsmethode
+        const dateA = this.getTaskDate(a).getTime();
+        const dateB = this.getTaskDate(b).getTime();
+        // Wenn die Daten unterschiedlich sind, sortiere nach Datum (früher zuerst)
+        if (dateA !== dateB) return dateA - dateB;
+        // Bei gleichem Datum: sortiere nach Priorität (urgent vor medium vor low)
+        return prioOrder[a.priority] - prioOrder[b.priority];
+      });
+    // Gibt den ersten Task zurück (nächste Deadline) oder null wenn keine Tasks vorhanden
+    return upcomingTasks.length > 0 ? upcomingTasks[0] : null;
   }
 }
