@@ -17,6 +17,8 @@ export class MainpageComponent {
     this.taskService.tasksChanged.subscribe(() => {
       console.log('Tasks geladen:', this.taskService.tasks);
       this.nextDeadlineInfo;
+      console.log('Next Deadline Info:', this.nextDeadlineInfo.priority);
+      
     });
   }
 
