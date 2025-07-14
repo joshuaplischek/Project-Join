@@ -41,7 +41,9 @@ export class LoginComponent {
 
   onRegister(authData: AuthData) {
     console.log('Register attempt:', authData);
+    this.authService.signUp(authData)
     this.authService.login();
     this.router.navigate(['/board']);
   }
+    
 }

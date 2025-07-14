@@ -93,19 +93,19 @@ export class LogFormComponent {
       }
 
       // Privacy Policy Validierung hinzufügen
-      let privacyPolicyValid: boolean;
-      if (this.showCheckBoxPrivacyPolicy) {
-        privacyPolicyValid = this.acceptPrivacyPolicy;
-      } else {
-        privacyPolicyValid = true;
-      }
+      // let privacyPolicyValid: boolean;
+      // if (this.showCheckBoxPrivacyPolicy) {
+      //   privacyPolicyValid = this.acceptPrivacyPolicy;
+      // } else {
+      //   privacyPolicyValid = true;
+      // }
 
       return (
         emailValid &&
         passwordValid &&
         nameValid &&
-        confirmPasswordValid &&
-        privacyPolicyValid
+        confirmPasswordValid
+        // privacyPolicyValid
       );
     }
   }
@@ -116,6 +116,9 @@ export class LogFormComponent {
       const authData: AuthData = {
         email: this.email,
         password: this.password,
+        firstName: '',
+        lastName: '',
+        confirmedPassword: ''
       };
 
       // Bei Registierung Vor-und Nachnamen hinzufügen
