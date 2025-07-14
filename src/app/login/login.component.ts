@@ -28,22 +28,26 @@ export class LoginComponent {
   }
 
   guestLogin() {
-    console.log('Guest login');
     this.authService.login();
     this.router.navigate(['/board']);
   }
 
   onLogin(authData: AuthData) {
-    console.log('Login attempt:', authData);
     this.authService.logIn(authData);
-    this.router.navigate(['/board']);
+    if (this.authService.userExists) {
+      this.router.navigate(['/board']);
+    } else {
+      //show error message
+    }
   }
 
   onRegister(authData: AuthData) {
-    console.log('Register attempt:', authData);
-    this.authService.signUp(authData)
-    this.authService.login();
-    this.router.navigate(['/board']);
+    this.authService.signUp(authData);
+    if (this.authService.userSignedUp) {
+      this.authService.login();
+      this.router.navigate(['/board']);
+    } else {
+      //show error message
+    }
   }
-    
 }
