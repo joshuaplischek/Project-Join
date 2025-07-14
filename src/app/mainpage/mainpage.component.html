@@ -4,6 +4,7 @@
       <h2>Join 360</h2>
       <div class="vertical-blue-line"></div>
       <p>Key Metrics at a Glance</p>
+      <div class="horizontal-blue-line"></div>
     </div>
   </div>
   <section class="summary-terminal">
@@ -31,17 +32,17 @@
       <div [routerLink]="'/board'" class="show-upcoming-deadline">
         <div class="priority-part">
           @if (nextDeadlineInfo.priority === 'Urgent') {
-            <div [style.background]="'#ff0000'" class="priority-circle"> <!-- add dynamic backroundcolor -->
+            <div [style.background]="'#ff0000'" class="priority-circle">
               <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'" alt="priority image Urgant"  />
             </div>
           }
           @if (nextDeadlineInfo.priority === 'Medium') {
-            <div [style.background]="'#ff7a00'" class="priority-circle"> <!-- add dynamic backroundcolor -->
+            <div [style.background]="'#ff7a00'" class="priority-circle">
               <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'" alt="priority image Medium"  />
             </div>
           }
           @if (nextDeadlineInfo.priority === 'Low') {
-            <div [style.background]="'#7ae229'" class="priority-circle"> <!-- add dynamic backroundcolor -->
+            <div [style.background]="'#7ae229'" class="priority-circle">
               <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'" alt="priority image Low"  />
             </div>
           }
