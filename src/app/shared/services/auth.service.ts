@@ -68,6 +68,7 @@ export class AuthService {
     await setDoc(doc(this.firestore, 'contactlist', userCredential.user.uid), {
       firstName: authData.firstName,
       lastName: authData.lastName,
+      email: authData.email,
     });
   }
 
