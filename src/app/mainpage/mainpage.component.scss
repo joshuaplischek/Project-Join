@@ -13,6 +13,9 @@ section{
         height: auto;
         padding: 0;
     }
+    @media (max-width: 400px){
+        padding: clamp(2rem, 2vw, 5rem) clamp(0.5rem, 0vw, 10rem) clamp(1rem, 2vw, 2rem) clamp(0.5rem, 0vw, 5rem);
+    }
 }
 
 .heading{
@@ -114,7 +117,7 @@ section{
         }
     }
     @media (max-width: 800px){
-        width: clamp(8rem, 30vw, 15rem);
+        width: clamp(9rem, 30vw, 15rem);
         
     }
 }
@@ -164,7 +167,7 @@ section{
             text-align: center;
         }
         @media (max-width: 800px){
-            width: clamp(5rem, 15vw, 15rem);
+            width: clamp(6rem, 15vw, 15rem);
         }
     }
 }
