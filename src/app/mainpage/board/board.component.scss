@@ -141,7 +141,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    width: 20%;
+    width: 22%;
   }
 
   .list-heading {
@@ -275,6 +275,7 @@ label {
 
 .cdk-drag {
   width: 100%;
+
   @media (max-width: 1024px) {
     width: auto;
   }
