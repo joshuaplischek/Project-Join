@@ -3,6 +3,8 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   updateProfile,
+  User,
+  UserCredential,
 } from 'firebase/auth';
 import { BehaviorSubject, last } from 'rxjs';
 import { AuthData } from '../../../interfaces/authData';
@@ -42,19 +44,22 @@ export class AuthService {
         displayName: `${authData.firstName} ${authData.lastName}`,
       });
 
-      await setDoc(
-        doc(this.firestore, 'contactlist', userCredential.user.uid),
-        {
-          firstName: authData.firstName,
-          lastName: authData.lastName,
-        }
-      );
+      this.saveInDatabase(authData, userCredential)
 
       this.isLoggedInSubject.next(true);
       return userCredential;
     } catch (error) {
       console.error('Error during sign up:', error);
-      throw error; // Rethrow the error to handle it in the component
+      throw error;
     }
   }
+
+  async saveInDatabase(authData: AuthData, userCredential: UserCredential) {
+    await setDoc(doc(this.firestore, 'contactlist', userCredential.user.uid), {
+      firstName: authData.firstName,
+      lastName: authData.lastName,
+    });
+  }
+
+
 }
