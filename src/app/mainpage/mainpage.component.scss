@@ -3,9 +3,16 @@ section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100dvh;
+    justify-content: start;
+    height: calc(100dvh - 96px);
     width: 100%;
+    max-width: 1600px;
+    padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 5rem);
+    gap: 2rem;
+    >section{
+        height: auto;
+        padding: 0;
+    }
 }
 
 .heading{
@@ -13,7 +20,7 @@ section{
     align-items: center;
     width: 100%;
     height: auto;
-    padding: 0 100px;
+    // padding: 0 clamp(1rem, 7vw, 10rem);
     >div{
         display: flex;
         align-items: center;
@@ -30,11 +37,12 @@ section{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     .done-todo-infos{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
         .circle-container{
             display: flex;
             justify-content: center;
@@ -48,7 +56,6 @@ section{
             display: flex;
             align-items: center;
             justify-content: center;
-            height: clamp(1rem, 15vw, 10rem);
             gap: 25px;
         }
     }
@@ -59,6 +66,7 @@ section{
     display: flex;
     border-radius: 25px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    height: clamp(1rem, 15vw, 10rem);
     &:hover{
         cursor: pointer;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
@@ -69,7 +77,34 @@ section{
     width: clamp(1rem, 20vw, 15rem);
 }
 .show-upcoming-deadline{
-    width: clamp(1rem, 20vw, 15rem);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    .priority-part{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .priority-circle{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            height: 69px;
+            width: 69px;
+            >img{
+                height: clamp(1rem, 1.3vw, 2rem);
+                filter: brightness(0) invert(1);
+            }
+        }
+
+    }
+    .boderline{
+        width: 2px;
+        height: clamp(1rem, 4vw, 5rem);
+        background-color: var(--grey-color);
+    }
 }
 
 .show-task-info{
@@ -77,16 +112,30 @@ section{
     flex-direction: row;
     justify-content: space-between;
 
-    .show-sum-of-tasks, .show-tasks-in-progress, .show-awaiting-feedback{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: clamp(1rem, 10vw, 10rem);
-    height: clamp(1rem, 10vw, 10rem);
-    >p{
-        text-align: center;
+        .show-sum-of-tasks, .show-tasks-in-progress, .show-awaiting-feedback{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: clamp(1rem, 10vw, 10rem);
+        >p{
+            text-align: center;
+        }
     }
 }
+
+.num-of{
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: bold;
+}
+
+.greeting{
+    h3{
+        font-size: 43px;
+    }
+
+    h2{
+        color: var(--accent-color-light);
+    }
 }
 

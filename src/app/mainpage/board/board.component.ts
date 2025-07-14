@@ -50,18 +50,17 @@ export class BoardComponent {
   showSuccessMessage = false;
   successMessage = '';
 
-  ngOnInit() {
-    this.filteredTasks = this.taskService.tasks;
-    this.taskService.subTasks();
-    this.subscription.add(
-      this.taskService.tasksChanged.subscribe(() => {
-        this.filteredTasks = this.taskService.tasks;
-        this.searchTask();
-      })
-    );
-    this.setDragStartDelay();
-    window.addEventListener('resize', () => this.setDragStartDelay());
-  }
+ngOnInit() {
+  this.filteredTasks = this.taskService.tasks;
+  this.subscription.add(
+    this.taskService.tasksChanged.subscribe(() => {
+      this.filteredTasks = this.taskService.tasks;
+      this.searchTask();
+    })
+  );
+  this.setDragStartDelay();
+  window.addEventListener('resize', () => this.setDragStartDelay());
+}
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
