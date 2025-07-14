@@ -3,13 +3,13 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   updateProfile,
-  User,
   UserCredential,
 } from 'firebase/auth';
 import { BehaviorSubject, last } from 'rxjs';
 import { AuthData } from '../../../interfaces/authData';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { FirebaseApp } from '@angular/fire/app';
+import { signInWithEmailAndPassword } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +20,7 @@ export class AuthService {
   firestore: Firestore = inject(Firestore);
   firebaseApp: FirebaseApp = inject(FirebaseApp);
 
-  login() {
-    this.isLoggedInSubject.next(true);
-  }
+  login() {}
 
   logout() {
     this.isLoggedInSubject.next(false);
@@ -40,11 +38,12 @@ export class AuthService {
         authData.email,
         authData.password
       );
+      console.log(userCredential);
       await updateProfile(userCredential.user, {
         displayName: `${authData.firstName} ${authData.lastName}`,
       });
 
-      this.saveInDatabase(authData, userCredential)
+      this.saveInDatabase(authData, userCredential);
 
       this.isLoggedInSubject.next(true);
       return userCredential;
@@ -61,5 +60,16 @@ export class AuthService {
     });
   }
 
-
+  logIn(authData: AuthData) {
+    try {
+      const auth = getAuth(this.firebaseApp);
+      const userLogIn = signInWithEmailAndPassword(auth, authData.email, authData.password);
+      console.log(userLogIn);
+      
+      this.isLoggedInSubject.next(true);
+    } catch (error) {
+      console.error('Error during Log In:', error);
+      throw error;
+    }
+  }
 }

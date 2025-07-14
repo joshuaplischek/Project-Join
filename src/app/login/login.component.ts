@@ -35,7 +35,7 @@ export class LoginComponent {
 
   onLogin(authData: AuthData) {
     console.log('Login attempt:', authData);
-    this.authService.login();
+    this.authService.logIn(authData);
     this.router.navigate(['/board']);
   }
 
