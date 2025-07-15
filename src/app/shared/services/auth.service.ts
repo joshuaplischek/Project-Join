@@ -1,10 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  updateProfile,
-  UserCredential,
-} from 'firebase/auth';
+import {createUserWithEmailAndPassword, getAuth, updateProfile, UserCredential,} from 'firebase/auth';
 import { BehaviorSubject, last } from 'rxjs';
 import { AuthData } from '../../../interfaces/authData';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
