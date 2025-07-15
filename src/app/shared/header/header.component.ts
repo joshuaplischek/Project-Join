@@ -24,6 +24,20 @@ export class HeaderComponent {
     this.isMenuOpen = false;
   }
 
+  getInitials() {
+    const displayName = this.authService.displayName;
+    this.getFirstLetters(displayName)
+    return this.getFirstLetters(displayName) || 'GU';
+  }
+
+  getFirstLetters(str: string) {
+    const firstLetters = str
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('');
+    return firstLetters;
+  }
+
   logout() {
     this.authService.logout();
     this.closeQuickMenu();
