@@ -1,5 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import {createUserWithEmailAndPassword, getAuth, updateProfile, UserCredential,} from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+  UserCredential,
+} from 'firebase/auth';
 import { BehaviorSubject, last } from 'rxjs';
 import { AuthData } from '../../../interfaces/authData';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
@@ -17,6 +22,7 @@ export class AuthService {
   userExists: boolean = false;
   userSignedUp: boolean = false;
   wrongUserData: boolean = false;
+  loginSuccess: boolean = false;
 
   logInGuest() {
     this.isLoggedInSubject.next(true);
@@ -74,6 +80,7 @@ export class AuthService {
 
   async logIn(authData: AuthData) {
     this.userExists = false;
+    this.loginSuccess = false;
     try {
       const auth = getAuth(this.firebaseApp);
       const userLogIn = await signInWithEmailAndPassword(
@@ -81,6 +88,7 @@ export class AuthService {
         authData.email,
         authData.password
       );
+      this.loginSuccess = true;
       this.userExists = true;
       this.isLoggedInSubject.next(true);
       return userLogIn;

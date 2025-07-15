@@ -9,7 +9,6 @@
 
     @if (isLoginMode) {
     <!-- Login Form -->
-
     <app-log-form [heading]="'Log in'" [buttonOne]="'Guest Log in'" [buttonTwo]="'Log in'" [showNameFields]="false"
       [showPasswordConfirm]="false" [isLoginMode]="true" (buttonOneClick)="guestLogin()"
       (buttonTwoClick)="onLogin($event)">
@@ -18,7 +17,6 @@
     <div class="input-hint">@if (wrongUser) {
       <span role="alert">Wrong username or password. Please try again</span>}
     </div>
-
 
     } @else {
     <!-- Register Form -->

@@ -32,19 +32,22 @@
       <div [routerLink]="'/board'" class="show-upcoming-deadline">
         <div class="priority-part">
           @if (nextDeadlineInfo.priority === 'Urgent') {
-            <div [style.background]="'#ff0000'" class="priority-circle">
-              <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'" alt="priority image Urgant"  />
-            </div>
+          <div [style.background]="'#ff0000'" class="priority-circle">
+            <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'"
+              alt="priority image Urgant" />
+          </div>
           }
           @if (nextDeadlineInfo.priority === 'Medium') {
-            <div [style.background]="'#ff7a00'" class="priority-circle">
-              <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'" alt="priority image Medium"  />
-            </div>
+          <div [style.background]="'#ff7a00'" class="priority-circle">
+            <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'"
+              alt="priority image Medium" />
+          </div>
           }
           @if (nextDeadlineInfo.priority === 'Low') {
-            <div [style.background]="'#7ae229'" class="priority-circle">
-              <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'" alt="priority image Low"  />
-            </div>
+          <div [style.background]="'#7ae229'" class="priority-circle">
+            <img [src]="'/assets/images/main/' + nextDeadlineInfo.priority.toLowerCase() + '.svg'"
+              alt="priority image Low" />
+          </div>
           }
           <div>
             <p class="num-of">{{nextDeadlineInfo.count}}</p>
@@ -79,6 +82,12 @@
       </div>
     </div>
   </section>
+
+  @if (showSuccessMessage) {
+  <div class="success-message-container">
+    <div class="success-message">
+      {{ successMessage }}
+    </div>
+  </div>
+  }
 </section>
-
-

@@ -12,12 +12,21 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrl: './mainpage.component.scss',
 })
 export class MainpageComponent {
-  constructor(public taskService: TasksFirbaseService, public authService: AuthService) {}
+  showSuccessMessage = false;
+  successMessage = '';
+
+  constructor(
+    public taskService: TasksFirbaseService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.taskService.tasksChanged.subscribe(() => {
       this.nextDeadlineInfo;
     });
+    if (this.authService.loginSuccess) {
+      this.showSuccessMessageBox('You have successfully logged in <3');
+    }
   }
 
   getLogedInPerson() {
@@ -111,5 +120,14 @@ export class MainpageComponent {
       });
     // Gibt den ersten Task zurück (nächste Deadline) oder null wenn keine Tasks vorhanden
     return upcomingTasks.length > 0 ? upcomingTasks[0] : null;
+  }
+
+  showSuccessMessageBox(message: string) {
+    this.successMessage = message;
+    this.showSuccessMessage = true;
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 1500);
+    this.authService.loginSuccess = false;
   }
 }

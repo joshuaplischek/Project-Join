@@ -21,6 +21,7 @@ export class LoginComponent {
   registerHeading = 'Sign up';
   registerButtonText = 'Sign up';
 
+  loginSuccess: boolean = false;
   wrongUser: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
