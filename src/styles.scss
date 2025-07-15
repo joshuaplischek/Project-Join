@@ -198,6 +198,66 @@ h2 {
   }
 }
 
+//Animations
+
+@keyframes moveToTopLeft {
+  0% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    top: 5%;
+    left: 5%;
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes revealUserSummary {
+  0% {
+    opacity: 1;
+    display: flex;
+  }
+  80%{
+    opacity: 1;
+    display: flex;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes revealUserName {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+  }
+  20%{
+    opacity: 1;
+  }
+  80%{
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+  
+}
+
 @keyframes slide-in-out {
   0% {
     transform: translateX(120%);

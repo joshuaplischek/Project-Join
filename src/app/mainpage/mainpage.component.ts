@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksFirbaseService } from '../shared/services/tasks-firbase.service';
 import { RouterLink } from '@angular/router';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { Tasks } from '../../interfaces/tasks';
 import { AuthService } from '../shared/services/auth.service';
 
@@ -15,6 +15,7 @@ import { AuthService } from '../shared/services/auth.service';
 export class MainpageComponent implements OnInit {
   showSuccessMessage: boolean = false;
   successMessage: string = '';
+  animationStarted = false;
 
   constructor(
     public taskService: TasksFirbaseService,
@@ -26,9 +27,19 @@ export class MainpageComponent implements OnInit {
     this.taskService.tasksChanged.subscribe(() => {
       this.nextDeadlineInfo;
     });
-
     if (this.authService.checkAndResetSuccessMessage()) {
       this.showSuccessMessageBox('You have successfully logged in <3');
+    }
+    this.checkAnimation();
+    this.authService.wasJustLoggedIn = false;
+  }
+
+  checkAnimation() {
+    if (!this.animationStarted && this.authService.wasJustLoggedIn) {
+        this.animationStarted = true;
+      setTimeout(() => {
+        this.animationStarted = false;
+    }, 2500);
     }
   }
 

@@ -1,189 +1,229 @@
-@import '../../styles.scss';
-section{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    height: calc(100dvh - 96px);
-    width: 100%;
-    max-width: 1600px;
-    padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 5rem);
-    gap: 2rem;
-    >section{
-        height: auto;
-        padding: 0;
-    }
-    @media (max-width: 400px){
-        padding: clamp(2rem, 2vw, 5rem) clamp(0.5rem, 0vw, 10rem) clamp(1rem, 2vw, 2rem) clamp(0.5rem, 0vw, 5rem);
-    }
+@import "../../styles.scss";
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: calc(100dvh - 96px);
+  width: 100%;
+  max-width: 1600px;
+  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem)
+    clamp(1rem, 4vw, 5rem);
+  gap: 2rem;
+  > section {
+    height: auto;
+    padding: 0;
+  }
+  @media (max-width: 400px) {
+    padding: clamp(2rem, 2vw, 5rem) clamp(0.5rem, 0vw, 10rem)
+      clamp(1rem, 2vw, 2rem) clamp(0.5rem, 0vw, 5rem);
+  }
 }
 
-.heading{
+.heading {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  // padding: 0 clamp(1rem, 7vw, 10rem);
+  > div {
     display: flex;
     align-items: center;
-    width: 100%;
-    height: auto;
-    // padding: 0 clamp(1rem, 7vw, 10rem);
-    >div{
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        .vertical-blue-line{
-            width: 2px;
-            height: 50px;
-            background-color: var(--accent-color-light);
-        }
+    gap: 40px;
+    .vertical-blue-line {
+      width: 2px;
+      height: 50px;
+      background-color: var(--accent-color-light);
     }
-    @media (max-width: 600px){
-      div{
-        align-items: start;
-        flex-direction: column; 
-        gap: 10px;
-        .vertical-blue-line {
-            display: none;
-        }
-        .horizontal-blue-line {
-            width: clamp(1rem, 30vw, 10rem);
-            height: 2px;
-            background-color: var(--accent-color-light);
+  }
+  @media (max-width: 600px) {
+    div {
+      align-items: start;
+      flex-direction: column;
+      gap: 10px;
+      .vertical-blue-line {
+        display: none;
+      }
+      .horizontal-blue-line {
+        width: clamp(1rem, 30vw, 10rem);
+        height: 2px;
+        background-color: var(--accent-color-light);
+      }
+    }
+  }
+}
+
+.summary-terminal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  .done-todo-infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    .circle-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      background-color: var(--nav-bg-color);
+      height: 69px;
+      width: 69px;
+    }
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+    }
+  }
+  @media (max-width: 800px) {
+    flex-direction: column;
+    div {
+      .greeting {
+        display: none;
+      }
+      div {
+        div {
+          gap: 0;
         }
       }
     }
+  }
 }
 
-.summary-terminal{
+.show-todo,
+.show-done,
+.show-upcoming-deadline,
+.show-sum-of-tasks,
+.show-tasks-in-progress,
+.show-awaiting-feedback {
+  display: flex;
+  border-radius: 25px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  height: clamp(9rem, 15vw, 10rem);
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.show-todo,
+.show-done {
+  width: clamp(10rem, 20vw, 15rem);
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    p {
+      text-align: center;
+    }
+  }
+  @media (max-width: 800px) {
+    width: clamp(9rem, 30vw, 15rem);
+  }
+}
+.show-upcoming-deadline {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  .priority-part {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    .done-todo-infos{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        .circle-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 100%;
-            background-color: var(--nav-bg-color);
-            height: 69px;
-            width: 69px;
-        }
-        >div{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 25px;
-        }
+    .priority-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      height: 69px;
+      width: 69px;
+      > img {
+        height: clamp(1rem, 1.3vw, 2rem);
+        filter: brightness(0) invert(1);
+      }
     }
-    @media (max-width: 800px){
-        flex-direction: column;
-        div{
-            .greeting{
-                display: none;
-            }
-            div{
-                div{
-                 gap: 0;
-            }
-            }
-        }
-    }
+  }
+  .boderline {
+    width: 2px;
+    height: clamp(5rem, 4vw, 5rem);
+    background-color: var(--grey-color);
+  }
 }
 
-.show-todo, .show-done, .show-upcoming-deadline,
-.show-sum-of-tasks, .show-tasks-in-progress, .show-awaiting-feedback{
+.show-task-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .show-sum-of-tasks,
+  .show-tasks-in-progress,
+  .show-awaiting-feedback {
     display: flex;
-    border-radius: 25px;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-    height: clamp(9rem, 15vw, 10rem);
-    &:hover{
-        cursor: pointer;
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
-    }
-
-}
-
-.show-todo, .show-done{
-    width: clamp(10rem, 20vw, 15rem);
-    div{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        p{
-            text-align: center;
-        }
-    }
-    @media (max-width: 800px){
-        width: clamp(9rem, 30vw, 15rem);
-        
-    }
-}
-.show-upcoming-deadline{
-    display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: clamp(6rem, 10vw, 10rem);
+    > p {
+      text-align: center;
+    }
+    @media (max-width: 800px) {
+      width: clamp(6rem, 15vw, 15rem);
+    }
+  }
+}
+
+.num-of {
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: bold;
+}
+
+.greeting {
+  h3 {
+    font-size: 43px;
+  }
+
+  h2 {
+    color: var(--accent-color-light);
+  }
+}
+
+.greeting-mobile {
+  h3 {
+    font-size: 43px;
+  }
+
+  h2 {
+    color: var(--accent-color-light);
+  }
+}
+
+.greeting-mobile.loaded {
+  animation: revealUserName 3s ease-in-out forwards;
+}
+
+.mobile-animation-overlay {
+  display: none;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+}
+
+@media (max-width: 800px) {
+  .mobile-animation-overlay.loaded {
+    display: flex;
     text-align: center;
-    width: 100%;
-    .priority-part{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        .priority-circle{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 100%;
-            height: 69px;
-            width: 69px;
-            >img{
-                height: clamp(1rem, 1.3vw, 2rem);
-                filter: brightness(0) invert(1);
-            }
-        }
-
-    }
-    .boderline{
-        width: 2px;
-        height: clamp(5rem, 4vw, 5rem);
-        background-color: var(--grey-color);
-    }
+    animation: revealUserSummary 2s ease-in-out forwards;
+  }
 }
-
-.show-task-info{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-        .show-sum-of-tasks, .show-tasks-in-progress, .show-awaiting-feedback{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: clamp(6rem, 10vw, 10rem);
-        >p{
-            text-align: center;
-        }
-        @media (max-width: 800px){
-            width: clamp(6rem, 15vw, 15rem);
-        }
-    }
-}
-
-.num-of{
-    font-size: clamp(32px, 5vw, 64px);
-    font-weight: bold;
-}
-
-.greeting{
-    h3{
-        font-size: 43px;
-    }
-
-    h2{
-        color: var(--accent-color-light);
-    }
-}
-

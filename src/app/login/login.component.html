@@ -1,5 +1,7 @@
 <section class="login-container">
-  <img class="join-logo" src="/assets/images/login/join_logo.svg" alt="join logo">
+  <div class="white-onload-overlay"></div>
+  <img class="join-logo-white" [class.loaded]="animationStarted" src="/assets/images/sidebar-logo.svg" alt="join logo">
+  <img class="join-logo" [class.loaded]="animationStarted" src="/assets/images/login/join_logo.svg" alt="join logo">
   @if (isLoginMode){ <section class="login-header">
     <p>Not a Join user? </p>
     <button type="button" class="button-blue" (click)="toggleMode()"><span>Sign up</span></button>
