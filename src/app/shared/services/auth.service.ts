@@ -17,6 +17,7 @@ import { signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
   firestore: Firestore = inject(Firestore);
   firebaseApp: FirebaseApp = inject(FirebaseApp);
   userExists: boolean = false;
@@ -24,18 +25,43 @@ export class AuthService {
   wrongUserData: boolean = false;
   loginSuccess: boolean = false;
 
+  private shouldShowSuccessMessage: boolean = false;
+  private shouldShowSignOutMessage: boolean = false;
+
   logInGuest() {
     this.isLoggedInSubject.next(true);
+  }
+
+  checkAndResetSuccessMessage(): boolean {
+    if (this.shouldShowSuccessMessage) {
+      this.shouldShowSuccessMessage = false;
+      return true;
+    }
+    return false;
+  }
+
+  checkAndResetSignOutMessage(): boolean {
+    if (this.shouldShowSignOutMessage) {
+      this.shouldShowSignOutMessage = false;
+      console.log(this.shouldShowSignOutMessage);
+      return true;
+    }
+    return false;
   }
 
   logout() {
     const auth = getAuth(this.firebaseApp);
     signOut(auth)
       .then(() => {
+        this.shouldShowSuccessMessage = false;
+        this.shouldShowSignOutMessage = true;
         this.isLoggedInSubject.next(false);
       })
       .catch((error) => {
         console.log('Error during sign out:', error);
+        this.shouldShowSuccessMessage = false;
+        this.shouldShowSignOutMessage = false;
+        this.isLoggedInSubject.next(false);
       });
   }
 
@@ -60,7 +86,9 @@ export class AuthService {
       await updateProfile(userCredential.user, {
         displayName: `${authData.firstName} ${authData.lastName}`,
       });
-      this.saveInDatabase(authData, userCredential);
+      await this.saveInDatabase(authData, userCredential);
+      this.shouldShowSuccessMessage = true;
+      this.shouldShowSignOutMessage = false;
       this.isLoggedInSubject.next(true);
       return userCredential;
     } catch (error) {
@@ -90,10 +118,15 @@ export class AuthService {
       );
       this.loginSuccess = true;
       this.userExists = true;
+      this.shouldShowSuccessMessage = true;
+      this.shouldShowSignOutMessage = false;
       this.isLoggedInSubject.next(true);
       return userLogIn;
     } catch (error) {
+      this.userExists = false;
+      this.loginSuccess = false;
       this.isLoggedInSubject.next(false);
+      console.error('Error during Log In:', error);
       throw error;
     }
   }
