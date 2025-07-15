@@ -7,7 +7,7 @@
     <img class="header-icon" src="/assets/images/header_logo.svg" alt="Logo Icon" />
     <div>
       <a class="help-icon-link" routerLink="/help"><img src="/assets/images/icons/icon-help.svg" alt="help icon" /></a>
-      <div (click)="openQuickMenu()" class="user-badge"><span>SM</span></div>
+      <div (click)="openQuickMenu()" class="user-badge"><span>{{getInitials()}}</span></div>
     </div>
     @if (isMenuOpen) {
     <div class="overlay" (click)="closeQuickMenu()"></div>
