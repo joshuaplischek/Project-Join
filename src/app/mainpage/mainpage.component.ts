@@ -39,7 +39,7 @@ export class MainpageComponent implements OnInit {
         this.animationStarted = true;
       setTimeout(() => {
         this.animationStarted = false;
-    }, 1000);
+    }, 2500);
     }
   }
 

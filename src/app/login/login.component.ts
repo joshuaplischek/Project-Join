@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LogFormComponent } from '../shared/log-form/log-form.component';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -12,7 +12,7 @@ import { AuthService } from '../shared/services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   isLoginMode = true; // true = Login, false = Register
 
   loginHeading: string = 'Log in';
@@ -28,13 +28,20 @@ export class LoginComponent {
   signOutMessage: string = '';
   animationStarted: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.startAnimations();
+
+    this.authService.isLoggedIn$.subscribe(() => {
+      // Wenn ausgeloggt, zeige die Nachricht und stoße Change Detection an
+      if (!this.authService.isLoggedIn) {
+        this.cdr.detectChanges();
+      }
+    });
   }
 
-  startAnimations(){
+  startAnimations() {
     setTimeout(() => {
       this.animationStarted = true;
     }, 10);

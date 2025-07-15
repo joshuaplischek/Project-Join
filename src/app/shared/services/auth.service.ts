@@ -30,7 +30,7 @@ export class AuthService {
   private shouldShowSignOutMessage: boolean = false;
 
   logInGuest() {
-    this.wasJustLoggedIn = true; // Animation-Flag setzen!
+    this.wasJustLoggedIn = true;
     this.isLoggedInSubject.next(true);
   }
 
