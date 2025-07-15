@@ -186,7 +186,8 @@ h2 {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   z-index: 9999;
   transform: translateX(120%);
-  animation: slide-in 0.3s forwards;
+  opacity: 0;
+  animation: slide-in-out 3s forwards;
 
   @media (max-width: 1024px) {
     bottom: 12%;
@@ -197,9 +198,25 @@ h2 {
   }
 }
 
-@keyframes slide-in {
-  to {
+@keyframes slide-in-out {
+  0% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+
+  10% {
     transform: translateX(0);
+    opacity: 1;
+  }
+
+  85% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
   }
 }
 
