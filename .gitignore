@@ -40,6 +40,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Firebase
 .firebase
@@ -47,4 +48,3 @@ Thumbs.db
 .runtimeconfig.json
 
 
-desktop.ini
