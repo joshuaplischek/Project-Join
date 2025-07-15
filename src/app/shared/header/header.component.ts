@@ -30,11 +30,8 @@ export class HeaderComponent {
     return this.getFirstLetters(displayName) || 'GU';
   }
 
-  getFirstLetters(str: string) {
-    const firstLetters = str
-      .split(' ')
-      .map(word => word.charAt(0))
-      .join('');
+  getFirstLetters(name: string) {
+    const firstLetters = name.split(' ').map(word => word.charAt(0)).join('');
     return firstLetters;
   }
 
