@@ -16,7 +16,6 @@ export class MainpageComponent {
 
   ngOnInit() {
     this.taskService.tasksChanged.subscribe(() => {
-      console.log('Tasks geladen:', this.taskService.tasks);
       this.nextDeadlineInfo;
     });
   }
