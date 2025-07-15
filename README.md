@@ -149,21 +149,13 @@ firebase deploy
 
 ##  Angular CLI Informationen
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Dieses Projekt wurde mit [Angular CLI](https://github.com/angular/angular-cli) Version 17.3.17 generiert.
 
-### Code scaffolding
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Code-Generierung
+Führen Sie `ng generate component component-name` aus, um eine neue Komponente zu generieren. Sie können auch `ng generate directive|pipe|service|class|guard|interface|enum|module` verwenden.
 
-### Further help
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-##  Contributing
-
-1. Fork das Repository
-2. Feature-Branch erstellen (`git checkout -b feature/AmazingFeature`)
-3. Änderungen committen (`git commit -m 'Add AmazingFeature'`)
-4. Branch pushen (`git push origin feature/AmazingFeature`)
-5. Pull Request erstellen
+### Weitere Hilfe
+Um weitere Hilfe zur Angular CLI zu erhalten, verwenden Sie `ng help` oder besuchen Sie die [Angular CLI Übersicht und Befehlsreferenz](https://angular.io/cli) Seite.
 
 
 ---
