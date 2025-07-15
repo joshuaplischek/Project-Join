@@ -14,6 +14,8 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class LoginComponent {
   isLoginMode = true; // true = Login, false = Register
+  wrongUserData = false;
+  userExistsErrMessage = false;
 
   loginHeading = 'Log in';
   loginButtonText = 'Log in';
@@ -29,15 +31,15 @@ export class LoginComponent {
 
   guestLogin() {
     this.authService.login();
-    this.router.navigate(['/board']);
+    this.router.navigate(['/summary']);
   }
 
   onLogin(authData: AuthData) {
     this.authService.logIn(authData);
     if (this.authService.userExists) {
-      this.router.navigate(['/board']);
+      this.router.navigate(['/summary']);
     } else {
-      //show error message
+      this.wrongUserData = true;
     }
   }
 
@@ -45,9 +47,9 @@ export class LoginComponent {
     this.authService.signUp(authData);
     if (this.authService.userSignedUp) {
       this.authService.login();
-      this.router.navigate(['/board']);
+      this.router.navigate(['/summary']);
     } else {
-      //show error message
+      this.userExistsErrMessage = true;
     }
   }
 }

@@ -84,6 +84,7 @@ export class AuthService {
       console.log(userLogIn);
 
       this.isLoggedInSubject.next(true);
+      return userLogIn;
     } catch (error) {
       console.error('Error during Log In:', error);
       this.isLoggedInSubject.next(false);
