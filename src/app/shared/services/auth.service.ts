@@ -1,10 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  updateProfile,
-  UserCredential,
-} from 'firebase/auth';
+import {createUserWithEmailAndPassword, getAuth, updateProfile, UserCredential,} from 'firebase/auth';
 import { BehaviorSubject, last } from 'rxjs';
 import { AuthData } from '../../../interfaces/authData';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
@@ -40,6 +35,11 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     return this.isLoggedInSubject.value;
+  }
+
+  get displayName(): string {
+    const auth = getAuth(this.firebaseApp);
+    return auth.currentUser?.displayName || '';
   }
 
   async signUp(authData: AuthData) {
