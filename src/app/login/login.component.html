@@ -36,4 +36,12 @@
     <a routerLink="/legalnotice">
       Legal notice</a>
   </section>
+
+  @if (checkAndResetSignOutMessage()) {
+  <div class="success-message-container">
+    <div class="success-message">
+      <p>You have successfully logged out</p>
+    </div>
+  </div>
+  }
 </section>

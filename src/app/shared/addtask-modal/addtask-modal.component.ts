@@ -261,9 +261,6 @@ export class AddtaskModalComponent implements OnInit {
   showSuccessMessageBox(message: string) {
     this.successMessageContent = message;
     this.showSuccessMessage = true;
-    setTimeout(() => {
-      this.showSuccessMessage = false;
-    }, 1500);
   }
 
   clearForm() {

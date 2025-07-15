@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TasksFirbaseService } from '../shared/services/tasks-firbase.service';
 import { RouterLink } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Tasks } from '../../interfaces/tasks';
 import { AuthService } from '../shared/services/auth.service';
 
@@ -11,20 +12,22 @@ import { AuthService } from '../shared/services/auth.service';
   templateUrl: './mainpage.component.html',
   styleUrl: './mainpage.component.scss',
 })
-export class MainpageComponent {
-  showSuccessMessage = false;
-  successMessage = '';
+export class MainpageComponent implements OnInit {
+  showSuccessMessage: boolean = false;
+  successMessage: string = '';
 
   constructor(
     public taskService: TasksFirbaseService,
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.taskService.tasksChanged.subscribe(() => {
       this.nextDeadlineInfo;
     });
-    if (this.authService.loginSuccess) {
+
+    if (this.authService.checkAndResetSuccessMessage()) {
       this.showSuccessMessageBox('You have successfully logged in <3');
     }
   }
@@ -125,9 +128,6 @@ export class MainpageComponent {
   showSuccessMessageBox(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
-    setTimeout(() => {
-      this.showSuccessMessage = false;
-    }, 1500);
-    this.authService.loginSuccess = false;
+    // CSS-Animation übernimmt das automatische Ausblenden nach 3 Sekunden
   }
 }

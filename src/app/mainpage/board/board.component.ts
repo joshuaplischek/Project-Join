@@ -12,7 +12,6 @@ import { CompactTaskComponent } from '../../shared/compact-task/compact-task.com
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { TasksFirbaseService } from '../../shared/services/tasks-firbase.service';
 import { Tasks } from '../../../interfaces/tasks';
-import { doc, updateDoc } from 'firebase/firestore';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { TaskAddComponent } from './task-add/task-add.component';
@@ -47,20 +46,20 @@ export class BoardComponent {
   searchText: string = '';
   showSearchContainer: boolean = false;
 
-  showSuccessMessage = false;
-  successMessage = '';
+  showSuccessMessage: boolean = false;
+  successMessage: string = '';
 
-ngOnInit() {
-  this.filteredTasks = this.taskService.tasks;
-  this.subscription.add(
-    this.taskService.tasksChanged.subscribe(() => {
-      this.filteredTasks = this.taskService.tasks;
-      this.searchTask();
-    })
-  );
-  this.setDragStartDelay();
-  window.addEventListener('resize', () => this.setDragStartDelay());
-}
+  ngOnInit() {
+    this.filteredTasks = this.taskService.tasks;
+    this.subscription.add(
+      this.taskService.tasksChanged.subscribe(() => {
+        this.filteredTasks = this.taskService.tasks;
+        this.searchTask();
+      })
+    );
+    this.setDragStartDelay();
+    window.addEventListener('resize', () => this.setDragStartDelay());
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -167,9 +166,6 @@ ngOnInit() {
   onTaskSuccess(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
-    setTimeout(() => {
-      this.showSuccessMessage = false;
-    }, 1500);
   }
 
   onTaskDeleted(taskId: string): void {
@@ -177,6 +173,5 @@ ngOnInit() {
       (task) => task.id !== taskId
     );
     this.closeTaskDetail();
-    // this.taskService.subTasks();
   }
 }

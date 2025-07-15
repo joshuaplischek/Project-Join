@@ -17,8 +17,6 @@ export class AddTaskComponent {
   onTaskSuccess(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
-    setTimeout(() => {
-      this.showSuccessMessage = false;
-    }, 1500);
+    // CSS-Animation übernimmt das automatische Ausblenden
   }
 }

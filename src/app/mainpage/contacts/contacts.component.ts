@@ -16,7 +16,6 @@ import { ContactformComponent } from './contactform/contactform.component';
   styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent implements OnInit {
-
   contacts: Contactlist[] = [];
   isOpen: boolean = false;
   isMenuOpen: boolean = false;
@@ -32,7 +31,7 @@ export class ContactsComponent implements OnInit {
   constructor(
     private contactlist: FirebaseService,
     private location: Location
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
@@ -44,9 +43,9 @@ export class ContactsComponent implements OnInit {
     this.isMobile = window.innerWidth < 768;
   }
 
-get groupedContacts() {
-  return this.contactlist.getGroupedContacts();
-}
+  get groupedContacts() {
+    return this.contactlist.getGroupedContacts();
+  }
 
   getColorForLetter(letter: string): string {
     return this.contactlist.getColorForLetter(letter);
@@ -77,9 +76,7 @@ get groupedContacts() {
   showSuccessMessageBox(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
-    setTimeout(() => {
-      this.showSuccessMessage = false;
-    }, 2000);
+    // CSS-Animation übernimmt das automatische Ausblenden
   }
 
   closeAddContactForm() {
