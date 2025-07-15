@@ -22,13 +22,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.checkCurrentRoute();
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkCurrentRoute();
       }
     });
-
     this.authService.isLoggedIn$.subscribe(() => {
       this.checkCurrentRoute();
     });
