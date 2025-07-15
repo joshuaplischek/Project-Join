@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TasksFirbaseService } from '../shared/services/tasks-firbase.service';
 import { RouterLink } from '@angular/router';
 import { Tasks } from '../../interfaces/tasks';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -11,13 +12,17 @@ import { Tasks } from '../../interfaces/tasks';
   styleUrl: './mainpage.component.scss',
 })
 export class MainpageComponent {
-  constructor(public taskService: TasksFirbaseService) {}
+  constructor(public taskService: TasksFirbaseService, public authService: AuthService) {}
 
   ngOnInit() {
     this.taskService.tasksChanged.subscribe(() => {
       console.log('Tasks geladen:', this.taskService.tasks);
       this.nextDeadlineInfo;
     });
+  }
+
+  getLogedInPerson() {
+    return this.authService.displayName || 'Guest';
   }
 
   getGreeting() {
