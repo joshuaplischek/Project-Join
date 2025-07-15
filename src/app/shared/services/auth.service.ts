@@ -24,11 +24,13 @@ export class AuthService {
   userSignedUp: boolean = false;
   wrongUserData: boolean = false;
   loginSuccess: boolean = false;
+  wasJustLoggedIn: boolean = false;
 
   private shouldShowSuccessMessage: boolean = false;
   private shouldShowSignOutMessage: boolean = false;
 
   logInGuest() {
+    this.wasJustLoggedIn = true; // Animation-Flag setzen!
     this.isLoggedInSubject.next(true);
   }
 
@@ -109,13 +111,10 @@ export class AuthService {
   async logIn(authData: AuthData) {
     this.userExists = false;
     this.loginSuccess = false;
+    this.wasJustLoggedIn = true;
     try {
       const auth = getAuth(this.firebaseApp);
-      const userLogIn = await signInWithEmailAndPassword(
-        auth,
-        authData.email,
-        authData.password
-      );
+      const userLogIn = await signInWithEmailAndPassword(auth, authData.email, authData.password);
       this.loginSuccess = true;
       this.userExists = true;
       this.shouldShowSuccessMessage = true;

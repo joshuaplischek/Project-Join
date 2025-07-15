@@ -26,8 +26,23 @@ export class LoginComponent {
 
   showSignOutMessage: boolean = false;
   signOutMessage: string = '';
+  animationStarted: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit() {
+    this.startAnimations();
+  }
+
+  startAnimations(){
+    setTimeout(() => {
+      this.animationStarted = true;
+    }, 10);
+
+    setTimeout(() => {
+      this.animationStarted = false;
+    }, 1500);
+  }
 
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;

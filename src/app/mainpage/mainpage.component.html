@@ -1,4 +1,10 @@
 <section>
+  <div class="mobile-animation-overlay" [class.loaded]="animationStarted">
+          <div class="greeting-mobile" [class.loaded]="animationStarted">
+        <h3>{{getGreeting()}}</h3>
+        <h2>{{getLogedInPerson()}}</h2>
+      </div>
+  </div>
   <div class="heading">
     <div>
       <h2>Join 360</h2>
