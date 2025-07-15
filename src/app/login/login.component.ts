@@ -14,14 +14,14 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class LoginComponent {
   isLoginMode = true; // true = Login, false = Register
-  wrongUserData = false;
-  userExistsErrMessage = false;
 
   loginHeading = 'Log in';
   loginButtonText = 'Log in';
 
   registerHeading = 'Sign up';
   registerButtonText = 'Sign up';
+
+  wrongUser: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -30,26 +30,26 @@ export class LoginComponent {
   }
 
   guestLogin() {
-    this.authService.login();
+    this.authService.logInGuest();
     this.router.navigate(['/summary']);
   }
 
-  onLogin(authData: AuthData) {
-    this.authService.logIn(authData);
-    if (this.authService.userExists) {
+  async onLogin(authData: AuthData) {
+    try {
+      await this.authService.logIn(authData);
       this.router.navigate(['/summary']);
-    } else {
-      this.wrongUserData = true;
+    } catch {
+      this.wrongUser = true;
     }
   }
 
-  onRegister(authData: AuthData) {
-    this.authService.signUp(authData);
-    if (this.authService.userSignedUp) {
-      this.authService.login();
+  async onRegister(authData: AuthData) {
+    try {
+      await this.authService.signUp(authData);
+      this.authService.logIn(authData);
       this.router.navigate(['/summary']);
-    } else {
-      this.userExistsErrMessage = true;
+    } catch {
+      this.wrongUser = true;
     }
   }
 }

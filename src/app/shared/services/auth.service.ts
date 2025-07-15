@@ -21,8 +21,11 @@ export class AuthService {
   firebaseApp: FirebaseApp = inject(FirebaseApp);
   userExists: boolean = false;
   userSignedUp: boolean = false;
+  wrongUserData: boolean = false;
 
-  login() {}
+  logInGuest() {
+    this.isLoggedInSubject.next(true);
+  }
 
   logout() {
     const auth = getAuth(this.firebaseApp);
@@ -47,14 +50,11 @@ export class AuthService {
         authData.email,
         authData.password
       );
-      console.log(userCredential);
       this.userSignedUp = true;
       await updateProfile(userCredential.user, {
         displayName: `${authData.firstName} ${authData.lastName}`,
       });
-
       this.saveInDatabase(authData, userCredential);
-
       this.isLoggedInSubject.next(true);
       return userCredential;
     } catch (error) {
@@ -73,6 +73,7 @@ export class AuthService {
   }
 
   async logIn(authData: AuthData) {
+    this.userExists = false;
     try {
       const auth = getAuth(this.firebaseApp);
       const userLogIn = await signInWithEmailAndPassword(
@@ -81,12 +82,9 @@ export class AuthService {
         authData.password
       );
       this.userExists = true;
-      console.log(userLogIn);
-
       this.isLoggedInSubject.next(true);
       return userLogIn;
     } catch (error) {
-      console.error('Error during Log In:', error);
       this.isLoggedInSubject.next(false);
       throw error;
     }

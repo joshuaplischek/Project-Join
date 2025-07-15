@@ -14,11 +14,11 @@
       [showPasswordConfirm]="false" [isLoginMode]="true" (buttonOneClick)="guestLogin()"
       (buttonTwoClick)="onLogin($event)">
     </app-log-form>
-    @if (wrongUserData) {
-      <div>
-        <p class="error-message">Wrong username or password. Please try again.</p>
-      </div>
-    }
+
+    <div class="input-hint">@if (wrongUser) {
+      <span role="alert">Wrong username or password. Please try again</span>}
+    </div>
+
 
     } @else {
     <!-- Register Form -->
@@ -26,11 +26,9 @@
       [isLoginMode]="false" [showBackButton]="true" [showCheckBoxPrivacyPolicy]="false"
       (buttonTwoClick)="onRegister($event)" (backButtonClick)="toggleMode()">
     </app-log-form>
-    @if (userExistsErrMessage) {
-      <div>
-        <p class="error-message">User already exists. Please log in or use a different email address.</p>
-      </div>
-    }
+    <div class="input-hint">@if (wrongUser) {
+      <span role="alert">User already exists. Please log in or use a different email address.</span>}
+    </div>
     }
   </section>
 
