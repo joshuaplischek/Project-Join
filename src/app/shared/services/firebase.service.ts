@@ -13,9 +13,6 @@ import {
   Contactlist,
   ContactlistFirestoreData,
 } from '../../../interfaces/contactlist';
-import { single } from 'rxjs';
-import { idToken } from '@angular/fire/auth';
-import { Tasks } from '../../../interfaces/tasks';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +26,7 @@ export class FirebaseService {
     this.unsubscribe = this.subContactList();
   }
 
-    private readonly standardColors: string[] = [
+  private readonly standardColors: string[] = [
     '#ff7a00',
     '#1fd7c1',
     '#6e52ff',
@@ -69,29 +66,26 @@ export class FirebaseService {
   }
 
   getGroupedContacts() {
-  const grouped: Record<string, Contactlist[]> = {};
-
-  for (const contact of this.contacts) {
-    if (contact.firstName && contact.firstName.length > 0) {
-      const letter = contact.firstName[0].toUpperCase();
-      grouped[letter] ??= [];
-      grouped[letter].push(contact);
+    const grouped: Record<string, Contactlist[]> = {};
+    for (const contact of this.contacts) {
+      if (contact.firstName && contact.firstName.length > 0) {
+        const letter = contact.firstName[0].toUpperCase();
+        grouped[letter] ??= [];
+        grouped[letter].push(contact);
+      }
     }
+    return Object.keys(grouped)
+      .sort()
+      .map((letter) => ({ letter, contacts: grouped[letter] }));
   }
 
-  return Object.keys(grouped)
-    .sort()
-    .map((letter) => ({ letter, contacts: grouped[letter] }));
-}
-
-getSortedContacts(): Contactlist[] {
-  return [...this.contacts].sort((a, b) => {
-    const nameA = (a.firstName + ' ' + a.lastName).toLowerCase();
-    const nameB = (b.firstName + ' ' + b.lastName).toLowerCase();
-    return nameA.localeCompare(nameB);
-  });
-}
-  
+  getSortedContacts(): Contactlist[] {
+    return [...this.contacts].sort((a, b) => {
+      const nameA = (a.firstName + ' ' + a.lastName).toLowerCase();
+      const nameB = (b.firstName + ' ' + b.lastName).toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
+  }
 
   getContacts() {
     return collection(this.firestore, 'contactlist');
@@ -106,7 +100,7 @@ getSortedContacts(): Contactlist[] {
   }
 
   setContactsObject(obj: ContactlistFirestoreData, id: string): Contactlist {
-    return {  
+    return {
       id: id,
       firstName: obj.firstName || '',
       lastName: obj.lastName || '',

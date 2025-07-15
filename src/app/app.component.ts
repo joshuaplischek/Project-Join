@@ -14,9 +14,9 @@ import { AuthService } from './shared/services/auth.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  showFullLayout = false;
-  showLimitedLayout = false;
-  showNoLayout = false;
+  showFullLayout: boolean = false;
+  showLimitedLayout: boolean = false;
+  showNoLayout: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -38,36 +38,43 @@ export class AppComponent implements OnInit {
   // 3. NavigationEnd { url: '/login' }     ← Nur hier reagieren!
 
   private checkCurrentRoute() {
-    // Holt die aktuelle URL vom Router
     const currentUrl = this.router.url;
     const isLoggedIn = this.authService.isLoggedIn;
 
-    // Kein Layout für Login (immer)
-    if (currentUrl.includes('/login')) {
-      this.showNoLayout = true;
-      this.showLimitedLayout = false;
-      this.showFullLayout = false;
+    if (this.isLoginRoute(currentUrl)) {
+      this.setNoLayout();
+    } else if (isLoggedIn) {
+      this.setFullLayout();
+    } else if (this.isPublicPageRoute(currentUrl)) {
+      this.setLimitedLayout();
+    } else {
+      this.setFullLayout();
     }
-    // Wenn eingeloggt: immer volles Layout (außer Login)
-    else if (isLoggedIn) {
-      this.showNoLayout = false;
-      this.showLimitedLayout = false;
-      this.showFullLayout = true;
-    }
-    // Nicht eingeloggt + Privacy/Legal → limitiertes Layout
-    else if (
-      currentUrl.includes('/privacypolicy') ||
-      currentUrl.includes('/legalnotice')
-    ) {
-      this.showNoLayout = false;
-      this.showLimitedLayout = true;
-      this.showFullLayout = false;
-    }
-    // Fallback: volles Layout
-    else {
-      this.showNoLayout = false;
-      this.showLimitedLayout = false;
-      this.showFullLayout = true;
-    }
+  }
+
+  private isLoginRoute(url: string): boolean {
+    return url.includes('/login');
+  }
+
+  private isPublicPageRoute(url: string): boolean {
+    return url.includes('/privacypolicy') || url.includes('/legalnotice');
+  }
+
+  private setNoLayout(): void {
+    this.showNoLayout = true;
+    this.showLimitedLayout = false;
+    this.showFullLayout = false;
+  }
+
+  private setLimitedLayout(): void {
+    this.showNoLayout = false;
+    this.showLimitedLayout = true;
+    this.showFullLayout = false;
+  }
+
+  private setFullLayout(): void {
+    this.showNoLayout = false;
+    this.showLimitedLayout = false;
+    this.showFullLayout = true;
   }
 }

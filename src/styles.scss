@@ -206,6 +206,7 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
   100% {
     top: 5%;
     left: 5%;
@@ -218,6 +219,7 @@ h2 {
     opacity: 1;
     display: block;
   }
+
   100% {
     opacity: 0;
     display: none;
@@ -229,10 +231,12 @@ h2 {
     opacity: 1;
     display: flex;
   }
-  80%{
+
+  80% {
     opacity: 1;
     display: flex;
   }
+
   100% {
     opacity: 0;
     display: none;
@@ -243,19 +247,23 @@ h2 {
   0% {
     opacity: 0;
   }
+
   10% {
     opacity: 0;
   }
-  20%{
+
+  20% {
     opacity: 1;
   }
-  80%{
+
+  80% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
-  
+
 }
 
 @keyframes slide-in-out {
@@ -280,7 +288,6 @@ h2 {
   }
 }
 
-// Datepicker Toggle Icon Hover
 mat-datepicker-toggle {
   button {
     &:hover {
@@ -289,7 +296,6 @@ mat-datepicker-toggle {
   }
 }
 
-// Remove ripple effect from buttons
 .mat-mdc-button-ripple,
 .mdc-icon-button__ripple {
   display: none !important;

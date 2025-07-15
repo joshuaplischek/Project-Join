@@ -13,7 +13,7 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  isLoginMode = true; // true = Login, false = Register
+  isLoginMode: boolean = true;
 
   loginHeading: string = 'Log in';
   loginButtonText: string = 'Log in';
@@ -28,13 +28,16 @@ export class LoginComponent implements OnInit {
   signOutMessage: string = '';
   animationStarted: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.startAnimations();
 
     this.authService.isLoggedIn$.subscribe(() => {
-      // Wenn ausgeloggt, zeige die Nachricht und stoße Change Detection an
       if (!this.authService.isLoggedIn) {
         this.cdr.detectChanges();
       }

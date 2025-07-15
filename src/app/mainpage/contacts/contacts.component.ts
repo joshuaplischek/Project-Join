@@ -20,12 +20,12 @@ export class ContactsComponent implements OnInit {
   isOpen: boolean = false;
   isMenuOpen: boolean = false;
   openDetail: boolean = false;
-  isAddContactFormVisible = false;
-  isEditContactFormVisible = false;
+  isAddContactFormVisible: boolean = false;
+  isEditContactFormVisible: boolean = false;
   selectedContact: Contactlist | null = null;
 
-  successMessage = '';
-  showSuccessMessage = false;
+  successMessage: string = '';
+  showSuccessMessage: boolean = false;
   isMobile: boolean = false;
 
   constructor(
@@ -76,7 +76,6 @@ export class ContactsComponent implements OnInit {
   showSuccessMessageBox(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
-    // CSS-Animation übernimmt das automatische Ausblenden
   }
 
   closeAddContactForm() {

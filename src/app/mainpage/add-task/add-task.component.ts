@@ -11,12 +11,11 @@ import { AddtaskModalComponent } from '../../shared/addtask-modal/addtask-modal.
 export class AddTaskComponent {
   constructor() {}
 
-  showSuccessMessage = false;
-  successMessage = '';
+  showSuccessMessage: boolean = false;
+  successMessage: string = '';
 
   onTaskSuccess(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
-    // CSS-Animation übernimmt das automatische Ausblenden
   }
 }

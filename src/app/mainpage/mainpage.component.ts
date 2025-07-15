@@ -36,10 +36,10 @@ export class MainpageComponent implements OnInit {
 
   checkAnimation() {
     if (!this.animationStarted && this.authService.wasJustLoggedIn) {
-        this.animationStarted = true;
+      this.animationStarted = true;
       setTimeout(() => {
         this.animationStarted = false;
-    }, 2500);
+      }, 2500);
     }
   }
 
@@ -59,29 +59,24 @@ export class MainpageComponent implements OnInit {
     return this.taskService.tasks.filter((t) => t.status === task).length;
   }
 
-  // Hilfsfunktion für Datumskonvertierung
   private getTaskDate(task: Tasks): Date {
     return task.date instanceof Date ? task.date : task.date.toDate();
   }
 
-  // Hilfsfunktion für Zeitstempel (nutzt getTaskDate)
   private getTaskTime(task: Tasks): number {
     return this.getTaskDate(task).getTime();
   }
 
-  // Hilfsfunktion für Prioritäts-Formatierung
   private formatPriority(priority: string): string {
     return priority ? priority.charAt(0).toUpperCase() + priority.slice(1) : '';
   }
 
   get nextDeadlineInfo() {
     const nextTask = this.filterDeadlineTasks();
-    // Early return wenn keine Task gefunden
     if (!nextTask) {
       return { count: 0, priority: '', date: '' };
     }
     const dateToCompare = this.getTaskTime(nextTask);
-    // Filtert Tasks mit gleicher Deadline und Priorität
     const sameTasks = this.taskService.tasks.filter(
       (task) =>
         task.date &&
@@ -119,26 +114,21 @@ export class MainpageComponent implements OnInit {
     const upcomingTasks = this.taskService.tasks
       .filter((task) => {
         if (!task.date || task.status === 'done') return false;
-        // Nutzt die private Hilfsmethode
         const taskDate = this.getTaskDate(task);
         return taskDate.setHours(0, 0, 0, 0) >= today;
       })
       .sort((a, b) => {
-        // Nutzt die private Hilfsmethode
         const dateA = this.getTaskDate(a).getTime();
         const dateB = this.getTaskDate(b).getTime();
-        // Wenn die Daten unterschiedlich sind, sortiere nach Datum (früher zuerst)
         if (dateA !== dateB) return dateA - dateB;
-        // Bei gleichem Datum: sortiere nach Priorität (urgent vor medium vor low)
+
         return prioOrder[a.priority] - prioOrder[b.priority];
       });
-    // Gibt den ersten Task zurück (nächste Deadline) oder null wenn keine Tasks vorhanden
     return upcomingTasks.length > 0 ? upcomingTasks[0] : null;
   }
 
   showSuccessMessageBox(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
-    // CSS-Animation übernimmt das automatische Ausblenden nach 3 Sekunden
   }
 }
