@@ -42,10 +42,12 @@ section {
   }
 
   @media (max-width: 600px) {
+    justify-content: center;
     div {
       align-items: start;
       flex-direction: column;
       gap: 10px;
+      width: 300px;
 
       .vertical-blue-line {
         display: none;
