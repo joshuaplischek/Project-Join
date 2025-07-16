@@ -17,7 +17,7 @@
     max-height: 96px;
     min-height: 96px;
     width: 100dvw;
-    padding: 0;
+    padding: 0 10px;
     ;
   }
 
@@ -48,7 +48,7 @@ a {
   transition: all 0.3s ease;
 }
 
-nav {
+.nav-full, .nav-limited {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,7 +108,13 @@ nav {
   }
 }
 
-.policy-wrapper {
+.nav-limited{
+  @media (max-width: 1024px) {
+    width: auto;
+  }
+}
+
+.policy-wrapper, .policy-wrapper-limited {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -120,6 +126,13 @@ nav {
     &:hover {
       color: var(--accent-color-light);
     }
+  }
+}
+
+.policy-wrapper-limited{
+  @media (max-width: 1024px) {
+    width: auto;
+    flex-direction: row;
   }
 }
 
