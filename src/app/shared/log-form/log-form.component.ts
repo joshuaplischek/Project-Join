@@ -29,6 +29,9 @@ export class LogFormComponent {
   acceptPrivacyPolicy: boolean = false;
   acceptPrivacyPolicyTouched: boolean = false;
 
+  passwordHasContent: boolean = false;
+  confirmedPasswordHasContent: boolean = false;
+
   constructor(private contactService: FirebaseService) {}
 
   @Input() heading: string = '';
@@ -52,6 +55,14 @@ export class LogFormComponent {
     return this.email.includes('@');
   }
 
+  onPasswordInput(): void {
+    this.passwordHasContent = this.password.length > 0;
+  }
+
+  onConfirmedPasswordInput(): void {
+    this.confirmedPasswordHasContent = this.confirmedPassword.length > 0;
+  }
+
   resetForm() {
     this.firstName = '';
     this.lastName = '';
@@ -63,6 +74,8 @@ export class LogFormComponent {
     this.emailTouched = false;
     this.passwordTouched = false;
     this.confirmedPasswordTouched = false;
+    this.passwordHasContent = false;
+    this.confirmedPasswordHasContent = false;
   }
 
   close() {
@@ -85,7 +98,13 @@ export class LogFormComponent {
       } else {
         nameValid = true;
       }
-      return emailValid && passwordValid && nameValid && confirmPasswordValid; // && privacyPolicyCheckboxChecked
+      return (
+        emailValid &&
+        passwordValid &&
+        nameValid &&
+        confirmPasswordValid &&
+        this.acceptPrivacyPolicy
+      );
     }
   }
 

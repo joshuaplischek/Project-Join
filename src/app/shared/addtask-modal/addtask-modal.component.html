@@ -119,7 +119,7 @@
               } @if (category) {
               <span>{{ category }}</span>
               }
-              <img src="/assets/images/board/arrow_drop_down.svg" alt="" />
+              <img id="img-drop-down" src="/assets/images/board/arrow_drop_down.svg" alt="" />
             </div>
             @if (categoryDropDownOpen) {
             <div class="dropdown" (mousedown)="$event.preventDefault()">

@@ -47,8 +47,11 @@
       <div class="password-field">
         <div class="input-wrapper" [ngClass]="{'error': !validatePassword() && passwordTouched}">
           <label for="passwordInput">Password</label>
-          <input [(ngModel)]="password" type="password" placeholder="Password" (blur)="passwordTouched = true">
-          <img src="/assets/images/contactform/lock.svg" alt="password icon">
+          <input [(ngModel)]="password" type="password" placeholder="Password" (blur)="passwordTouched = true"
+            (input)="onPasswordInput()">
+          <img
+            [src]="passwordHasContent ? '/assets/images/icons/visibility_off.svg' : '/assets/images/contactform/lock.svg'"
+            alt="password icon">
         </div>
         <div class="input-hint">@if (!validatePassword() && passwordTouched) {
           <span role="alert">Password must contain:
@@ -62,8 +65,10 @@
         <div class="input-wrapper" [ngClass]="{'error': !matchingPasswords() && confirmedPasswordTouched}">
           <label for="confirmPasswordInput">Confirm Password</label>
           <input [(ngModel)]="confirmedPassword" type="password" placeholder="Confirm Password"
-            (blur)="confirmedPasswordTouched = true">
-          <img src="/assets/images/contactform/lock.svg" alt="password icon">
+            (blur)="confirmedPasswordTouched = true" (input)="onConfirmedPasswordInput()">
+          <img
+            [src]="confirmedPasswordHasContent ? '/assets/images/icons/visibility_off.svg' : '/assets/images/contactform/lock.svg'"
+            alt="password icon">
         </div>
         <div class="input-hint">@if (!matchingPasswords() && confirmedPasswordTouched) {
           <span role="alert">Passwords do not match</span>}
