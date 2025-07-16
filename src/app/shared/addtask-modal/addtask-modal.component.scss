@@ -201,7 +201,6 @@
   @include flex(column);
   gap: 1rem;
   width: 100%;
-  max-width: 1700px;
 
   .form-container {
     @include flex(column);
