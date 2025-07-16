@@ -28,6 +28,7 @@ export class AuthService {
 
   private shouldShowSuccessMessage: boolean = false;
   private shouldShowSignOutMessage: boolean = false;
+  pendingSignOutMessage: boolean = false;
 
   logInGuest() {
     this.wasJustLoggedIn = true;
@@ -43,12 +44,11 @@ export class AuthService {
   }
 
   checkAndResetSignOutMessage(): boolean {
-    if (this.shouldShowSignOutMessage) {
-      this.shouldShowSignOutMessage = false;
-      console.log(this.shouldShowSignOutMessage);
-      return true;
+    if (this.pendingSignOutMessage) {
+      this.pendingSignOutMessage = false;
+      return this.shouldShowSignOutMessage;
     }
-    return false;
+    return this.shouldShowSignOutMessage;
   }
 
   logout() {
@@ -57,10 +57,10 @@ export class AuthService {
       .then(() => {
         this.shouldShowSuccessMessage = false;
         this.shouldShowSignOutMessage = true;
+        this.pendingSignOutMessage = true;
         this.isLoggedInSubject.next(false);
       })
       .catch((error) => {
-        console.log('Error during sign out:', error);
         this.shouldShowSuccessMessage = false;
         this.shouldShowSignOutMessage = false;
         this.isLoggedInSubject.next(false);

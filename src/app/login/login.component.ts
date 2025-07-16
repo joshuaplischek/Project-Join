@@ -28,14 +28,19 @@ export class LoginComponent implements OnInit {
   signOutMessage: string = '';
   animationStarted: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.startAnimations();
-
-    this.authService.isLoggedIn$.subscribe(() => {
+    this.authService.isLoggedIn$.subscribe((loggedIn) => {
       // Wenn ausgeloggt, zeige die Nachricht und stoße Change Detection an
-      if (!this.authService.isLoggedIn) {
+      if (!loggedIn && !this.showSignOutMessage) {
+        this.showSignOutMessage =
+        this.authService.checkAndResetSignOutMessage();
         this.cdr.detectChanges();
       }
     });
@@ -76,9 +81,5 @@ export class LoginComponent implements OnInit {
     } catch {
       this.wrongUser = true;
     }
-  }
-
-  public checkAndResetSignOutMessage(): boolean {
-    return this.authService.checkAndResetSignOutMessage();
   }
 }
