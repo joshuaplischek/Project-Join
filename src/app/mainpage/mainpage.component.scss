@@ -16,7 +16,7 @@ section {
   }
 
   @media(max-width: 800px) {
-    padding: 2rem 1rem;
+    padding: 2rem;
     max-width: 700px;
     margin: 0 auto;
     width: 100%;
@@ -139,7 +139,7 @@ section {
   width: clamp(50px, 6vw, 69px);
 
   >img {
-    width: clamp(1rem, 1.5vw, 1.5rem);
+    width: clamp(1rem, 3vw, 2.5rem);
   }
 }
 
@@ -155,6 +155,7 @@ section {
   height: clamp(9rem, 15vw, 10rem);
   transition: all 0.2s ease-in-out;
   background-color: white;
+  padding: 0.5rem;
 
   &:hover {
     cursor: pointer;
@@ -189,7 +190,6 @@ section {
 
     p {
       text-align: center;
-      font-size: clamp(1rem, 1.2vw, 1.2rem);
     }
   }
 }
@@ -200,10 +200,6 @@ section {
   align-items: center;
   text-align: center;
   width: 100%;
-
-  p {
-    font-size: clamp(1rem, 1.2vw, 1.2rem);
-  }
 
   .priority-part {
     display: flex;
@@ -250,7 +246,6 @@ section {
 
     >p {
       text-align: center;
-      font-size: clamp(1rem, 1.2vw, 1.2rem);
     }
 
     @media (max-width: 800px) {
@@ -260,7 +255,7 @@ section {
 }
 
 .num-of {
-  font-size: clamp(1.1rem, 4vw, 3.5rem);
+  font-size: clamp(1.5rem, 5vw, 3rem);
   font-weight: bold;
 }
 
