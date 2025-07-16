@@ -5,6 +5,7 @@ import {
   Input,
   OnChanges,
   OnInit,
+  OnDestroy,
   Output,
   SimpleChanges,
   ViewChild,
@@ -31,7 +32,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './addtask-modal.component.html',
   styleUrl: './addtask-modal.component.scss',
 })
-export class AddtaskModalComponent implements OnInit {
+export class AddtaskModalComponent implements OnInit, OnDestroy {
   @Input() initialStatus: string = 'todo';
   @Input() buttonPosition: {
     right?: string;
@@ -42,6 +43,10 @@ export class AddtaskModalComponent implements OnInit {
   @Input() useFixedPosition: boolean = true;
   @Output() taskCreated = new EventEmitter<void>();
   @Output() successMessage = new EventEmitter<string>();
+
+  isDesktop: boolean = true;
+  isTablet: boolean = false;
+  isMobile: boolean = false;
 
   constructor(
     public contactlist: FirebaseService,
@@ -81,6 +86,18 @@ export class AddtaskModalComponent implements OnInit {
   ngOnInit() {
     this.filteredContacts = this.allContacts;
     this.selectPrio('medium');
+    this.checkScreenSize();
+    window.addEventListener('resize', () => this.checkScreenSize());
+  }
+
+  checkScreenSize() {
+    const screenWidth = window.innerWidth;
+    this.isMobile = screenWidth < 768;
+    this.isTablet = screenWidth >= 768 && screenWidth < 1024;
+    this.isDesktop = screenWidth >= 1024;
+
+    // Buttons nur auf Mobile/Tablet fixed positionieren
+    this.useFixedPosition = this.isMobile || this.isTablet;
   }
 
   ngAfterViewInit() {
@@ -295,5 +312,9 @@ export class AddtaskModalComponent implements OnInit {
       '--button-bottom-tablet': this.buttonPosition.bottomTablet || '15%',
       '--button-bottom-mobile': this.buttonPosition.bottomMobile || '13%',
     };
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('resize', () => this.checkScreenSize());
   }
 }
