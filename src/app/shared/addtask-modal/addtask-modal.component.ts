@@ -58,14 +58,14 @@ export class AddtaskModalComponent implements OnInit {
   selectedPrio: string = 'medium';
   contactInput: string = '';
   newSubtask: string = '';
-  successMessageContent = '';
+  successMessageContent: string = '';
 
-  showSuccessMessage = false;
-  categoryDropDownOpen = false;
-  contactDropDownOpen = false;
-  titleTouched = false;
-  dateTouched = false;
-  categoryTouched = false;
+  showSuccessMessage: boolean = false;
+  categoryDropDownOpen: boolean = false;
+  contactDropDownOpen: boolean = false;
+  titleTouched: boolean = false;
+  dateTouched: boolean = false;
+  categoryTouched: boolean = false;
 
   editingSubtaskIndex: number | null = null;
   editingSubtaskValue: string = '';
@@ -84,7 +84,6 @@ export class AddtaskModalComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    // Falls bereits im Edit-Modus, fokussiere das Input-Feld
     if (this.editingSubtaskIndex !== null && this.editInput) {
       this.editInput.nativeElement.focus();
       this.editInput.nativeElement.select();
@@ -104,7 +103,6 @@ export class AddtaskModalComponent implements OnInit {
   }
 
   isSelected(contact: Contactlist) {
-    // .some() gibt true zurück, wenn die Bedingung für mindestens ein Element zutrifft, sonst false
     return this.selectedContacts.some(
       (selectedContact) => selectedContact.id === contact.id
     );

@@ -11,8 +11,8 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  @Input() isLimitedMode = false;
-  isMenuOpen = false;
+  @Input() isLimitedMode: boolean = false;
+  isMenuOpen: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -26,12 +26,15 @@ export class HeaderComponent {
 
   getInitials() {
     const displayName = this.authService.displayName;
-    this.getFirstLetters(displayName)
+    this.getFirstLetters(displayName);
     return this.getFirstLetters(displayName) || 'GU';
   }
 
   getFirstLetters(name: string) {
-    const firstLetters = name.split(' ').map(word => word.charAt(0)).join('');
+    const firstLetters = name
+      .split(' ')
+      .map((word) => word.charAt(0))
+      .join('');
     return firstLetters;
   }
 

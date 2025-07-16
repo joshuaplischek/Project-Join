@@ -16,7 +16,7 @@ import { AddtaskModalComponent } from '../../../shared/addtask-modal/addtask-mod
   styleUrl: './task-add.component.scss',
 })
 export class TaskAddComponent {
-  @Input() isVisible = false;
+  @Input() isVisible: boolean = false;
   @Input() initialStatus: string = 'todo';
   @Output() closeModal = new EventEmitter<void>();
   @Output() taskSuccess = new EventEmitter<string>();

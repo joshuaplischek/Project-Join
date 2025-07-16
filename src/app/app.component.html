@@ -1,5 +1,4 @@
 @if (showFullLayout) {
-<!-- Volles Layout mit Header und Sidenav -->
 <div class="app-layout">
   <app-nav class="sidenav"></app-nav>
   <div class="main-content">
@@ -10,7 +9,6 @@
   </div>
 </div>
 } @else if (showLimitedLayout) {
-<!-- Limitiertes Layout mit limitierter Nav -->
 <div class="app-layout">
   <app-nav class="sidenav" [isLimitedMode]="true"></app-nav>
   <div class="main-content">
@@ -21,6 +19,5 @@
   </div>
 </div>
 } @else {
-<!-- Kein Layout für Login -->
 <router-outlet></router-outlet>
 }

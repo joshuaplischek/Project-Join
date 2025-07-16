@@ -1,27 +1,163 @@
-# Join
+# Join - Task Management Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Ein modernes Task-Management-System, entwickelt mit Angular und Firebase, das Teams dabei hilft, Projekte effizient zu organisieren und zu verwalten.
 
-## Development server
+## Überblick
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Join ist eine vollständige Kanban-Board-Anwendung, die es Benutzern ermöglicht:
+-  Tasks zu erstellen, bearbeiten und verwalten
+-  Kontakte zu verwalten und Tasks zuzuweisen
+-  Projektfortschritt auf einem Kanban-Board zu verfolgen
+-  Deadlines und Prioritäten zu setzen
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+##  Features
 
-## Build
+###  Authentifizierung
+- **Benutzer-Registrierung** mit Email und Passwort
+- **Secure Login** mit Firebase Authentication
+- **Guest-Login** für Demo-Zwecke
+- **Logout-Funktionalität** mit Success-Messages
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+###  Task-Management
+- **Kanban-Board** mit Drag & Drop
+- **Task-Status**: To Do, In Progress, Await Feedback, Done
+- **Prioritäten**: Low, Medium, Urgent
+- **Deadlines** mit Datum-Picker
+- **Task-Kategorien** und -Beschreibungen
 
-## Running unit tests
+###  Kontakt-Management
+- **Kontakte hinzufügen** und bearbeiten
+- **Task-Zuweisung** an Kontakte
+- **Kontakt-Profile** mit Namen und E-Mail
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+###  Benutzeroberfläche
+- **Responsive Design** für alle Geräte
+- **Dark Theme** mit professionellem Look
+- **Animationen** und Success-Messages
+- **Intuitive Navigation** zwischen Bereichen
 
-## Running end-to-end tests
+##  Technologie-Stack
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Frontend
+- **Angular 17** - Modern Web Framework
+- **TypeScript** - Typsichere Programmierung
+- **SCSS** - Advanced CSS mit Variablen und Mixins
+- **Angular Material** - UI-Komponenten
+- **RxJS** - Reactive Programming
 
-## Further help
+### Backend & Database
+- **Firebase Authentication** - Benutzer-Management
+- **Cloud Firestore** - NoSQL-Datenbank
+- **Firebase Hosting** - Deployment
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Development Tools
+- **Angular CLI** - Entwicklungsumgebung
+- **Git** - Versionskontrolle
+- **VS Code** - IDE mit Extensions
+
+##  Installation & Setup
+
+### Voraussetzungen
+- Node.js (v18 oder höher)
+- npm oder yarn
+- Git
+
+### 1. Repository klonen
+```bash
+git clone https://github.com/anne-dalchow/join.git
+cd join
+```
+
+### 2. Dependencies installieren
+```bash
+npm install
+```
+
+### 3. Firebase konfigurieren
+1. Erstellen Sie ein Firebase-Projekt auf [Firebase Console](https://console.firebase.google.com/)
+2. Aktivieren Sie Authentication (Email/Password)
+3. Erstellen Sie eine Firestore-Datenbank
+4. Kopieren Sie die Firebase-Config in `src/app/app.config.ts`
+
+### 4. Development Server starten
+```bash
+npm start
+```
+Die Anwendung ist unter `http://localhost:4200` verfügbar.
+
+##  Projekt-Struktur
+
+```
+src/
+├── app/
+│   ├── login/                    # Login & Registrierung
+│   ├── mainpage/                 # Hauptbereich
+│   │   ├── board/                # Kanban-Board
+│   │   ├── contacts/             # Kontakt-Management
+│   │   ├── add-task/             # Task erstellen
+│   │   └── mainpage.component.*  # Dashboard/Summary
+│   ├── pages/                    # Statische Seiten
+│   │   ├── help/
+│   │   ├── legalnotice/
+│   │   └── privacypolice/
+│   ├── shared/                   # Geteilte Komponenten
+│   │   ├── services/             # Angular Services
+│   │   ├── header/               # Navigation
+│   │   ├── nav/                  # Sidebar
+│   │   └── addtask-modal/        # Task-Modal
+│   └── interfaces/               # TypeScript Interfaces
+├── assets/                       # Bilder, Fonts, Icons
+└── styles.scss                   # Globale Styles
+```
+
+##  Development Commands
+
+```bash
+ng serve                          # Development server (http://localhost:4200)
+ng build                          # Build für Production
+ng test                           # Unit Tests via Karma
+ng e2e                            # End-to-End Tests
+ng generate component name        # Neue Komponente generieren
+ng lint                           # Code Linting
+```
+
+##  Deployment
+
+### Firebase Hosting
+```bash
+# Build für Production
+ng build
+
+# Firebase Tools installieren (falls nicht vorhanden)
+npm install -g firebase-tools
+
+# Firebase Login
+firebase login
+
+# Deployment
+firebase deploy
+```
+
+##  Browser-Unterstützung
+
+-  Chrome (empfohlen)
+-  Firefox
+- Safari
+- Edge
+-  Mobile Browser (iOS Safari, Chrome Mobile)
+
+##  Angular CLI Informationen
+
+Dieses Projekt wurde mit [Angular CLI](https://github.com/angular/angular-cli) Version 17.3.17 generiert.
+
+### Code-Generierung
+Führen Sie `ng generate component component-name` aus, um eine neue Komponente zu generieren. Sie können auch `ng generate directive|pipe|service|class|guard|interface|enum|module` verwenden.
+
+### Weitere Hilfe
+Um weitere Hilfe zur Angular CLI zu erhalten, verwenden Sie `ng help` oder besuchen Sie die [Angular CLI Übersicht und Befehlsreferenz](https://angular.io/cli) Seite.
+
+
+---
+
+**Projekt Repository:** [GitHub](https://github.com/anne-dalchow/join)

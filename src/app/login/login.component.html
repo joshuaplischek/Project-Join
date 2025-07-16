@@ -10,7 +10,6 @@
   <section class="login-wrapper">
 
     @if (isLoginMode) {
-    <!-- Login Form -->
     <app-log-form [heading]="'Log in'" [buttonOne]="'Guest Log in'" [buttonTwo]="'Log in'" [showNameFields]="false"
       [showPasswordConfirm]="false" [isLoginMode]="true" (buttonOneClick)="guestLogin()"
       (buttonTwoClick)="onLogin($event)">
@@ -21,7 +20,6 @@
     </div>
 
     } @else {
-    <!-- Register Form -->
     <app-log-form [heading]="'Sign up'" [buttonTwo]="'Sign up'" [showNameFields]="true" [showPasswordConfirm]="true"
       [isLoginMode]="false" [showBackButton]="true" [showCheckBoxPrivacyPolicy]="false"
       (buttonTwoClick)="onRegister($event)" (backButtonClick)="toggleMode()">

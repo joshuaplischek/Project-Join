@@ -12,7 +12,7 @@ import { FirebaseService } from '../../../shared/services/firebase.service';
   styleUrl: './edit-contact.component.scss',
 })
 export class EditContactComponent {
-  @Input() isVisible = false;
+  @Input() isVisible: boolean = false;
   @Input() selectedContact: Contactlist | null = null;
   @Output() closeModal = new EventEmitter<void>();
   @Output() contactDeleted = new EventEmitter<void>();

@@ -13,7 +13,7 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  isLoginMode = true; // true = Login, false = Register
+  isLoginMode: boolean = true;
 
   loginHeading: string = 'Log in';
   loginButtonText: string = 'Log in';

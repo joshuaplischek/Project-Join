@@ -17,7 +17,7 @@ import { Contactlist } from '../../../../interfaces/contactlist';
   styleUrl: './add-contact-modul.component.scss',
 })
 export class AddContactModulComponent {
-  @Input() isVisible = false;
+  @Input() isVisible: boolean = false;
   @Output() closeModal = new EventEmitter<void>();
   @Output() contactCreated = new EventEmitter<Contactlist>();
   @ViewChild(ContactformComponent) contactFormComponent?: ContactformComponent;

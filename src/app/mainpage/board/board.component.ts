@@ -38,9 +38,9 @@ export class BoardComponent {
   @Input() selectedTask: Tasks | null = null;
 
   filteredTasks: Tasks[] = [];
-  dragStartDelay = 0;
-  isTaskDetailVisible = false;
-  isTaskAddVisible = false;
+  dragStartDelay: number = 0;
+  isTaskDetailVisible: boolean = false;
+  isTaskAddVisible: boolean = false;
   selectedTaskForDetail: Tasks | null = null;
   selectedStatus: string = 'todo';
   searchText: string = '';

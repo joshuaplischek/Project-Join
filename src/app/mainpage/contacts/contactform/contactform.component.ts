@@ -17,11 +17,11 @@ export class ContactformComponent {
   email: string = '';
   phone: string = '';
 
-  clicked = false;
-  firstNameTouched = false;
-  lastNameTouched = false;
-  emailTouched = false;
-  phoneTouched = false;
+  clicked: boolean = false;
+  firstNameTouched: boolean = false;
+  lastNameTouched: boolean = false;
+  emailTouched: boolean = false;
+  phoneTouched: boolean = false;
 
   constructor(private contactService: FirebaseService) {}
 
@@ -31,7 +31,7 @@ export class ContactformComponent {
   @Input() buttonTwo: string = '';
   @Input() contactData: Contactlist | null = null;
 
-  @Input() isVisible = false;
+  @Input() isVisible: boolean = false;
   @Output() closeModal = new EventEmitter<void>();
   @Output() buttonOneClick = new EventEmitter<void>();
   @Output() buttonTwoClick = new EventEmitter<Contactlist>();

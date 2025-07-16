@@ -19,15 +19,15 @@ export class LogFormComponent {
   password: string = '';
   confirmedPassword: string = '';
 
-  clicked = false;
-  firstNameTouched = false;
-  lastNameTouched = false;
-  emailTouched = false;
-  passwordTouched = false;
-  confirmedPasswordTouched = false;
+  clicked: boolean = false;
+  firstNameTouched: boolean = false;
+  lastNameTouched: boolean = false;
+  emailTouched: boolean = false;
+  passwordTouched: boolean = false;
+  confirmedPasswordTouched: boolean = false;
 
-  acceptPrivacyPolicy = false;
-  acceptPrivacyPolicyTouched = false;
+  acceptPrivacyPolicy: boolean = false;
+  acceptPrivacyPolicyTouched: boolean = false;
 
   constructor(private contactService: FirebaseService) {}
 
@@ -36,17 +36,17 @@ export class LogFormComponent {
   @Input() buttonOne: string = '';
   @Input() buttonTwo: string = '';
 
-  @Input() isVisible = true;
+  @Input() isVisible: boolean = true;
   @Output() closeModal = new EventEmitter<void>();
   @Output() buttonOneClick = new EventEmitter<void>();
   @Output() buttonTwoClick = new EventEmitter<AuthData>();
   @Output() backButtonClick = new EventEmitter<void>();
 
-  @Input() isLoginMode = false;
-  @Input() showPasswordConfirm = true;
-  @Input() showNameFields = true;
-  @Input() showBackButton = false;
-  @Input() showCheckBoxPrivacyPolicy = false;
+  @Input() isLoginMode: boolean = false;
+  @Input() showPasswordConfirm: boolean = true;
+  @Input() showNameFields: boolean = true;
+  @Input() showBackButton: boolean = false;
+  @Input() showCheckBoxPrivacyPolicy: boolean = false;
 
   isValidEmail(): boolean {
     return this.email.includes('@');
@@ -91,26 +91,10 @@ export class LogFormComponent {
       } else {
         confirmPasswordValid = true;
       }
-
-      // Privacy Policy Validierung hinzufügen
-      // let privacyPolicyValid: boolean;
-      // if (this.showCheckBoxPrivacyPolicy) {
-      //   privacyPolicyValid = this.acceptPrivacyPolicy;
-      // } else {
-      //   privacyPolicyValid = true;
-      // }
-
-      return (
-        emailValid &&
-        passwordValid &&
-        nameValid &&
-        confirmPasswordValid
-        // privacyPolicyValid
-      );
+      return emailValid && passwordValid && nameValid && confirmPasswordValid;
     }
   }
 
-  // AuthData Objekt Erstellung
   onSubmit() {
     if (this.isFormValid()) {
       const authData: AuthData = {
@@ -118,20 +102,15 @@ export class LogFormComponent {
         password: this.password,
         firstName: '',
         lastName: '',
-        confirmedPassword: ''
+        confirmedPassword: '',
       };
-
-      // Bei Registierung Vor-und Nachnamen hinzufügen
       if (!this.isLoginMode && this.showNameFields) {
         authData.firstName = this.firstName;
         authData.lastName = this.lastName;
       }
-
-      // Passwort Confirmed hinzufügen
       if (this.showPasswordConfirm) {
         authData.confirmedPassword = this.confirmedPassword;
       }
-
       this.buttonTwoClick.emit(authData);
     }
   }
