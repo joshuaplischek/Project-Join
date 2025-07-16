@@ -12,7 +12,7 @@
     <div class="input-fields">
       @if (showNameFields) {
       <div class="firstname-field">
-        <div class="input-wrapper">
+        <div class="input-wrapper" [ngClass]="{'error': !firstName && firstNameTouched}">
           <label for="firstNameInput">Vorname</label>
           <input [(ngModel)]="firstName" type="text" placeholder="Firstname" (blur)="firstNameTouched = true" />
           <img src="/assets/images/contactform/person-small.svg" alt="person icon" />
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="lastname-field">
-        <div class="input-wrapper">
+        <div class="input-wrapper" [ngClass]="{'error': !lastName && lastNameTouched}">
           <label for="lastNameInput">Nachname</label>
           <input [(ngModel)]="lastName" type="text" placeholder="Lastname" (blur)="lastNameTouched = true">
           <img src="/assets/images/contactform/person-small.svg" alt="person icon">
@@ -34,7 +34,7 @@
       }
 
       <div class="email-field">
-        <div class="input-wrapper">
+        <div class="input-wrapper" [ngClass]="{'error': (!email || !isValidEmail()) && emailTouched}">
           <label for="emailInput">E-Mail</label>
           <input [(ngModel)]="email" type="email" placeholder="Email" (blur)="emailTouched = true">
           <img src="/assets/images/contactform/mail.svg" alt="mail icon">
@@ -45,26 +45,28 @@
       </div>
 
       <div class="password-field">
-        <div class="input-wrapper">
+        <div class="input-wrapper" [ngClass]="{'error': !validatePassword() && passwordTouched}">
           <label for="passwordInput">Password</label>
           <input [(ngModel)]="password" type="password" placeholder="Password" (blur)="passwordTouched = true">
           <img src="/assets/images/contactform/lock.svg" alt="password icon">
         </div>
-        <div class="input-hint">@if (!password && passwordTouched) {
-          <span role="alert">Please enter a valid password</span>}
+        <div class="input-hint">@if (!validatePassword() && passwordTouched) {
+          <span role="alert">Password must contain:
+            minimum 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character</span>}
         </div>
       </div>
 
+
       @if (showPasswordConfirm) {
       <div class="password-field">
-        <div class="input-wrapper">
+        <div class="input-wrapper" [ngClass]="{'error': !matchingPasswords() && confirmedPasswordTouched}">
           <label for="confirmPasswordInput">Confirm Password</label>
           <input [(ngModel)]="confirmedPassword" type="password" placeholder="Confirm Password"
             (blur)="confirmedPasswordTouched = true">
           <img src="/assets/images/contactform/lock.svg" alt="password icon">
         </div>
-        <div class="input-hint">@if (!confirmedPassword && confirmedPasswordTouched) {
-          <span role="alert">Please confirm your password</span>}
+        <div class="input-hint">@if (!matchingPasswords() && confirmedPasswordTouched) {
+          <span role="alert">Passwords do not match</span>}
         </div>
       </div>
       }

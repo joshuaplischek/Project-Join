@@ -72,7 +72,8 @@ export class LogFormComponent {
 
   isFormValid(): boolean {
     const emailValid = this.email.trim().length > 0 && this.isValidEmail();
-    const passwordValid = this.password.trim().length > 0;
+    const passwordValid = this.validatePassword();
+    const confirmPasswordValid = this.matchingPasswords();
 
     if (this.isLoginMode) {
       return emailValid && passwordValid;
@@ -84,15 +85,45 @@ export class LogFormComponent {
       } else {
         nameValid = true;
       }
-
-      let confirmPasswordValid: boolean;
-      if (this.showPasswordConfirm) {
-        confirmPasswordValid = this.confirmedPassword.trim().length > 0;
-      } else {
-        confirmPasswordValid = true;
-      }
-      return emailValid && passwordValid && nameValid && confirmPasswordValid;
+      return emailValid && passwordValid && nameValid && confirmPasswordValid; // && privacyPolicyCheckboxChecked
     }
+  }
+
+  matchingPasswords(): boolean {
+    let confirmPasswordValid: boolean;
+    if (this.password === this.confirmedPassword) {
+      return (confirmPasswordValid = true);
+    } else {
+      return (confirmPasswordValid = false);
+    }
+  }
+
+  validatePasswordObject(password: string) {
+    return {
+      isValid:
+        password.length >= 8 &&
+        /[a-z]/.test(password) &&
+        /[A-Z]/.test(password) &&
+        /[0-9]/.test(password) &&
+        /[^A-Za-z0-9]/.test(password),
+      containsLowercaseLetter: /[a-z]/.test(password),
+      containsUppercaseLetter: /[A-Z]/.test(password),
+      containsDigit: /[0-9]/.test(password),
+      containsSpecialCharacter: /[^A-Za-z0-9]/.test(password),
+      minLengthMet: password.length >= 8,
+    };
+  }
+
+  validatePassword(): boolean {
+    const passwordValid = this.validatePasswordObject(this.password);
+    if (!passwordValid.isValid) {
+      if (!passwordValid.containsLowercaseLetter) return false;
+      if (!passwordValid.containsUppercaseLetter) return false;
+      if (!passwordValid.containsDigit) return false;
+      if (!passwordValid.containsSpecialCharacter) return false;
+      if (!passwordValid.minLengthMet) return false;
+    }
+    return true;
   }
 
   onSubmit() {
