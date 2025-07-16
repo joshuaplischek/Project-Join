@@ -29,7 +29,6 @@ export class LogFormComponent {
   acceptPrivacyPolicy: boolean = false;
   acceptPrivacyPolicyTouched: boolean = false;
 
-  // Password visibility states
   passwordHasContent: boolean = false;
   confirmedPasswordHasContent: boolean = false;
 
@@ -99,7 +98,13 @@ export class LogFormComponent {
       } else {
         nameValid = true;
       }
-      return emailValid && passwordValid && nameValid && confirmPasswordValid; // && privacyPolicyCheckboxChecked
+      return (
+        emailValid &&
+        passwordValid &&
+        nameValid &&
+        confirmPasswordValid &&
+        this.acceptPrivacyPolicy
+      );
     }
   }
 

@@ -21,7 +21,7 @@
 
     } @else {
     <app-log-form [heading]="'Sign up'" [buttonTwo]="'Sign up'" [showNameFields]="true" [showPasswordConfirm]="true"
-      [isLoginMode]="false" [showBackButton]="true" [showCheckBoxPrivacyPolicy]="false"
+      [isLoginMode]="false" [showBackButton]="true" [showCheckBoxPrivacyPolicy]="true"
       (buttonTwoClick)="onRegister($event)" (backButtonClick)="toggleMode()">
     </app-log-form>
     <div class="input-hint">@if (wrongUser) {
