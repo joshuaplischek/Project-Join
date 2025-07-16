@@ -76,6 +76,11 @@ export class AuthService {
     return auth.currentUser?.displayName || '';
   }
 
+  get uId(): string {
+    const auth = getAuth(this.firebaseApp);
+    return auth.currentUser?.uid || '';
+  }
+
   async signUp(authData: AuthData) {
     try {
       const auth = getAuth(this.firebaseApp);

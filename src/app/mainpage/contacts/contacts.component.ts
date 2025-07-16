@@ -7,6 +7,7 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { first } from 'rxjs';
 import { Location } from '@angular/common';
 import { ContactformComponent } from './contactform/contactform.component';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-contacts',
@@ -27,16 +28,24 @@ export class ContactsComponent implements OnInit {
   successMessage: string = '';
   showSuccessMessage: boolean = false;
   isMobile: boolean = false;
+  uIdRef = this.authService.uId;
 
   constructor(
     private contactlist: FirebaseService,
-    private location: Location
-  ) {}
+    private location: Location,
+    private authService: AuthService
+  ) {
+    console.log('uIdRef in contacts component:', this.uIdRef);
+  }
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
     this.checkMobile();
     window.addEventListener('resize', () => this.checkMobile());
+  }
+
+  getUid() {
+    return this.authService.uId;
   }
 
   checkMobile() {

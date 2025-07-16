@@ -375,4 +375,10 @@ hr {
       }
     }
   }
+
+  .me-tag {
+    color: grey;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    margin-left: 0.5rem;
+  }
 }
