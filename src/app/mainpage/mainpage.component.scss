@@ -3,36 +3,49 @@
 section {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: start;
-  height: calc(100dvh - 96px);
+  height: calc(100dvh - 200px);
   width: 100%;
-  max-width: 1600px;
-  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem)
-    clamp(1rem, 4vw, 5rem);
+  max-width: 1300px;
+  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 2vw, 2rem) clamp(1rem, 4vw, 5rem);
   gap: 2rem;
 
-  > section {
-    height: auto;
-    padding: 0;
+  @media(max-width: 1024px) {
+    gap: 1rem;
   }
 
-  @media (max-width: 400px) {
-    padding: clamp(2rem, 2vw, 5rem) clamp(0.5rem, 0vw, 10rem)
-      clamp(1rem, 2vw, 2rem) clamp(0.5rem, 0vw, 5rem);
+  @media(max-width: 800px) {
+    padding: 2rem 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  >section {
+    height: fit-content;
+    padding: 0;
+    padding-left: 1rem;
+
+    @media(max-width: 800px) {
+
+      padding: 0;
+      align-items: flex-start;
+
+    }
   }
 }
 
 .heading {
   display: flex;
   align-items: center;
-  width: 100%;
   height: auto;
+  width: 100%;
 
-  > div {
+  >div {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 2.5rem;
 
     .vertical-blue-line {
       width: 2px;
@@ -42,12 +55,12 @@ section {
   }
 
   @media (max-width: 600px) {
-    justify-content: center;
+
     div {
       align-items: start;
       flex-direction: column;
-      gap: 10px;
-      width: 300px;
+      gap: 0.5rem;
+
 
       .vertical-blue-line {
         display: none;
@@ -74,11 +87,11 @@ section {
     align-items: center;
     gap: 1rem;
 
-    > div {
+    >div {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 25px;
+      gap: 1.5rem;
     }
   }
 
@@ -92,7 +105,7 @@ section {
 
       div {
         div {
-          gap: 0;
+          gap: 0.5rem;
         }
       }
     }
@@ -100,10 +113,20 @@ section {
 }
 
 .summary-container {
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: clamp(30rem, 80vw, 31rem);
+  height: fit-content;
+  gap: 1rem;
+
+  @media(max-width: 1024px) {
+    width: 50%;
+  }
+
+  @media(max-width: 800px) {
+    width: 100%;
+  }
 }
 
 .circle-container {
@@ -112,8 +135,12 @@ section {
   align-items: center;
   border-radius: 100%;
   background-color: var(--nav-bg-color);
-  height: 69px;
-  width: 69px;
+  height: clamp(50px, 6vw, 69px);
+  width: clamp(50px, 6vw, 69px);
+
+  >img {
+    width: clamp(1rem, 1.5vw, 1.5rem);
+  }
 }
 
 .show-todo,
@@ -127,18 +154,22 @@ section {
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   height: clamp(9rem, 15vw, 10rem);
   transition: all 0.2s ease-in-out;
+  background-color: white;
 
   &:hover {
     cursor: pointer;
+
     @media (min-width: 1024px) {
-      transform: scale(1.07);
+      transform: scale(1.05);
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
       background-color: var(--nav-bg-color);
       color: white;
       z-index: 3;
+
       .circle-container {
         background-color: white;
-        > img {
+
+        >img {
           filter: brightness(0) invert(0);
         }
       }
@@ -148,7 +179,7 @@ section {
 
 .show-todo,
 .show-done {
-  width: clamp(10rem, 20vw, 15rem);
+  width: 100%;
 
   div {
     display: flex;
@@ -158,11 +189,8 @@ section {
 
     p {
       text-align: center;
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
     }
-  }
-
-  @media (max-width: 800px) {
-    width: clamp(9rem, 30vw, 15rem);
   }
 }
 
@@ -172,6 +200,10 @@ section {
   align-items: center;
   text-align: center;
   width: 100%;
+
+  p {
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+  }
 
   .priority-part {
     display: flex;
@@ -183,11 +215,12 @@ section {
       justify-content: center;
       align-items: center;
       border-radius: 100%;
-      height: 69px;
-      width: 69px;
+      height: clamp(50px, 6vw, 69px);
+      width: clamp(50px, 6vw, 69px);
 
-      > img {
-        height: clamp(1rem, 1.3vw, 2rem);
+      >img {
+        height: clamp(1rem, 1.5vw, 1.5rem);
+
         filter: brightness(0) invert(1);
       }
     }
@@ -204,6 +237,7 @@ section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 1rem;
 
   .show-sum-of-tasks,
   .show-tasks-in-progress,
@@ -214,18 +248,19 @@ section {
     justify-content: center;
     width: clamp(6rem, 11vw, 11rem);
 
-    > p {
+    >p {
       text-align: center;
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
     }
 
     @media (max-width: 800px) {
-      width: clamp(6rem, 15vw, 15rem);
+      width: 100%;
     }
   }
 }
 
 .num-of {
-  font-size: clamp(32px, 5vw, 64px);
+  font-size: clamp(1.1rem, 4vw, 3.5rem);
   font-weight: bold;
 }
 

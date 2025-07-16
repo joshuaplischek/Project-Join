@@ -5,8 +5,10 @@
       <div class="addTaskForm">
         <div class="title-field">
           <label for="titleInput">Title<span class="warning">*</span></label>
-          <input id="titleInput" [(ngModel)]="title" type="text" placeholder="Enter a title"
-            (blur)="titleTouched = true" />
+          <div class="input-wrapper" [ngClass]="{'error': !title && titleTouched}">
+            <input id="titleInput" [(ngModel)]="title" type="text" placeholder="Enter a title"
+              (blur)="titleTouched = true" />
+          </div>
           <div class="input-hint">
             @if (!title && titleTouched) {
             <span role="alert">Please enter a title</span>}
@@ -20,7 +22,7 @@
 
         <div class="date-field">
           <label for="dateInput">Due date<span class="warning">*</span></label>
-          <div class="date-input-container">
+          <div class="date-input-container input-wrapper" [ngClass]="{'error': !date && dateTouched}">
             <input id="dateInput" matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minDate"
               placeholder="dd/mm/yyyy" (blur)="dateTouched = true" (focus)="picker.open()" />
             <mat-datepicker-toggle matSuffix [for]="picker">
@@ -109,7 +111,8 @@
 
         <div class="category-wrapper">
           <p>Category<span class="warning">*</span></p>
-          <div class="custom-select" tabindex="0" (blur)="onCategoryBlur()">
+          <div class="custom-select input-wrapper" [ngClass]="{'error': !category && categoryTouched}" tabindex="0"
+            (blur)="onCategoryBlur()">
             <div class="selected" (click)="categoryDropDownOpen = !categoryDropDownOpen">
               @if (!category) {
               <span>Select task category</span>
