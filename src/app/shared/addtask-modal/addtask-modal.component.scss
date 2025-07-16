@@ -35,7 +35,6 @@
   position: absolute;
   inset: 50% 2% auto auto;
   transform: translateY(-50%);
-  width: 25px;
   pointer-events: none;
 }
 
@@ -192,6 +191,10 @@
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
   }
+}
+
+#img-drop-down {
+  inset: 50% 0% auto auto;
 }
 
 .add-task-wrapper {
