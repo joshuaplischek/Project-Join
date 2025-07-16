@@ -50,10 +50,12 @@
           <input [(ngModel)]="password" type="password" placeholder="Password" (blur)="passwordTouched = true">
           <img src="/assets/images/contactform/lock.svg" alt="password icon">
         </div>
-        <div class="input-hint">@if (!password && passwordTouched) {
-          <span role="alert">Please enter a valid password</span>}
+        <div class="input-hint">@if (!validatePassword() && passwordTouched) {
+          <span role="alert">Password must contain:
+            minimum 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character</span>}
         </div>
       </div>
+
 
       @if (showPasswordConfirm) {
       <div class="password-field">
@@ -63,8 +65,8 @@
             (blur)="confirmedPasswordTouched = true">
           <img src="/assets/images/contactform/lock.svg" alt="password icon">
         </div>
-        <div class="input-hint">@if (!confirmedPassword && confirmedPasswordTouched) {
-          <span role="alert">Please confirm your password</span>}
+        <div class="input-hint">@if (!matchingPasswords()) {
+          <span role="alert">Passwords do not match</span>}
         </div>
       </div>
       }
