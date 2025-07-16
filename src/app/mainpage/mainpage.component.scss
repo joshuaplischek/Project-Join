@@ -8,16 +8,18 @@ section {
   height: calc(100dvh - 96px);
   width: 100%;
   max-width: 1600px;
-  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 5rem);
+  padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 3vw, 2rem)
+    clamp(1rem, 4vw, 5rem);
   gap: 2rem;
 
-  >section {
+  > section {
     height: auto;
     padding: 0;
   }
 
   @media (max-width: 400px) {
-    padding: clamp(2rem, 2vw, 5rem) clamp(0.5rem, 0vw, 10rem) clamp(1rem, 2vw, 2rem) clamp(0.5rem, 0vw, 5rem);
+    padding: clamp(2rem, 2vw, 5rem) clamp(0.5rem, 0vw, 10rem)
+      clamp(1rem, 2vw, 2rem) clamp(0.5rem, 0vw, 5rem);
   }
 }
 
@@ -27,7 +29,7 @@ section {
   width: 100%;
   height: auto;
 
-  >div {
+  > div {
     display: flex;
     align-items: center;
     gap: 40px;
@@ -70,17 +72,7 @@ section {
     align-items: center;
     gap: 1rem;
 
-    .circle-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 100%;
-      background-color: var(--nav-bg-color);
-      height: 69px;
-      width: 69px;
-    }
-
-    >div {
+    > div {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -105,6 +97,23 @@ section {
   }
 }
 
+.summary-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: clamp(30rem, 80vw, 31rem);
+}
+
+.circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: var(--nav-bg-color);
+  height: 69px;
+  width: 69px;
+}
+
 .show-todo,
 .show-done,
 .show-upcoming-deadline,
@@ -115,10 +124,23 @@ section {
   border-radius: 25px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   height: clamp(9rem, 15vw, 10rem);
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     cursor: pointer;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    @media (min-width: 1024px) {
+      transform: scale(1.07);
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+      background-color: var(--nav-bg-color);
+      color: white;
+      z-index: 3;
+      .circle-container {
+        background-color: white;
+        > img {
+          filter: brightness(0) invert(0);
+        }
+      }
+    }
   }
 }
 
@@ -162,7 +184,7 @@ section {
       height: 69px;
       width: 69px;
 
-      >img {
+      > img {
         height: clamp(1rem, 1.3vw, 2rem);
         filter: brightness(0) invert(1);
       }
@@ -188,9 +210,9 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: clamp(6rem, 10vw, 10rem);
+    width: clamp(6rem, 11vw, 11rem);
 
-    >p {
+    > p {
       text-align: center;
     }
 
