@@ -34,9 +34,7 @@ export class ContactsComponent implements OnInit {
     private contactlist: FirebaseService,
     private location: Location,
     private authService: AuthService
-  ) {
-    console.log('uIdRef in contacts component:', this.uIdRef);
-  }
+  ) {}
 
   ngOnInit() {
     this.contacts = this.contactlist.contacts;

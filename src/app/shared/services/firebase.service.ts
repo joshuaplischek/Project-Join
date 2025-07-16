@@ -126,7 +126,6 @@ export class FirebaseService {
   async deleteContact(id: string) {
     try {
       await deleteDoc(doc(this.firestore, 'contactlist', id));
-      console.log('Kontakt erfolgreich gelöscht');
     } catch (error) {
       console.error('Fehler beim Löschen des Kontakts:', error);
     }

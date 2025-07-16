@@ -120,7 +120,6 @@ export class BoardComponent {
   }
 
   openAddTask(status: string) {
-    console.log('Opening add task with status:', status);
     this.selectedStatus = status;
     this.isTaskAddVisible = true;
   }
