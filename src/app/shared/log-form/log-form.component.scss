@@ -102,9 +102,8 @@
     .input-fields {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: flex-start;
-      gap: clamp(0.5rem, 2vw, 1rem);
       width: 100%;
 
       .firstname-field,

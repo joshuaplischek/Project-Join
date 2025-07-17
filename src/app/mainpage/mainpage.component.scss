@@ -1,3 +1,9 @@
+.overflow-scroll {
+  @media(max-height: 715px) {
+    overflow-y: scroll;
+  }
+}
+
 section {
   display: flex;
   flex-direction: column;
@@ -8,6 +14,8 @@ section {
   max-width: 1300px;
   padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 7vw, 10rem) clamp(1rem, 2vw, 2rem) clamp(1rem, 4vw, 5rem);
   gap: 2rem;
+
+
 
   @media(max-width: 1024px) {
     gap: 1rem;

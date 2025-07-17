@@ -1,17 +1,21 @@
 .login-container {
   width: 100%;
   max-width: 1920px;
-  min-height: 100dvh;
+  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
   padding: 2rem;
   margin: 0 auto;
+  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: auto;
+
 
   @media (max-width: 768px) {
     align-items: center;
-    justify-content: center;
     gap: 1rem;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
   }
@@ -30,15 +34,25 @@
 
   .login-wrapper {
     width: 100%;
+    max-width: 400px;
+    min-width: 0;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     align-items: center;
     justify-content: center;
+    padding: 2rem 1.5rem;
+    margin-top: auto;
 
-    @media (max-width: 768px) {
-      order: 1;
-      gap: 1rem
+    @media (max-width: 1024px) {
+      max-width: 90vw;
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 600px) {
+      max-width: 98vw;
+      padding: 1rem 0.5rem;
+      gap: 0.7rem;
     }
   }
 }
@@ -78,7 +92,13 @@
   z-index: 1000;
   top: 5%;
   left: 5%;
-  width: clamp(40px, 5vw, 100px);
+  width: clamp(30px, 5vw, 100px);
+
+  @media (max-width: 600px) {
+    top: 2%;
+    left: 5%;
+  }
+
 }
 
 .join-logo.loaded {
@@ -89,12 +109,11 @@
   display: flex;
   gap: 2rem;
   align-self: center;
-
-  @media (max-width: 768px) {
-    order: 3;
-    position: absolute;
-    bottom: 40px;
-  }
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0 2rem 0;
+  order: 3;
+  margin-top: auto;
 
   a {
     color: #a8a8a8;
