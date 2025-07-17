@@ -3,11 +3,9 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   OnDestroy,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
@@ -44,6 +42,7 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     bottomMobile?: string;
   } = {};
   @Input() useFixedPosition: boolean = true;
+  private originalFixedPosition: boolean = true;
   @Output() taskCreated = new EventEmitter<void>();
   @Output() successMessage = new EventEmitter<string>();
 
@@ -95,6 +94,7 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
    * Initializes component and sets up default values.
    */
   ngOnInit() {
+    this.originalFixedPosition = this.useFixedPosition;
     this.filteredContacts = this.allContacts;
     this.selectPrio('medium');
     this.checkScreenSize();
@@ -103,13 +103,18 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
 
   /**
    * Checks current screen size and updates responsive flags.
+   * Only applies fixed positioning logic if originally enabled.
    */
   checkScreenSize() {
     const screenWidth = window.innerWidth;
     this.isMobile = screenWidth < 768;
     this.isTablet = screenWidth >= 768 && screenWidth < 1024;
     this.isDesktop = screenWidth >= 1024;
-    this.useFixedPosition = this.isMobile || this.isTablet;
+    if (this.originalFixedPosition) {
+      this.useFixedPosition = this.isMobile || this.isTablet;
+    } else {
+      this.useFixedPosition = false;
+    }
   }
 
   /**
