@@ -47,7 +47,6 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
   @Output() successMessage = new EventEmitter<string>();
 
   isDesktop: boolean = true;
-  isTablet: boolean = false;
   isMobile: boolean = false;
 
   title: string = '';
@@ -103,15 +102,17 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
 
   /**
    * Checks current screen size and updates responsive flags.
-   * Only applies fixed positioning logic if originally enabled.
+   * Since modal is only used on screens ≥850px, simplified logic.
    */
   checkScreenSize() {
     const screenWidth = window.innerWidth;
     this.isMobile = screenWidth < 768;
-    this.isTablet = screenWidth >= 768 && screenWidth < 1024;
     this.isDesktop = screenWidth >= 1024;
+
+    // Modal is only shown on screens ≥850px, so simplified positioning
     if (this.originalFixedPosition) {
-      this.useFixedPosition = this.isMobile || this.isTablet;
+      // Only use fixed position on very small screens (if modal somehow appears)
+      this.useFixedPosition = this.isMobile;
     } else {
       this.useFixedPosition = false;
     }

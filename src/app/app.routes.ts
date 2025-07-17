@@ -9,8 +9,6 @@ import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 
-// localhost4200/ URL Pfad ist '' -> exakte Übereinstimmung -> Weiterleitung zu /login
-// localhost4200/board URL Pfad ist 'board' -> keine Übereinstimmung -> keine Weiterleitung
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'summary', component: MainpageComponent },

@@ -15,6 +15,7 @@ import { Tasks } from '../../../interfaces/tasks';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { TaskAddComponent } from './task-add/task-add.component';
+import { Router } from '@angular/router';
 
 /**
  * Component for managing task board with drag-and-drop functionality.
@@ -53,8 +54,12 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   /**
    * @param taskService - Service for task operations
+   * @param router - Angular router for navigation
    */
-  constructor(public taskService: TasksFirbaseService) {}
+  constructor(
+    public taskService: TasksFirbaseService,
+    private router: Router
+  ) {}
 
   /**
    * Initializes component and sets up subscriptions.
@@ -145,13 +150,19 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Opens task add modal with specified status.
+   * Opens task add modal with specified status or navigates to add-task page on smaller screens.
    *
    * @param status - Initial status for new task
    */
   openAddTask(status: string) {
-    this.selectedStatus = status;
-    this.isTaskAddVisible = true;
+    // On screens smaller than 850px, navigate to add-task page
+    if (window.innerWidth < 850) {
+      this.router.navigate(['/add-task']);
+    } else {
+      // On larger screens, show modal
+      this.selectedStatus = status;
+      this.isTaskAddVisible = true;
+    }
   }
 
   /**
