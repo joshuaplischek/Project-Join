@@ -122,8 +122,7 @@ export class TaskDetailEditComponent
   validateForm(): boolean {
     return this.editTitle &&
       this.editDate &&
-      this.editCategory &&
-      this.validateDate(this.editDate)
+      this.editCategory
       ? true
       : false;
   }
