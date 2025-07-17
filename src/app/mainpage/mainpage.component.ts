@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { Tasks } from '../../interfaces/tasks';
 import { AuthService } from '../shared/services/auth.service';
 
+/**
+ * Main dashboard component displaying task overview and greeting.
+ */
 @Component({
   selector: 'app-mainpage',
   standalone: true,
@@ -17,12 +20,20 @@ export class MainpageComponent implements OnInit {
   successMessage: string = '';
   animationStarted = false;
 
+  /**
+   * @param taskService - Service for task operations
+   * @param authService - Service for authentication
+   * @param router - Angular router for navigation
+   */
   constructor(
     public taskService: TasksFirbaseService,
     public authService: AuthService,
     private router: Router
   ) {}
 
+  /**
+   * Initializes component and sets up subscriptions.
+   */
   ngOnInit() {
     this.taskService.tasksChanged.subscribe(() => {
       this.nextDeadlineInfo;
@@ -34,6 +45,9 @@ export class MainpageComponent implements OnInit {
     this.authService.wasJustLoggedIn = false;
   }
 
+  /**
+   * Checks and manages login animation state.
+   */
   checkAnimation() {
     if (!this.animationStarted && this.authService.wasJustLoggedIn) {
       this.animationStarted = true;
@@ -43,10 +57,16 @@ export class MainpageComponent implements OnInit {
     }
   }
 
+  /**
+   * Gets the logged-in person's display name.
+   */
   getLogedInPerson() {
     return this.authService.displayName || 'Guest';
   }
 
+  /**
+   * Gets time-based greeting message.
+   */
   getGreeting() {
     let dateTime = new Date();
     let hour = dateTime.getHours();
@@ -55,18 +75,38 @@ export class MainpageComponent implements OnInit {
     return 'Good evening,';
   }
 
+  /**
+   * Gets the number of tasks by status.
+   *
+   * @param task - Task status to filter by
+   */
   getNumberOftasks(task: string) {
     return this.taskService.tasks.filter((t) => t.status === task).length;
   }
 
+  /**
+   * Converts task date to Date object.
+   *
+   * @param task - Task containing date
+   */
   private getTaskDate(task: Tasks): Date {
     return task.date instanceof Date ? task.date : task.date.toDate();
   }
 
+  /**
+   * Gets task date as timestamp.
+   *
+   * @param task - Task containing date
+   */
   private getTaskTime(task: Tasks): number {
     return this.getTaskDate(task).getTime();
   }
 
+  /**
+   * Formats priority string with proper capitalization.
+   *
+   * @param priority - Priority string to format
+   */
   private formatPriority(priority: string): string {
     return priority ? priority.charAt(0).toUpperCase() + priority.slice(1) : '';
   }
@@ -92,6 +132,11 @@ export class MainpageComponent implements OnInit {
     };
   }
 
+  /**
+   * Converts task date to formatted string.
+   *
+   * @param task - Task containing date to convert
+   */
   convertDate(task: Tasks | null): string {
     if (!task || !task.date) return '';
     const options: Intl.DateTimeFormatOptions = {
@@ -108,6 +153,9 @@ export class MainpageComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Filters and sorts tasks by deadline and priority.
+   */
   filterDeadlineTasks() {
     const prioOrder: Record<string, number> = { urgent: 1, medium: 2, low: 3 };
     const today = new Date().setHours(0, 0, 0, 0);
@@ -127,6 +175,11 @@ export class MainpageComponent implements OnInit {
     return upcomingTasks.length > 0 ? upcomingTasks[0] : null;
   }
 
+  /**
+   * Shows a success message to the user.
+   *
+   * @param message - Success message to display
+   */
   showSuccessMessageBox(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;

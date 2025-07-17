@@ -5,6 +5,9 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthData } from '../../interfaces/authData';
 import { AuthService } from '../shared/services/auth.service';
 
+/**
+ * Component for user login and registration functionality.
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -28,24 +31,34 @@ export class LoginComponent implements OnInit {
   signOutMessage: string = '';
   animationStarted: boolean = false;
 
+  /**
+   * @param router - Angular router for navigation
+   * @param authService - Service for authentication operations
+   * @param cdr - Change detector for manual change detection
+   */
   constructor(
     private router: Router,
     private authService: AuthService,
     private cdr: ChangeDetectorRef
   ) {}
 
+  /**
+   * Initializes component and sets up animations and subscriptions.
+   */
   ngOnInit() {
     this.startAnimations();
     this.authService.isLoggedIn$.subscribe((loggedIn) => {
-      // Wenn ausgeloggt, zeige die Nachricht und stoße Change Detection an
       if (!loggedIn && !this.showSignOutMessage) {
         this.showSignOutMessage =
-        this.authService.checkAndResetSignOutMessage();
+          this.authService.checkAndResetSignOutMessage();
         this.cdr.detectChanges();
       }
     });
   }
 
+  /**
+   * Starts logo animation sequence.
+   */
   startAnimations() {
     setTimeout(() => {
       this.animationStarted = true;
@@ -56,15 +69,28 @@ export class LoginComponent implements OnInit {
     }, 1500);
   }
 
+  /**
+   * Toggles between login and registration mode.
+   */
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 
+  /**
+   * Logs in user as guest and navigates to summary page.
+   */
   guestLogin() {
     this.authService.logInGuest();
     this.router.navigate(['/summary']);
   }
 
+  /**
+   * Handles user login with authentication data.
+   *
+   * @param authData - User login credentials
+   *
+   * @throws {Error} When login fails
+   */
   async onLogin(authData: AuthData) {
     try {
       await this.authService.logIn(authData);
@@ -74,6 +100,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * Handles user registration with authentication data.
+   *
+   * @param authData - User registration data
+   *
+   * @throws {Error} When registration fails
+   */
   async onRegister(authData: AuthData) {
     try {
       await this.authService.signUp(authData);

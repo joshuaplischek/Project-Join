@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { Contactlist } from '../../../../interfaces/contactlist';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 
+/**
+ * Component for editing and deleting existing contacts.
+ */
 @Component({
   selector: 'app-edit-contact',
   standalone: true,
@@ -20,10 +23,18 @@ export class EditContactComponent {
 
   firebaseService = inject(FirebaseService);
 
+  /**
+   * Closes the edit contact modal.
+   */
   close() {
     this.closeModal.emit();
   }
 
+  /**
+   * Deletes the selected contact from Firebase.
+   *
+   * @throws {Error} When contact deletion fails
+   */
   async deleteContact() {
     if (this.selectedContact?.id) {
       await this.firebaseService.deleteContact(this.selectedContact.id);
@@ -32,6 +43,13 @@ export class EditContactComponent {
     }
   }
 
+  /**
+   * Saves updated contact data to Firebase.
+   *
+   * @param formData - Updated contact data from the form
+   *
+   * @throws {Error} When contact update fails
+   */
   async saveContact(formData: Contactlist) {
     if (this.selectedContact?.id) {
       await this.firebaseService.updateContact(

@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthData } from '../../../interfaces/authData';
 
+/**
+ * Component for handling login and registration forms.
+ */
 @Component({
   selector: 'app-log-form',
   standalone: true,
@@ -32,6 +35,9 @@ export class LogFormComponent {
   passwordHasContent: boolean = false;
   confirmedPasswordHasContent: boolean = false;
 
+  /**
+   * @param contactService - Service for Firebase operations
+   */
   constructor(private contactService: FirebaseService) {}
 
   @Input() heading: string = '';
@@ -51,18 +57,30 @@ export class LogFormComponent {
   @Input() showBackButton: boolean = false;
   @Input() showCheckBoxPrivacyPolicy: boolean = false;
 
+  /**
+   * Validates email format by checking for @ symbol.
+   */
   isValidEmail(): boolean {
     return this.email.includes('@');
   }
 
-  onPasswordInput(): void {
+  /**
+   * Updates password content state on input.
+   */
+  onPasswordInput() {
     this.passwordHasContent = this.password.length > 0;
   }
 
-  onConfirmedPasswordInput(): void {
+  /**
+   * Updates confirmed password content state on input.
+   */
+  onConfirmedPasswordInput() {
     this.confirmedPasswordHasContent = this.confirmedPassword.length > 0;
   }
 
+  /**
+   * Resets all form fields and validation states.
+   */
   resetForm() {
     this.firstName = '';
     this.lastName = '';
@@ -78,11 +96,17 @@ export class LogFormComponent {
     this.confirmedPasswordHasContent = false;
   }
 
+  /**
+   * Closes the form modal and resets all fields.
+   */
   close() {
     this.resetForm();
     this.closeModal.emit();
   }
 
+  /**
+   * Validates the entire form based on current mode.
+   */
   isFormValid(): boolean {
     const emailValid = this.email.trim().length > 0 && this.isValidEmail();
     const passwordValid = this.validatePassword();
@@ -108,15 +132,18 @@ export class LogFormComponent {
     }
   }
 
+  /**
+   * Checks if password and confirmed password match.
+   */
   matchingPasswords(): boolean {
-    let confirmPasswordValid: boolean;
-    if (this.password === this.confirmedPassword) {
-      return (confirmPasswordValid = true);
-    } else {
-      return (confirmPasswordValid = false);
-    }
+    return this.password === this.confirmedPassword;
   }
 
+  /**
+   * Validates password against security requirements.
+   *
+   * @param password - Password string to validate
+   */
   validatePasswordObject(password: string) {
     return {
       isValid:
@@ -133,6 +160,9 @@ export class LogFormComponent {
     };
   }
 
+  /**
+   * Validates current password against all security requirements.
+   */
   validatePassword(): boolean {
     const passwordValid = this.validatePasswordObject(this.password);
     if (!passwordValid.isValid) {
@@ -145,6 +175,9 @@ export class LogFormComponent {
     return true;
   }
 
+  /**
+   * Handles form submission and emits auth data.
+   */
   onSubmit() {
     if (this.isFormValid()) {
       const authData: AuthData = {

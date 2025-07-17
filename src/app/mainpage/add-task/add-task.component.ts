@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AddtaskModalComponent } from '../../shared/addtask-modal/addtask-modal.component';
 
+/**
+ * Component for creating new tasks.
+ */
 @Component({
   selector: 'app-add-task',
   standalone: true,
@@ -14,7 +17,11 @@ export class AddTaskComponent {
   showSuccessMessage: boolean = false;
   successMessage: string = '';
 
-  onTaskSuccess(message: string) {
+  /**
+   * Handles successful task creation.
+   * @param {string} message - The success message to display
+   */
+  onTaskSuccess(message: string): void {
     this.successMessage = message;
     this.showSuccessMessage = true;
   }

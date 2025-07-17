@@ -14,6 +14,9 @@ import {
   ContactlistFirestoreData,
 } from '../../../interfaces/contactlist';
 
+/**
+ * Service for managing contacts in Firebase Firestore.
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -22,6 +25,9 @@ export class FirebaseService {
   contacts: Contactlist[] = [];
   unsubscribe;
 
+  /**
+   * Initializes service and subscribes to contact list changes.
+   */
   constructor() {
     this.unsubscribe = this.subContactList();
   }
@@ -38,6 +44,11 @@ export class FirebaseService {
     '#462f8a',
   ];
 
+  /**
+   * Gets a color for a contact's initial letter.
+   *
+   * @param letter - First letter of contact name
+   */
   getColorForLetter(letter: string): string {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const index = alphabet.indexOf(letter.toUpperCase());
@@ -45,6 +56,9 @@ export class FirebaseService {
     return this.standardColors[index % this.standardColors.length];
   }
 
+  /**
+   * Subscribes to real-time contact list updates.
+   */
   subContactList() {
     return onSnapshot(this.getContacts(), (list) => {
       this.contacts = [];
@@ -54,6 +68,13 @@ export class FirebaseService {
     });
   }
 
+  /**
+   * Fetches a single contact by ID once.
+   *
+   * @param id - Contact ID to fetch
+   *
+   * @throws {Error} When contact fetch fails
+   */
   async getSingleContactOnce(id: string) {
     const docRef = doc(this.firestore, 'contactlist', id);
     const snapshot = await getDoc(docRef);
@@ -65,6 +86,9 @@ export class FirebaseService {
     }
   }
 
+  /**
+   * Groups contacts by first letter of first name.
+   */
   getGroupedContacts() {
     const grouped: Record<string, Contactlist[]> = {};
     for (const contact of this.contacts) {
@@ -79,6 +103,9 @@ export class FirebaseService {
       .map((letter) => ({ letter, contacts: grouped[letter] }));
   }
 
+  /**
+   * Returns contacts sorted alphabetically by full name.
+   */
   getSortedContacts(): Contactlist[] {
     return [...this.contacts].sort((a, b) => {
       const nameA = (a.firstName + ' ' + a.lastName).toLowerCase();
@@ -87,18 +114,36 @@ export class FirebaseService {
     });
   }
 
+  /**
+   * Gets the Firestore collection reference for contacts.
+   */
   getContacts() {
     return collection(this.firestore, 'contactlist');
   }
 
+  /**
+   * Sorts the local contacts array by first name.
+   */
   sortContacts() {
     this.contacts.sort((a, b) => a.firstName.localeCompare(b.firstName));
   }
 
+  /**
+   * Gets a single document reference.
+   *
+   * @param colId - Collection ID
+   * @param docId - Document ID
+   */
   getSingleContact(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);
   }
 
+  /**
+   * Converts Firestore data to Contact object.
+   *
+   * @param obj - Raw Firestore contact data
+   * @param id - Document ID
+   */
   setContactsObject(obj: ContactlistFirestoreData, id: string): Contactlist {
     return {
       id: id,
@@ -109,6 +154,13 @@ export class FirebaseService {
     };
   }
 
+  /**
+   * Adds a new contact to Firestore.
+   *
+   * @param formData - Contact data to add
+   *
+   * @throws {Error} When contact creation fails
+   */
   async addContact(formData: Contactlist) {
     const contactsCollection = this.getContacts();
     try {
@@ -123,6 +175,13 @@ export class FirebaseService {
     }
   }
 
+  /**
+   * Deletes a contact from Firestore.
+   *
+   * @param id - Contact ID to delete
+   *
+   * @throws {Error} When contact deletion fails
+   */
   async deleteContact(id: string) {
     try {
       await deleteDoc(doc(this.firestore, 'contactlist', id));
@@ -131,6 +190,14 @@ export class FirebaseService {
     }
   }
 
+  /**
+   * Updates an existing contact in Firestore.
+   *
+   * @param id - Contact ID to update
+   * @param formData - Updated contact data
+   *
+   * @throws {Error} When contact update fails
+   */
   async updateContact(id: string, formData: Contactlist) {
     try {
       const docRef = doc(this.firestore, 'contactlist', id);
@@ -145,6 +212,9 @@ export class FirebaseService {
     }
   }
 
+  /**
+   * Cleans up subscriptions when service is destroyed.
+   */
   ngOnDestroy() {
     this.unsubscribe();
   }

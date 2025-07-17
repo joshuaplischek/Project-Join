@@ -9,6 +9,9 @@ import { Location } from '@angular/common';
 import { ContactformComponent } from './contactform/contactform.component';
 import { AuthService } from '../../shared/services/auth.service';
 
+/**
+ * Component for managing contacts with CRUD operations.
+ */
 @Component({
   selector: 'app-contacts',
   standalone: true,
@@ -30,22 +33,36 @@ export class ContactsComponent implements OnInit {
   isMobile: boolean = false;
   uIdRef = this.authService.uId;
 
+  /**
+   * @param contactlist - Service for contact operations
+   * @param location - Angular location service for navigation
+   * @param authService - Service for authentication
+   */
   constructor(
     private contactlist: FirebaseService,
     private location: Location,
     private authService: AuthService
   ) {}
 
+  /**
+   * Initializes component and sets up responsive behavior.
+   */
   ngOnInit() {
     this.contacts = this.contactlist.contacts;
     this.checkMobile();
     window.addEventListener('resize', () => this.checkMobile());
   }
 
+  /**
+   * Gets the current user ID.
+   */
   getUid() {
     return this.authService.uId;
   }
 
+  /**
+   * Checks if the current screen size is mobile.
+   */
   checkMobile() {
     this.isMobile = window.innerWidth < 768;
   }
@@ -54,14 +71,27 @@ export class ContactsComponent implements OnInit {
     return this.contactlist.getGroupedContacts();
   }
 
+  /**
+   * Gets color for contact initial letter.
+   *
+   * @param letter - First letter of contact name
+   */
   getColorForLetter(letter: string): string {
     return this.contactlist.getColorForLetter(letter);
   }
 
+  /**
+   * Opens the add contact form modal.
+   */
   openAddContactForm() {
     this.isAddContactFormVisible = true;
   }
 
+  /**
+   * Adds a new contact to the database.
+   *
+   * @param formData - Contact data from the form
+   */
   addContactToDb(formData: Contactlist) {
     this.contactlist.addContact(formData);
     this.showSuccessMessageBox('Kontakt wurde erfolgreich hinzugefügt!');
@@ -80,23 +110,42 @@ export class ContactsComponent implements OnInit {
     }, 300);
   }
 
+  /**
+   * Shows a success message to the user.
+   *
+   * @param message - Success message to display
+   */
   showSuccessMessageBox(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
   }
 
+  /**
+   * Closes the add contact form modal.
+   */
   closeAddContactForm() {
     this.isAddContactFormVisible = false;
   }
 
+  /**
+   * Opens the edit contact form modal.
+   */
   openEdit() {
     this.isEditContactFormVisible = true;
   }
 
+  /**
+   * Closes the edit contact form modal.
+   */
   closeEditContactForm() {
     this.isEditContactFormVisible = false;
   }
 
+  /**
+   * Opens the detail view for a selected contact.
+   *
+   * @param contact - Contact to display details for
+   */
   openSingleContact(contact: Contactlist) {
     if (this.selectedContact && contact.id !== this.selectedContact.id) {
       this.isOpen = false;
@@ -113,11 +162,25 @@ export class ContactsComponent implements OnInit {
     }
   }
 
+  /**
+   * Fetches a single contact by ID and updates selected contact.
+   *
+   * @param id - Contact ID to fetch
+   *
+   * @throws {Error} When contact fetch fails
+   */
   async getContactField(id: string) {
     const data = await this.contactlist.getSingleContactOnce(id);
     this.selectedContact = data;
   }
 
+  /**
+   * Deletes a contact from the database.
+   *
+   * @param contactId - Optional contact ID to delete
+   *
+   * @throws {Error} When contact deletion fails
+   */
   async deleteContact(contactId?: string) {
     if (!contactId && this.selectedContact?.id) {
       contactId = this.selectedContact.id;
@@ -131,6 +194,11 @@ export class ContactsComponent implements OnInit {
     }
   }
 
+  /**
+   * Updates the current contact and refreshes the view.
+   *
+   * @throws {Error} When contact update fails
+   */
   async updateContact() {
     this.showSuccessMessageBox('Kontakt wurde erfolgreich aktualisiert!');
     this.closeEditContactForm();
@@ -140,14 +208,23 @@ export class ContactsComponent implements OnInit {
     }
   }
 
+  /**
+   * Opens the options menu.
+   */
   openOptionsMenu() {
     this.isMenuOpen = true;
   }
 
+  /**
+   * Closes the options menu.
+   */
   closeOptionsMenu() {
     this.isMenuOpen = false;
   }
 
+  /**
+   * Handles back navigation for mobile and desktop.
+   */
   goBack(): void {
     if (this.isMobile) {
       this.isOpen = false;

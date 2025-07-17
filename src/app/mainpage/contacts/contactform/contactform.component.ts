@@ -1,9 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnChanges,
+} from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Contactlist } from '../../../../interfaces/contactlist';
 
+/**
+ * Component for creating and editing contact forms.
+ */
 @Component({
   selector: 'app-contactform',
   standalone: true,
@@ -11,7 +20,7 @@ import { Contactlist } from '../../../../interfaces/contactlist';
   templateUrl: './contactform.component.html',
   styleUrl: './contactform.component.scss',
 })
-export class ContactformComponent {
+export class ContactformComponent implements OnChanges {
   firstName: string = '';
   lastName: string = '';
   email: string = '';
@@ -23,6 +32,9 @@ export class ContactformComponent {
   emailTouched: boolean = false;
   phoneTouched: boolean = false;
 
+  /**
+   * @param contactService - Service for contact operations
+   */
   constructor(private contactService: FirebaseService) {}
 
   @Input() heading: string = '';
@@ -36,6 +48,9 @@ export class ContactformComponent {
   @Output() buttonOneClick = new EventEmitter<void>();
   @Output() buttonTwoClick = new EventEmitter<Contactlist>();
 
+  /**
+   * Handles changes to input properties and updates form data.
+   */
   ngOnChanges() {
     if (this.contactData) {
       this.firstName = this.contactData.firstName;
@@ -50,10 +65,16 @@ export class ContactformComponent {
     }
   }
 
+  /**
+   * Validates email format by checking for @ symbol.
+   */
   isValidEmail(): boolean {
     return this.email.includes('@');
   }
 
+  /**
+   * Resets all form fields and validation states.
+   */
   resetForm() {
     this.firstName = '';
     this.lastName = '';
@@ -65,6 +86,9 @@ export class ContactformComponent {
     this.phoneTouched = false;
   }
 
+  /**
+   * Closes the form modal and resets all fields.
+   */
   close() {
     this.resetForm();
     this.closeModal.emit();

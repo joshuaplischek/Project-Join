@@ -5,6 +5,9 @@ import { TasksFirbaseService } from '../../../shared/services/tasks-firbase.serv
 import { TaskDetailViewComponent } from './task-detail-view/task-detail-view.component';
 import { TaskDetailEditComponent } from './task-detail-edit/task-detail-edit.component';
 
+/**
+ * Component for displaying and managing task details with view/edit modes.
+ */
 @Component({
   selector: 'app-task-detail',
   standalone: true,
@@ -18,28 +21,50 @@ export class TaskDetailComponent {
   @Output() closeModal = new EventEmitter<void>();
   @Output() taskDeleted = new EventEmitter<string>();
 
-  isEditMode = false;
+  isEditMode: boolean = false;
 
+  /**
+   * @param taskService - Service for task operations
+   */
   constructor(private taskService: TasksFirbaseService) {}
 
-  close() {
+  /**
+   * Closes the task detail modal.
+   */
+  close(): void {
     this.isEditMode = false;
     this.closeModal.emit();
   }
 
-  onEditTask() {
+  /**
+   * Switches to edit mode.
+   */
+  onEditTask(): void {
     this.isEditMode = true;
   }
 
+  /**
+   * Handles task update and switches back to view mode.
+   *
+   * @param updatedTask - The updated task data
+   */
   onTaskUpdated(updatedTask: Tasks) {
     this.task = updatedTask;
     this.isEditMode = false;
   }
 
-  onCancelEdit() {
+  /**
+   * Cancels edit mode and returns to view mode.
+   */
+  onCancelEdit(): void {
     this.isEditMode = false;
   }
 
+  /**
+   * Deletes the current task.
+   *
+   * @throws {Error} When task deletion fails
+   */
   async onDeleteTask() {
     if (!this.task?.id) return;
 

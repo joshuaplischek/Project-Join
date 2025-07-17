@@ -20,6 +20,9 @@ import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
+/**
+ * Component for creating new tasks via modal interface.
+ */
 @Component({
   selector: 'app-addtask-modal',
   standalone: true,
@@ -48,14 +51,6 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
   isTablet: boolean = false;
   isMobile: boolean = false;
 
-  constructor(
-    public contactlist: FirebaseService,
-    public taskService: TasksFirbaseService,
-    private router: Router
-  ) {
-    this.minDate.setHours(0, 0, 0, 0);
-  }
-
   title: string = '';
   description: string = '';
   date: any;
@@ -83,6 +78,22 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
   @ViewChild('editInput') editInput!: ElementRef;
   isSubtaskActive: boolean = false;
 
+  /**
+   * @param contactlist - Service for contact operations
+   * @param taskService - Service for task operations
+   * @param router - Angular router for navigation
+   */
+  constructor(
+    public contactlist: FirebaseService,
+    public taskService: TasksFirbaseService,
+    private router: Router
+  ) {
+    this.minDate.setHours(0, 0, 0, 0);
+  }
+
+  /**
+   * Initializes component and sets up default values.
+   */
   ngOnInit() {
     this.filteredContacts = this.allContacts;
     this.selectPrio('medium');
@@ -90,16 +101,20 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     window.addEventListener('resize', () => this.checkScreenSize());
   }
 
+  /**
+   * Checks current screen size and updates responsive flags.
+   */
   checkScreenSize() {
     const screenWidth = window.innerWidth;
     this.isMobile = screenWidth < 768;
     this.isTablet = screenWidth >= 768 && screenWidth < 1024;
     this.isDesktop = screenWidth >= 1024;
-
-    // Buttons nur auf Mobile/Tablet fixed positionieren
     this.useFixedPosition = this.isMobile || this.isTablet;
   }
 
+  /**
+   * Focuses edit input after view initialization.
+   */
   ngAfterViewInit() {
     if (this.editingSubtaskIndex !== null && this.editInput) {
       this.editInput.nativeElement.focus();
@@ -111,20 +126,40 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     return this.contactlist.getSortedContacts();
   }
 
+  /**
+   * Sets the selected priority level.
+   *
+   * @param prio - Priority level to set
+   */
   selectPrio(prio: string) {
     this.selectedPrio = prio;
   }
 
+  /**
+   * Gets color for contact initial letter.
+   *
+   * @param letter - First letter of contact name
+   */
   getColorForLetter(letter: string): string {
     return this.contactlist.getColorForLetter(letter);
   }
 
+  /**
+   * Checks if contact is selected.
+   *
+   * @param contact - Contact to check
+   */
   isSelected(contact: Contactlist) {
     return this.selectedContacts.some(
       (selectedContact) => selectedContact.id === contact.id
     );
   }
 
+  /**
+   * Toggles contact selection.
+   *
+   * @param contact - Contact to toggle
+   */
   toggleContact(contact: Contactlist) {
     if (this.isSelected(contact)) {
       this.selectedContacts = this.selectedContacts.filter(
@@ -135,6 +170,9 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Handles category dropdown blur event.
+   */
   onCategoryBlur() {
     this.categoryDropDownOpen = false;
     if (!this.category) {
@@ -142,12 +180,20 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Validates if date is not in the past.
+   *
+   * @param date - Date to validate
+   */
   validateDate(date: Date): boolean {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return date >= today;
   }
 
+  /**
+   * Shows subtask input controls and focuses input.
+   */
   showSubtaskControls() {
     this.isSubtaskActive = true;
     setTimeout(() => {
@@ -155,6 +201,9 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Handles subtask input blur event.
+   */
   onSubtaskBlur() {
     setTimeout(() => {
       if (!this.newSubtask.trim()) {
@@ -163,11 +212,17 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
+  /**
+   * Clears subtask input and hides controls.
+   */
   clearSubtaskInput() {
     this.newSubtask = '';
     this.isSubtaskActive = false;
   }
 
+  /**
+   * Adds a new subtask to the list.
+   */
   addSubtask() {
     if (this.newSubtask.trim()) {
       this.subtasks.push(this.newSubtask.trim());
@@ -176,6 +231,11 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     this.isSubtaskActive = false;
   }
 
+  /**
+   * Starts editing a subtask.
+   *
+   * @param index - Index of subtask to edit
+   */
   editSubtask(index: number) {
     this.editingSubtaskIndex = index;
     this.editingSubtaskValue = this.subtasks[index];
@@ -187,6 +247,9 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }, 10);
   }
 
+  /**
+   * Saves the edited subtask.
+   */
   saveEditedSubtask() {
     if (this.editingSubtaskIndex !== null && this.editingSubtaskValue.trim()) {
       this.subtasks[this.editingSubtaskIndex] = this.editingSubtaskValue.trim();
@@ -194,11 +257,19 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Cancels subtask editing.
+   */
   cancelEditSubtask() {
     this.editingSubtaskIndex = null;
     this.editingSubtaskValue = '';
   }
 
+  /**
+   * Handles keyboard events in subtask editing.
+   *
+   * @param event - Keyboard event
+   */
   onSubtaskKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       this.saveEditedSubtask();
@@ -207,10 +278,18 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Removes a subtask from the list.
+   *
+   * @param index - Index of subtask to remove
+   */
   removeSubtask(index: number) {
     this.subtasks.splice(index, 1);
   }
 
+  /**
+   * Creates task data object for database storage.
+   */
   createTaskData(): TasksFirestoreData {
     const taskData = {
       title: this.title,
@@ -225,16 +304,25 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     return taskData;
   }
 
+  /**
+   * Formats selected contacts as string array.
+   */
   getFormattedContacts(): string[] {
     return this.selectedContacts.map(
       (contact) => `${contact.firstName} ${contact.lastName}`
     );
   }
 
+  /**
+   * Formats date value as Date object.
+   */
   getFormattedDate(): Date {
     return this.date instanceof Date ? this.date : new Date(this.date);
   }
 
+  /**
+   * Formats subtasks with done status.
+   */
   getFormattedSubtasks(): { title: string; done: boolean }[] {
     return this.subtasks.map((title) => ({
       title,
@@ -242,7 +330,12 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }));
   }
 
-  async addTaskToDBViaTemplateClick(): Promise<void> {
+  /**
+   * Adds task to database via template click.
+   *
+   * @throws {Error} When task creation fails
+   */
+  async addTaskToDBViaTemplateClick() {
     try {
       const taskData = this.createTaskData();
       await this.saveTaskAndRedirect(taskData);
@@ -252,6 +345,13 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Adds task to database.
+   *
+   * @param formData - Task data to save
+   *
+   * @throws {Error} When task creation fails
+   */
   async addTaskToDB(formData: TasksFirestoreData) {
     try {
       await this.taskService.addTask(formData);
@@ -260,6 +360,13 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Saves task and redirects to board.
+   *
+   * @param taskData - Task data to save
+   *
+   * @throws {Error} When task creation fails
+   */
   async saveTaskAndRedirect(taskData: TasksFirestoreData): Promise<void> {
     await this.addTaskToDB(taskData);
     this.successMessage.emit('Task added to board');
@@ -268,16 +375,29 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     await this.navigateToBoard();
   }
 
+  /**
+   * Navigates to board page with delay.
+   *
+   * @throws {Error} When navigation fails
+   */
   async navigateToBoard(): Promise<void> {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     await this.router.navigate(['/board']);
   }
 
+  /**
+   * Shows success message to user.
+   *
+   * @param message - Success message to display
+   */
   showSuccessMessageBox(message: string) {
     this.successMessageContent = message;
     this.showSuccessMessage = true;
   }
 
+  /**
+   * Clears all form fields and resets state.
+   */
   clearForm() {
     this.title = '';
     this.description = '';
@@ -314,6 +434,9 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     };
   }
 
+  /**
+   * Cleans up event listeners on component destroy.
+   */
   ngOnDestroy() {
     window.removeEventListener('resize', () => this.checkScreenSize());
   }

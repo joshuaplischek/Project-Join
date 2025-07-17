@@ -4,23 +4,37 @@ import { TasksFirbaseService } from '../services/tasks-firbase.service';
 import { FirebaseService } from '../services/firebase.service';
 import { Subtask, Tasks } from '../../../interfaces/tasks';
 
+/**
+ * Component for displaying tasks in compact card format.
+ */
 @Component({
   selector: 'app-compact-task',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './compact-task.component.html',
-  styleUrl: './compact-task.component.scss'
+  styleUrl: './compact-task.component.scss',
 })
 export class CompactTaskComponent {
+  @Input() task!: Tasks;
+  @Input() subtask!: Subtask[];
+  @Output() taskClick = new EventEmitter<Tasks>();
 
+  selectedSubtask: Subtask | null = null;
+
+  /**
+   * @param taskService - Service for task operations
+   * @param contactService - Service for contact operations
+   */
   constructor(
     private taskService: TasksFirbaseService,
     private contactService: FirebaseService
-  ) { }
+  ) {}
 
-  @Input() task!: Tasks;
-  @Output() taskClick = new EventEmitter<Tasks>();
-
+  /**
+   * Handles task click events and emits task data.
+   *
+   * @param event - Optional click event
+   */
   onTaskClick(event?: Event) {
     if (event) {
       event.stopPropagation();
@@ -28,26 +42,41 @@ export class CompactTaskComponent {
     this.taskClick.emit(this.task);
   }
 
-  @Input() subtask!: Subtask[];
-  selectedSubtask: Subtask | null = null;
-
+  /**
+   * Gets all tasks from the task service.
+   */
   getList() {
-    return this.taskService.tasks
+    return this.taskService.tasks;
   }
 
+  /**
+   * Counts the number of completed subtasks.
+   */
   getSubtasksDone(): number {
     return this.task?.subtasks?.filter((sub) => sub.done).length ?? 0;
   }
 
+  /**
+   * Gets the total number of subtasks.
+   */
   getSubtaskLength(): number {
     return this.task?.subtasks?.length ?? 0;
   }
 
+  /**
+   * Truncates description text to specified length.
+   *
+   * @param desc - Description text to truncate
+   * @param max - Maximum character length
+   */
   getShortDescription(desc: string | undefined, max: number = 40): string {
     if (!desc) return '';
-      return desc.length > max ? desc.slice(0, max) + '...' : desc;
-    }
-  
+    return desc.length > max ? desc.slice(0, max) + '...' : desc;
+  }
+
+  /**
+   * Gets the appropriate priority icon path.
+   */
   getPriorityIcon(): string {
     switch (this.task?.priority?.toLowerCase()) {
       case 'urgent':
@@ -61,6 +90,11 @@ export class CompactTaskComponent {
     }
   }
 
+  /**
+   * Gets color for contact initial letter.
+   *
+   * @param letter - First letter of contact name
+   */
   getColorForLetter(letter: string): string {
     return this.contactService.getColorForLetter(letter);
   }
@@ -73,10 +107,16 @@ export class CompactTaskComponent {
     return this.assignedUsers.length > 0;
   }
 
+  /**
+   * Gets the first 3 assigned users for display.
+   */
   getDisplayedUsers(): string[] {
     return this.assignedUsers.slice(0, 3);
   }
 
+  /**
+   * Calculates remaining users count beyond display limit.
+   */
   getRemainingUsersCount(): number {
     return Math.max(0, this.assignedUsers.length - 3);
   }

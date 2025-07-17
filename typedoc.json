@@ -1,0 +1,6 @@
+{
+  "entryPoints": ["src/app"],
+  "out": "docs",
+  "excludePrivate": true,
+  "includeVersion": true
+}

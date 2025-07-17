@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -16,6 +16,9 @@ import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { TaskAddComponent } from './task-add/task-add.component';
 
+/**
+ * Component for managing task board with drag-and-drop functionality.
+ */
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -32,10 +35,10 @@ import { TaskAddComponent } from './task-add/task-add.component';
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
-export class BoardComponent {
-  constructor(public taskService: TasksFirbaseService) {}
-  private subscription: Subscription = new Subscription();
+export class BoardComponent implements OnInit, OnDestroy {
   @Input() selectedTask: Tasks | null = null;
+
+  private subscription: Subscription = new Subscription();
 
   filteredTasks: Tasks[] = [];
   dragStartDelay: number = 0;
@@ -45,10 +48,17 @@ export class BoardComponent {
   selectedStatus: string = 'todo';
   searchText: string = '';
   showSearchContainer: boolean = false;
-
   showSuccessMessage: boolean = false;
   successMessage: string = '';
 
+  /**
+   * @param taskService - Service for task operations
+   */
+  constructor(public taskService: TasksFirbaseService) {}
+
+  /**
+   * Initializes component and sets up subscriptions.
+   */
   ngOnInit() {
     this.filteredTasks = this.taskService.tasks;
     this.subscription.add(
@@ -61,6 +71,9 @@ export class BoardComponent {
     window.addEventListener('resize', () => this.setDragStartDelay());
   }
 
+  /**
+   * Cleans up subscriptions and event listeners.
+   */
   ngOnDestroy() {
     this.subscription.unsubscribe();
     window.removeEventListener('resize', () => this.setDragStartDelay());
@@ -82,6 +95,13 @@ export class BoardComponent {
     return this.filteredTasks.filter((task) => task.status === 'done');
   }
 
+  /**
+   * Handles drag and drop events for tasks.
+   *
+   * @param event - The drag drop event
+   *
+   * @throws {Error} When task status update fails
+   */
   drop(event: CdkDragDrop<Tasks[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -110,6 +130,11 @@ export class BoardComponent {
     }
   }
 
+  /**
+   * Determines task status based on drop container ID.
+   *
+   * @param event - The drag drop event
+   */
   private getStatusByArray(event: CdkDragDrop<Tasks[]>) {
     const id = event.container.id as string;
     if (id.includes('todo')) return 'todo';
@@ -119,20 +144,36 @@ export class BoardComponent {
     return '';
   }
 
+  /**
+   * Opens task add modal with specified status.
+   *
+   * @param status - Initial status for new task
+   */
   openAddTask(status: string) {
     this.selectedStatus = status;
     this.isTaskAddVisible = true;
   }
 
+  /**
+   * Closes the task add modal.
+   */
   closeAddTask() {
     this.isTaskAddVisible = false;
   }
 
+  /**
+   * Opens task detail modal for specified task.
+   *
+   * @param task - Task to display details for
+   */
   openTaskDetail(task: Tasks) {
     this.selectedTaskForDetail = task;
     this.isTaskDetailVisible = true;
   }
 
+  /**
+   * Closes the task detail modal.
+   */
   closeTaskDetail() {
     this.isTaskDetailVisible = false;
     setTimeout(() => {
@@ -140,15 +181,26 @@ export class BoardComponent {
     }, 300);
   }
 
+  /**
+   * Sets drag start delay based on screen size.
+   */
   setDragStartDelay() {
     this.dragStartDelay = window.innerWidth <= 1024 ? 300 : 0;
   }
 
+  /**
+   * Handles search input and triggers task filtering.
+   *
+   * @param data - Search query string
+   */
   searchKey(data: string) {
     this.searchText = data;
     this.searchTask();
   }
 
+  /**
+   * Filters tasks based on search text.
+   */
   searchTask() {
     const search = this.searchText.toLowerCase();
     if (!search) {
@@ -162,12 +214,22 @@ export class BoardComponent {
     );
   }
 
+  /**
+   * Handles successful task creation.
+   *
+   * @param message - Success message to display
+   */
   onTaskSuccess(message: string) {
     this.successMessage = message;
     this.showSuccessMessage = true;
   }
 
-  onTaskDeleted(taskId: string): void {
+  /**
+   * Handles task deletion and updates filtered tasks.
+   *
+   * @param taskId - ID of deleted task
+   */
+  onTaskDeleted(taskId: string) {
     this.filteredTasks = this.filteredTasks.filter(
       (task) => task.id !== taskId
     );

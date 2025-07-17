@@ -6,6 +6,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { AuthService } from './shared/services/auth.service';
 
+/**
+ * Root component managing application layout based on route and authentication state.
+ */
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -18,8 +21,15 @@ export class AppComponent implements OnInit {
   showLimitedLayout: boolean = false;
   showNoLayout: boolean = false;
 
+  /**
+   * @param router - Angular router for navigation
+   * @param authService - Service for authentication operations
+   */
   constructor(private router: Router, private authService: AuthService) {}
 
+  /**
+   * Initializes component and sets up route and authentication subscriptions.
+   */
   ngOnInit() {
     this.checkCurrentRoute();
     this.router.events.subscribe((event) => {
@@ -32,11 +42,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // Beispiel aller Events während einer Navigation:
-  // 1. NavigationStart { url: '/login' }
-  // 2. RoutesRecognized { url: '/login' }
-  // 3. NavigationEnd { url: '/login' }     ← Nur hier reagieren!
-
+  /**
+   * Determines which layout to show based on current route and authentication status.
+   */
   private checkCurrentRoute() {
     const currentUrl = this.router.url;
     const isLoggedIn = this.authService.isLoggedIn;
@@ -52,27 +60,46 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks if current URL is a login route.
+   *
+   * @param url - URL to check
+   */
   private isLoginRoute(url: string): boolean {
     return url.includes('/login');
   }
 
+  /**
+   * Checks if current URL is a public page route.
+   *
+   * @param url - URL to check
+   */
   private isPublicPageRoute(url: string): boolean {
     return url.includes('/privacypolicy') || url.includes('/legalnotice');
   }
 
-  private setNoLayout(): void {
+  /**
+   * Sets layout to show no navigation or header.
+   */
+  private setNoLayout() {
     this.showNoLayout = true;
     this.showLimitedLayout = false;
     this.showFullLayout = false;
   }
 
-  private setLimitedLayout(): void {
+  /**
+   * Sets layout to show limited navigation without full functionality.
+   */
+  private setLimitedLayout() {
     this.showNoLayout = false;
     this.showLimitedLayout = true;
     this.showFullLayout = false;
   }
 
-  private setFullLayout(): void {
+  /**
+   * Sets layout to show full navigation and header.
+   */
+  private setFullLayout() {
     this.showNoLayout = false;
     this.showLimitedLayout = false;
     this.showFullLayout = true;
