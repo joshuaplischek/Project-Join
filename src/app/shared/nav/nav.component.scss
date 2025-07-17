@@ -11,6 +11,9 @@
   max-height: 100dvh;
   min-height: 100dvh;
   white-space: nowrap;
+    -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 
   @media (max-width: 1024px) {
     flex-direction: row;
@@ -46,6 +49,7 @@ a {
   font-size: 1rem;
   color: #cdcdcd;
   transition: all 0.3s ease;
+  border-radius: 15px;
 }
 
 .nav-full, .nav-limited {
@@ -63,6 +67,7 @@ a {
       align-items: center;
       width: 100%;
       padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 4vw, 2rem);
+      border-radius: 8px;
 
       img {
         width: clamp(20px, 3vw, 25px);
