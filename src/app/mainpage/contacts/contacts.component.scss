@@ -1,5 +1,3 @@
-@import "./../../../styles.scss";
-
 .button-blue {
   padding: clamp(0.5rem, 3vw, 1rem) clamp(1rem, 3vw, 2rem);
   margin: clamp(1rem, 2vw, 1.5rem) 0 clamp(2rem, 4vw, 3rem) 0;
@@ -87,6 +85,10 @@ hr {
 
     .contact-name {
       font-size: clamp(1rem, 3vw, 1.4rem);
+      text-overflow: ellipsis;
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .contact-email {
@@ -111,6 +113,7 @@ hr {
       display: flex;
       flex-direction: column;
       padding: clamp(1.5rem, 4vw, 3rem);
+      overflow-x: auto;
     }
 
     .contact-container-heading {
@@ -135,6 +138,7 @@ hr {
       &.open-contact {
         transform: translateX(0);
         opacity: 1;
+        overflow-x: auto;
       }
     }
 
@@ -200,7 +204,7 @@ hr {
       p {
         font-size: clamp(1.5rem, 3vw, 3rem);
         font-weight: 500;
-        white-space: nowrap;
+        overflow-wrap: break-word;
       }
     }
   }
