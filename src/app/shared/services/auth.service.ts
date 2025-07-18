@@ -18,7 +18,7 @@ import { signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  public isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   firestore: Firestore = inject(Firestore);
