@@ -7,10 +7,17 @@
 }
 
 .task-title {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
   color: var(--text-color-dark-blue);
   margin: 0 0 24px 0;
+  overflow-wrap: break-word;
+  max-width: clamp(150px, 50vw, 100%);
+
+  @media (max-width: 800px) {
+    max-width: clamp(150px, 70vw, 450px);
+    font-size: 2rem;
+  }
 }
 
 .task-description {
