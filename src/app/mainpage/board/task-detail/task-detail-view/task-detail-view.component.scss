@@ -15,7 +15,7 @@
   max-width: clamp(150px, 50vw, 100%);
 
   @media (max-width: 800px) {
-    max-width: clamp(150px, 70vw, 450px);
+    max-width: clamp(150px, 70vw, 100%);
     font-size: 2rem;
   }
 }
