@@ -1,13 +1,4 @@
-@mixin flex($direction: row) {
-  display: flex;
-  flex-direction: $direction;
-}
-
-@mixin center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@import '../../../../shared/styles/mixins';
 
 .edit-form {
   display: flex;
@@ -67,7 +58,6 @@
       margin-top: 4px;
     }
 
-    // Date Input Styling
     .date-input-container {
       display: flex;
       align-items: center;
@@ -97,7 +87,6 @@
       }
     }
 
-    // Category Display (Read-only)
     .category-display {
       width: 100%;
       padding: clamp(0.5rem, 2vw, 0.75rem);
@@ -115,7 +104,6 @@
     }
   }
 
-  // Priority Buttons
   .priority-buttons {
     display: flex;
     gap: clamp(0.5rem, 2vw, 2rem);
@@ -177,7 +165,6 @@
     }
   }
 
-  // Custom Select
   .custom-select {
     position: relative;
     width: 100%;
@@ -242,55 +229,11 @@
         align-items: center;
       }
 
-      // .checkbox-container {
-      //   display: flex;
-      //   align-items: center;
-
-      //   input[type="checkbox"] {
-      //     display: none;
-      //   }
-
-      //   .custom-checkbox {
-      //     width: 16px;
-      //     height: 16px;
-      //     border: 2px solid var(--text-color-dark-blue);
-      //     border-radius: 3px;
-      //     display: flex;
-      //     align-items: center;
-      //     justify-content: center;
-      //     cursor: pointer;
-      //     transition: all 0.3s ease;
-      //     position: relative;
-
-      //     &::after {
-      //       content: "";
-      //       width: 10px;
-      //       height: 8px;
-      //       background-image: url("/assets/images/icons/icon-check.svg");
-      //       background-size: contain;
-      //       background-repeat: no-repeat;
-      //       background-position: center;
-      //       opacity: 0;
-      //       transition: opacity 0.3s ease;
-      //       filter: brightness(0) invert(1);
-      //     }
-      //   }
-
-      //   input[type="checkbox"]:checked + .custom-checkbox {
-      //     background: var(--text-color-dark-blue);
-      //     border-color: var(--text-color-dark-blue);
-
-      //     &::after {
-      //       opacity: 1;
-      //     }
-      //   }
-      // }
       @include flex;
     }
   }
 }
 
-// Kontakt-Initialen
 .contact-initials {
   width: 32px;
   height: 32px;
@@ -299,7 +242,6 @@
   @include center;
   padding: 0.5rem;
   font-size: 0.75rem;
-
 }
 
 .selected-contacts-initials {
@@ -319,7 +261,6 @@
   }
 }
 
-// Subtasks Wrapper (wie im AddTask-Modal)
 .subtasks-wrapper {
   label {
     display: block;
@@ -502,11 +443,6 @@
         color: var(--text-color-dark-blue);
         transition: all 0.3s ease;
         margin-left: 12px;
-
-        // &.completed {
-        //   text-decoration: line-through;
-        //   color: #888;
-        // }
       }
 
       .subtask-edit-input {
@@ -538,8 +474,6 @@
   }
 }
 
-
-// Button Actions
 .edit-actions {
   display: flex;
   justify-content: flex-end;
@@ -549,6 +483,5 @@
     img {
       width: 25px;
     }
-
   }
 }

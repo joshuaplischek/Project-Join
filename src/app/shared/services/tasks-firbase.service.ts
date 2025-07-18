@@ -7,7 +7,6 @@ import {
   updateDoc,
   onSnapshot,
   Timestamp,
-  serverTimestamp,
   deleteDoc,
 } from '@angular/fire/firestore';
 import { Subtask, Tasks, TasksFirestoreData } from '../../../interfaces/tasks';

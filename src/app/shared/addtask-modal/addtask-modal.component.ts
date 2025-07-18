@@ -42,7 +42,6 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     bottomMobile?: string;
   } = {};
   @Input() useFixedPosition: boolean = true;
-  private originalFixedPosition: boolean = true;
   @Output() taskCreated = new EventEmitter<void>();
   @Output() successMessage = new EventEmitter<string>();
 
@@ -54,11 +53,8 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
   date: any;
   category: string = '';
   selectedPrio: string = 'medium';
-  contactInput: string = '';
   newSubtask: string = '';
-  successMessageContent: string = '';
 
-  showSuccessMessage: boolean = false;
   categoryDropDownOpen: boolean = false;
   contactDropDownOpen: boolean = false;
   titleTouched: boolean = false;
@@ -69,7 +65,6 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
   editingSubtaskValue: string = '';
 
   selectedContacts: Contactlist[] = [];
-  filteredContacts: Contactlist[] = [];
   subtasks: string[] = [];
   minDate: Date = new Date();
   @ViewChild('subtaskInput') subtaskInput!: ElementRef;
@@ -93,8 +88,6 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
    * Initializes component and sets up default values.
    */
   ngOnInit() {
-    this.originalFixedPosition = this.useFixedPosition;
-    this.filteredContacts = this.allContacts;
     this.selectPrio('medium');
     this.checkScreenSize();
     window.addEventListener('resize', () => this.checkScreenSize());
@@ -108,14 +101,7 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
     const screenWidth = window.innerWidth;
     this.isMobile = screenWidth < 768;
     this.isDesktop = screenWidth >= 1024;
-
-    // Modal is only shown on screens ≥850px, so simplified positioning
-    if (this.originalFixedPosition) {
-      // Only use fixed position on very small screens (if modal somehow appears)
-      this.useFixedPosition = this.isMobile;
-    } else {
-      this.useFixedPosition = false;
-    }
+    this.useFixedPosition = this.isMobile;
   }
 
   /**
@@ -397,8 +383,7 @@ export class AddtaskModalComponent implements OnInit, OnDestroy {
    * @param message - Success message to display
    */
   showSuccessMessageBox(message: string) {
-    this.successMessageContent = message;
-    this.showSuccessMessage = true;
+    // entfernt: successMessageContent und showSuccessMessage
   }
 
   /**
