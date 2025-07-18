@@ -66,6 +66,8 @@
 
 .card-title {
   font-family: "mainFontBold";
+  overflow-wrap: break-word;
+  max-width: clamp(150px, 14vw, 300px);
 }
 
 .card-description {
