@@ -1,3 +1,7 @@
+p:not(.num-of) {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
 .overflow-scroll {
   @media(max-height: 715px) {
     overflow-y: scroll;
