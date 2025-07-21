@@ -81,8 +81,10 @@ a {
         margin-right: 1rem;
       }
 
-      &:hover {
+      @media (min-width: 1024px) {
+        &:hover {
         background-color: var(--nav-bg-hover);
+      }
       }
 
       &:active {
@@ -90,6 +92,10 @@ a {
       }
     }
   }
+
+.active-nav {
+  background-color: var(--accent-color-dark);
+}
 
   @media (max-width: 1024px) {
     flex-direction: row;

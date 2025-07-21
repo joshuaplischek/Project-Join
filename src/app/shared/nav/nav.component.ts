@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 /**
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, RouterModule],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
 })

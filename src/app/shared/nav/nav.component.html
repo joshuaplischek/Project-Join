@@ -25,26 +25,26 @@
       <img src="/assets/images/sidebar-logo.svg" alt="join-logo">
 
       <nav class="nav-full">
-        <div [ngClass]="{ 'active': router.url === '/summary' }">
-          <a [routerLink]="'/summary'">
+        <div>
+          <a routerLink="/summary" routerLinkActive="active-nav" [routerLinkActiveOptions]="{ exact: true }">
             <img src="/assets/images/icons/icon-summary.svg" alt="">
             <span>Summary</span>
           </a>
         </div>
-        <div [ngClass]="{ 'active': router.url === '/add-task' }">
-          <a routerLink="/add-task">
+        <div>
+          <a routerLink="/add-task" routerLinkActive="active-nav" [routerLinkActiveOptions]="{ exact: true }">
             <img src="/assets/images/icons/icon-add-task.svg" alt="">
             <span>Add Tasks</span>
           </a>
         </div>
-        <div [ngClass]="{ 'active': router.url === '/board' }">
-          <a routerLink="/board">
+        <div>
+          <a routerLink="/board" routerLinkActive="active-nav" [routerLinkActiveOptions]="{ exact: true }">
             <img src="/assets/images/icons/icon-board.svg" alt="">
             <span>Board</span>
           </a>
         </div>
-        <div [ngClass]="{ 'active': router.url === '/contacts' }">
-          <a routerLink="/contacts">
+        <div>
+          <a routerLink="/contacts" routerLinkActive="active-nav" [routerLinkActiveOptions]="{ exact: true }">
             <img src="/assets/images/icons/icon-contacts.svg" alt="">
             <span>Contacts</span>
           </a>
