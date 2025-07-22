@@ -8,5 +8,5 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes, withHashLocation()), provideFirebaseApp(() => initializeApp({"projectId":"join-7e54b","appId":"1:424943017502:web:0a1d69d4e4a85c3569580f","storageBucket":"join-7e54b.firebasestorage.app","apiKey":"AIzaSyCnn-zzaGhj-Hh20QYqwumfSFlpFGNIyxs","authDomain":"join-7e54b.firebaseapp.com","messagingSenderId":"424943017502"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideAnimationsAsync()]
+  providers: [provideRouter(routes, withHashLocation()), provideFirebaseApp(() => initializeApp({"projectId":"project-join-afa57","appId":"1:1028088814116:web:8de8a56a624b5bea5456b1","storageBucket":"project-join-afa57.firebasestorage.app","apiKey":"AIzaSyDJNjXVhs_d-kLDnVQxg7NNteOjtnwBKas","authDomain":"project-join-afa57.firebaseapp.com","messagingSenderId":"1028088814116"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideAnimationsAsync()]
 };
